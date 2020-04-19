@@ -6,7 +6,7 @@ const User = require('../models/User');
 // @route POST api/users
 // @desc Register a user
 // @access Public
-// @TODO authentication
+// @TODO log user in
 router.post('/', async (req, res) => {
 
     const { name, email, password } = req.body;
@@ -33,5 +33,20 @@ router.post('/', async (req, res) => {
         res.status(500).send('Server Error');
     }
 });
+
+// @route DELETE api/users
+// @desc Delete your user
+// @access Private
+// @TODO ensure user being deleted is logged in
+router.delete('/:id', async (req, res) => {
+    try {
+        // find and delete user
+        await User.findByIdAndDelete(req.params.id);
+
+        res.json({msg: "User Removed"});
+    } catch (err) {
+        
+    }
+})
 
 module.exports = router;
