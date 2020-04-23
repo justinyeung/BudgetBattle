@@ -15,16 +15,19 @@ passport.use(new Strategy({
     callbackURL: '/api/auth/callback'
     },
     async function(accessToken, refreshToken, profile, cb){
-        let user = await User.findOne({ email: profile.email });
+      // runs when logging in
+        let user = await User.findOne({ facebookID: profile.id });
         if(!user){
+            console.log("new user");
             user = new User({
+                facebookID: profile.id,
                 name: profile.displayName,
-                email: profile.email,
-                password: 'testing'
+                email: profile.email
             });
             await user.save();
             return cb(null, profile);
         }else{
+            console.log("existing user");
             return cb(null, user);
         };
 }));
@@ -35,21 +38,17 @@ passport.deserializeUser(function(obj, cb) {
     cb(null, obj);
 });
 
-// after authenticating
+// callback
 router.get('/callback', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
-  });
+    // returns logged in user
+    res.json(req.user);
+});
 
-// log in
+// log in to facebook route
 router.get('/login/facebook',
   passport.authenticate('facebook')
-
 );
-
-
-
-
 
 module.exports = router;

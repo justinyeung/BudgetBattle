@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 
+import FBLoginBtn from './components/layout/FBLoginBtn';
+
 function App() {
   return (
-    <div>
-      <a href="http://localhost:5000/api/auth/login/facebook/">Login to Facebook</a>
-    </div>
+    <FBLoginBtn />
   );
 }
 

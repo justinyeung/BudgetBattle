@@ -11,7 +11,7 @@ app.use(express.json({ extended: false }));
 
 
 // Define routes
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./routes/facebookAuth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/competitions', require('./routes/competitions'));
 app.use('/api/purchases', require('./routes/competitions'));

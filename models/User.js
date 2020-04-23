@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
+    facebookID: {
+        type: String
+    },
     name: {
         type: String,
         // required: true
@@ -11,8 +14,7 @@ const UserSchema = mongoose.Schema({
         // unique: true
     },
     password: {
-        type:String,
-        // required:true
+        type:String
     },
     friends: [
         {
