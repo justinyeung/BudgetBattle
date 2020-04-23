@@ -11,8 +11,18 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
     <script>
-      
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '611749673018879',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v6.0'
+        });
+      };
     </script>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v6.0&appId=611749673018879&autoLogAppEvents=1"></script>
     <title>React App</title>
   </head>
   <body>
