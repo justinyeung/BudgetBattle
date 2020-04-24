@@ -14,23 +14,12 @@ app.use(require("express-session")({
   saveUninitialized: true
 }));
 
-// TEST ROUTE
-// get current user
-app.get('/id', (req, res) => {
-  res.send(req.session.user);
-})
-
 // Define routes
 app.use('/api/fbauth', require('./routes/facebookAuth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/competitions', require('./routes/competitions'));
 app.use('/api/purchases', require('./routes/competitions'));
 app.use('/api/middleware', require('./routes/middleware'));
-
-// home
-// app.get('/', (req, res) => {
-//     res.send("Success");
-//   });
 
 const PORT = process.env.PORT || 5000;
 app.listen(

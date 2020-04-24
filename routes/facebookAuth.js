@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+
+const isLoggedIn = require('./middleware');
+
 require('dotenv').config();
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
-
 const User = require('../models/User');
 
 // passport
@@ -62,8 +64,8 @@ router.get('/login',
 // @route GET /api/fbauth/user
 // @desc log in to facebook route
 // @access private
-router.get('/user', (req, res) => {
+router.get('/user', isLoggedIn, (req, res) => {
   res.json(req.session.user);
-})
+});
 
 module.exports = router;
