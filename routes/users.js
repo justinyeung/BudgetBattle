@@ -9,13 +9,19 @@ const User = require('../models/User');
 // @desc get current logged in user
 // @access private
 router.get('/current', isLoggedIn, (req, res) => {
+  try {
     res.json(req.session.user);
-  });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error'); 
+  }
+});
 
 // @route GET /api/users/logout
 // @desc log out of route
 // @access private
 router.get('/logout', isLoggedIn, (req, res) => {
+  try {
     // logout of passport and destroy express session
     req.logout();
     req.session.destroy();
@@ -23,7 +29,11 @@ router.get('/logout', isLoggedIn, (req, res) => {
     // redirect to home page
     // res.redirect('http://localhost:3000/');
     return res.json({ msg: "User Logged Out"});
-  })
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error'); 
+  }
+});
 
 // @route DELETE /api/users/delete
 // @desc delete current logged in user
@@ -43,7 +53,8 @@ router.delete('/delete', isLoggedIn, async (req, res) => {
 
     return res.json({ msg: "User Deleted" });
   } catch (error) {
-    
+    console.error(err.message);
+    res.status(500).send('Server Error'); 
   }
   
 })

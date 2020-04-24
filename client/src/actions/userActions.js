@@ -1,8 +1,9 @@
-import { LOGIN, GET_USER, LOGOUT, DELETEUSER } from './types';
+import { LOGIN, GET_USER, LOGOUT, DELETEUSER, LOGIN_ERROR, GET_USER_ERROR, LOGOUT_ERROR, DELETE_USER_ERROR } from './types';
 
 import axios from 'axios';
 
 // Login user
+// TODO trigger this in fb/gg login tags
 export const login = () => async dispatch => {
     try {
         // api call to get current user
@@ -13,7 +14,10 @@ export const login = () => async dispatch => {
             payload: res.data
         })
     } catch (err) {
-        console.log(err);
+        dispatch({
+            type: LOGIN_ERROR,
+            payload: err.response.statusText
+        });
     }
 }
 
@@ -28,7 +32,10 @@ export const getUser = () => async dispatch => {
             payload: res.data
         })
     } catch (err) {
-        console.log(err);
+        dispatch({
+            type: GET_USER_ERROR,
+            payload: err.response.statusText
+        });
     }
 }
 
@@ -43,7 +50,10 @@ export const logout = () => async dispatch => {
             payload: null
         })
     } catch (err) {
-        console.log(err);   
+        dispatch({
+            type: LOGOUT_ERROR,
+            payload: err.response.statusText
+        });
     }
 }
 
@@ -58,6 +68,9 @@ export const deleteUser = () => async dispatch => {
             payload: null
         })
     } catch (err) {
-        
+        dispatch({
+            type: DELETE_USER_ERROR,
+            payload: err.response.statusText
+        });
     }
 }

@@ -1,8 +1,9 @@
-import { LOGIN, GET_USER, LOGOUT, DELETEUSER } from '../actions/types';
+import { LOGIN, GET_USER, LOGOUT, DELETEUSER, LOGIN_ERROR, GET_USER_ERROR, LOGOUT_ERROR, DELETE_USER_ERROR } from '../actions/types';
 
 const initialState = {
     user: null,
-    isLoggedIn: false
+    isLoggedIn: false,
+    error: null
 }
 
 export default (state = initialState, action) => {
@@ -24,6 +25,15 @@ export default (state = initialState, action) => {
                 ...state,
                 user:null,
                 isLoggedIn: false
+            }
+        case LOGIN_ERROR:
+        case GET_USER_ERROR:
+        case LOGOUT_ERROR:
+        case DELETE_USER_ERROR:
+            console.error(action.payload);
+            return{
+                ...state,
+                error: action.payload
             }
         default:
             return state;
