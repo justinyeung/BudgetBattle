@@ -4,14 +4,14 @@ const UserSchema = mongoose.Schema({
     facebookID: {
         type: String
     },
+    googleID: {
+        type: String
+    },
     name: {
-        type: String,
-        // required: true
+        type: String
     },
     email: {
-        type: String,
-        // required: true,
-        // unique: true
+        type: String
     },
     password: {
         type:String

@@ -7,7 +7,6 @@ export const getUser = () => async dispatch => {
     try {
         // api call to log in to facebook
         const res = await axios.get('/api/users/current');
-        console.log(res.data);
 
         dispatch({
             type: GET_USER,

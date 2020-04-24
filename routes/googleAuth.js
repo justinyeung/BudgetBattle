@@ -4,7 +4,7 @@ const passport = require('passport');
 
 // callback
 router.get('/callback', 
-  passport.authenticate('facebook', { failureRedirect: '/loginfail' }),
+  passport.authenticate('google', { failureRedirect: '/loginfail' }),
   function(req, res) {
     // save user to express session
     req.session.user = req.user;
@@ -13,11 +13,11 @@ router.get('/callback',
     res.redirect('http://localhost:3000/');
 });
 
-// @route GET /api/fbauth/login
-// @desc log in to facebook route
+// @route GET /api/ggauth/login
+// @desc log in to google route
 // @access public
 router.get('/login',
-  passport.authenticate('facebook')
+  passport.authenticate('google', { scope: ['profile'] })
 );
 
 module.exports = router;
