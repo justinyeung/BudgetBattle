@@ -21,10 +21,16 @@ app.use(require("express-session")({
 const passport = require('passport');
 app.use(passport.initialize());
 app.use(passport.session());
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
 
 // Facebook Passport Strategy
-const Strategy = require('passport-facebook').Strategy;
-passport.use(new Strategy({
+const FacebookStrategy = require('passport-facebook').Strategy;
+passport.use(new FacebookStrategy({
     clientID: process.env['FACEBOOK_APP_ID'],
     clientSecret: process.env['FACEBOOK_APP_SECRET'],
     callbackURL: '/api/fbauth/callback'
@@ -40,21 +46,40 @@ passport.use(new Strategy({
                 email: profile.email
             });
             await user.save();
-            return cb(null, profile);
+            return cb(null, user);
         }else{
             console.log("existing user");
             return cb(null, user);
         };
 }));
-passport.serializeUser(function(user, cb) {
-    cb(null, user);
-});
-passport.deserializeUser(function(obj, cb) {
-    cb(null, obj);
-});
+
+// Google Passport Strategy
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+passport.use(new GoogleStrategy({
+  clientID: process.env['GOOGLE_APP_ID'],
+  clientSecret: process.env['GOOGLE_APP_SECRET'],
+  callbackURL: '/api/ggauth/callback'
+  },
+  async function(accessToken, refreshToken, profile, cb){
+    // runs when logging in
+      let user = await User.findOne({ googleID: profile.id });
+      if(!user){
+          console.log("new user");
+          user = new User({
+              googleID: profile.id,
+              name: profile.name.givenName + " " + profile.name.familyName
+          });
+          await user.save();
+          return cb(null, user);
+      }else{
+          console.log("existing user");
+          return cb(null, user);
+      };
+}));
 
 // Define routes
 app.use('/api/fbauth', require('./routes/facebookAuth'));
+app.use('/api/ggauth', require('./routes/googleAuth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/competitions', require('./routes/competitions'));
 app.use('/api/purchases', require('./routes/competitions'));
