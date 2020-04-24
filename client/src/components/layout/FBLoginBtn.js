@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getUser, logout } from '../../actions/userActions';
 
 const FBLoginBtn = () => {
 
@@ -11,4 +9,4 @@ const FBLoginBtn = () => {
     )
 }
 
-export default connect(null, { getUser, logout })(FBLoginBtn);
+export default FBLoginBtn;

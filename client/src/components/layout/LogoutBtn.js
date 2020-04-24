@@ -11,7 +11,8 @@ const LogoutBtn = ({ logout }) => {
 
     return(
         <div>
-            <a href="http://localhost:5000/api/users/logout/" onClick={logoutButton}>Logout</a>
+            {/* <a href="http://localhost:5000/api/users/logout/" onClick={logoutButton}>Logout</a> */}
+            <button onClick={logoutButton}>Logout</button>
         </div>
     )
 }

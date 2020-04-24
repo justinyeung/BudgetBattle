@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUser } from '../../actions/userActions';
 
-const FBLoginBtn = ({ getUser }) => {
+const GetUserBtn = ({ getUser }) => {
     const getUserButton = () => {
         getUser();
     }
@@ -17,8 +17,8 @@ const FBLoginBtn = ({ getUser }) => {
     )
 }
 
-FBLoginBtn.propTypes = {
+GetUserBtn.propTypes = {
     getUser: PropTypes.func.isRequired
 }
 
-export default connect(null, { getUser })(FBLoginBtn);
+export default connect(null, { getUser })(GetUserBtn);

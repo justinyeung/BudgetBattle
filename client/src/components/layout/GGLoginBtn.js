@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { logout } from '../../actions/userActions';
 
 const GGLoginBtn = () => {
 
@@ -11,4 +9,4 @@ const GGLoginBtn = () => {
     )
 }
 
-export default connect(null, { logout })(GGLoginBtn);
+export default GGLoginBtn;
