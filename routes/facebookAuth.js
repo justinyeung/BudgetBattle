@@ -28,7 +28,7 @@ router.get('/login',
 // @route GET /api/fbauth/logout
 // @desc log out of facebook route
 // @access private
-router.get('/logout', (req, res) => {
+router.get('/logout', isLoggedIn, (req, res) => {
   // logout of passport and destroy express session
   req.logout();
   req.session.destroy();
