@@ -1,7 +1,7 @@
 import { GET_USER } from '../actions/types';
 
 const initialState = {
-    user: null
+    user: "nobody"
 }
 
 export default (state = initialState, action) => {
@@ -11,5 +11,7 @@ export default (state = initialState, action) => {
                 ...state,
                 user: action.payload,
             };
+        default:
+            return state;
     }
 }

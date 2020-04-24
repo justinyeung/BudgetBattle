@@ -1,8 +1,11 @@
 import { GET_USER } from './types';
 
+import axios from 'axios';
+
+// Get logged in user
 export const getUser = () => async dispatch => {
     try {
-        const res = await fetch('/api/auth/login/facebook');
+        const res = await axios.get('/api/auth/login/facebook');
         const data = await res.json();
 
         dispatch({
@@ -10,6 +13,7 @@ export const getUser = () => async dispatch => {
             payload: data
         })
     } catch (err) {
-        console.err(err);
+        console.log(err)
+        ;
     }
 }
