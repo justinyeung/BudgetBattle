@@ -5,12 +5,13 @@ import axios from 'axios';
 // Get logged in user
 export const getUser = () => async dispatch => {
     try {
-        const res = await axios.get('/api/auth/login/facebook');
-        const data = await res.json();
+        const res = await axios.get('/api/fbauth/user');
+        // const data = await res.json();
+        console.log(res.data);
 
         dispatch({
             type: GET_USER,
-            payload: data
+            payload: res.data
         })
     } catch (err) {
         console.log(err)

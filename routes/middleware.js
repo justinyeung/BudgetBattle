@@ -10,22 +10,22 @@ function isLoggedIn(req, res, next){
     res.send("Not logged in");
 }
 
-// TODO TEST ROUTE
-// return logged in user
-router.get('/user', (req, res) => {
-    // console.log(req.session.cookie);
-    // console.log(req.sessionID);
-    res.send(req.session.user);
-})
+// // TODO TEST ROUTE
+// // return logged in user
+// router.get('/user', (req, res) => {
+//     // console.log(req.session.cookie);
+//     // console.log(req.sessionID);
+//     res.send(req.session.user);
+// })
 
-// TEST ROUTE
-// check if logged in or not
-router.get('/isLoggedIn', (req, res) => {
-    if(isLoggedIn){
-        res.send("Logged In");
-    }else{
-        res.send("Not Logged In");
-    }
-});
+// // TEST ROUTE
+// // check if logged in or not
+// router.get('/isLoggedIn', (req, res) => {
+//     if(isLoggedIn){
+//         res.send("Logged In");
+//     }else{
+//         res.send("Not Logged In");
+//     }
+// });
 
 module.exports = router;

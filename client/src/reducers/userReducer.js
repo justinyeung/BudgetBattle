@@ -1,7 +1,7 @@
 import { GET_USER } from '../actions/types';
 
 const initialState = {
-    user: "nobody"
+    user: null
 }
 
 export default (state = initialState, action) => {
