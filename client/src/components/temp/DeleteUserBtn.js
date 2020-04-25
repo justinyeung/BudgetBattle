@@ -3,12 +3,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteUser, logout } from '../../actions/userActions';
+import { deleteUser } from '../../actions/userActions';
 
-const DeleteUserBtn = ({ logout, deleteUser }) => {
+const DeleteUserBtn = ({ deleteUser }) => {
     const deleteUserButton = () => {
         deleteUser();
-        // logout();
     }
 
     return(
@@ -19,8 +18,7 @@ const DeleteUserBtn = ({ logout, deleteUser }) => {
 }
 
 DeleteUserBtn.propTypes = {
-    deleteUser: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
+    deleteUser: PropTypes.func.isRequired
 }
 
-export default connect(null, { deleteUser, logout })(DeleteUserBtn);
+export default connect(null, { deleteUser })(DeleteUserBtn);

@@ -4,7 +4,7 @@ const passport = require('passport');
 
 // callback
 router.get('/callback', 
-  passport.authenticate('facebook', { failureRedirect: '/loginfail' }),
+  passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000/' }),
   function(req, res) {
     try {
       // save user to express session

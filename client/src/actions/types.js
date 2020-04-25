@@ -6,3 +6,5 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const GET_USER_ERROR = 'GET_USER_ERROR';
 export const LOGOUT_ERROR = 'LOGOUT_ERROR';
 export const DELETE_USER_ERROR = 'DELETE_USER_ERROR';
+export const ADD_FRIEND = 'ADD_FRIEND';
+export const ADD_FRIEND_ERROR = 'ADD_FRIEND_ERROR';
