@@ -15,8 +15,7 @@ const AddFriendForm = ({ addFriend }) => {
 
     return(
         <div>
-            <input type="text" value={friendID} onChange={e => setFriendID(e.target.value)} />
-            <br />
+            <input type="text" placeholder="Friend's UserID" value={friendID} onChange={e => setFriendID(e.target.value)} />
             <button onClick={onSubmit}>Add Friend</button>
         </div>
     )

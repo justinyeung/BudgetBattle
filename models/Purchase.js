@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
 const PurchaseSchema = mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
+    userID: {
+        // type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'user',
         required: true
     },

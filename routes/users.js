@@ -44,7 +44,7 @@ router.delete('/delete', isLoggedIn, async (req, res) => {
 
         if(!user){
           return res.status(404).json({ msg: "User not found" });
-    }
+        }
 
         await User.findByIdAndRemove(req.session.user._id);
 

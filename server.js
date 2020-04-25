@@ -82,9 +82,9 @@ app.use('/api/fbauth', require('./routes/facebookAuth'));
 app.use('/api/ggauth', require('./routes/googleAuth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/competitions', require('./routes/competitions'));
-app.use('/api/purchases', require('./routes/competitions'));
+app.use('/api/purchases', require('./routes/purchases'));
 app.use('/api/friends', require('./routes/friends'));
-app.use('/api/middleware', require('./routes/middleware'));
+// app.use('/api/middleware', require('./routes/middleware'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(

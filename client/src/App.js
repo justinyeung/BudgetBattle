@@ -14,12 +14,19 @@ import store from './store';
 function App() {
   return (
     <Provider store={store}>
-      <FBLoginBtn />
-      <GGLoginBtn />
-      <GetUserBtn />
-      <LogoutBtn />
-      <DeleteUserBtn />
-      <AddFriendForm />
+      <div style={{ padding: '1rem' }}>
+        <FBLoginBtn />
+        <GGLoginBtn />
+        <GetUserBtn />
+        <LogoutBtn />
+      </div>
+      <div style={{ padding: '1rem' }}>
+        <DeleteUserBtn />
+      </div>
+      <div style={{ padding: '1rem' }}>
+        <AddFriendForm />
+      </div>
+      
     </Provider>
   );
 }
