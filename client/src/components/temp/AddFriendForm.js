@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { addFriend } from '../../actions/friendActions';
 import { addFriend } from '../../actions/userActions';
 
 const AddFriendForm = ({ addFriend }) => {
@@ -15,8 +14,7 @@ const AddFriendForm = ({ addFriend }) => {
 
     return(
         <div>
-            <input type="text" value={friendID} onChange={e => setFriendID(e.target.value)} />
-            <br />
+            <input type="text" placeholder="Friend's UserID" value={friendID} onChange={e => setFriendID(e.target.value)} />
             <button onClick={onSubmit}>Add Friend</button>
         </div>
     )

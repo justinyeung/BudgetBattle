@@ -1,5 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETEUSER, LOGIN_ERROR, GET_USER_ERROR, 
-    LOGOUT_ERROR, DELETE_USER_ERROR, ADD_FRIEND, ADD_FRIEND_ERROR } from './types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, FRIEND_ERROR } from './types';
 
 import axios from 'axios';
 
@@ -16,11 +15,11 @@ export const login = () => async dispatch => {
         })
     } catch (err) {
         dispatch({
-            type: LOGIN_ERROR,
+            type: AUTH_ERROR,
             payload: err
         });
     }
-}
+};
 
 // Get logged in user
 export const getUser = () => async dispatch => {
@@ -34,11 +33,11 @@ export const getUser = () => async dispatch => {
         })
     } catch (err) {
         dispatch({
-            type: GET_USER_ERROR,
+            type: USER_ERROR,
             payload: err
         });
     }
-}
+};
 
 // logout user
 export const logout = () => async dispatch => {
@@ -52,11 +51,11 @@ export const logout = () => async dispatch => {
         })
     } catch (err) {
         dispatch({
-            type: LOGOUT_ERROR,
+            type: AUTH_ERROR,
             payload: err
         });
     }
-}
+};
 
 // delete user
 export const deleteUser = () => async dispatch => {
@@ -65,12 +64,12 @@ export const deleteUser = () => async dispatch => {
         await axios.delete('/api/users/delete');
 
         dispatch({
-            type: DELETEUSER,
+            type: DELETE_USER,
             payload: null
         })
     } catch (err) {
         dispatch({
-            type: DELETE_USER_ERROR,
+            type: USER_ERROR,
             payload: err
         });
     }
@@ -95,9 +94,9 @@ export const addFriend = (friendID) => async dispatch => {
         })
     } catch (err) {
         dispatch({
-            type: ADD_FRIEND_ERROR,
+            type: FRIEND_ERROR,
             payload: err
         });
         console.log(err);
     }
-}
+};

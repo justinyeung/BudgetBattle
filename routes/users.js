@@ -8,9 +8,12 @@ const User = require('../models/User');
 // @route GET /api/users/current
 // @desc get current logged in user
 // @access private
-router.get('/current', isLoggedIn, (req, res) => {
+router.get('/current', isLoggedIn, async (req, res) => {
     try {
-        res.json(req.session.user);
+        let currentUser = await User.findById(req.session.user._id);
+
+        res.json(currentUser);
+        // res.json(req.session.user);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 
@@ -44,7 +47,7 @@ router.delete('/delete', isLoggedIn, async (req, res) => {
 
         if(!user){
           return res.status(404).json({ msg: "User not found" });
-    }
+        }
 
         await User.findByIdAndRemove(req.session.user._id);
 

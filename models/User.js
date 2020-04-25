@@ -20,12 +20,12 @@ const UserSchema = mongoose.Schema({
             ref: "friend"
         }
     ],
-    purchases: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "purchase"
-        }
-    ],
+    // purchases: [
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: "purchase"
+    //     }
+    // ],
     saved: {
         locations: [
             {
