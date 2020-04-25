@@ -8,9 +8,12 @@ const User = require('../models/User');
 // @route GET /api/users/current
 // @desc get current logged in user
 // @access private
-router.get('/current', isLoggedIn, (req, res) => {
+router.get('/current', isLoggedIn, async (req, res) => {
     try {
-        res.json(req.session.user);
+        let currentUser = await User.findById(req.session.user._id);
+
+        res.json(currentUser);
+        // res.json(req.session.user);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 

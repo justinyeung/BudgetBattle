@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { addFriend } from '../../actions/friendActions';
 import { addFriend } from '../../actions/userActions';
 
 const AddFriendForm = ({ addFriend }) => {

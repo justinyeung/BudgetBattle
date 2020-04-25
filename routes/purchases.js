@@ -5,23 +5,46 @@ const isLoggedIn = require('./middleware');
 
 const Purchase = require('../models/Purchase');
 
+// // @route GET /api/purchases
+// // @desc get a purchase
+// // @access private
+// router.get("/", async (req, res) => {
+//     try {
+//         // input params
+//         const { purchaseID } = req.body;
+
+//         // query for purchase in db
+//         let purchase = await Purchase.findById(purchaseID);
+
+//         // check if purchase exists
+//         if(!purchase){
+//             return res.status(404).json({ msg: "Purchase Not Found" });
+//         }
+
+//         res.json(purchase);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error'); 
+//     }
+// });
+
 // @route GET /api/purchases
-// @desc get a purchase
+// @desc get a user's purchases
 // @access private
 router.get("/", async (req, res) => {
     try {
         // input params
-        const { purchaseID } = req.body;
+        // const { userID } = req.body;
+
 
         // query for purchase in db
-        let purchase = await Purchase.findById(purchaseID);
+        let purchases = await Purchase.find({ userID: req.session.user.userID });
 
         // check if purchase exists
-        if(!purchase){
-            return res.status(404).json({ msg: "Purchase Not Found" });
-        }
-
-        res.json(purchase);
+        // if(!purchase){
+        //     return res.status(404).json({ msg: "Purchase Not Found" });
+        // }
+        res.json(purchases);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 
@@ -34,11 +57,11 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         // input params
-        const { userID, date, amount, location, category } = req.body;
+        const { date, amount, location, category } = req.body;
 
         // create new purchase object
         newPurchase = new Purchase({
-            userID,
+            userID: req.session.user.userID,
             date,
             amount,
             location,

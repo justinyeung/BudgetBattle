@@ -1,5 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETEUSER, LOGIN_ERROR, GET_USER_ERROR, 
-    LOGOUT_ERROR, DELETE_USER_ERROR, ADD_FRIEND, ADD_FRIEND_ERROR } from '../actions/types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, FRIEND_ERROR } from '../actions/types';
 
 const initialState = {
     user: null,
@@ -21,7 +20,7 @@ export default (state = initialState, action) => {
                 user: action.payload
             };
         case LOGOUT:
-        case DELETEUSER:
+        case DELETE_USER:
             return{
                 ...state,
                 user:null,
@@ -29,15 +28,12 @@ export default (state = initialState, action) => {
             }
         case ADD_FRIEND:
             state.user.friends = [...state.user.friends, action.payload];
-            // console.log(state.user);
             return{
                 ...state
             }
-        case LOGIN_ERROR:
-        case GET_USER_ERROR:
-        case LOGOUT_ERROR:
-        case DELETE_USER_ERROR:
-        case ADD_FRIEND_ERROR:
+        case AUTH_ERROR:
+        case USER_ERROR:
+        case FRIEND_ERROR:
             console.error(action.payload);
             return{
                 ...state,
