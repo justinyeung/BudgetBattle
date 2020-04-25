@@ -4,13 +4,19 @@ const passport = require('passport');
 
 // callback
 router.get('/callback', 
-  passport.authenticate('google', { failureRedirect: '/loginfail' }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/' }),
   function(req, res) {
-    // save user to express session
-    req.session.user = req.user;
+    try {
+      // save user to express session
+      req.session.user = req.user;
 
-    // redirect to home page
-    res.redirect('http://localhost:3000/');
+      // redirect to home page
+      res.redirect('http://localhost:3000/');
+    } catch (error) {
+      console.error(err.message);
+      res.status(500).send('Server Error'); 
+    }
+    
 });
 
 // @route GET /api/ggauth/login

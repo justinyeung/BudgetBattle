@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const UserSchema = mongoose.Schema({
-    facebookID: {
-        type: String
-    },
-    googleID: {
+    userID: {
         type: String
     },
     name: {
@@ -18,7 +15,8 @@ const UserSchema = mongoose.Schema({
     },
     friends: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            // type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: "friend"
         }
     ],

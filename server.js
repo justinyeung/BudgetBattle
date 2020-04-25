@@ -37,11 +37,11 @@ passport.use(new FacebookStrategy({
     },
     async function(accessToken, refreshToken, profile, cb){
       // runs when logging in
-        let user = await User.findOne({ facebookID: profile.id });
+        let user = await User.findOne({ userID: profile.id });
         if(!user){
             console.log("new user");
             user = new User({
-                facebookID: profile.id,
+                userID: profile.id,
                 name: profile.displayName,
                 email: profile.email
             });
@@ -62,11 +62,11 @@ passport.use(new GoogleStrategy({
   },
   async function(accessToken, refreshToken, profile, cb){
     // runs when logging in
-      let user = await User.findOne({ googleID: profile.id });
+      let user = await User.findOne({ userID: profile.id });
       if(!user){
           console.log("new user");
           user = new User({
-              googleID: profile.id,
+              userID: profile.id,
               name: profile.name.givenName + " " + profile.name.familyName
           });
           await user.save();
@@ -83,6 +83,7 @@ app.use('/api/ggauth', require('./routes/googleAuth'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/competitions', require('./routes/competitions'));
 app.use('/api/purchases', require('./routes/competitions'));
+app.use('/api/friends', require('./routes/friends'));
 app.use('/api/middleware', require('./routes/middleware'));
 
 const PORT = process.env.PORT || 5000;
