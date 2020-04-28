@@ -5,6 +5,7 @@ export const GET_USER = 'GET_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const USER_ERROR = 'USER_ERROR';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const FRIEND_ERROR = 'FRIEND_ERROR';
 export const ADD_PURCHASE = 'ADD_PURCHASE';
 export const EDIT_PURCHASE = 'EDIT_PURCHASE';

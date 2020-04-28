@@ -1,4 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, FRIEND_ERROR } from './types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, DELETE_FRIEND, FRIEND_ERROR } from './types';
 
 import axios from 'axios';
 
@@ -88,7 +88,7 @@ export const addFriend = (friendID) => async dispatch => {
         const param = { friendID };
 
         // api call to add friend, friendID as param
-        await axios.post('/api/friends/add', param, config);
+        await axios.post('/api/friends', param, config);
 
         dispatch({
             type: ADD_FRIEND,
@@ -102,3 +102,32 @@ export const addFriend = (friendID) => async dispatch => {
         console.log(err);
     }
 };
+
+// Delete friend for current user
+export const deleteFriend = (friendID) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: {
+                'friendID': friendID
+            }
+        }
+        const param = { friendID };
+
+        // api call to add friend, friendID as param
+        await axios.delete('/api/friends', config);
+
+        dispatch({
+            type: DELETE_FRIEND,
+            payload: friendID
+        });
+    } catch (err) {
+        dispatch({
+            type: FRIEND_ERROR,
+            payload: err
+        });
+        console.log(err);
+    }
+}

@@ -1,4 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, FRIEND_ERROR } from '../actions/types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, FRIEND_ERROR, DELETE_FRIEND } from '../actions/types';
 
 const initialState = {
     user: null,
@@ -27,6 +27,14 @@ export default (state = initialState, action) => {
             }
         case ADD_FRIEND:
             state.user.friends = [...state.user.friends, action.payload];
+            return{
+                ...state
+            }
+        case DELETE_FRIEND:
+            // state.user.friends = state.user.friends.filter(friend => friend.userID !== action.payload);
+            
+            // TEMPORARY. compares entire friend string
+            state.user.friends = state.user.friends.filter(friend => friend !== action.payload);
             return{
                 ...state
             }
