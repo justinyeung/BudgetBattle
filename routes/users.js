@@ -22,8 +22,8 @@ router.get('/current', isLoggedIn, async (req, res) => {
 
 // @route GET /api/users/logout
 // @desc log out of route
-// @access private
-router.get('/logout', isLoggedIn, (req, res) => {
+// @access public
+router.get('/logout', (req, res) => {
     try {
         // logout of passport and destroy express session
         req.logout();
