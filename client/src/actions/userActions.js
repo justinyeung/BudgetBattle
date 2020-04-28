@@ -7,11 +7,12 @@ import axios from 'axios';
 export const login = () => async dispatch => {
     try {
         // api call to get current user
-        const res = await axios.get('/api/users/current');
+        // const res = await axios.get('/api/users/current');
+        
 
         dispatch({
             type: LOGIN,
-            payload: res.data
+            payload: null
         })
     } catch (err) {
         dispatch({
@@ -26,12 +27,13 @@ export const getUser = () => async dispatch => {
     try {
         // api call to get current user
         const res = await axios.get('/api/users/current');
-
+        // console.log(res.data);
         dispatch({
             type: GET_USER,
             payload: res.data
         })
     } catch (err) {
+        console.log("Login failed");
         dispatch({
             type: USER_ERROR,
             payload: err
