@@ -8,10 +8,10 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
     useEffect(() => {
         // get state of currently logged in user
         getUser();
-        if(user !== null){
-            // set isLoggedIn to true
-            login();
-        }
+        // if(user !== null){
+        //     // set isLoggedIn to true
+        //     login();
+        // }
         // eslint-disable-next-line
     }, []);
 
@@ -19,9 +19,10 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
         <ul>
             {user !== null && 
             (<div>
-                <li>{user !== null && user.name}</li>
-                <li>{user !== null && user.userID}</li>
+                <li>Name: {user !== null && user.name}</li>
+                <li>User ID: {user !== null && user.userID}</li>
                 <ul>
+                    <li>Friends:</li>
                     {user.friends.map(friend => (
                         <li key={friend.userID}>{friend}</li>
                     ))}
