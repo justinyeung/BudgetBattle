@@ -41,3 +41,29 @@ export const addPurchase = purchase => async dispatch => {
         });
     }
 }
+
+// Delete a purchase
+export const deletePurchase = purchaseID => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }, 
+            data: {
+                'purchaseID': purchaseID
+            }
+        } 
+
+        await axios.delete('/api/purchases', config);
+
+        dispatch({
+            type: DELETE_PURCHASE,
+            payload: purchaseID
+        })
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
