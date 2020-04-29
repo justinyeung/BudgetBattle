@@ -9,7 +9,6 @@ export const login = () => async dispatch => {
         // api call to get current user
         // const res = await axios.get('/api/users/current');
         
-
         dispatch({
             type: LOGIN,
             payload: null
@@ -114,7 +113,6 @@ export const deleteFriend = (friendID) => async dispatch => {
                 'friendID': friendID
             }
         }
-        const param = { friendID };
 
         // api call to add friend, friendID as param
         await axios.delete('/api/friends', config);
