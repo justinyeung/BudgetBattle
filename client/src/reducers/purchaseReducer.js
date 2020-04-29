@@ -13,6 +13,7 @@ export default (state = initialState, action) => {
             }
         case ADD_PURCHASE:
             state.purchases = [...state.purchases, action.payload];
+            // state.purchases = action.payload;
             return{
                 ...state
             }

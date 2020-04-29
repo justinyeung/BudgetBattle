@@ -28,11 +28,15 @@ export const addPurchase = purchase => async dispatch => {
             }
         }
 
-        await axios.post('/api/purchases', purchase, config);
+        // api call to add purchase to db
+        let res = await axios.post('/api/purchases', purchase, config);
+
+        // api call to get purchase to retrieve userid and purchaseid
+        // let purchases = await axios.get('/api/purchases');
 
         dispatch({
             type: ADD_PURCHASE,
-            payload: purchase
+            payload: res.data
         });
     } catch (err) {
         dispatch({
