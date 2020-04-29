@@ -16,6 +16,11 @@ export default (state = initialState, action) => {
             return{
                 ...state
             }
+        case DELETE_PURCHASE:
+            state.purchases = state.purchases.filter(purchase => purchase._id !== action.payload)
+            return{
+                ...state
+            }
         default:
             return state;
     }

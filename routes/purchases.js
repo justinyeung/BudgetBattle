@@ -5,29 +5,6 @@ const isLoggedIn = require('./middleware');
 
 const Purchase = require('../models/Purchase');
 
-// // @route GET /api/purchases
-// // @desc get a purchase
-// // @access private
-// router.get("/", async (req, res) => {
-//     try {
-//         // input params
-//         const { purchaseID } = req.body;
-
-//         // query for purchase in db
-//         let purchase = await Purchase.findById(purchaseID);
-
-//         // check if purchase exists
-//         if(!purchase){
-//             return res.status(404).json({ msg: "Purchase Not Found" });
-//         }
-
-//         res.json(purchase);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error'); 
-//     }
-// });
-
 // @route GET /api/purchases
 // @desc get a user's purchases
 // @access private
