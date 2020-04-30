@@ -22,16 +22,16 @@ const CurrentComps = ({ getAccepted, getPending, competition: { accepted, pendin
                         <li>
                             <ul>
                                 <li>
-                                    {comp._id}
+                                    Competition ID: {comp._id}
                                 </li>
                                 <li>
-                                    {comp.user1}
+                                    User1: {comp.user1}
                                 </li>
                                 <li>
-                                    {comp.user2}
+                                    User2: {comp.user2}
                                 </li>
                                 <li>
-                                    {comp.status}
+                                    Status: {comp.status}
                                 </li>
                             </ul>
                         </li>
@@ -45,16 +45,16 @@ const CurrentComps = ({ getAccepted, getPending, competition: { accepted, pendin
                         <li>
                             <ul>
                                 <li>
-                                    {comp._id}
+                                    Competition ID: {comp._id}
                                 </li>
                                 <li>
-                                    {comp.user1}
+                                    User1: {comp.user1}
                                 </li>
                                 <li>
-                                    {comp.user2}
+                                    User2: {comp.user2}
                                 </li>
                                 <li>
-                                    {comp.status}
+                                    Status: {comp.status}
                                 </li>
                             </ul>
                         </li>
