@@ -8,7 +8,7 @@ const Purchase = require('../models/Purchase');
 // @route GET /api/purchases
 // @desc get a user's purchases
 // @access private
-router.get("/", async (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
     try {
         // input params
         // const { userID } = req.body;
@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
 // @route POST /api/purchases
 // @desc add a purchase
 // @access private
-router.post("/", async (req, res) => {
+router.post("/", isLoggedIn, async (req, res) => {
     try {
         // input params
         const { date, amount, location, category } = req.body;
@@ -57,7 +57,7 @@ router.post("/", async (req, res) => {
 // @route PUT /api/purchases
 // @desc edit a purchase
 // @access private
-router.put("/", async (req, res) => {
+router.put("/", isLoggedIn, async (req, res) => {
     try {
         // input params
         const { purchaseID, userID, date, amount, location, category } = req.body;
@@ -94,7 +94,7 @@ router.put("/", async (req, res) => {
 // @route DELETE /api/purchases
 // @desc delete a purchase
 // @access private
-router.delete("/", async (req, res) => {
+router.delete("/", isLoggedIn, async (req, res) => {
     try {
         // input params
         const { purchaseID } = req.body;
