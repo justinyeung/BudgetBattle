@@ -1,7 +1,8 @@
-import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, DELETE_PURCHASE } from '../actions/types';
+import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, DELETE_PURCHASE, PURCHASE_ERROR, CLEAR_PURCHASES } from '../actions/types';
 
 const initialState = {
-    purchases: []
+    purchases: [],
+    error: null
 }
 
 export default (state = initialState, action) => {
@@ -22,7 +23,19 @@ export default (state = initialState, action) => {
             return{
                 ...state
             }
+        case PURCHASE_ERROR:
+            console.error(action.payload);
+            return{
+                ...state,
+                error: action.payload
+            }
+        case CLEAR_PURCHASES:
+            return{
+                ...state,
+                purchases: []
+            }
         default:
             return state;
+        
     }
 }

@@ -2,29 +2,31 @@ const mongoose = require("mongoose");
 
 const CompetitionSchema = new mongoose.Schema({
     user1: {
-        id:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        name: {
-            type: String,
-            required: true
-        }
+        // id:{
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: "User"
+        // },
+        // name: {
+        //     type: String,
+        //     required: true
+        // }
+        type: String
     },
     user2: {
-        id:{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        name: {
-            type: String,
-            required: true
-        }
+        // id:{
+        //     type: mongoose.Schema.Types.ObjectId,
+        //     ref: "User"
+        // },
+        // name: {
+        //     type: String,
+        //     required: true
+        // }
+        type: String
     },
     status: {
         type: String,
         required:true,
-        default: "pending"
+        default: "Pending"
     }
 })
 

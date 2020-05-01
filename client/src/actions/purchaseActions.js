@@ -1,4 +1,4 @@
-import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, DELETE_PURCHASE, PURCHASE_ERROR } from './types';
+import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, DELETE_PURCHASE, PURCHASE_ERROR, CLEAR_PURCHASES } from './types';
 
 import axios from 'axios';
 
@@ -63,6 +63,21 @@ export const deletePurchase = purchaseID => async dispatch => {
         dispatch({
             type: DELETE_PURCHASE,
             payload: purchaseID
+        })
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
+
+// Clear purchases fro state
+export const clearPurchases = () => async dispatch => {
+    try {
+        dispatch({
+            type: CLEAR_PURCHASES,
+            payload: null
         })
     } catch (err) {
         dispatch({

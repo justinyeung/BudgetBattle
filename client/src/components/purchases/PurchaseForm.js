@@ -1,5 +1,3 @@
-// TEMPORARY BUTTON
-
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,6 +11,10 @@ const PurchaseForm = ({ addPurchase }) => {
 
     const addPurchaseBtn = () => {
         addPurchase({ date, amount, location, category });
+        setDate('');
+        setAmount('');
+        setLocation('');
+        setCategory('');
     }
 
     return(
