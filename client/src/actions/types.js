@@ -18,4 +18,5 @@ export const ACCEPT_COMP = 'ACCEPT_COMP';
 export const REJECT_COMP = 'REJECT_COMP';
 export const GET_ACCEPTED = 'GET_ACCEPTED';
 export const GET_PENDING = 'GET_PENDING';
+export const CLEAR_COMPS = 'CLEAR_COMPS';
 export const COMP_ERROR = 'COMP_ERROR';

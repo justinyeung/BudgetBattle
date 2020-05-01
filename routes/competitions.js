@@ -82,14 +82,16 @@ router.put('/accept', async (req, res) => {
         }
 
         // find competition and update status to accepted
-        competition = await Competition.findByIdAndUpdate(compID, 
+        await Competition.findByIdAndUpdate(compID, 
             { $set: {
                 status: "Accepted"
                 }
             }
-        );   
-        
-        res.json(competition);
+        );
+
+        // find and return updated competition
+        let returnCompetition = await Competition.findById(compID);
+        res.json(returnCompetition);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 
@@ -102,17 +104,17 @@ router.put('/accept', async (req, res) => {
 router.delete('/reject', async (req, res) => {
     try {
         // input params
-        const { compID } = req.body;
+        const { comp } = req.body;
 
         // find competition
-        let competition = await Competition.findById(compID);
+        let competition = await Competition.findById(comp.compID);
 
         // check if competition exists
         if(!competition){
             return res.status(404).json({ msg: "Competition Not Found" });
         }
         
-        await Competition.findByIdAndDelete(compID);
+        await Competition.findByIdAndDelete(comp.compID);
         
         res.json({ msg: "Competition Rejected" });
     } catch (err) {

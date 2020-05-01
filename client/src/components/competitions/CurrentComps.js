@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAccepted, getPending } from '../../actions/competitionActions';
+import { getAcceptedComp, getPendingComp } from '../../actions/competitionActions';
 
-const CurrentComps = ({ getAccepted, getPending, competition: { accepted, pending } }) => {
+const CurrentComps = ({ getAcceptedComp, getPendingComp, competition: { accepted, pending } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
-        getAccepted();
-        getPending();
+        getAcceptedComp();
+        getPendingComp();
 
         // eslint-disable-next-line
     }, []);
@@ -66,12 +66,12 @@ const CurrentComps = ({ getAccepted, getPending, competition: { accepted, pendin
 }
 
 CurrentComps.propTypes = {
-    getAccepted: PropTypes.func.isRequired,
-    getPending: PropTypes.func.isRequired
+    getAcceptedComp: PropTypes.func.isRequired,
+    getPendingComp: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     competition: state.competition
 });
 
-export default connect(mapStateToProps, { getAccepted, getPending })(CurrentComps);
+export default connect(mapStateToProps, { getAcceptedComp, getPendingComp })(CurrentComps);
