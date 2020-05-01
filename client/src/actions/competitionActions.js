@@ -1,4 +1,4 @@
-import { SEND_COMP, ACCEPT_COMP, REJECT_COMP, GET_ACCEPTED, GET_PENDING, COMP_ERROR, CLEAR_COMPS } from './types';
+import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED, GET_PENDING, COMP_ERROR, CLEAR_COMPS } from './types';
 
 import axios from 'axios';
 
@@ -69,7 +69,7 @@ export const acceptComp = compID => async dispatch => {
             }
         }
 
-        let competition = await axios.put('/api/competitions/accept', compID, config);
+        let competition = await axios.put('/api/competitions', compID, config);
 
         dispatch({
             type: ACCEPT_COMP,
@@ -84,7 +84,7 @@ export const acceptComp = compID => async dispatch => {
 }
 
 // Reject competition request
-export const rejectComp = comp => async dispatch => {
+export const rejectOrDeleteComp = comp => async dispatch => {
     try {
         const config = {
             headers: {
@@ -95,10 +95,10 @@ export const rejectComp = comp => async dispatch => {
             }
         }
 
-        await axios.delete('/api/competitions/reject', config);
+        await axios.delete('/api/competitions', config);
 
         dispatch({
-            type: REJECT_COMP,
+            type: REJECT_DELETE_COMP,
             payload: comp
         })
     } catch (err) {

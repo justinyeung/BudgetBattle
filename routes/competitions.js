@@ -68,7 +68,7 @@ router.post('/send', async (req, res) => {
 // @route PUT /api/competitions/accept
 // @desc accept a pending competition request
 // @access private
-router.put('/accept', async (req, res) => {
+router.put('/', async (req, res) => {
     try {
         // input params
         const { compID } = req.body;
@@ -98,10 +98,10 @@ router.put('/accept', async (req, res) => {
     }
 });
 
-// @route DELETE /api/competitions/reject
-// @desc accept a pending competition request
+// @route DELETE /api/competitions
+// @desc reject or delete a competition request or competition
 // @access private
-router.delete('/reject', async (req, res) => {
+router.delete('/', async (req, res) => {
     try {
         // input params
         const { comp } = req.body;

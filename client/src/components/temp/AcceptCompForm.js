@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { acceptComp, rejectComp } from '../../actions/competitionActions';
+import { acceptComp, rejectOrDeleteComp } from '../../actions/competitionActions';
 
-const AcceptCompForm = ({ acceptComp, rejectComp }) => {
+const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp }) => {
     const [compID, setCompID] = useState('');
 
     const acceptCompBtn = () => {
@@ -13,8 +13,8 @@ const AcceptCompForm = ({ acceptComp, rejectComp }) => {
         setCompID('');
     }
 
-    const rejectCompBtn = () => {
-        rejectComp({ compID });
+    const rejectOrDeleteCompBtn = () => {
+        rejectOrDeleteComp({ compID });
         setCompID('');
     }
 
@@ -24,14 +24,16 @@ const AcceptCompForm = ({ acceptComp, rejectComp }) => {
             <br/>
             <button onClick={acceptCompBtn}>Accept Competition Request</button>
             <br />
-            <button onClick={rejectCompBtn}>Reject Competition Request</button>
+            <button onClick={rejectOrDeleteCompBtn}>Reject Competition Request</button>
+            <br />
+            <button onClick={rejectOrDeleteCompBtn}>Delete Competition</button>
         </div>
     )
 }
 
 AcceptCompForm.propTypes = {
     acceptComp: PropTypes.func.isRequired,
-    rejectComp: PropTypes.func.isRequired
+    rejectOrDeleteComp: PropTypes.func.isRequired
 }
 
-export default connect(null, { acceptComp, rejectComp })(AcceptCompForm);
+export default connect(null, { acceptComp, rejectOrDeleteComp })(AcceptCompForm);

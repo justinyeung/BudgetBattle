@@ -1,4 +1,4 @@
-import { SEND_COMP, ACCEPT_COMP, REJECT_COMP, GET_ACCEPTED, GET_PENDING, CLEAR_COMPS } from '../actions/types';
+import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED, GET_PENDING, CLEAR_COMPS } from '../actions/types';
 
 const initialState = {
     accepted: [],
@@ -29,10 +29,11 @@ export default(state = initialState, action) => {
                 accepted: [...state.accepted, action.payload],
                 pending: state.pending.filter(comp => comp._id !== action.payload._id)
             }
-        case REJECT_COMP:
+        case REJECT_DELETE_COMP:
             console.log(action.payload);
             return{
                 ...state,
+                accepted: state.pending.filter(comp => comp._id !== action.payload.compID),
                 pending: state.pending.filter(comp => comp._id !== action.payload.compID)
             }
         case CLEAR_COMPS:
