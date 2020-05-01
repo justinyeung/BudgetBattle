@@ -8,12 +8,14 @@ const Competition = require('../models/Competition');
 // @route GET /api/competitions/accepted
 // @desc get a user's accepted competitions
 // @access private
-router.get('/accepted', async (req, res) => {
+router.get('/accepted', isLoggedIn, async (req, res) => {
     try {
-        // get all accepted competitions
+        // get all accepted outgoing and incoming competitions
         let competitions = await Competition.find({ 
-            user1: req.session.user.userID, 
-            status: "Accepted"
+            $or:[
+                {user1: req.session.user.userID, status: "Accepted"},
+                {user2: req.session.user.userID, status: "Accepted"}
+              ]
         });
 
         res.json(competitions);
@@ -23,10 +25,10 @@ router.get('/accepted', async (req, res) => {
     }
 });
 
-// @route GET /api/competitions/pending
-// @desc get a user's accepted competitions
+// @route GET /api/competitions/outpending
+// @desc get a user's outgoing pending requests
 // @access private
-router.get('/pending', async (req, res) => {
+router.get('/outpending', isLoggedIn, async (req, res) => {
     try {
         // get all pending competitions
         let competitions = await Competition.find({ 
@@ -41,10 +43,28 @@ router.get('/pending', async (req, res) => {
     }
 });
 
+// @route GET /api/competitions/inpending
+// @desc get a user's incoming pending requests
+// @access private
+router.get('/inpending', isLoggedIn, async (req, res) => {
+    try {
+        // get all pending competitions
+        let competitions = await Competition.find({ 
+            user2: req.session.user.userID, 
+            status: "Pending"
+        });
+
+        res.json(competitions);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
 // @route POST /api/competitions/send
 // @desc send a pending competition request
 // @access private
-router.post('/send', async (req, res) => {
+router.post('/send', isLoggedIn, async (req, res) => {
     try {
         // input params
         const { id: user2ID } = req.body;
@@ -66,9 +86,9 @@ router.post('/send', async (req, res) => {
 });
 
 // @route PUT /api/competitions/accept
-// @desc accept a pending competition request
+// @desc accept a inpending competition request
 // @access private
-router.put('/', async (req, res) => {
+router.put('/', isLoggedIn, async (req, res) => {
     try {
         // input params
         const { compID } = req.body;
@@ -79,6 +99,11 @@ router.put('/', async (req, res) => {
         // check if competition exists
         if(!competition){
             return res.status(404).json({ msg: "Competition Not Found" });
+        }
+
+        if(competition.user2 !== req.session.user.userID){
+            console.log("Cannot accept outoing comp");
+            return res.status(404).json({ msg: "Cannot Accept Outgoing Competition"});
         }
 
         // find competition and update status to accepted
@@ -101,7 +126,7 @@ router.put('/', async (req, res) => {
 // @route DELETE /api/competitions
 // @desc reject or delete a competition request or competition
 // @access private
-router.delete('/', async (req, res) => {
+router.delete('/', isLoggedIn, async (req, res) => {
     try {
         // input params
         const { comp } = req.body;

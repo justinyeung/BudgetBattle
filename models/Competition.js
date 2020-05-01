@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const CompetitionSchema = new mongoose.Schema({
     user1: {
+        // outgoing 
         // id:{
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: "User"
@@ -13,6 +14,7 @@ const CompetitionSchema = new mongoose.Schema({
         type: String
     },
     user2: {
+        // incoming
         // id:{
         //     type: mongoose.Schema.Types.ObjectId,
         //     ref: "User"
