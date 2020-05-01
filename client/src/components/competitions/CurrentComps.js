@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAcceptedComp, getPendingComp } from '../../actions/competitionActions';
+import { getAcceptedComp, getOutPendingComp, getInPendingComp } from '../../actions/competitionActions';
 
-const CurrentComps = ({ getAcceptedComp, getPendingComp, competition: { accepted, pending } }) => {
+const CurrentComps = ({ getAcceptedComp, getOutPendingComp, getInPendingComp, competition: { accepted, outpending, inpending } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
-        getPendingComp();
+        getOutPendingComp();
+        getInPendingComp();
 
         // eslint-disable-next-line
     }, []);
@@ -39,9 +40,32 @@ const CurrentComps = ({ getAcceptedComp, getPendingComp, competition: { accepted
                 }
             </ul>
             <ul>
-                <li>Pending:</li>
-                {pending !== [] && 
-                    pending.map(comp => (<div>
+                <li>Out Pending:</li>
+                {outpending !== [] && 
+                    outpending.map(comp => (<div>
+                        <li>
+                            <ul>
+                                <li>
+                                    Competition ID: {comp._id}
+                                </li>
+                                <li>
+                                    User1: {comp.user1}
+                                </li>
+                                <li>
+                                    User2: {comp.user2}
+                                </li>
+                                <li>
+                                    Status: {comp.status}
+                                </li>
+                            </ul>
+                        </li>
+                    </div>))
+                }
+            </ul>
+            <ul>
+                <li>In Pending:</li>
+                {inpending !== [] && 
+                    inpending.map(comp => (<div>
                         <li>
                             <ul>
                                 <li>
@@ -67,11 +91,12 @@ const CurrentComps = ({ getAcceptedComp, getPendingComp, competition: { accepted
 
 CurrentComps.propTypes = {
     getAcceptedComp: PropTypes.func.isRequired,
-    getPendingComp: PropTypes.func.isRequired
+    getOutPendingComp: PropTypes.func.isRequired,
+    getInPendingComp: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     competition: state.competition
 });
 
-export default connect(mapStateToProps, { getAcceptedComp, getPendingComp })(CurrentComps);
+export default connect(mapStateToProps, { getAcceptedComp, getOutPendingComp, getInPendingComp })(CurrentComps);

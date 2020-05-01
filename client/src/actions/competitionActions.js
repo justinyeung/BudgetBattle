@@ -1,4 +1,4 @@
-import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED, GET_PENDING, COMP_ERROR, CLEAR_COMPS } from './types';
+import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED, GET_OUTPENDING, GET_INPENDING, COMP_ERROR, CLEAR_COMPS } from './types';
 
 import axios from 'axios';
 
@@ -43,13 +43,28 @@ export const getAcceptedComp = () => async dispatch => {
     }
 }
 
-// Get pending competitions
-export const getPendingComp = () => async dispatch => {
+// Get out pending competitions
+export const getOutPendingComp = () => async dispatch => {
     try {
-        let competitions = await axios.get('/api/competitions/pending');
-        console.log(competitions);
+        let competitions = await axios.get('/api/competitions/outpending');
         dispatch({
-            type: GET_PENDING,
+            type: GET_OUTPENDING,
+            payload: competitions.data
+        })
+    } catch (err) {
+        dispatch({
+            type: COMP_ERROR,
+            payload: err
+        });
+    }
+}
+
+// Get in pending competitions
+export const getInPendingComp = () => async dispatch => {
+    try {
+        let competitions = await axios.get('/api/competitions/inpending');
+        dispatch({
+            type: GET_INPENDING,
             payload: competitions.data
         })
     } catch (err) {
