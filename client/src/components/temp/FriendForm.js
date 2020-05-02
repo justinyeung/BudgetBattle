@@ -13,6 +13,7 @@ const FriendForm = ({ sendFriendRequest, deleteFriend }) => {
     }
 
     const deleteFriendBtn = () => {
+        console.log("deleting friend");
         deleteFriend({ friendID });
     }
 

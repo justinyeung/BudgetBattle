@@ -6,81 +6,61 @@ const isLoggedIn = require('./middleware');
 const User = require('../models/User');
 const Friend = require('../models/Friend');
 
-// // @route POST /api/friends/
-// // @desc add friend for current user
+// // @route GET /api/friends/accepted
+// // @desc get a user's friends
 // // @access private
-// router.post('/', isLoggedIn, async (req, res) => {
-//     try{
-//         // get current user
-//         let user = await User.findOne({ userID: req.session.user.userID });
+// router.get('/accepted', isLoggedIn, async (req, res) => {
+//     try {
+//         // get all accepted outgoing and incoming friends
+//         let friends = await Friend.find({ 
+//             $or:[
+//                 {user1: req.session.user.userID, status: "Accepted"},
+//                 {user2: req.session.user.userID, status: "Accepted"}
+//               ]
+//         });
 
-//         // append new friend to end of list
-//         // gets input of friendID
-//         user.friends = [...user.friends, req.body.friendID];
-
-//         user.save();
-//         res.json(user);
-//     }catch(err){
+//         res.json(friends);
+//     } catch (err) {
 //         console.error(err.message);
 //         res.status(500).send('Server Error'); 
 //     }
 // });
 
-// @route GET /api/friends/accepted
-// @desc get a user's friends
-// @access private
-router.get('/accepted', isLoggedIn, async (req, res) => {
-    try {
-        // get all accepted outgoing and incoming friends
-        let friends = await Friend.find({ 
-            $or:[
-                {user1: req.session.user.userID, status: "Accepted"},
-                {user2: req.session.user.userID, status: "Accepted"}
-              ]
-        });
+// // @route GET /api/friends/outpending
+// // @desc get a user's outgoing pending friend requests
+// // @access private
+// router.get('/outpending', async (req, res) => {
+//     try {
+//         // get all pending friends
+//         let friends = await Friend.find({ 
+//             user1: req.session.user.userID, 
+//             status: "Pending"
+//         });
 
-        res.json(friends);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
-});
+//         res.json(friends);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error'); 
+//     }
+// });
 
-// @route GET /api/friends/outpending
-// @desc get a user's outgoing pending friend requests
-// @access private
-router.get('/outpending', async (req, res) => {
-    try {
-        // get all pending friends
-        let friends = await Friend.find({ 
-            user1: req.session.user.userID, 
-            status: "Pending"
-        });
+// // @route GET /api/friends/inpending
+// // @desc get a user's ingoing pending friend requests
+// // @access private
+// router.get('/inpending', async (req, res) => {
+//     try {
+//         // get all pending friends
+//         let friends = await Friend.find({ 
+//             user2: req.session.user.userID, 
+//             status: "Pending"
+//         });
 
-        res.json(friends);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
-});
-
-// @route GET /api/friends/inpending
-// @desc get a user's ingoing pending friend requests
-// @access private
-router.get('/inpending', async (req, res) => {
-    try {
-        // get all pending friends
-        let friends = await Friend.find({ 
-            user2: req.session.user.userID, 
-            status: "Pending"
-        });
-
-        res.json(friends);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
-});
+//         res.json(friends);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error'); 
+//     }
+// });
 
 // @route POST /api/friends/send
 // @desc send a friend request
@@ -88,7 +68,15 @@ router.get('/inpending', async (req, res) => {
 router.post('/send', async (req, res) => {
     try{
         // get current user
-        let user = await User.findOne({ userID: req.session.user.userID });
+        // let user = await User.findOne({ userID: req.session.user.userID });
+
+        // get current user's friends and friend requests
+        let currentFriends = await Friend.find({ 
+            $or:[
+                {user1: req.session.user.userID},
+                {user2: req.session.user.userID}
+              ]
+        });
 
         // input params
         const { friendID } = req.body;
@@ -100,8 +88,8 @@ router.post('/send', async (req, res) => {
             status: "Pending"
         });
 
-        friendsList = [...user.friends, newFriend];
-
+        // update user with new friend
+        friendsList = [...currentFriends, newFriend];
         updatedUser = await User.findByIdAndUpdate(req.session.user._id, 
             { 
                 friends: friendsList
@@ -118,7 +106,7 @@ router.post('/send', async (req, res) => {
 });
 
 // @route PUT /api/friends/accept
-// @desc accept a inpending friend request
+// @desc accept an inpending friend request
 // @access private
 router.put('/', async (req, res) => {
     try {
@@ -161,29 +149,47 @@ router.put('/', async (req, res) => {
 router.delete('/', isLoggedIn, async (req, res) => {
     try {
         // get current user
-        let user = await User.findOne({ userID: req.session.user.userID });
+        // let user = await User.findOne({ userID: req.session.user.userID });
 
         // filter out user
         // user.friends = user.friends.filter(friend => friend.userID != req.body.friendID);
 
         // TEMPORARY. friendares entire friend string
-        user.friends = user.friends.filter(f => f !== req.body.friendID);
-
+        // user.friends = user.friends.filter(f => f !== req.body.friendID);
 
         // input params
-        const { friendInput } = req.body;
-        // delete friend object
-        let friend = await Friend.findById(friendInput.id);
+        const { friendID } = req.body;
+
+        // find friend with current user and friendid
+        let friend = await Friend.findOne({
+            $or:[
+                {
+                    $and:[
+                        {user1: req.session.user.userID},
+                        {user2: friendID.friendID}
+                    ]
+                },
+                {
+                    $and:[
+                        {user1: friendID.friendID},
+                        {user2: req.session.user.userID}
+                    ]
+                },
+                
+              ]
+        });
 
         // check if friend exists
         if(!friend){
             return res.status(404).json({ msg: "Friend Not Found" });
         }
 
-        await Friend.findByIdAndDelete(friendInput.id);
+        // delete friend
+        await Friend.findByIdAndDelete(friend._id);
 
-        user.save();
-        res.json(user);
+        // user.save();
+        // res.json(user);
+        res.json({ msg: "Friend deleted" });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 

@@ -11,10 +11,7 @@ const Friend = require('../models/Friend');
 // @access private
 router.get('/current', isLoggedIn, async (req, res) => {
     try {
-        // get current user
-        let currentUser = await User.findById(req.session.user._id);
-
-        // get friends and friend requests
+        // get current user's friends and friend requests
         let currentFriends = await Friend.find({ 
             $or:[
                 {user1: req.session.user.userID},
@@ -22,13 +19,10 @@ router.get('/current', isLoggedIn, async (req, res) => {
               ]
         });
 
-        // update friends list
-        friendsList = [...currentUser.friends, ...currentFriends];
-
-        // update user with updated friends
+        // get and update user with updated friends
         updatedUser = await User.findByIdAndUpdate(req.session.user._id, 
             { 
-                friends: friendsList
+                friends: currentFriends
             },
             {new: true}
         );

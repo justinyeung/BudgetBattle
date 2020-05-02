@@ -1,4 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, SEND_FRIEND, ACCEPT_FRIEND, GET_ACCEPTED_FRIEND, GET_OUTPENDING_FRIEND, GET_INPENDING_FRIEND, DELETE_FRIEND, FRIEND_ERROR } from './types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, SEND_FRIEND, ACCEPT_FRIEND, DELETE_FRIEND, FRIEND_ERROR } from './types';
 
 import axios from 'axios';
 
@@ -21,7 +21,7 @@ export const login = () => async dispatch => {
     }
 };
 
-// Get logged in user
+// Get logged in user and user's friends
 export const getUser = () => async dispatch => {
     try {
         // api call to get current user
@@ -101,60 +101,6 @@ export const sendFriendRequest = (friendID) => async dispatch => {
     }
 };
 
-// Get all current user's friends
-export const getAcceptedFriends = () => async dispatch => {
-    try {
-        let friends = await axios.get('/api/friends/accepted');
-
-        dispatch({
-            type: GET_ACCEPTED_FRIEND,
-            payload: friends.data
-        })
-    } catch (err) {
-        dispatch({
-            type: FRIEND_ERROR,
-            payload: err
-        });
-        console.log(err);
-    }
-}
-
-// Get out pending friend requests
-export const getOutPendingFriends = () => async dispatch => {
-    try {
-        let friends = await axios.get('/api/friends/outpending');
-
-        dispatch({
-            type: GET_OUTPENDING_FRIEND,
-            payload: friends.data
-        });
-    } catch (err) {
-        dispatch({
-            type: FRIEND_ERROR,
-            payload: err
-        });
-        console.log(err);
-    }
-}
-
-// Get in pending friend requests
-export const getInPendingFriends = () => async dispatch => {
-    try {
-        let friends = await axios.get('/api/friends/inpending');
-
-        dispatch({
-            type: GET_INPENDING_FRIEND,
-            payload: friends.data
-        });
-    } catch (err) {
-        dispatch({
-            type: FRIEND_ERROR,
-            payload: err
-        });
-        console.log(err);
-    }
-}
-
 // Accept friend request
 export const acceptFriend = friendID => async dispatch => {
     try {
@@ -195,7 +141,7 @@ export const deleteFriend = (friendID) => async dispatch => {
 
         dispatch({
             type: DELETE_FRIEND,
-            payload: friendID
+            payload: friendID.friendID
         });
     } catch (err) {
         dispatch({
