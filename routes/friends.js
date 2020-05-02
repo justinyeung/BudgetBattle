@@ -6,14 +6,32 @@ const isLoggedIn = require('./middleware');
 const User = require('../models/User');
 const Friend = require('../models/Friend');
 
+
+// @route POST /api/friends
+// @desc get a friend's name
+// @access private
+router.post('/', async (req, res) => {
+    try {
+        // input params
+        const { id } = req.body;
+
+        // find friend's user object
+        let friend = await User.findOne({
+            userID: id
+        });
+
+        res.json(friend);        
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
 // @route POST /api/friends/send
 // @desc send a friend request
 // @access private
 router.post('/send', async (req, res) => {
     try{
-        // get current user
-        // let user = await User.findOne({ userID: req.session.user.userID });
-
         // get current user's friends and friend requests
         let currentFriends = await Friend.find({ 
             $or:[
@@ -23,16 +41,16 @@ router.post('/send', async (req, res) => {
         });
 
         // input params
-        const { friendID } = req.body;
+        const { id } = req.body;
 
         // find friend's name
-        let friend = await User.findOne({ userID: friendID });
+        let friend = await User.findOne({ userID: id });
 
         // create new Friend
         newFriend = new Friend({
             user1: req.session.user.userID,
             user1name: req.session.user.name,
-            user2: friendID,
+            user2: id,
             user2name: friend.name,
             status: "Pending"
         });
@@ -61,12 +79,12 @@ router.post('/send', async (req, res) => {
 router.put('/', async (req, res) => {
     try {
         // input params
-        const { friendID } = req.body;
+        const { id } = req.body;
 
-        // find friend with current user and friendid
+        // find friend with current user and id
         let friend = await Friend.findOne({
             $and:[
-                {user1: friendID},
+                {user1: id},
                 {user2: req.session.user.userID}
             ]
         });
@@ -104,30 +122,21 @@ router.put('/', async (req, res) => {
 // @access private
 router.delete('/', isLoggedIn, async (req, res) => {
     try {
-        // get current user
-        // let user = await User.findOne({ userID: req.session.user.userID });
-
-        // filter out user
-        // user.friends = user.friends.filter(friend => friend.userID != req.body.friendID);
-
-        // TEMPORARY. friendares entire friend string
-        // user.friends = user.friends.filter(f => f !== req.body.friendID);
-
         // input params
-        const { friendID } = req.body;
+        const { id } = req.body;
 
-        // find friend with current user and friendid
+        // find friend with current user and id
         let friend = await Friend.findOne({
             $or:[
                 {
                     $and:[
                         {user1: req.session.user.userID},
-                        {user2: friendID.friendID}
+                        {user2: id.id}
                     ]
                 },
                 {
                     $and:[
-                        {user1: friendID.friendID},
+                        {user1: id.id},
                         {user2: req.session.user.userID}
                     ]
                 },

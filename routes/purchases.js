@@ -6,21 +6,31 @@ const isLoggedIn = require('./middleware');
 const Purchase = require('../models/Purchase');
 
 // @route GET /api/purchases
-// @desc get a user's purchases
+// @desc get current user's purchases
 // @access private
 router.get("/", isLoggedIn, async (req, res) => {
     try {
-        // input params
-        // const { userID } = req.body;
-
-
         // query for purchase in db
         let purchases = await Purchase.find({ userID: req.session.user.userID });
 
-        // check if purchase exists
-        // if(!purchase){
-        //     return res.status(404).json({ msg: "Purchase Not Found" });
-        // }
+        res.json(purchases);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+});
+
+// @route POST /api/purchases/competitor
+// @desc get competitor's purchases
+// @access private
+router.post("/competitor", isLoggedIn, async (req, res) => {
+    try {
+        // input params
+        const { id } = req.body;
+
+        // query for purchase in db
+        let purchases = await Purchase.find({ userID: id });
+
         res.json(purchases);
     } catch (err) {
         console.error(err.message);
