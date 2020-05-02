@@ -4,7 +4,13 @@ const FriendSchema = mongoose.Schema({
     user1: {
         type: String
     },
+    user1name:{
+        type: String
+    },
     user2: {
+        type: String
+    },
+    user2name:{
         type: String
     },
     status: {
