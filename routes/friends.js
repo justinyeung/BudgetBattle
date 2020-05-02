@@ -25,10 +25,15 @@ router.post('/send', async (req, res) => {
         // input params
         const { friendID } = req.body;
 
+        // find friend's name
+        let friend = await User.findOne({ userID: friendID });
+
         // create new Friend
         newFriend = new Friend({
             user1: req.session.user.userID,
+            user1name: req.session.user.name,
             user2: friendID,
+            user2name: friend.name,
             status: "Pending"
         });
 
@@ -41,6 +46,7 @@ router.post('/send', async (req, res) => {
             {new: true}
         );
 
+        // save new friend to db
         newFriend.save();
         res.json(updatedUser);
     }catch(err){
