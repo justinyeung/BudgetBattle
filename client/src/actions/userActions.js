@@ -1,4 +1,4 @@
-import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, ADD_FRIEND, DELETE_FRIEND, FRIEND_ERROR } from './types';
+import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, SEND_FRIEND, ACCEPT_FRIEND, GET_ACCEPTED_FRIEND, GET_OUTPENDING_FRIEND, GET_INPENDING_FRIEND, DELETE_FRIEND, FRIEND_ERROR } from './types';
 
 import axios from 'axios';
 
@@ -77,21 +77,20 @@ export const deleteUser = () => async dispatch => {
 }
 
 // Add friend to current user
-export const addFriend = (friendID) => async dispatch => {
+export const sendFriendRequest = (friendID) => async dispatch => {
     try {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        const param = { friendID };
 
         // api call to add friend, friendID as param
-        await axios.post('/api/friends', param, config);
+        let updatedCurrent = await axios.post('/api/friends/send', friendID, config);
 
         dispatch({
-            type: ADD_FRIEND,
-            payload: friendID
+            type: SEND_FRIEND,
+            payload: updatedCurrent.data
         })
     } catch (err) {
         dispatch({
@@ -101,6 +100,83 @@ export const addFriend = (friendID) => async dispatch => {
         console.log(err);
     }
 };
+
+// Get all current user's friends
+export const getAcceptedFriends = () => async dispatch => {
+    try {
+        let friends = await axios.get('/api/friends/accepted');
+
+        dispatch({
+            type: GET_ACCEPTED_FRIEND,
+            payload: friends.data
+        })
+    } catch (err) {
+        dispatch({
+            type: FRIEND_ERROR,
+            payload: err
+        });
+        console.log(err);
+    }
+}
+
+// Get out pending friend requests
+export const getOutPendingFriends = () => async dispatch => {
+    try {
+        let friends = await axios.get('/api/friends/outpending');
+
+        dispatch({
+            type: GET_OUTPENDING_FRIEND,
+            payload: friends.data
+        });
+    } catch (err) {
+        dispatch({
+            type: FRIEND_ERROR,
+            payload: err
+        });
+        console.log(err);
+    }
+}
+
+// Get in pending friend requests
+export const getInPendingFriends = () => async dispatch => {
+    try {
+        let friends = await axios.get('/api/friends/inpending');
+
+        dispatch({
+            type: GET_INPENDING_FRIEND,
+            payload: friends.data
+        });
+    } catch (err) {
+        dispatch({
+            type: FRIEND_ERROR,
+            payload: err
+        });
+        console.log(err);
+    }
+}
+
+// Accept friend request
+export const acceptFriend = friendID => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        let friend = await axios.put('/api/friends', friendID, config);
+
+        dispatch({
+            type: ACCEPT_FRIEND,
+            payload: friend.data
+        })
+    } catch (err) {
+        dispatch({
+            type: FRIEND_ERROR,
+            payload: err
+        });
+    }
+}
 
 // Delete friend for current user
 export const deleteFriend = (friendID) => async dispatch => {

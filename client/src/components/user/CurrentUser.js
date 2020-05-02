@@ -23,8 +23,8 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                 <li>User ID: {user !== null && user.userID}</li>
                 <ul>
                     <li>Friends:</li>
-                    {user.friends.map(friend => (
-                        <li key={friend.userID}>{friend}</li>
+                    {user.friends !== null && user.friends.map(friend => (
+                        friend != null && (<li key={friend._id}>{friend._id}</li>)
                     ))}
                 </ul>
             </div>)
