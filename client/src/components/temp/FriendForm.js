@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sendFriendRequest, deleteFriend } from '../../actions/userActions';
+import { sendFriendRequest, acceptFriend, deleteFriend } from '../../actions/userActions';
 
-const FriendForm = ({ sendFriendRequest, deleteFriend }) => {
+const FriendForm = ({ sendFriendRequest, acceptFriend, deleteFriend }) => {
     const [friendID, setFriendID] = useState('');
 
     const sendFriendRequestBtn = () => {
@@ -13,8 +13,11 @@ const FriendForm = ({ sendFriendRequest, deleteFriend }) => {
     }
 
     const deleteFriendBtn = () => {
-        console.log("deleting friend");
         deleteFriend({ friendID });
+    }
+
+    const acceptFriendBtn = () => {
+        acceptFriend({ friendID });
     }
 
     return(
@@ -23,14 +26,17 @@ const FriendForm = ({ sendFriendRequest, deleteFriend }) => {
             <br/>
             <button onClick={sendFriendRequestBtn}>Send Friend Request</button>
             <br/>
-            <button onClick={deleteFriendBtn}>Delete Friend</button>
+            <button onClick={acceptFriendBtn}>Accept Friend Request</button>
+            <br/>
+            <button onClick={deleteFriendBtn}>Delete Friend/Friend Request</button>
         </div>
     )
 }
 
 FriendForm.propTypes = {
     sendFriendRequest: PropTypes.func.isRequired,
+    acceptFriend: PropTypes.func.isRequired,
     deleteFriend: PropTypes.func.isRequired
 }
 
-export default connect(null, { sendFriendRequest, deleteFriend })(FriendForm);
+export default connect(null, { sendFriendRequest, acceptFriend, deleteFriend })(FriendForm);

@@ -25,7 +25,13 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                 <li>
                     <ul>
                         {user.friends.map(friend => (
-                            friend.status === "Accepted" && (<li key={friend._id}>{friend._id}</li>)
+                            friend.status === "Accepted" && 
+                            (
+                            (friend.user2 === user.userID && 
+                                (<li key={friend._id}>Friend's ID: {friend.user1}</li>)) || 
+                            (friend.user1 === user.userID && 
+                                (<li key={friend._id}>Friend's ID: {friend.user2}</li>))
+                            )
                         ))}
                     </ul>
                 </li>
@@ -35,7 +41,7 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                         {user.friends.map(friend => (
                             friend.status === "Pending" && 
                             friend.user1 === user.userID &&
-                            (<li key={friend._id}>{friend._id}</li>)
+                            (<li key={friend._id}>Friend's ID: {friend.user2}</li>)
                         ))}
                     </ul>
                 </li>
@@ -45,7 +51,7 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                         {user.friends.map(friend => (
                             friend.status === "Pending" && 
                             friend.user2 === user.userID &&
-                            (<li key={friend._id}>{friend._id}</li>)
+                            (<li key={friend._id}>Friend's ID: {friend.user1}</li>)
                         ))}
                     </ul>
                 </li>

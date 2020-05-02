@@ -86,6 +86,7 @@ export const sendFriendRequest = (friendID) => async dispatch => {
         }
 
         // api call to add friend, friendID as param
+        // returns updated current user object
         let updatedCurrent = await axios.post('/api/friends/send', friendID, config);
 
         dispatch({
@@ -110,8 +111,11 @@ export const acceptFriend = friendID => async dispatch => {
             }
         }
 
+        // returns updated friend object
         let friend = await axios.put('/api/friends', friendID, config);
 
+        console.log(friend.data);
+        
         dispatch({
             type: ACCEPT_FRIEND,
             payload: friend.data
