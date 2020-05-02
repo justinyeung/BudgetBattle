@@ -4,16 +4,30 @@ const router = express.Router();
 const isLoggedIn = require('./middleware');
 
 const User = require('../models/User');
+const Friend = require('../models/Friend');
 
 // @route GET /api/users/current
 // @desc get current logged in user
 // @access private
 router.get('/current', isLoggedIn, async (req, res) => {
     try {
-        let currentUser = await User.findById(req.session.user._id);
+        // get current user's friends and friend requests
+        let currentFriends = await Friend.find({ 
+            $or:[
+                {user1: req.session.user.userID},
+                {user2: req.session.user.userID}
+              ]
+        });
 
-        res.json(currentUser);
-        // res.json(req.session.user);
+        // get and update user with updated friends
+        updatedUser = await User.findByIdAndUpdate(req.session.user._id, 
+            { 
+                friends: currentFriends
+            },
+            {new: true}
+        );
+
+        res.json(updatedUser);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error'); 

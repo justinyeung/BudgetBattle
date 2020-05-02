@@ -1,4 +1,4 @@
-import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED, GET_OUTPENDING, GET_INPENDING, CLEAR_COMPS } from '../actions/types';
+import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED_COMP, GET_OUTPENDING_COMP, GET_INPENDING_COMP, CLEAR_COMPS } from '../actions/types';
 
 const initialState = {
     accepted: [],
@@ -14,17 +14,17 @@ export default(state = initialState, action) => {
             return{
                 ...state
             }
-        case GET_ACCEPTED:
+        case GET_ACCEPTED_COMP:
             state.accepted = action.payload
             return{
                 ...state
             }
-        case GET_OUTPENDING:
+        case GET_OUTPENDING_COMP:
             state.outpending = action.payload
             return{
                 ...state
             }
-        case GET_INPENDING:
+        case GET_INPENDING_COMP:
             state.inpending = action.payload
             return{
                 ...state

@@ -21,12 +21,40 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
             (<div>
                 <li>Name: {user !== null && user.name}</li>
                 <li>User ID: {user !== null && user.userID}</li>
-                <ul>
-                    <li>Friends:</li>
-                    {user.friends.map(friend => (
-                        <li key={friend.userID}>{friend}</li>
-                    ))}
-                </ul>
+                <li>Friends:</li>
+                <li>
+                    <ul>
+                        {user.friends.map(friend => (
+                            friend.status === "Accepted" && 
+                            (
+                            (friend.user2 === user.userID && 
+                                (<li key={friend._id}>Friend's ID: {friend.user1}</li>)) || 
+                            (friend.user1 === user.userID && 
+                                (<li key={friend._id}>Friend's ID: {friend.user2}</li>))
+                            )
+                        ))}
+                    </ul>
+                </li>
+                <li>Outpending Friend Requests:</li>
+                <li>
+                    <ul>
+                        {user.friends.map(friend => (
+                            friend.status === "Pending" && 
+                            friend.user1 === user.userID &&
+                            (<li key={friend._id}>Friend's ID: {friend.user2}</li>)
+                        ))}
+                    </ul>
+                </li>
+                <li>Inpending Friend Requests:</li>
+                <li>
+                    <ul>
+                        {user.friends.map(friend => (
+                            friend.status === "Pending" && 
+                            friend.user2 === user.userID &&
+                            (<li key={friend._id}>Friend's ID: {friend.user1}</li>)
+                        ))}
+                    </ul>
+                </li>
             </div>)
             }
         </ul>

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { sendRequest } from '../../actions/competitionActions';
+import { sendCompRequest } from '../../actions/competitionActions';
 
-const CompsForm = ({ sendRequest }) => {
+const CompsForm = ({ sendCompRequest }) => {
     const [id, setID] = useState('');
 
     const requestBtn = () => {
-        sendRequest({ id });
+        sendCompRequest({ id });
         setID('');
     }
 
@@ -22,7 +22,7 @@ const CompsForm = ({ sendRequest }) => {
 }
 
 CompsForm.propTypes = {
-    sendRequest: PropTypes.func.isRequired
+    sendCompRequest: PropTypes.func.isRequired
 }
 
-export default connect(null, { sendRequest })(CompsForm);
+export default connect(null, { sendCompRequest })(CompsForm);

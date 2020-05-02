@@ -1,44 +1,18 @@
 const mongoose = require('mongoose');
 
-const UserSchema = mongoose.Schema({
-    userID: {
+const FriendSchema = mongoose.Schema({
+    user1: {
         type: String
     },
-    name: {
+    user2: {
         type: String
     },
-    email: {
-        type: String
-    },
-    password: {
-        type:String
-    },
-    friends: [
-        {
-            // type: mongoose.Schema.Types.ObjectId,
-            type: String,
-            ref: "friend"
-        }
-    ],
-    // purchases: [
-    //     {
-    //         type: mongoose.Schema.Types.ObjectId,
-    //         ref: "purchase"
-    //     }
-    // ],
-    saved: {
-        locations: [
-            {
-                type: String
-            }
-        ],
-        categories: [
-            {
-                type: String
-            }
-        ]
-
+    status: {
+        type: String,
+        required: true,
+        default: "Pending"
     }
+    
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('friend', FriendSchema);
