@@ -9,6 +9,7 @@ import CurrentUser from './components/user/CurrentUser';
 import DeleteUserBtn from './components/temp/DeleteUserBtn';
 import FriendForm from './components/temp/FriendForm';
 
+import SetCompetitorForm from './components/temp/SetCompetitorForm';
 import PurchaseForm from './components/purchases/PurchaseForm';
 import CurrentPurchases from './components/purchases/CurrentPurchases';
 import DeletePurchaseForm from './components/temp/DeletePurchaseForm';
@@ -41,6 +42,9 @@ function App() {
       </div>
       <div style={{ padding: '1rem' }}>
         <DeletePurchaseForm />
+      </div>
+      <div style={{ padding: '1rem' }}>
+        <SetCompetitorForm />
       </div>
       <div style={{ padding: '1rem' }}>
         <CurrentPurchases/>

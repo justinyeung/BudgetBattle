@@ -1,4 +1,4 @@
-import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, DELETE_PURCHASE, PURCHASE_ERROR, CLEAR_PURCHASES } from './types';
+import { ADD_PURCHASE, EDIT_PURCHASE, GET_PURCHASES, SET_COMPETITOR, GET_COMPETITOR_PURCHASES, DELETE_PURCHASE, PURCHASE_ERROR, CLEAR_PURCHASES, CLEAR_COMPETITOR } from './types';
 
 import axios from 'axios';
 
@@ -72,11 +72,73 @@ export const deletePurchase = purchaseID => async dispatch => {
     }
 }
 
-// Clear purchases fro state
+// Clear purchases from state
 export const clearPurchases = () => async dispatch => {
     try {
         dispatch({
             type: CLEAR_PURCHASES,
+            payload: null
+        })
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
+
+export const setCompetitor = (id) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        // get competitor's friend object
+        let friend = await axios.post('/api/friends', id, config);
+
+        dispatch({
+            type: SET_COMPETITOR,
+            payload: friend.data
+        })
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
+
+// Get all purchases for competitor
+export const getCompetitorPurchases = (id) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        // api call to get competitor's purchases
+        let purchases = await axios.post('/api/purchases/competitor', id, config);
+
+        dispatch({
+            type: GET_COMPETITOR_PURCHASES,
+            payload: purchases.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
+
+// Clear purchases fro state
+export const clearCompetitor = () => async dispatch => {
+    try {
+        dispatch({
+            type: CLEAR_COMPETITOR,
             payload: null
         })
     } catch (err) {
