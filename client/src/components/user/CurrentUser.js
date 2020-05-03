@@ -8,11 +8,6 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
     useEffect(() => {
         // get state of currently logged in user
         getUser();
-        // if(user !== null){
-        //     // set isLoggedIn to true
-        //     login();
-        // }
-        // eslint-disable-next-line
     }, []);
 
     return (
@@ -29,16 +24,16 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                             (
                             (friend.user2 === user.userID && 
                                 (
-                                    <div>
-                                        <li key={friend._id}>Friend's ID: {friend.user1}</li>
-                                        <li key={friend._id}>Friend's Name: {friend.user1name}</li>
+                                    <div key={friend._id}>
+                                        <li>Friend's ID: {friend.user1}</li>
+                                        <li>Friend's Name: {friend.user1name}</li>
                                     </div>
                                 )) || 
                             (friend.user1 === user.userID && 
                                 (
-                                    <div>
-                                        <li key={friend._id}>Friend's ID: {friend.user2}</li>
-                                        <li key={friend._id}>Friend's Name: {friend.user2name}</li>
+                                    <div key={friend._id}>
+                                        <li>Friend's ID: {friend.user2}</li>
+                                        <li>Friend's Name: {friend.user2name}</li>
                                     </div>
                                 ))
                             )
@@ -52,9 +47,9 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                             friend.status === "Pending" && 
                             friend.user1 === user.userID &&
                             (
-                                <div>
-                                    <li key={friend._id}>Friend's ID: {friend.user2}</li>
-                                    <li key={friend._id}>Friend's Name: {friend.user2name}</li>
+                                <div key={friend._id}>
+                                    <li>Friend's ID: {friend.user2}</li>
+                                    <li>Friend's Name: {friend.user2name}</li>
                                 </div>
                             )
                         ))}
@@ -66,9 +61,9 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
                         {user.friends.map(friend => (
                             friend.status === "Pending" && 
                             friend.user2 === user.userID &&
-                            (<div>
-                                <li key={friend._id}>Friend's ID: {friend.user1}</li>
-                                <li key={friend._id}>Friend's Name: {friend.user1name}</li>
+                            (<div key={friend._id}>
+                                <li>Friend's ID: {friend.user1}</li>
+                                <li>Friend's Name: {friend.user1name}</li>
                             </div>
                             )
                         ))}

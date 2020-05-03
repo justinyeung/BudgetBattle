@@ -2,7 +2,6 @@ import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, SEND_FRIE
 
 const initialState = {
     user: null,
-    isLoggedIn: false,
     error: null
 }
 
@@ -10,8 +9,7 @@ export default (state = initialState, action) => {
     switch(action.type){
         case LOGIN:
             return{
-                ...state,
-                isLoggedIn: true
+                ...state
             }
         case GET_USER:
             return{
@@ -22,8 +20,7 @@ export default (state = initialState, action) => {
         case DELETE_USER:
             return{
                 ...state,
-                user:null,
-                isLoggedIn: false
+                user:null
             }
         case SEND_FRIEND:
             return{

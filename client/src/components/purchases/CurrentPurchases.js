@@ -16,35 +16,39 @@ const CurrentPurchases = ({ getPurchases, purchase: { purchases, competitor, com
         <ul>
             <li>Your Purchases:</li>
             {purchases !== [] && 
-                purchases.map(purchase => (<div>
-                    <li>
-                        <ul>
-                            <li>Purchase ID: {purchase._id}</li>
-                            <li>User ID: {purchase.userID}</li>
-                            <li>Date: {purchase.date}</li>
-                            <li>Amount: {purchase.amount}</li>
-                            <li>Category: {purchase.category}</li>
-                            <li>Location: {purchase.location}</li>
-                        </ul>
-                    </li>
-                </div>))
+                purchases.map(purchase => (
+                    <div key={purchase._id}>
+                        <li>
+                            <ul>
+                                <li>Purchase ID: {purchase._id}</li>
+                                <li>User ID: {purchase.userID}</li>
+                                <li>Date: {purchase.date}</li>
+                                <li>Amount: {purchase.amount}</li>
+                                <li>Category: {purchase.category}</li>
+                                <li>Location: {purchase.location}</li>
+                            </ul>
+                        </li>
+                    </div>
+                ))
             }
             <li>Competitor's ID: {competitor !== null && competitor.userID}</li>
             <li>Competitor's Name: {competitor !== null && competitor.name}</li>
             <li>Competitor's Purchases</li>
             {competitorPurchases !== [] && 
-                competitorPurchases.map(purchase => (<div>
-                    <li>
-                        <ul>
-                            <li>Purchase ID: {purchase._id}</li>
-                            <li>User ID: {purchase.userID}</li>
-                            <li>Date: {purchase.date}</li>
-                            <li>Amount: {purchase.amount}</li>
-                            <li>Category: {purchase.category}</li>
-                            <li>Location: {purchase.location}</li>
-                        </ul>
-                    </li>
-                </div>))
+                competitorPurchases.map(purchase => (
+                    <div key={purchase._id}>
+                        <li>
+                            <ul>
+                                <li>Purchase ID: {purchase._id}</li>
+                                <li>User ID: {purchase.userID}</li>
+                                <li>Date: {purchase.date}</li>
+                                <li>Amount: {purchase.amount}</li>
+                                <li>Category: {purchase.category}</li>
+                                <li>Location: {purchase.location}</li>
+                            </ul>
+                        </li>
+                    </div>
+                ))
             }
         </ul>
     )

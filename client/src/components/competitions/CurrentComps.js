@@ -19,70 +19,76 @@ const CurrentComps = ({ getAcceptedComp, getOutPendingComp, getInPendingComp, co
             <ul>
                 <li>Accepted:</li>
                 {accepted !== [] && 
-                    accepted.map(comp => (<div>
-                        <li>
-                            <ul>
-                                <li>
-                                    Competition ID: {comp._id}
-                                </li>
-                                <li>
-                                    User1: {comp.user1}
-                                </li>
-                                <li>
-                                    User2: {comp.user2}
-                                </li>
-                                <li>
-                                    Status: {comp.status}
-                                </li>
-                            </ul>
-                        </li>
-                    </div>))
+                    accepted.map(comp => (
+                        <div key={comp._id}>
+                            <li>
+                                <ul>
+                                    <li>
+                                        Competition ID: {comp._id}
+                                    </li>
+                                    <li>
+                                        User1: {comp.user1}
+                                    </li>
+                                    <li>
+                                        User2: {comp.user2}
+                                    </li>
+                                    <li>
+                                        Status: {comp.status}
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    ))
                 }
             </ul>
             <ul>
                 <li>Out Pending:</li>
                 {outpending !== [] && 
-                    outpending.map(comp => (<div>
-                        <li>
-                            <ul>
-                                <li>
-                                    Competition ID: {comp._id}
-                                </li>
-                                <li>
-                                    User1: {comp.user1}
-                                </li>
-                                <li>
-                                    User2: {comp.user2}
-                                </li>
-                                <li>
-                                    Status: {comp.status}
-                                </li>
-                            </ul>
-                        </li>
-                    </div>))
+                    outpending.map(comp => (
+                        <div key={comp._id}>
+                            <li>
+                                <ul>
+                                    <li>
+                                        Competition ID: {comp._id}
+                                    </li>
+                                    <li>
+                                        User1: {comp.user1}
+                                    </li>
+                                    <li>
+                                        User2: {comp.user2}
+                                    </li>
+                                    <li>
+                                        Status: {comp.status}
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    ))
                 }
             </ul>
             <ul>
                 <li>In Pending:</li>
                 {inpending !== [] && 
-                    inpending.map(comp => (<div>
-                        <li>
-                            <ul>
-                                <li>
-                                    Competition ID: {comp._id}
-                                </li>
-                                <li>
-                                    User1: {comp.user1}
-                                </li>
-                                <li>
-                                    User2: {comp.user2}
-                                </li>
-                                <li>
-                                    Status: {comp.status}
-                                </li>
-                            </ul>
-                        </li>
-                    </div>))
+                    inpending.map(comp => (
+                        <div key={comp._id}>
+                            <li>
+                                <ul>
+                                    <li>
+                                        Competition ID: {comp._id}
+                                    </li>
+                                    <li>
+                                        User1: {comp.user1}
+                                    </li>
+                                    <li>
+                                        User2: {comp.user2}
+                                    </li>
+                                    <li>
+                                        Status: {comp.status}
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+                    ))
                 }
             </ul>
         </div>
