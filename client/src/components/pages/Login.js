@@ -7,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 import FBLoginBtn from '../auth/FBLoginBtn';
 import GGLoginBtn from '../auth/GGLoginBtn';
 
+import Container from '@material-ui/core/Container';
+
 import { getUser } from '../../actions/userActions';
 
 const Login = ({ user: { user }, getUser }) => {
@@ -24,9 +26,11 @@ const Login = ({ user: { user }, getUser }) => {
           <Redirect to='/' />
         </div>
       ) : (
-        <div>
-          <FBLoginBtn />
-          <GGLoginBtn />
+        <div class='drawer-container'>
+          <Container maxWidth="sm">
+            <FBLoginBtn />
+            <GGLoginBtn />
+          </Container>
         </div>
       )}
     </div>
