@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import FBLoginBtn from '../auth/FBLoginBtn';
 import GGLoginBtn from '../auth/GGLoginBtn';
@@ -14,7 +14,8 @@ const Login = ({ user: { user }, getUser }) => {
   useEffect(() => {
     getUser();
     
-  }, []);
+    
+  }, [getUser]);
 
   return(
     <div>
@@ -30,24 +31,6 @@ const Login = ({ user: { user }, getUser }) => {
       )}
     </div>
   )
-  
-  // if(user !== null){
-  //   return(
-  //     <div style={{ padding: '1rem' }}>
-  //       <FBLoginBtn />
-  //       <GGLoginBtn />
-  //     </div>
-  //   )
-  // }else{
-  //   <Redirect to='/' />
-  // }
-
-  // return (
-  //   <div style={{ padding: '1rem' }}>
-  //     <FBLoginBtn />
-  //     <GGLoginBtn />
-  //   </div>
-  // );
 }
 
 Login.propTypes = {

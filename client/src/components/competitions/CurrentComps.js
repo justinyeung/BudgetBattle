@@ -12,7 +12,7 @@ const CurrentComps = ({ getAcceptedComp, getOutPendingComp, getInPendingComp, co
         getInPendingComp();
 
         // eslint-disable-next-line
-    }, []);
+    }, [getAcceptedComp, getOutPendingComp, getInPendingComp]);
 
     return (
         <div>
