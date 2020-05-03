@@ -26,7 +26,7 @@ const Login = ({ user: { user }, getUser }) => {
           <Redirect to='/' />
         </div>
       ) : (
-        <div class='drawer-container'>
+        <div className='drawer-container'>
           <Container maxWidth="sm">
             <FBLoginBtn />
             <GGLoginBtn />

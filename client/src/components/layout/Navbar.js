@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,20 +13,24 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import HomeIcon from '@material-ui/icons/Home';
+import AppsIcon from '@material-ui/icons/Apps';
+import PersonIcon from '@material-ui/icons/Person';
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import CheckIcon from '@material-ui/icons/Check';
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 
 //drawer
 import clsx from 'clsx';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-//
+
+import { getUser } from '../../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -95,7 +102,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function PrimarySearchAppBar() {
+const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
+
+    useEffect(() => {
+        getUser();
+    }, [getUser]);
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -125,23 +137,48 @@ export default function PrimarySearchAppBar() {
           onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}
         >
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+            <List>
+                <ListItem button key={'Home'}>
+                    <ListItemIcon><HomeIcon /></ListItemIcon>
+                    <ListItemText primary={'Home'} />
+                </ListItem>
+            </List>
+            <Divider />
+            {user === null ? (
+                <div>
+                    <List>
+                        <ListItem button key={'Get Started'} >
+                            <ListItemIcon><CheckIcon /></ListItemIcon>
+                            <ListItemText primary={'Get Started'} />
+                        </ListItem>
+                        <ListItem button key={'Login'}>
+                            <ListItemIcon><AppsIcon /></ListItemIcon>
+                            <ListItemText primary={'Login'} />
+                        </ListItem>
+                    </List>
+                </div>
+            ) : (
+                <div>
+                    <List>
+                        <ListItem button key={'Dashboard'}>
+                            <ListItemIcon><AppsIcon /></ListItemIcon>
+                            <ListItemText primary={'Dashboard'} />
+                        </ListItem>
+                        <ListItem button key={'Friends'}>
+                            <ListItemIcon><PersonIcon /></ListItemIcon>
+                            <ListItemText primary={'Friends'} />
+                        </ListItem>
+                        <ListItem button key={'Purchases'}>
+                            <ListItemIcon><LocalAtmIcon /></ListItemIcon>
+                            <ListItemText primary={'Purchases'} />
+                        </ListItem>
+                        <ListItem button key={'Competitions'}>
+                            <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
+                            <ListItemText primary={'Competitions'} />
+                        </ListItem>
+                    </List>
+                </div>
+            )}
         </div>
       );
 
@@ -178,8 +215,16 @@ export default function PrimarySearchAppBar() {
         open={isMenuOpen}
         onClose={handleMenuClose}
         >
-        <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+        <div>
+            {user === null ? (
+                <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+            ) : (
+                <div>
+                    <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+                    <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
+                </div>
+            )}
+        </div>
         </Menu>
   );
 
@@ -283,3 +328,13 @@ export default function PrimarySearchAppBar() {
         </div>
     );
 }
+
+PrimarySearchAppBar.propTypes = {
+    getUser: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps, { getUser })(PrimarySearchAppBar);
