@@ -13,6 +13,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import LockIcon from '@material-ui/icons/Lock';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -22,7 +23,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Budget Battle
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -65,15 +66,17 @@ const LoginPage = ({ getUser, user: { user } }) => {
                     <Container component="main" maxWidth="xs">
                         <CssBaseline />
                         <div className={classes.paper}>
-                          <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon />
+                          <Avatar>
+                            <LockIcon />
                           </Avatar>
-                          <Typography component="h1" variant="h5">
+                          <Typography component="h1" variant="h3">
                             Log in
                           </Typography>
                         </div>
-                        <FBLoginBtn />
-                        <GGLoginBtn />
+                        <Box mt={8}>
+                          <FBLoginBtn />
+                          <GGLoginBtn />
+                        </Box>
                         <Box mt={8}>
                             <Copyright />
                         </Box>
