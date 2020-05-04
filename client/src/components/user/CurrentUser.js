@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUser, login } from '../../actions/userActions';
 
-const CurrentUser = ({ getUser, login, user: { user } }) => {
+const CurrentUser = ({ getUser, user: { user } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getUser();
-    }, [getUser]);
+    }, [getUser, user]);
 
     return (
         <ul>
@@ -77,12 +77,11 @@ const CurrentUser = ({ getUser, login, user: { user } }) => {
 
 CurrentUser.propTypes = {
     user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired
+    getUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     user: state.user
 });
 
-export default connect(mapStateToProps, { getUser, login })(CurrentUser);
+export default connect(mapStateToProps, { getUser })(CurrentUser);

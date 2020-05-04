@@ -9,8 +9,12 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
 import PrivateRoute from './components/routing/PrivateRoute';
 
-import Login from './components/pages/Login';
 import Navbar from './components/layout/Navbar';
+import LoginPage from './components/pages/LoginPage';
+import Dashboard from './components/pages/Dashboard';
+import FriendsPage from './components/pages/FriendsPage';
+import CompetitionsPage from './components/pages/CompetitionsPage';
+import CurrentCompPage from './components/pages/CurrentCompPage';
 
 function App() {
   return (
@@ -19,8 +23,11 @@ function App() {
         <Navbar />
         <Fragment>
           <Switch>
-            <PrivateRoute exact path='/' />
-            <Route exact path='/login' component={Login} />
+            <PrivateRoute exact path='/' component={Dashboard} />
+            <PrivateRoute path='/friends' component={FriendsPage} />
+            <PrivateRoute exact path='/competitions' component={CompetitionsPage} />
+            <PrivateRoute path='/competitions/user' component={CurrentCompPage} />
+            <Route exact path='/login' component={LoginPage} />
           </Switch>
         </Fragment>
       </Router>

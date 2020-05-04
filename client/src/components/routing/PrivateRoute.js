@@ -1,34 +1,19 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import { getUser } from '../../actions/userActions';
-import Dashboard from '../pages/Dashboard';
-
-
-const PrivateRoute = ({ user: { user }, getUser }) => {
-    useEffect(() => {
-        getUser();
-    }, [getUser]);
+// const PrivateRoute = ({ user: { user }, getUser }) => {
+const PrivateRoute = ({ component: Component , ...rest }) => {
 
     return (
         <div>
-            {user === null ? (
+            {!localStorage.getItem('isLoggedIn') ? (
                 <Redirect to='/login' />
             ) : (
-                <Dashboard />
+                <Route {...rest} render={Component} />
             )}
         </div>
     )
 }
 
-PrivateRoute.propTypes = {
-    getUser: PropTypes.func.isRequired
-}
-
-const mapStateToProps = state => ({
-    user: state.user
-});
-
-export default connect(mapStateToProps, { getUser })(PrivateRoute);
+export default PrivateRoute;

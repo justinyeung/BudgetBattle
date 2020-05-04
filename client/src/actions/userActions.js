@@ -26,7 +26,13 @@ export const getUser = () => async dispatch => {
     try {
         // api call to get current user
         const res = await axios.get('/api/users/current');
-        // console.log(res.data);
+
+        if(res.data !== null){
+            localStorage.setItem('isLoggedIn', true);
+        }else{
+            localStorage.setItem('isLoggedIn', false);
+        }
+
         dispatch({
             type: GET_USER,
             payload: res.data
@@ -45,6 +51,8 @@ export const logout = () => async dispatch => {
     try {
         // api call to log out user
         await axios.get('/api/users/logout');
+
+        localStorage.setItem('isLoggedIn', false);
 
         dispatch({
             type: LOGOUT,
