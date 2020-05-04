@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -133,44 +131,58 @@ const PrimarySearchAppBar = () => {
           onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <ListItem button key={'Home'}>
-                    <ListItemIcon><HomeIcon /></ListItemIcon>
-                    <ListItemText primary={'Home'} />
-                </ListItem>
+                <Link to='/' id="drawer-link">
+                    <ListItem button key={'Home'}>
+                        <ListItemIcon><HomeIcon /></ListItemIcon>
+                        <ListItemText primary={'Home'} />
+                    </ListItem>
+                </Link>
             </List>
             <Divider />
             {!localStorage.getItem('isLoggedIn') ? (
                 <div>
                     <List>
-                        <ListItem button key={'Get Started'} >
-                            <ListItemIcon><CheckIcon /></ListItemIcon>
-                            <ListItemText primary={'Get Started'} />
-                        </ListItem>
-                        <ListItem button key={'Login'}>
-                            <ListItemIcon><AppsIcon /></ListItemIcon>
-                            <ListItemText primary={'Login'} />
-                        </ListItem>
+                        <Link to='/getstarted' id="drawer-link">
+                            <ListItem button key={'Get Started'} >
+                                <ListItemIcon><CheckIcon /></ListItemIcon>
+                                <ListItemText primary={'Get Started'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/login' id="drawer-link">
+                            <ListItem button key={'Login'}>
+                                <ListItemIcon><AppsIcon /></ListItemIcon>
+                                <ListItemText primary={'Login'} />
+                            </ListItem>
+                        </Link>
                     </List>
                 </div>
             ) : (
                 <div>
                     <List>
-                        <ListItem button key={'Dashboard'} onClick={() => { this.props.history.push('/')}}>
-                            <ListItemIcon><AppsIcon /></ListItemIcon>
-                            <ListItemText primary={'Dashboard'} />
-                        </ListItem>
-                        <ListItem button key={'Friends'} onClick={() => { this.props.history.push('/friends')}}>
-                            <ListItemIcon><PersonIcon /></ListItemIcon>
-                            <ListItemText primary={'Friends'} />
-                        </ListItem>
-                        <ListItem button key={'Purchases'} onClick={() => { this.props.history.push('/purchases')}}>
-                            <ListItemIcon><LocalAtmIcon /></ListItemIcon>
-                            <ListItemText primary={'Purchases'} />
-                        </ListItem>
-                        <ListItem button key={'Competitions'} onClick={() => { this.props.history.push('/competitions')}}>
-                            <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
-                            <ListItemText primary={'Competitions'} />
-                        </ListItem>
+                        <Link to='/dashboard' id="drawer-link" >
+                            <ListItem button key={'Dashboard'} >
+                                <ListItemIcon><AppsIcon /></ListItemIcon>
+                                <ListItemText primary={'Dashboard'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/friends' id="drawer-link">
+                            <ListItem button key={'Friends'} >
+                                <ListItemIcon><PersonIcon /></ListItemIcon>
+                                <ListItemText primary={'Friends'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/purchases' id="drawer-link">
+                            <ListItem button key={'Purchases'} >
+                                <ListItemIcon><LocalAtmIcon /></ListItemIcon>
+                                <ListItemText primary={'Purchases'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/competitions' id="drawer-link">
+                            <ListItem button key={'Competitions'} >
+                                <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
+                                <ListItemText primary={'Competitions'} />
+                            </ListItem>
+                        </Link>
                     </List>
                 </div>
             )}
@@ -324,13 +336,4 @@ const PrimarySearchAppBar = () => {
     );
 }
 
-// PrimarySearchAppBar.propTypes = {
-//     getUser: PropTypes.func.isRequired
-// }
-
-// const mapStateToProps = state => ({
-//     user: state.user
-// });
-
-// export default connect(mapStateToProps, { getUser })(PrimarySearchAppBar);
 export default PrimarySearchAppBar;

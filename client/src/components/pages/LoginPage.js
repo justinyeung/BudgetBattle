@@ -17,16 +17,16 @@ const LoginPage = ({ getUser, user: { user } }) => {
 
   return(
     <div>
-      {localStorage.getItem('isLoggedIn') || user !== null ? (
-        <div>
-          <Redirect to='/' />
-        </div>
-      ) : (
+      {!localStorage.getItem('isLoggedIn') || user === null ? (
         <div className='drawer-container'>
           <Container maxWidth="sm">
             <FBLoginBtn />
             <GGLoginBtn />
           </Container>
+        </div>
+      ) : (
+        <div>
+          <Redirect to='/' />
         </div>
       )}
     </div>

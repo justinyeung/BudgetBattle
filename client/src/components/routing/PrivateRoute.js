@@ -14,10 +14,10 @@ const PrivateRoute = ({ getUser, user: { user }, component: Component , ...rest 
 
     return (
         <div>
-            {!localStorage.getItem('isLoggedIn') || user === null ? (
-                <Redirect to='/login' />
-            ) : (
+            {localStorage.getItem('isLoggedIn') || user !== null ? (
                 <Route {...rest} render={Component} />
+            ) : (
+                <Redirect to='/login' />
             )}
         </div>
     )
