@@ -8,6 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type){
         case LOGIN:
+            localStorage.setItem('isLoggedIn', true);
             return{
                 ...state
             }
@@ -18,6 +19,7 @@ export default (state = initialState, action) => {
             };
         case LOGOUT:
         case DELETE_USER:
+            localStorage.setItem('isLoggedIn', false);
             return{
                 ...state,
                 user:null
