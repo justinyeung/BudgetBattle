@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -29,8 +30,6 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-
-import { getUser } from '../../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -102,11 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
-
-    useEffect(() => {
-        getUser();
-    }, [getUser]);
+const PrimarySearchAppBar = () => {
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -144,10 +139,10 @@ const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
                 </ListItem>
             </List>
             <Divider />
-            {user === null ? (
+            {!localStorage.getItem('isLoggedIn') ? (
                 <div>
                     <List>
-                        <ListItem button key={'Get Started'} onClick={() => { console.log("Button Clicked") }}>
+                        <ListItem button key={'Get Started'} >
                             <ListItemIcon><CheckIcon /></ListItemIcon>
                             <ListItemText primary={'Get Started'} />
                         </ListItem>
@@ -160,19 +155,19 @@ const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
             ) : (
                 <div>
                     <List>
-                        <ListItem button key={'Dashboard'}>
+                        <ListItem button key={'Dashboard'} onClick={() => { this.props.history.push('/')}}>
                             <ListItemIcon><AppsIcon /></ListItemIcon>
                             <ListItemText primary={'Dashboard'} />
                         </ListItem>
-                        <ListItem button key={'Friends'}>
+                        <ListItem button key={'Friends'} onClick={() => { this.props.history.push('/friends')}}>
                             <ListItemIcon><PersonIcon /></ListItemIcon>
                             <ListItemText primary={'Friends'} />
                         </ListItem>
-                        <ListItem button key={'Purchases'}>
+                        <ListItem button key={'Purchases'} onClick={() => { this.props.history.push('/purchases')}}>
                             <ListItemIcon><LocalAtmIcon /></ListItemIcon>
                             <ListItemText primary={'Purchases'} />
                         </ListItem>
-                        <ListItem button key={'Competitions'}>
+                        <ListItem button key={'Competitions'} onClick={() => { this.props.history.push('/competitions')}}>
                             <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
                             <ListItemText primary={'Competitions'} />
                         </ListItem>
@@ -216,7 +211,7 @@ const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
         onClose={handleMenuClose}
         >
         <div>
-            {user === null ? (
+            { !localStorage.getItem('isLoggedIn') ? (
                 <MenuItem onClick={handleMenuClose}>Login</MenuItem>
             ) : (
                 <div>
@@ -329,12 +324,13 @@ const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
     );
 }
 
-PrimarySearchAppBar.propTypes = {
-    getUser: PropTypes.func.isRequired
-}
+// PrimarySearchAppBar.propTypes = {
+//     getUser: PropTypes.func.isRequired
+// }
 
-const mapStateToProps = state => ({
-    user: state.user
-});
+// const mapStateToProps = state => ({
+//     user: state.user
+// });
 
-export default connect(mapStateToProps, { getUser })(PrimarySearchAppBar);
+// export default connect(mapStateToProps, { getUser })(PrimarySearchAppBar);
+export default PrimarySearchAppBar;

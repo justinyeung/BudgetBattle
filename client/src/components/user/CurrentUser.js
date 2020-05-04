@@ -8,7 +8,7 @@ const CurrentUser = ({ getUser, user: { user } }) => {
     useEffect(() => {
         // get state of currently logged in user
         getUser();
-    }, [getUser, user]);
+    }, []);
 
     return (
         <ul>
