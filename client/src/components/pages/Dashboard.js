@@ -7,7 +7,7 @@ import Competitions from '../subpages/Competitions';
 import CurrentCompetition from '../subpages/CurrentCompetition';
 import Friends from '../subpages/Friends';
 
-const Home = () => {
+const Dashboard = () => {
   return (
     <div>
       <div style={{ padding: '1rem' }}>
@@ -27,4 +27,4 @@ const Home = () => {
   );
 }
 
-export default Home;
+export default Dashboard;
