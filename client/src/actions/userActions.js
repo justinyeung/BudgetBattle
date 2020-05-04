@@ -30,7 +30,7 @@ export const getUser = () => async dispatch => {
         if(res.data !== null){
             localStorage.setItem('isLoggedIn', true);
         }else{
-            localStorage.setItem('isLoggedIn', false);
+            localStorage.removeItem('isLoggedIn');
         }
 
         dispatch({
@@ -52,7 +52,7 @@ export const logout = () => async dispatch => {
         // api call to log out user
         await axios.get('/api/users/logout');
 
-        localStorage.setItem('isLoggedIn', false);
+        localStorage.removeItem('isLoggedIn');
 
         dispatch({
             type: LOGOUT,

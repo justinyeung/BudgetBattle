@@ -9,7 +9,6 @@ router.get('/callback',
     try {
       // save user to express session
       req.session.user = req.user;
-
       // redirect to home page
       res.redirect('http://localhost:3000/');
     } catch (err) {
