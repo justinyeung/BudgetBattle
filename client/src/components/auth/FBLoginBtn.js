@@ -1,10 +1,14 @@
 import React from 'react';
 
+import { FacebookLoginButton } from 'react-social-login-buttons';
+
 const FBLoginBtn = () => {
 
     return(
         <div>
-            <a href="http://localhost:5000/api/fbauth/login/">Login to Facebook</a>
+            <a href="http://localhost:5000/api/fbauth/login/">
+                <FacebookLoginButton />
+            </a>
         </div>
     )
 }

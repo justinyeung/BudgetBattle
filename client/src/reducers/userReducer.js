@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
             };
         case LOGOUT:
         case DELETE_USER:
-            localStorage.setItem('isLoggedIn', false);
+            localStorage.removeItem('isLoggedIn');
             return{
                 ...state,
                 user:null
