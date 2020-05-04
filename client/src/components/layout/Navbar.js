@@ -147,7 +147,7 @@ const PrimarySearchAppBar = ({ user: { user }, getUser }) => {
             {user === null ? (
                 <div>
                     <List>
-                        <ListItem button key={'Get Started'} >
+                        <ListItem button key={'Get Started'} onClick={() => { console.log("Button Clicked") }}>
                             <ListItemIcon><CheckIcon /></ListItemIcon>
                             <ListItemText primary={'Get Started'} />
                         </ListItem>
