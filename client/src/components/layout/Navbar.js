@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -28,6 +30,10 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+
+import { logout, getUser } from '../../actions/userActions';
+import { clearPurchases } from '../../actions/purchaseActions';
+import { clearComps } from '../../actions/competitionActions';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -99,7 +105,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const PrimarySearchAppBar = () => {
+const PrimarySearchAppBar = ({ user: { user }, logout, getUser, clearPurchases, clearComps }) => {
+
+    useEffect(() => {
+        getUser();
+        // eslint-disable-next-line
+    }, []);
 
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -139,24 +150,7 @@ const PrimarySearchAppBar = () => {
                 </Link>
             </List>
             <Divider />
-            {!localStorage.getItem('isLoggedIn') ? (
-                <div>
-                    <List>
-                        <Link to='/getstarted' id="drawer-link">
-                            <ListItem button key={'Get Started'} >
-                                <ListItemIcon><CheckIcon /></ListItemIcon>
-                                <ListItemText primary={'Get Started'} />
-                            </ListItem>
-                        </Link>
-                        <Link to='/login' id="drawer-link">
-                            <ListItem button key={'Login'}>
-                                <ListItemIcon><AppsIcon /></ListItemIcon>
-                                <ListItemText primary={'Login'} />
-                            </ListItem>
-                        </Link>
-                    </List>
-                </div>
-            ) : (
+            {localStorage.getItem('isLoggedIn') || user !== null ? (
                 <div>
                     <List>
                         <Link to='/dashboard' id="drawer-link" >
@@ -181,6 +175,23 @@ const PrimarySearchAppBar = () => {
                             <ListItem button key={'Competitions'} >
                                 <ListItemIcon><EmojiEventsIcon /></ListItemIcon>
                                 <ListItemText primary={'Competitions'} />
+                            </ListItem>
+                        </Link>
+                    </List>
+                </div>
+            ) : (
+                <div>
+                    <List>
+                        <Link to='/getstarted' id="drawer-link">
+                            <ListItem button key={'Get Started'} >
+                                <ListItemIcon><CheckIcon /></ListItemIcon>
+                                <ListItemText primary={'Get Started'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/login' id="drawer-link">
+                            <ListItem button key={'Login'}>
+                                <ListItemIcon><AppsIcon /></ListItemIcon>
+                                <ListItemText primary={'Login'} />
                             </ListItem>
                         </Link>
                     </List>
@@ -211,6 +222,13 @@ const PrimarySearchAppBar = () => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const logoutButton = () => {
+        handleMenuClose();
+        logout();
+        clearPurchases();
+        clearComps();
+    }
+
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -222,16 +240,18 @@ const PrimarySearchAppBar = () => {
         open={isMenuOpen}
         onClose={handleMenuClose}
         >
-        <div>
-            { !localStorage.getItem('isLoggedIn') ? (
-                <MenuItem onClick={handleMenuClose}>Login</MenuItem>
-            ) : (
-                <div>
-                    <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
-                    <MenuItem onClick={handleMenuClose}>Log Out</MenuItem>
-                </div>
-            )}
-        </div>
+            <div>
+                { localStorage.getItem('isLoggedIn') || user !== null ? (
+                    <div>
+                        <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
+                        <MenuItem onClick={logoutButton}>Log Out</MenuItem>
+                    </div>
+                ) : (
+                    <Link to='/login' id="drawer-link">
+                        <MenuItem onClick={handleMenuClose}>Login</MenuItem>
+                    </Link>
+                )}
+            </div>
         </Menu>
   );
 
@@ -336,4 +356,15 @@ const PrimarySearchAppBar = () => {
     );
 }
 
-export default PrimarySearchAppBar;
+PrimarySearchAppBar.propTypes = {
+    logout: PropTypes.func.isRequired,
+    getUser: PropTypes.func.isRequired,
+    clearPurchases: PropTypes.func.isRequired,
+    clearComps: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps, { logout, getUser, clearPurchases, clearComps })(PrimarySearchAppBar);

@@ -12,7 +12,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Navbar from './components/layout/Navbar';
 import LoginPage from './components/pages/LoginPage';
 import HomePage from './components/pages/HomePage';
-import GetStartedPage from './components/pages/HomePage';
+import GetStartedPage from './components/pages/GetStartedPage';
 import Dashboard from './components/pages/Dashboard';
 import FriendsPage from './components/pages/FriendsPage';
 import PurchasesPage from './components/pages/PurchasesPage';
@@ -26,9 +26,9 @@ function App() {
         <Navbar />
         <Fragment>
           <Switch>
-            <PrivateRoute exact path='/' component={HomePage} />
+            <Route exact path='/' component={HomePage} />
+            <Route path='/getstarted' component={GetStartedPage} />
             <PrivateRoute path='/dashboard' component={Dashboard} />
-            <PrivateRoute path='/getstarted' component={GetStartedPage} />
             <PrivateRoute path='/friends' component={FriendsPage} />
             <PrivateRoute path='/purchases' component={PurchasesPage} />
             <PrivateRoute exact path='/competitions' component={CompetitionsPage} />
