@@ -1,9 +1,5 @@
 import React from 'react';
 
-
-import PurchaseForm from '../purchases/PurchaseForm';
-import DeletePurchaseForm from '../temp/DeletePurchaseForm';
-import SetCompetitorForm from '../temp/SetCompetitorForm';
 import CurrentPurchases from '../purchases/CurrentPurchases';
 
 const CurrentCompetition = () => {
