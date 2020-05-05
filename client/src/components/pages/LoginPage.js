@@ -70,7 +70,7 @@ const LoginPage = ({ getUser, user: { user } }) => {
                             <LockIcon />
                           </Avatar>
                           <Typography component="h1" variant="h3">
-                            Log in
+                            Login
                           </Typography>
                         </div>
                         <Box mt={8}>

@@ -3,10 +3,6 @@ import React from 'react';
 import LogoutBtn from '../auth/LogoutBtn';
 import DeleteUserBtn from '../temp/DeleteUserBtn';
 
-import Competitions from '../subpages/Competitions';
-import CurrentCompetition from '../subpages/CurrentCompetition';
-import Friends from '../subpages/Friends';
-
 import CurrentUser from '../user/CurrentUser';
 import FriendForm from '../temp/FriendForm';
 import PurchaseForm from '../purchases/PurchaseForm';
