@@ -1,7 +1,7 @@
 import React, { useEffect, forwardRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getPurchases, deletePurchase } from '../../actions/purchaseActions';
+import { getPurchases, editPurchase, deletePurchase } from '../../actions/purchaseActions';
 
 import { Container } from '@material-ui/core';
 import MaterialTable from "material-table";
@@ -43,6 +43,7 @@ const tableIcons = {
   };
 
 const setData = (purchasesArray) => {
+    console.log("Setting data");
     const currentPurchases = purchasesArray.map((purchase) => (
        {id: purchase._id,
         userID: purchase.userID,
@@ -54,7 +55,7 @@ const setData = (purchasesArray) => {
     return currentPurchases;
 }
 
-const CurrentPurchases = ({ getPurchases, deletePurchase, purchase: { purchases } }) => {
+const CurrentPurchases = ({ getPurchases, editPurchase, deletePurchase, purchase: { purchases } }) => {
 
     useEffect(() => {
         // get purchases of currently logged in user
@@ -68,14 +69,17 @@ const CurrentPurchases = ({ getPurchases, deletePurchase, purchase: { purchases 
             <Container maxWidth="lg">
                 <MaterialTable
                     columns={[
-                        { title: "Date", field: "date" },
+                        { title: "Date", field: "date", defaultSort: 'desc' },
                         { title: "Location", field: "location"},
                         { title: "Category", field: "category"},
-                        { title: "Amount", field: "amount" },
+                        { title: "Amount", field: "amount", filtering: false },
                     ]}
                     data={setData(purchases)}
                     title="Purchases"
                     icons={tableIcons}
+                    options={{
+                        filtering: true
+                    }}
                     editable={{
                         isEditable: rowData => rowData.name !== null, // only name(a) rows would be editable
                         isDeletable: rowData => rowData.name !== null, // only name(a) rows would be deletable
@@ -84,11 +88,16 @@ const CurrentPurchases = ({ getPurchases, deletePurchase, purchase: { purchases 
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
                                     {
-                                        /* const data = this.state.data;
-                                        const index = data.indexOf(oldData);
-                                        data[index] = newData;                
-                                        this.setState({ data }, () => resolve()); */
-                                        
+                                        const oldPurchase = {
+                                            purchaseID: oldData.id,
+                                            userID: newData.userID,
+                                            date: newData.date,
+                                            location: newData.location,
+                                            category: newData.category,
+                                            amount: newData.amount
+                                        }
+
+                                        editPurchase(oldPurchase);
                                     }
                                     resolve();
                                 }, 1000);
@@ -97,11 +106,12 @@ const CurrentPurchases = ({ getPurchases, deletePurchase, purchase: { purchases 
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
                                     {
-                                        /* let data = this.state.data;
-                                        const index = data.indexOf(oldData);
-                                        data.splice(index, 1);
-                                        this.setState({ data }, () => resolve()); */
                                         deletePurchase(oldData.id);
+
+                                        // let data = this.state.data;
+                                        // const index = data.indexOf(oldData);
+                                        // data.splice(index, 1);
+                                        // this.setState({ data }, () => resolve());
                                     }
                                     resolve();
                                 }, 1000);
@@ -115,6 +125,7 @@ const CurrentPurchases = ({ getPurchases, deletePurchase, purchase: { purchases 
 
 CurrentPurchases.propTypes = {
     getPurchases: PropTypes.func.isRequired,
+    editPurchase: PropTypes.func.isRequired,
     deletePurchase: PropTypes.func.isRequired
 }
 
@@ -122,4 +133,4 @@ const mapStateToProps = state => ({
     purchase: state.purchase
 });
 
-export default connect(mapStateToProps, { getPurchases, deletePurchase })(CurrentPurchases);
+export default connect(mapStateToProps, { getPurchases, editPurchase, deletePurchase })(CurrentPurchases);

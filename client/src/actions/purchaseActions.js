@@ -46,6 +46,29 @@ export const addPurchase = purchase => async dispatch => {
     }
 }
 
+// Edit a purchase
+export const editPurchase = purchase => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.put('/api/purchases/', purchase, config);
+
+        dispatch({ 
+            type: EDIT_PURCHASE, 
+            payload: res.data
+        });
+    } catch (err) {
+        dispatch({
+            type: PURCHASE_ERROR,
+            payload: err
+        });
+    }
+}
+
 // Delete a purchase
 export const deletePurchase = purchaseID => async dispatch => {
     try {
