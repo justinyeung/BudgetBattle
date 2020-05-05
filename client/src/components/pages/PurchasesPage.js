@@ -1,11 +1,17 @@
 import React from 'react';
-
+import MaterialTable from "material-table";
 
 import PurchaseForm from '../purchases/PurchaseForm';
 import DeletePurchaseForm from '../temp/DeletePurchaseForm';
 import CurrentPurchases from '../purchases/CurrentPurchases';
 
+
+
+
+
 const PurchasePage = () => {
+    
+
     return (
         <div>
             <div style={{ padding: '1rem' }}>
@@ -17,6 +23,7 @@ const PurchasePage = () => {
             <div style={{ padding: '1rem' }}>
                 <CurrentPurchases/>
             </div>
+        
         </div>
     );
 }

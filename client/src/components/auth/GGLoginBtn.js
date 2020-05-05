@@ -6,7 +6,7 @@ const GGLoginBtn = () => {
 
     return(
         <div>
-            <a href="http://localhost:5000/api/ggauth/login/">
+            <a id="login-link" href="http://localhost:5000/api/ggauth/login/">
                 <GoogleLoginButton />
             </a>
         </div>

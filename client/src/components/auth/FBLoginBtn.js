@@ -6,7 +6,7 @@ const FBLoginBtn = () => {
 
     return(
         <div>
-            <a href="http://localhost:5000/api/fbauth/login/">
+            <a id="login-link" href="http://localhost:5000/api/fbauth/login/">
                 <FacebookLoginButton />
             </a>
         </div>
