@@ -12,7 +12,6 @@ const PurchasePage = () => {
             <div style={{ padding: '1rem' }}>
                 <CurrentPurchases/>
             </div>
-        
         </div>
     );
 }

@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUser, login } from '../../actions/userActions';
+import { getUser } from '../../actions/userActions';
 
 const CurrentUser = ({ getUser, user: { user } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getUser();
+
+        // eslint-disable-next-line
     }, []);
 
     return (

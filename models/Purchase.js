@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const PurchaseSchema = mongoose.Schema({
     userID: {
-        // type: mongoose.Schema.Types.ObjectId,
         type: String,
         ref: 'user',
         required: true
@@ -13,7 +12,6 @@ const PurchaseSchema = mongoose.Schema({
     },
     amount: {
         type: Number,
-        required: true,
         default: 0
     },
     location: {
