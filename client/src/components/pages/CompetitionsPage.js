@@ -1,8 +1,5 @@
 import React from 'react';
 
-import LogoutBtn from '../auth/LogoutBtn';
-import DeleteUserBtn from '../temp/DeleteUserBtn';
-
 import SetCompetitorForm from '../temp/SetCompetitorForm';
 import CurrentPurchases from '../purchases/CurrentPurchases';
 

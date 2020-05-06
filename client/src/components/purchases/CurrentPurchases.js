@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, forwardRef, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPurchases, editPurchase, deletePurchase } from '../../actions/purchaseActions';
@@ -21,6 +21,12 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
+import 'date-fns';
+import DateFnsUtils from '@date-io/date-fns';
+
+const moment = require('moment');
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -47,7 +53,8 @@ const setData = (purchasesArray) => {
     const currentPurchases = purchasesArray.map((purchase) => (
        {id: purchase._id,
         userID: purchase.userID,
-        date: purchase.date, 
+        // date: purchase.date,
+        date: moment(purchase.date).format("MMM DD YYYY"),
         location: purchase.location, 
         category: purchase.category, 
         amount: purchase.amount
@@ -69,7 +76,31 @@ const CurrentPurchases = ({ getPurchases, editPurchase, deletePurchase, purchase
             <Container maxWidth="lg">
                 <MaterialTable
                     columns={[
-                        { title: "Date", field: "date", defaultSort: 'desc' },
+                        { 
+                            title: "Date", 
+                            field: "date", 
+                            defaultSort: 'desc', 
+                            filtering: false, 
+                            editComponent: props => (
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    <KeyboardDatePicker
+                                        disableToolbar
+                                        variant="inline"
+                                        format="MM/dd/yyyy"
+                                        margin="normal"
+                                        id="date-picker-inline"
+                                        label="Date"
+                                        inputVariant="outlined"
+                                        autoOk="true"
+                                        value={props.value}
+                                        onChange={date => props.onChange(date)}
+                                        KeyboardButtonProps={{
+                                            'aria-label': 'change date',
+                                        }}
+                                    />
+                                </MuiPickersUtilsProvider>
+                            )
+                        },
                         { title: "Location", field: "location"},
                         { title: "Category", field: "category"},
                         { title: "Amount", field: "amount", filtering: false },

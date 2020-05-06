@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import './App.css';
 
 import 'typeface-roboto';
-import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
+// import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';

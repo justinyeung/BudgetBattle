@@ -1,8 +1,5 @@
 import React from 'react';
 
-import LogoutBtn from '../auth/LogoutBtn';
-import DeleteUserBtn from '../temp/DeleteUserBtn';
-
 import CurrentUser from '../user/CurrentUser';
 import FriendForm from '../temp/FriendForm';
 import PurchaseForm from '../purchases/PurchaseForm';
@@ -22,21 +19,6 @@ const Dashboard = () => {
       </div>
       
     </div>
-    // <div>
-    //   <div style={{ padding: '1rem' }}>
-    //     <LogoutBtn />
-    //     <DeleteUserBtn />
-    //   </div>
-    //   <div style={{ padding: '1rem' }}>
-    //     <Friends/>
-    //   </div>
-    //   <div style={{ padding: '1rem' }}>
-    //     <Competitions/>
-    //   </div>
-    //   <div style={{ padding: '1rem' }}>
-    //     <CurrentCompetition/>
-    //   </div>
-    // </div>
   );
 }
 
