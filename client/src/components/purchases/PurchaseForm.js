@@ -62,7 +62,7 @@ const PurchaseForm = ({ addPurchase }) => {
                         alignItems="center"
                         spacing={5}
                     >
-                            <Grid item xl={2} lg={2} md={3} sm={5} xs={8}>
+                            <Grid item md={3} sm={5} xs={8}>
                                 <FormControl fullWidth>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                         <KeyboardDatePicker
@@ -82,17 +82,17 @@ const PurchaseForm = ({ addPurchase }) => {
                                     </MuiPickersUtilsProvider>
                                 </FormControl>
                             </Grid>
-                            <Grid item xl={2} lg={2} md={3} sm={5} xs={8}>
+                            <Grid item md={3} sm={5} xs={8}>
                                 <FormControl fullWidth>
                                     <TextField id="outlined-basic" label="Amount" variant="outlined" value={amount} onChange={amount => setAmount(amount.target.value)}/>
                                 </FormControl>
                             </Grid>
-                            <Grid item xl={2} lg={2} md={3} sm={5} xs={8}>
+                            <Grid item md={3} sm={5} xs={8}>
                                 <FormControl fullWidth>
                                     <TextField id="outlined-basic" label="Location" variant="outlined" value={location} onChange={location => setLocation(location.target.value)}/>
                                 </FormControl>
                             </Grid>
-                            <Grid item xl={2} lg={2} md={3} sm={5} xs={8}>
+                            <Grid item md={3} sm={5} xs={8}>
                                 <FormControl fullWidth>
                                     <TextField id="outlined-basic" label="Category" variant="outlined" value={category} onChange={category => setCategory(category.target.value)}/>
                                 </FormControl>
