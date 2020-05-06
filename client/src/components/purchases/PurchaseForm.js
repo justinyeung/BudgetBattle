@@ -84,17 +84,17 @@ const PurchaseForm = ({ addPurchase }) => {
                             </Grid>
                             <Grid item md={3} sm={5} xs={8}>
                                 <FormControl fullWidth>
-                                    <TextField id="outlined-basic" label="Amount" variant="outlined" value={amount} onChange={amount => setAmount(amount.target.value)}/>
+                                    <TextField id="outlined-basic" autoComplete='off' label="Amount" variant="outlined" value={amount} onChange={amount => setAmount(amount.target.value)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item md={3} sm={5} xs={8}>
-                                <FormControl fullWidth>
-                                    <TextField id="outlined-basic" label="Location" variant="outlined" value={location} onChange={location => setLocation(location.target.value)}/>
+                                <FormControl fullWidth >
+                                    <TextField id="outlined-basic" autoComplete='off' label="Location" variant="outlined" value={location} onChange={location => setLocation(location.target.value)}/>
                                 </FormControl>
                             </Grid>
                             <Grid item md={3} sm={5} xs={8}>
-                                <FormControl fullWidth>
-                                    <TextField id="outlined-basic" label="Category" variant="outlined" value={category} onChange={category => setCategory(category.target.value)}/>
+                                <FormControl fullWidth >
+                                    <TextField id="outlined-basic" autoComplete='off' label="Category" variant="outlined" value={category} onChange={category => setCategory(category.target.value)}/>
                                 </FormControl>
                             </Grid>
                     </Grid>
