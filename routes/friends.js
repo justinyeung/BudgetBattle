@@ -123,7 +123,7 @@ router.put('/', async (req, res) => {
 router.delete('/', isLoggedIn, async (req, res) => {
     try {
         // input params
-        const { id } = req.body;
+        const { friendID } = req.body;
 
         // find friend with current user and id
         let friend = await Friend.findOne({
@@ -131,12 +131,12 @@ router.delete('/', isLoggedIn, async (req, res) => {
                 {
                     $and:[
                         {user1: req.session.user.userID},
-                        {user2: id.id}
+                        {user2: friendID.friendID}
                     ]
                 },
                 {
                     $and:[
-                        {user1: id.id},
+                        {user1: friendID.friendID},
                         {user2: req.session.user.userID}
                     ]
                 },
