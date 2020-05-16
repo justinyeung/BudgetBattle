@@ -13,6 +13,9 @@ const CompetitionSchema = new mongoose.Schema({
         // }
         type: String
     },
+    user1name: {
+        type: String
+    },
     user2: {
         // incoming
         // id:{
@@ -23,6 +26,9 @@ const CompetitionSchema = new mongoose.Schema({
         //     type: String,
         //     required: true
         // }
+        type: String
+    },
+    user2name: {
         type: String
     },
     status: {

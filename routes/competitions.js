@@ -4,6 +4,7 @@ const router = express.Router();
 const isLoggedIn = require('./middleware');
 
 const Competition = require('../models/Competition');
+const User = require('../models/User');
 
 // @route GET /api/competitions/accepted
 // @desc get a user's accepted competitions
@@ -69,10 +70,15 @@ router.post('/send', isLoggedIn, async (req, res) => {
         // input params
         const { id: user2ID } = req.body;
 
+        // query for user2 name
+        let user2 = await User.findOne({ userID: user2ID });
+
         // create new competition
         newCompetition = new Competition({
             user1: req.session.user.userID,
+            user1name: req.session.user.name,
             user2: user2ID,
+            user2name: user2.name,
             status: "Pending"
         });
 

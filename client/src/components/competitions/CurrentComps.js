@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAcceptedComp } from '../../actions/competitionActions';
-import { getUserById } from '../../actions/userActions';
+
+// import { getUserById } from '../../actions/userActions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -48,11 +49,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CurrentComps = ({ getAcceptedComp, getUserById, competition: { accepted } }) => {
+const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
+        // getUserById('100604803256524080496').then(data => {
+        //     console.log(data.name);
+        // })
         // eslint-disable-next-line
     }, []);
 
@@ -91,11 +95,15 @@ const CurrentComps = ({ getAcceptedComp, getUserById, competition: { accepted } 
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Typography variant='h5'>Justin Yeung</Typography>
+                                        <Typography variant='h5'>
+                                            Person 1
+                                        </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Typography variant='h5'>Alyssa Schleifer</Typography>
+                                        <Typography variant='h5'>
+                                            Person 2
+                                        </Typography>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
@@ -138,11 +146,10 @@ const CurrentComps = ({ getAcceptedComp, getUserById, competition: { accepted } 
 
 CurrentComps.propTypes = {
     getAcceptedComp: PropTypes.func.isRequired,
-    getUserById: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     competition: state.competition
 });
 
-export default connect(mapStateToProps, { getAcceptedComp, getUserById })(CurrentComps);
+export default connect(mapStateToProps, { getAcceptedComp })(CurrentComps);
