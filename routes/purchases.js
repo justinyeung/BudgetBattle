@@ -20,16 +20,19 @@ router.get("/", isLoggedIn, async (req, res) => {
     }
 });
 
-// @route POST /api/purchases/competitor
+// @route GET /api/purchases/competitor/:id
 // @desc get competitor's purchases
 // @access private
-router.post("/competitor", isLoggedIn, async (req, res) => {
+router.get("/competitor/:id", isLoggedIn, async (req, res) => {
     try {
         // input params
-        const { id } = req.body;
+        // const { id } = req.body;
+        const userID = req.params.id;
+
+        console.log(userID);
 
         // query for purchase in db
-        let purchases = await Purchase.find({ userID: id });
+        let purchases = await Purchase.find({ userID: userID });
 
         res.json(purchases);
     } catch (err) {

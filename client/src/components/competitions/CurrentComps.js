@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAcceptedComp } from '../../actions/competitionActions';
+import { getUserById } from '../../actions/userActions';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -47,12 +48,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
+const CurrentComps = ({ getAcceptedComp, getUserById, competition: { accepted } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
-
         // eslint-disable-next-line
     }, []);
 
@@ -65,7 +65,7 @@ const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
                 <div className={classes.root}>
                     {accepted !== [] && 
                         accepted.map(comp => (
-                            <ExpansionPanel defaultExpanded key={comp._id}>
+                            <ExpansionPanel key={comp._id}>
                                 <ExpansionPanelSummary
                                     expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1c-content"
@@ -137,11 +137,12 @@ const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
 }
 
 CurrentComps.propTypes = {
-    getAcceptedComp: PropTypes.func.isRequired
+    getAcceptedComp: PropTypes.func.isRequired,
+    getUserById: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     competition: state.competition
 });
 
-export default connect(mapStateToProps, { getAcceptedComp })(CurrentComps);
+export default connect(mapStateToProps, { getAcceptedComp, getUserById })(CurrentComps);

@@ -3,7 +3,6 @@ import { LOGIN, GET_USER, LOGOUT, DELETE_USER, AUTH_ERROR, USER_ERROR, SEND_FRIE
 import axios from 'axios';
 
 // Login user
-// TODO trigger this in fb/gg login tags
 export const login = () => async dispatch => {
     try {
         // api call to get current user
@@ -21,7 +20,26 @@ export const login = () => async dispatch => {
     }
 };
 
-// Get logged in user and user's friends
+// Get user by user id
+export const getUserById = (userID) => async dispatch => {
+    try {
+
+        const res = await axios.get(`/api/users/byid/${userID}`);
+
+        dispatch({
+            type: null,
+            payload: res.data
+        })
+
+    } catch (err) {
+        dispatch({
+            type: AUTH_ERROR,
+            payload: err
+        });
+    }
+}
+
+// Get current logged in user and user's friends
 export const getUser = () => async dispatch => {
     try {
         // api call to get current user

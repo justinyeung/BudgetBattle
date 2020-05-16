@@ -6,6 +6,22 @@ const isLoggedIn = require('./middleware');
 const User = require('../models/User');
 const Friend = require('../models/Friend');
 
+// @route GET /api/users/byid/:id
+// @desc get current logged in user
+// @access private
+router.get('/byid/:id', async (req, res) => {
+    try {
+        // input params
+        const userID = req.params.id;
+
+        let user = await User.findOne({ userID: userID });
+        res.json(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
+    }
+})
+
 // @route GET /api/users/current
 // @desc get current logged in user
 // @access private
@@ -75,8 +91,5 @@ router.delete('/delete', isLoggedIn, async (req, res) => {
     }
   
 });
-
-
-
 
 module.exports = router;

@@ -134,16 +134,10 @@ export const setCompetitor = (id) => async dispatch => {
 }
 
 // Get all purchases for competitor
-export const getCompetitorPurchases = (id) => async dispatch => {
+export const getCompetitorPurchases = ({ id }) => async dispatch => {
     try {
-        const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-
         // api call to get competitor's purchases
-        let purchases = await axios.post('/api/purchases/competitor', id, config);
+        const purchases = await axios.get(`/api/purchases/competitor/${id}`);
 
         dispatch({
             type: GET_COMPETITOR_PURCHASES,
@@ -157,7 +151,7 @@ export const getCompetitorPurchases = (id) => async dispatch => {
     }
 }
 
-// Clear purchases fro state
+// Clear purchases from state
 export const clearCompetitor = () => async dispatch => {
     try {
         dispatch({
