@@ -139,3 +139,21 @@ export const clearComps = () => async dispatch => {
     }
 }
 
+// Get totals for competition for each user
+export const getCompTotals = ({ compID }) => async dispatch => {
+    try {
+        const res = await axios.get(`/api/competitions/${compID}`);
+
+        console.log(res.data);
+
+        dispatch({
+            type: null,
+            payload: res.data
+        })
+    } catch (err) {
+        dispatch({
+            type: COMP_ERROR,
+            payload: err
+        });
+    }
+}

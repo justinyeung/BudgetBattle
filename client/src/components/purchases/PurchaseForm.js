@@ -35,7 +35,6 @@ const PurchaseForm = ({ addPurchase }) => {
     const classes = useStyles();
 
     const addPurchaseBtn = () => {
-        console.log("Button pressed");
         addPurchase({ date, amount, location, category });
         setDate(new Date());
         setAmount('');

@@ -112,7 +112,6 @@ router.put('/', isLoggedIn, async (req, res) => {
         }
 
         if(competition.user2 !== req.session.user.userID){
-            console.log("Cannot accept outoing comp");
             return res.status(404).json({ msg: "Cannot Accept Outgoing Competition"});
         }
 
@@ -166,11 +165,38 @@ router.get('/:id', isLoggedIn, async (req, res) => {
         // input params
         const compID = req.params.id;
 
+        // get competition object
         let competition = await Competition.findById(compID);
 
+        // Get total for users
+        let user1purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user1,
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
+        let user2purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user2
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
 
+        console.log(user1purchases[0].count);
+        console.log(user2purchases[0].count);
+
+        res.json({ user1total: user1purchases[0].count, user2total: user2purchases[0].count });
     } catch (err) {
-        
+        console.error(err.message);
+        res.status(500).send('Server Error'); 
     }
 })
 

@@ -49,7 +49,6 @@ const tableIcons = {
   };
 
 const setData = (purchasesArray) => {
-    console.log("Setting data");
     const CurrentCompetition = purchasesArray.map((purchase) => (
        {id: purchase._id,
         userID: purchase.userID,

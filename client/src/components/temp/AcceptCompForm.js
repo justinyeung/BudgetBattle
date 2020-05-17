@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { acceptComp, rejectOrDeleteComp } from '../../actions/competitionActions';
+import { acceptComp, rejectOrDeleteComp, getCompTotals } from '../../actions/competitionActions';
 
-const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp }) => {
+const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp, getCompTotals }) => {
     const [compID, setCompID] = useState('');
 
     const acceptCompBtn = () => {
@@ -18,6 +18,11 @@ const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp }) => {
         setCompID('');
     }
 
+    const getCompTotalsBtn = () => {
+        getCompTotals({ compID });
+        setCompID('');
+    }
+
     return(
         <div>
             <input type="text" placeholder="Competition ID" value={compID} onChange={e => setCompID(e.target.value)} />
@@ -27,13 +32,16 @@ const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp }) => {
             <button onClick={rejectOrDeleteCompBtn}>Reject Competition Request</button>
             <br />
             <button onClick={rejectOrDeleteCompBtn}>Delete Competition</button>
+            <br />
+            <button onClick={getCompTotalsBtn}>Get Comp Totals</button>
         </div>
     )
 }
 
 AcceptCompForm.propTypes = {
     acceptComp: PropTypes.func.isRequired,
-    rejectOrDeleteComp: PropTypes.func.isRequired
+    rejectOrDeleteComp: PropTypes.func.isRequired,
+    getCompTotals: PropTypes.func.isRequired
 }
 
-export default connect(null, { acceptComp, rejectOrDeleteComp })(AcceptCompForm);
+export default connect(null, { acceptComp, rejectOrDeleteComp, getCompTotals })(AcceptCompForm);
