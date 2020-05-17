@@ -1,108 +1,153 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getAcceptedComp, getOutPendingComp, getInPendingComp } from '../../actions/competitionActions';
+import { getAcceptedComp } from '../../actions/competitionActions';
 
-const CurrentComps = ({ getAcceptedComp, getOutPendingComp, getInPendingComp, competition: { accepted, outpending, inpending } }) => {
+import { makeStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+import { Container } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontWeight: "fontWeightBold"
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  winningColour: {
+      color: 'green'
+  },
+  icon: {
+    verticalAlign: 'bottom',
+    height: 20,
+    width: 20,
+  },
+  details: {
+    alignItems: 'center',
+    paddingTop: '16px'
+  },
+  detailsAvatar: {
+    alignItems: 'center',
+    paddingTop: '32px'
+  },
+  column: {
+    flexBasis: '25%',
+  }
+}));
+
+const CurrentComps = ({ getAcceptedComp, user: { user }, competition: { accepted } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
-        getOutPendingComp();
-        getInPendingComp();
-
         // eslint-disable-next-line
     }, []);
 
+    const classes = useStyles();
+
     return (
         <div>
-            <ul>
-                <li>Accepted:</li>
-                {accepted !== [] && 
-                    accepted.map(comp => (
-                        <div key={comp._id}>
-                            <li>
-                                <ul>
-                                    <li>
-                                        Competition ID: {comp._id}
-                                    </li>
-                                    <li>
-                                        User1: {comp.user1}
-                                    </li>
-                                    <li>
-                                        User2: {comp.user2}
-                                    </li>
-                                    <li>
-                                        Status: {comp.status}
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                    ))
-                }
-            </ul>
-            <ul>
-                <li>Out Pending:</li>
-                {outpending !== [] && 
-                    outpending.map(comp => (
-                        <div key={comp._id}>
-                            <li>
-                                <ul>
-                                    <li>
-                                        Competition ID: {comp._id}
-                                    </li>
-                                    <li>
-                                        User1: {comp.user1}
-                                    </li>
-                                    <li>
-                                        User2: {comp.user2}
-                                    </li>
-                                    <li>
-                                        Status: {comp.status}
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                    ))
-                }
-            </ul>
-            <ul>
-                <li>In Pending:</li>
-                {inpending !== [] && 
-                    inpending.map(comp => (
-                        <div key={comp._id}>
-                            <li>
-                                <ul>
-                                    <li>
-                                        Competition ID: {comp._id}
-                                    </li>
-                                    <li>
-                                        User1: {comp.user1}
-                                    </li>
-                                    <li>
-                                        User2: {comp.user2}
-                                    </li>
-                                    <li>
-                                        Status: {comp.status}
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
-                    ))
-                }
-            </ul>
+            <h1>Competitions:</h1>
+            <Container maxWidth='lg'>
+                <div className={classes.root}>
+                    {accepted !== [] && 
+                        accepted.map(comp => (
+                            <ExpansionPanel key={comp._id}>
+                                <ExpansionPanelSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1c-content"
+                                    id="panel1c-header"
+                                    >
+                                    <div id="competitions-left-column" className={classes.column}>
+                                        <Typography id='competitor-header-name' variant='h5'>
+                                            { user.userID === comp.user1 ? (comp.user2name) : (comp.user1name) }
+                                        </Typography>
+                                    </div>
+                                    <div id="competitions-center-column" className={classes.column} />
+                                    <div id="competitions-right-column" className={classes.column}>
+                                        <Typography className={classes.secondaryHeading}>CompetitionID: {comp._id}</Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <Divider />
+                                <ExpansionPanelDetails className={classes.detailsAvatar}>
+                                    <div id="competitions-left-column" className={classes.column}>
+                                        <Avatar>{comp.user1name.substring(0,1)}</Avatar>
+                                    </div>
+                                    <div id="competitions-center-column" className={classes.column} />
+                                    <div id="competitions-right-column" className={classes.column}>
+                                        <Avatar>{comp.user2name.substring(0,1)}</Avatar>
+                                    </div>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails className={classes.details}>
+                                    <div id="competitions-left-column" className={classes.column}>
+                                        <Typography variant='h5'>
+                                            {comp.user1name}
+                                        </Typography>
+                                    </div>
+                                    <div id="competitions-center-column" className={classes.column} />
+                                    <div id="competitions-right-column" className={classes.column}>
+                                        <Typography variant='h5'>
+                                            {comp.user2name}
+                                        </Typography>
+                                    </div>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails className={classes.details}>
+                                    <div id="competitions-left-column" className={classes.column}>
+                                        <Typography variant='h5'>$145</Typography>
+                                    </div>
+                                    <div id="competitions-center-column" className={classes.column}>
+                                        <h5>Total Spent</h5>
+                                    </div>
+                                    <div id="competitions-right-column" className={classes.column}>
+                                        <Typography variant='h5'>$160</Typography>
+                                    </div>
+                                </ExpansionPanelDetails>
+                                <ExpansionPanelDetails className={classes.details}>
+                                    <div id="competitions-left-column" className={classes.column}>
+                                        <Typography className={classes.winningColour} variant='h5'>-15</Typography>
+                                    </div>
+                                    <div id="competitions-center-column" className={classes.column}>
+                                        <h5>Difference</h5>
+                                    </div>
+                                    <div id="competitions-right-column" className={classes.column}>
+                                        <Typography color='error' variant='h5'>+15</Typography>
+                                    </div>
+                                </ExpansionPanelDetails>
+                                <Divider />
+                                <ExpansionPanelActions>
+                                    <Button size="small" color="primary">
+                                        View More
+                                    </Button>
+                                </ExpansionPanelActions>
+                            </ExpansionPanel>
+
+                        ))
+                    }
+                </div>
+            </Container>
         </div>
     )
 }
 
 CurrentComps.propTypes = {
     getAcceptedComp: PropTypes.func.isRequired,
-    getOutPendingComp: PropTypes.func.isRequired,
-    getInPendingComp: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
-    competition: state.competition
+    competition: state.competition,
+    user: state.user
 });
 
-export default connect(mapStateToProps, { getAcceptedComp, getOutPendingComp, getInPendingComp })(CurrentComps);
+export default connect(mapStateToProps, { getAcceptedComp })(CurrentComps);

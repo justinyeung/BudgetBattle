@@ -41,16 +41,16 @@ router.post('/send', async (req, res) => {
         });
 
         // input params
-        const { id } = req.body;
+        const { friendID } = req.body;
 
         // find friend's name
-        let friend = await User.findOne({ userID: id });
+        let friend = await User.findOne({ userID: friendID });
 
         // create new Friend
         newFriend = new Friend({
             user1: req.session.user.userID,
             user1name: req.session.user.name,
-            user2: id,
+            user2: friendID,
             user2name: friend.name,
             status: "Pending"
         });
@@ -79,27 +79,20 @@ router.post('/send', async (req, res) => {
 router.put('/', async (req, res) => {
     try {
         // input params
-        const { id } = req.body;
+        const { friendID } = req.body;
 
         // find friend with current user and id
         let friend = await Friend.findOne({
             $and:[
-                {user1: id},
+                {user1: friendID},
                 {user2: req.session.user.userID}
             ]
         });
-
-        
 
         // check if friend exists
         if(!friend){
             return res.status(404).json({ msg: "friend Not Found" });
         }
-
-        // if(friend.user2 !== req.session.user.userID){
-        //     console.log("Cannot accept outoing friend");
-        //     return res.status(404).json({ msg: "Cannot Accept Outgoing friend"});
-        // }
 
         // update friend
         await Friend.findByIdAndUpdate(friend._id, 
@@ -123,7 +116,7 @@ router.put('/', async (req, res) => {
 router.delete('/', isLoggedIn, async (req, res) => {
     try {
         // input params
-        const { id } = req.body;
+        const { friendID } = req.body;
 
         // find friend with current user and id
         let friend = await Friend.findOne({
@@ -131,12 +124,12 @@ router.delete('/', isLoggedIn, async (req, res) => {
                 {
                     $and:[
                         {user1: req.session.user.userID},
-                        {user2: id.id}
+                        {user2: friendID.friendID}
                     ]
                 },
                 {
                     $and:[
-                        {user1: id.id},
+                        {user1: friendID.friendID},
                         {user2: req.session.user.userID}
                     ]
                 },

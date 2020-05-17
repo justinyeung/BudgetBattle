@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { useEffect, forwardRef, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getPurchases, editPurchase, deletePurchase } from '../../actions/purchaseActions';
@@ -50,7 +50,7 @@ const tableIcons = {
 
 const setData = (purchasesArray) => {
     console.log("Setting data");
-    const currentPurchases = purchasesArray.map((purchase) => (
+    const CurrentCompetition = purchasesArray.map((purchase) => (
        {id: purchase._id,
         userID: purchase.userID,
         // date: purchase.date,
@@ -59,10 +59,10 @@ const setData = (purchasesArray) => {
         category: purchase.category, 
         amount: purchase.amount
        }));
-    return currentPurchases;
+    return CurrentCompetition;
 }
 
-const CurrentPurchases = ({ getPurchases, editPurchase, deletePurchase, purchase: { purchases } }) => {
+const CurrentCompetition = ({ getPurchases, editPurchase, deletePurchase, purchase: { purchases } }) => {
 
     useEffect(() => {
         // get purchases of currently logged in user
@@ -154,7 +154,7 @@ const CurrentPurchases = ({ getPurchases, editPurchase, deletePurchase, purchase
     )
 }
 
-CurrentPurchases.propTypes = {
+CurrentCompetition.propTypes = {
     getPurchases: PropTypes.func.isRequired,
     editPurchase: PropTypes.func.isRequired,
     deletePurchase: PropTypes.func.isRequired
@@ -164,4 +164,4 @@ const mapStateToProps = state => ({
     purchase: state.purchase
 });
 
-export default connect(mapStateToProps, { getPurchases, editPurchase, deletePurchase })(CurrentPurchases);
+export default connect(mapStateToProps, { getPurchases, editPurchase, deletePurchase })(CurrentCompetition);

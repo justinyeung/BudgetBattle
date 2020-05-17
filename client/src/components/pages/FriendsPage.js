@@ -2,6 +2,7 @@ import React from 'react';
 
 import CurrentUser from '../user/CurrentUser';
 import FriendForm from '../temp/FriendForm';
+import FriendsList from '../friends/FriendsList';
 
 const FriendsPage = () => {
   return (
@@ -10,7 +11,7 @@ const FriendsPage = () => {
         <FriendForm />
       </div>
       <div style={{ padding: '1rem' }}>
-        <CurrentUser/>
+        <FriendsList/>
       </div>
     </div>
   );

@@ -68,10 +68,29 @@
 }
 
 #purchases-form-submit{
-
   padding-right: 24px;
 }
 
 #purchases-form-grid{
   padding:34px;
+}
+
+#competitions-left-column{
+  padding-left: 1.5rem;
+}
+
+#competitions-center-column{
+  text-align: center;
+}
+
+#competitions-right-column{
+  text-align: right;
+  text-align: -webkit-right;
+  text-align: -ms-right;
+  text-align: -moz-right;
+  text-align: -o-right;
+}
+
+#competitor-header-name{
+  font-weight: bold;
 }
