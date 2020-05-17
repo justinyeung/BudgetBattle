@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PurchaseForm from '../purchases/PurchaseForm';
-import CurrentPurchases from '../purchases/CurrentPurchases';
+import PurchaseForm from '../components/purchases/PurchaseForm';
+import CurrentPurchases from '../components/purchases/CurrentPurchases';
 
 const PurchasePage = () => {
     return (

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import CurrentUser from '../user/CurrentUser';
-import FriendForm from '../temp/FriendForm';
-import PurchaseForm from '../purchases/PurchaseForm';
-import CompRequests from '../competitions/CompRequests';
-import FriendRequests from '../friends/FriendRequests';
-import AcceptCompForm from '../temp/AcceptCompForm';
+import CurrentUser from '../components/user/CurrentUser';
+import FriendForm from '../components/temp/FriendForm';
+import PurchaseForm from '../components/purchases/PurchaseForm';
+import CompRequests from '../components/competitions/CompRequests';
+import FriendRequests from '../components/friends/FriendRequests';
+import AcceptCompForm from '../components/temp/AcceptCompForm';
 
 const Dashboard = () => {
 
