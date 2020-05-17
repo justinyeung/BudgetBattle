@@ -3,7 +3,7 @@ import { SEND_COMP, ACCEPT_COMP, REJECT_DELETE_COMP, GET_ACCEPTED_COMP, GET_OUTP
 import axios from 'axios';
 
 // Send competition request
-export const sendCompRequest = user2ID => async dispatch => {
+export const sendCompRequest = ({ id, numMonth, numYear }) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -12,7 +12,7 @@ export const sendCompRequest = user2ID => async dispatch => {
         }
 
         // api call to send request
-        let res = await axios.post('/api/competitions/send', user2ID, config);
+        let res = await axios.post('/api/competitions/send', { id, numMonth, numYear }, config);
 
         dispatch({
             type: SEND_COMP,

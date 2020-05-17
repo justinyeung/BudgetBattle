@@ -5,6 +5,7 @@ const isLoggedIn = require('./middleware');
 
 const Competition = require('../models/Competition');
 const User = require('../models/User');
+const Purchase = require('../models/Purchase');
 
 // @route GET /api/competitions/accepted
 // @desc get a user's accepted competitions
@@ -68,17 +69,20 @@ router.get('/inpending', isLoggedIn, async (req, res) => {
 router.post('/send', isLoggedIn, async (req, res) => {
     try {
         // input params
-        const { id: user2ID } = req.body;
+        // TODO month and year
+        const { id, numMonth: month, numYear: year } = req.body;
 
         // query for user2 name
-        let user2 = await User.findOne({ userID: user2ID });
+        let user2 = await User.findOne({ userID: id });
 
         // create new competition
         newCompetition = new Competition({
             user1: req.session.user.userID,
             user1name: req.session.user.name,
-            user2: user2ID,
+            user2: id,
             user2name: user2.name,
+            month: month,
+            year: year,
             status: "Pending"
         });
 
@@ -154,5 +158,20 @@ router.delete('/', isLoggedIn, async (req, res) => {
     }
 });
 
+// @route GET /api/competitions/:id
+// @desc get all the purchases for a specific competition
+// @access private
+router.get('/:id', isLoggedIn, async (req, res) => {
+    try {
+        // input params
+        const compID = req.params.id;
+
+        let competition = await Competition.findById(compID);
+
+
+    } catch (err) {
+        
+    }
+})
 
 module.exports = router;
