@@ -147,8 +147,6 @@ export const acceptFriend = friendID => async dispatch => {
         // returns updated friend object
         let friend = await axios.put('/api/friends', friendID, config);
 
-        // console.log(friend.data);
-        
         dispatch({
             type: ACCEPT_FRIEND,
             payload: friend.data

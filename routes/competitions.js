@@ -5,6 +5,7 @@ const isLoggedIn = require('./middleware');
 
 const Competition = require('../models/Competition');
 const User = require('../models/User');
+const Purchase = require('../models/Purchase');
 
 // @route GET /api/competitions/accepted
 // @desc get a user's accepted competitions
@@ -68,17 +69,19 @@ router.get('/inpending', isLoggedIn, async (req, res) => {
 router.post('/send', isLoggedIn, async (req, res) => {
     try {
         // input params
-        const { id: user2ID } = req.body;
+        const { id, numMonth: month, numYear: year } = req.body;
 
         // query for user2 name
-        let user2 = await User.findOne({ userID: user2ID });
+        let user2 = await User.findOne({ userID: id });
 
         // create new competition
         newCompetition = new Competition({
             user1: req.session.user.userID,
             user1name: req.session.user.name,
-            user2: user2ID,
+            user2: id,
             user2name: user2.name,
+            month: month,
+            year: year,
             status: "Pending"
         });
 
@@ -108,14 +111,41 @@ router.put('/', isLoggedIn, async (req, res) => {
         }
 
         if(competition.user2 !== req.session.user.userID){
-            console.log("Cannot accept outoing comp");
             return res.status(404).json({ msg: "Cannot Accept Outgoing Competition"});
         }
+
+        // Get total amount for users' purchases
+        let user1purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user1,
+                    month: competition.month - 1,
+                    year: competition.year
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
+        let user2purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user2,
+                    month: competition.month - 1,
+                    year: competition.year
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
 
         // find competition and update status to accepted
         await Competition.findByIdAndUpdate(compID, 
             { $set: {
-                status: "Accepted"
+                status: "Accepted",
+                user1total: user1purchases !== [] && !user1purchases ? user1purchases[0].count : 0,
+                user2total: user2purchases !== [] && !user2purchases ? user2purchases[0].count : 0
                 }
             }
         );
@@ -154,5 +184,51 @@ router.delete('/', isLoggedIn, async (req, res) => {
     }
 });
 
+// @route GET /api/competitions/:id
+// @desc get total amount for purchases in a competition
+// @access private
+// router.get('/:id', isLoggedIn, async (req, res) => {
+//     try {
+//         // input params
+//         const compID = req.params.id;
+
+//         // get competition object
+//         let competition = await Competition.findById(compID);
+
+//         // Get total for users
+//         let user1purchases = await Purchase.aggregate([
+//             {$match: {
+//                     userID: competition.user1,
+//                     month: competition.month - 1,
+//                     year: competition.year
+//                 }
+//             },
+//             {$group: {
+//                 _id: null,
+//                 count: { $sum: "$amount" }
+//             }
+//         }])
+//         let user2purchases = await Purchase.aggregate([
+//             {$match: {
+//                     userID: competition.user2,
+//                     month: competition.month - 1,
+//                     year: competition.year
+//                 }
+//             },
+//             {$group: {
+//                 _id: null,
+//                 count: { $sum: "$amount" }
+//             }
+//         }])
+
+//         console.log(user1purchases[0].count);
+//         console.log(user2purchases[0].count);
+
+//         res.json({ user1total: user1purchases[0].count, user2total: user2purchases[0].count });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error'); 
+//     }
+// })
 
 module.exports = router;

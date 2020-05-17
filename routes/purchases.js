@@ -4,6 +4,7 @@ const router = express.Router();
 const isLoggedIn = require('./middleware');
 
 const Purchase = require('../models/Purchase');
+const Competition = require('../models/Competition');
 
 // @route GET /api/purchases
 // @desc get current user's purchases
@@ -49,14 +50,35 @@ router.post("/", isLoggedIn, async (req, res) => {
         // input params
         const { date, amount, location, category } = req.body;
 
+        // const month = date.getMonth();
+        // const year = date.getYear();
+        const month = new Date(date).getMonth();
+        const year = new Date(date).getFullYear();
+
         // create new purchase object
         newPurchase = new Purchase({
             userID: req.session.user.userID,
             date,
+            month,
+            year,
             amount,
             location,
             category
         });
+
+        // Update sums in accepted competitions
+        await Competition.updateMany(
+            { user1: req.session.user.userID },
+            { $inc: {
+                user1total: amount
+            }}
+        )
+        await Competition.updateMany(
+            { user2: req.session.user.userID },
+            { $inc: {
+                user2total: amount
+            }}
+        )
 
         // save purchase to db
         const purchase = await newPurchase.save();
