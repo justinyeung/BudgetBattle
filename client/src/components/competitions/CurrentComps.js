@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getAcceptedComp } from '../../actions/competitionActions';
 
-// import { getUserById } from '../../actions/userActions';
-
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
@@ -49,14 +47,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
+const CurrentComps = ({ getAcceptedComp, user: { user }, competition: { accepted } }) => {
 
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
-        // getUserById('100604803256524080496').then(data => {
-        //     console.log(data.name);
-        // })
         // eslint-disable-next-line
     }, []);
 
@@ -76,7 +71,9 @@ const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
                                     id="panel1c-header"
                                     >
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Typography id='competitor-header-name' variant='h5'>Alyssa Schleifer</Typography>
+                                        <Typography id='competitor-header-name' variant='h5'>
+                                            { user.userID === comp.user1 ? (comp.user2name) : (comp.user1name) }
+                                        </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
@@ -86,23 +83,23 @@ const CurrentComps = ({ getAcceptedComp, competition: { accepted } }) => {
                                 <Divider />
                                 <ExpansionPanelDetails className={classes.detailsAvatar}>
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Avatar>JY</Avatar>
+                                        <Avatar>{comp.user1name.substring(0,1)}</Avatar>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Avatar>AS</Avatar>
+                                        <Avatar>{comp.user2name.substring(0,1)}</Avatar>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
                                     <div id="competitions-left-column" className={classes.column}>
                                         <Typography variant='h5'>
-                                            Person 1
+                                            {comp.user1name}
                                         </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
                                         <Typography variant='h5'>
-                                            Person 2
+                                            {comp.user2name}
                                         </Typography>
                                     </div>
                                 </ExpansionPanelDetails>
@@ -149,7 +146,8 @@ CurrentComps.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    competition: state.competition
+    competition: state.competition,
+    user: state.user
 });
 
 export default connect(mapStateToProps, { getAcceptedComp })(CurrentComps);
