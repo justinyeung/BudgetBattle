@@ -113,11 +113,29 @@ router.put("/", isLoggedIn, async (req, res) => {
             return res.status(404).json({ msg: "Purchase Not Found" });
         }
 
+        // Get old purchase amount and difference
+        let oldPurchaseAmount = purchase.amount;
+        let purchaseDiff = amount - oldPurchaseAmount;
+
+        // Update sums in accepted competitions
+        await Competition.updateMany(
+            { user1: req.session.user.userID },
+            { $inc: {
+                user1total: purchaseDiff
+            }}
+        )
+        await Competition.updateMany(
+            { user2: req.session.user.userID },
+            { $inc: {
+                user2total: purchaseDiff
+            }}
+        )
+
         // find purchase and update
         purchase = await Purchase.findByIdAndUpdate(purchaseID, 
             { $set: purchaseFields},
             { new: true });
-        
+
         res.json(purchase);
 
     } catch (err) {
@@ -141,6 +159,23 @@ router.delete("/", isLoggedIn, async (req, res) => {
         if(!purchase){
             return res.status(404).json({ msg: "Purchase Not Found" });
         }
+
+        // get value of old purchase amount
+        let oldAmount = purchase.amount;
+
+        // Update sums in accepted competitions
+        await Competition.updateMany(
+            { user1: req.session.user.userID },
+            { $inc: {
+                user1total: oldAmount * -1
+            }}
+        )
+        await Competition.updateMany(
+            { user2: req.session.user.userID },
+            { $inc: {
+                user2total: oldAmount * -1
+            }}
+        )
 
         await Purchase.findByIdAndDelete(purchaseID);
 
