@@ -47,15 +47,48 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CurrentComps = ({ getAcceptedComp, user: { user }, competition: { accepted } }) => {
+const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
+const CurrentComps = ({ getAcceptedComp, user: { user }, competition: { accepted } }) => {
     useEffect(() => {
         // get state of currently logged in user
         getAcceptedComp();
+
         // eslint-disable-next-line
     }, []);
 
     const classes = useStyles();
+
+    
+    const getRight = (comp) => {
+        if(user.userID === comp.user1){
+            return {
+                name: comp.user2name,
+                total: comp.user2total
+            }
+        }else{
+            return {
+                name: comp.user1name,
+                total: comp.user1total
+            }
+        }
+    };
+
+    const getLeft = (comp) => {
+        if(user.userID !== comp.user1){
+            return {
+                name: comp.user2name,
+                total: comp.user2total
+            }
+        }else{
+            return {
+                name: comp.user1name,
+                total: comp.user1total
+            }
+        }
+    };
 
     return (
         <div>
@@ -72,57 +105,65 @@ const CurrentComps = ({ getAcceptedComp, user: { user }, competition: { accepted
                                     >
                                     <div id="competitions-left-column" className={classes.column}>
                                         <Typography id='competitor-header-name' variant='h5'>
-                                            { user.userID === comp.user1 ? (comp.user2name) : (comp.user1name) }
+                                            {getRight(comp).name}
                                         </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Typography className={classes.secondaryHeading}>CompetitionID: {comp._id}</Typography>
+                                        <Typography variant='h5' className={classes.secondaryHeading}>{monthNames[comp.month-1]} {comp.year}</Typography>
                                     </div>
                                 </ExpansionPanelSummary>
                                 <Divider />
                                 <ExpansionPanelDetails className={classes.detailsAvatar}>
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Avatar>{comp.user1name.substring(0,1)}</Avatar>
+                                        <Avatar>{getLeft(comp).name.substring(0,1)}</Avatar>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Avatar>{comp.user2name.substring(0,1)}</Avatar>
+                                        <Avatar>{getRight(comp).name.substring(0,1)}</Avatar>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
                                     <div id="competitions-left-column" className={classes.column}>
                                         <Typography variant='h5'>
-                                            {comp.user1name}
+                                            {getLeft(comp).name}
                                         </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column} />
                                     <div id="competitions-right-column" className={classes.column}>
                                         <Typography variant='h5'>
-                                            {comp.user2name}
+                                            {getRight(comp).name}
                                         </Typography>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Typography variant='h5'>$145</Typography>
+                                        <Typography variant='h5'>
+                                            ${getLeft(comp).total}
+                                        </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column}>
                                         <h5>Total Spent</h5>
                                     </div>
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Typography variant='h5'>$160</Typography>
+                                        <Typography variant='h5'>
+                                            ${getRight(comp).total}
+                                        </Typography>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <ExpansionPanelDetails className={classes.details}>
                                     <div id="competitions-left-column" className={classes.column}>
-                                        <Typography className={classes.winningColour} variant='h5'>-15</Typography>
+                                        <Typography variant='h5'>
+                                            {getLeft(comp).total - getRight(comp).total}
+                                        </Typography>
                                     </div>
                                     <div id="competitions-center-column" className={classes.column}>
                                         <h5>Difference</h5>
                                     </div>
                                     <div id="competitions-right-column" className={classes.column}>
-                                        <Typography color='error' variant='h5'>+15</Typography>
+                                        <Typography variant='h5'>
+                                            {getRight(comp).total - getLeft(comp).total}
+                                        </Typography>
                                     </div>
                                 </ExpansionPanelDetails>
                                 <Divider />

@@ -69,7 +69,6 @@ router.get('/inpending', isLoggedIn, async (req, res) => {
 router.post('/send', isLoggedIn, async (req, res) => {
     try {
         // input params
-        // TODO month and year
         const { id, numMonth: month, numYear: year } = req.body;
 
         // query for user2 name
@@ -115,10 +114,38 @@ router.put('/', isLoggedIn, async (req, res) => {
             return res.status(404).json({ msg: "Cannot Accept Outgoing Competition"});
         }
 
+        // Get total amount for users' purchases
+        let user1purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user1,
+                    month: competition.month - 1,
+                    year: competition.year
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
+        let user2purchases = await Purchase.aggregate([
+            {$match: {
+                    userID: competition.user2,
+                    month: competition.month - 1,
+                    year: competition.year
+                }
+            },
+            {$group: {
+                _id: null,
+                count: { $sum: "$amount" }
+            }
+        }])
+
         // find competition and update status to accepted
         await Competition.findByIdAndUpdate(compID, 
             { $set: {
-                status: "Accepted"
+                status: "Accepted",
+                user1total: user1purchases[0].count,
+                user2total: user2purchases[0].count
                 }
             }
         );
@@ -158,50 +185,50 @@ router.delete('/', isLoggedIn, async (req, res) => {
 });
 
 // @route GET /api/competitions/:id
-// @desc get all the purchases for a specific competition
+// @desc get total amount for purchases in a competition
 // @access private
-router.get('/:id', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const compID = req.params.id;
+// router.get('/:id', isLoggedIn, async (req, res) => {
+//     try {
+//         // input params
+//         const compID = req.params.id;
 
-        // get competition object
-        let competition = await Competition.findById(compID);
+//         // get competition object
+//         let competition = await Competition.findById(compID);
 
-        // Get total for users
-        let user1purchases = await Purchase.aggregate([
-            {$match: {
-                    userID: competition.user1,
-                    month: competition.month - 1,
-                    year: competition.year
-                }
-            },
-            {$group: {
-                _id: null,
-                count: { $sum: "$amount" }
-            }
-        }])
-        let user2purchases = await Purchase.aggregate([
-            {$match: {
-                    userID: competition.user2,
-                    month: competition.month - 1,
-                    year: competition.year
-                }
-            },
-            {$group: {
-                _id: null,
-                count: { $sum: "$amount" }
-            }
-        }])
+//         // Get total for users
+//         let user1purchases = await Purchase.aggregate([
+//             {$match: {
+//                     userID: competition.user1,
+//                     month: competition.month - 1,
+//                     year: competition.year
+//                 }
+//             },
+//             {$group: {
+//                 _id: null,
+//                 count: { $sum: "$amount" }
+//             }
+//         }])
+//         let user2purchases = await Purchase.aggregate([
+//             {$match: {
+//                     userID: competition.user2,
+//                     month: competition.month - 1,
+//                     year: competition.year
+//                 }
+//             },
+//             {$group: {
+//                 _id: null,
+//                 count: { $sum: "$amount" }
+//             }
+//         }])
 
-        console.log(user1purchases[0].count);
-        console.log(user2purchases[0].count);
+//         console.log(user1purchases[0].count);
+//         console.log(user2purchases[0].count);
 
-        res.json({ user1total: user1purchases[0].count, user2total: user2purchases[0].count });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
-})
+//         res.json({ user1total: user1purchases[0].count, user2total: user2purchases[0].count });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error'); 
+//     }
+// })
 
 module.exports = router;
