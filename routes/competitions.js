@@ -144,8 +144,8 @@ router.put('/', isLoggedIn, async (req, res) => {
         await Competition.findByIdAndUpdate(compID, 
             { $set: {
                 status: "Accepted",
-                user1total: user1purchases[0].count,
-                user2total: user2purchases[0].count
+                user1total: user1purchases !== [] && !user1purchases ? user1purchases[0].count : 0,
+                user2total: user2purchases !== [] && !user2purchases ? user2purchases[0].count : 0
                 }
             }
         );
