@@ -10,6 +10,12 @@ const PurchaseSchema = mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    month: {
+        type: Number
+    },
+    year: {
+        type: Number
+    },
     amount: {
         type: Number,
         default: 0

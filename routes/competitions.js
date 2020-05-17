@@ -172,6 +172,8 @@ router.get('/:id', isLoggedIn, async (req, res) => {
         let user1purchases = await Purchase.aggregate([
             {$match: {
                     userID: competition.user1,
+                    month: competition.month - 1,
+                    year: competition.year
                 }
             },
             {$group: {
@@ -181,7 +183,9 @@ router.get('/:id', isLoggedIn, async (req, res) => {
         }])
         let user2purchases = await Purchase.aggregate([
             {$match: {
-                    userID: competition.user2
+                    userID: competition.user2,
+                    month: competition.month - 1,
+                    year: competition.year
                 }
             },
             {$group: {

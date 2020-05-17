@@ -49,10 +49,17 @@ router.post("/", isLoggedIn, async (req, res) => {
         // input params
         const { date, amount, location, category } = req.body;
 
+        // const month = date.getMonth();
+        // const year = date.getYear();
+        const month = new Date(date).getMonth();
+        const year = new Date(date).getFullYear();
+
         // create new purchase object
         newPurchase = new Purchase({
             userID: req.session.user.userID,
             date,
+            month,
+            year,
             amount,
             location,
             category

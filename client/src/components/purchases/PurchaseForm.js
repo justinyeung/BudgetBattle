@@ -30,7 +30,6 @@ const PurchaseForm = ({ addPurchase }) => {
     const [amount, setAmount] = useState('');
     const [location, setLocation] = useState('');
     const [category, setCategory] = useState('');
-    // const [open, setOpen] = useState(false);
 
     const classes = useStyles();
 
@@ -73,7 +72,7 @@ const PurchaseForm = ({ addPurchase }) => {
                                             inputVariant="outlined"
                                             autoOk="true"
                                             value={date}
-                                            onChange={date => date !== null ? setDate(date) : setDate(new Date())}
+                                            onChange={date => date !== null ? setDate(new Date(date)) : setDate(new Date())}
                                             KeyboardButtonProps={{
                                                 'aria-label': 'change date',
                                             }}
