@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CurrentPurchases from '../purchases/CurrentPurchases';
+import CurrentPurchases from '../components/purchases/CurrentPurchases';
 
 const CurrentCompetition = () => {
     return (

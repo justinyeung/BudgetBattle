@@ -135,14 +135,7 @@ const CurrentPurchases = ({ getPurchases, editPurchase, deletePurchase, purchase
                         onRowDelete: oldData =>
                             new Promise((resolve, reject) => {
                                 setTimeout(() => {
-                                    {
-                                        deletePurchase(oldData.id);
-
-                                        // let data = this.state.data;
-                                        // const index = data.indexOf(oldData);
-                                        // data.splice(index, 1);
-                                        // this.setState({ data }, () => resolve());
-                                    }
+                                    deletePurchase(oldData.id);
                                     resolve();
                                 }, 1000);
                             })

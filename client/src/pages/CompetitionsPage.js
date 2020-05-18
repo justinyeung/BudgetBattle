@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SetCompetitorForm from '../temp/SetCompetitorForm';
-import CurrentComps from '../competitions/CurrentComps';
-import CompsForm from '../competitions/CompsForm';
-import FriendsList from '../friends/FriendsList';
+import SetCompetitorForm from '../components/temp/SetCompetitorForm';
+import CurrentComps from '../components/competitions/CurrentComps';
+import CompsForm from '../components/competitions/CompsForm';
+import FriendsList from '../components/friends/FriendsList';
 
 const CompetitionsPage = () => {
   return (

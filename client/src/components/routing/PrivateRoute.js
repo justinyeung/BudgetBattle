@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import { getUser } from '../../actions/userActions';
 
@@ -10,6 +11,8 @@ const PrivateRoute = ({ getUser, user: { user }, component: Component , ...rest 
 
     useEffect(() => {
         getUser();
+
+        // eslint-disable-next-line
     }, []);
 
     return (

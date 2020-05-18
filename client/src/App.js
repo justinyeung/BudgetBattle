@@ -10,14 +10,14 @@ import store from './store';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import Navbar from './components/layout/Navbar';
-import LoginPage from './components/pages/LoginPage';
-import HomePage from './components/pages/HomePage';
-import GetStartedPage from './components/pages/GetStartedPage';
-import Dashboard from './components/pages/Dashboard';
-import FriendsPage from './components/pages/FriendsPage';
-import PurchasesPage from './components/pages/PurchasesPage';
-import CompetitionsPage from './components/pages/CompetitionsPage';
-import CurrentCompPage from './components/pages/CurrentCompPage';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import GetStartedPage from './pages/GetStartedPage';
+import Dashboard from './pages/Dashboard';
+import FriendsPage from './pages/FriendsPage';
+import PurchasesPage from './pages/PurchasesPage';
+import CompetitionsPage from './pages/CompetitionsPage';
+import CurrentCompPage from './pages/CurrentCompPage';
 
 function App() {
   return (

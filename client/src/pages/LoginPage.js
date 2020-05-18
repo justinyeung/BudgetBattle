@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import FBLoginBtn from '../auth/FBLoginBtn';
-import GGLoginBtn from '../auth/GGLoginBtn';
+import GGLoginBtn from '../components/auth/GGLoginBtn';
+import FBLoginBtn from '../components/auth/FBLoginBtn';
 
-import { getUser } from '../../actions/userActions';
+import { getUser } from '../actions/userActions';
 
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';

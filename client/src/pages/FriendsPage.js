@@ -1,8 +1,7 @@
 import React from 'react';
 
-import CurrentUser from '../user/CurrentUser';
-import FriendForm from '../temp/FriendForm';
-import FriendsList from '../friends/FriendsList';
+import FriendForm from '../components/temp/FriendForm';
+import FriendsList from '../components/friends/FriendsList';
 
 const FriendsPage = () => {
   return (
