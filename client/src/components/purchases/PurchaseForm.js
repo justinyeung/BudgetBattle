@@ -8,7 +8,6 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
@@ -16,22 +15,12 @@ import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      '& > *': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-    },
-  }));
-
 const PurchaseForm = ({ addPurchase }) => {
     const [date, setDate] = useState(new Date());
     const [amount, setAmount] = useState('');
     const [location, setLocation] = useState('');
     const [category, setCategory] = useState('');
 
-    const classes = useStyles();
 
     const addPurchaseBtn = () => {
         addPurchase({ date, amount, location, category });
