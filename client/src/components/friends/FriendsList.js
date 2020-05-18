@@ -46,7 +46,7 @@ const FriendsList = ({ getUser, user: { user } }) => {
                         <Avatar>{":("}</Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                        primary={"No Friend Requests to show."}
+                        primary={"No Friends to show."}
                         secondary={
                             <React.Fragment>
                             <Typography
