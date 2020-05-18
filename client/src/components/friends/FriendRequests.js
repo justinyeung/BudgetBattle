@@ -3,7 +3,34 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getUser } from '../../actions/userActions';
 
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Divider from '@material-ui/core/Divider';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import IconButton from '@material-ui/core/IconButton';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+
+const moment = require('moment');
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      backgroundColor: theme.palette.background.paper,
+    },
+    inline: {
+      display: 'inline',
+    },
+  }));
+
 const FriendRequests = ({ getUser, user: { user } }) => {
+    const classes = useStyles();
 
     useEffect(() => {
         // get state of currently logged in user
@@ -13,42 +40,77 @@ const FriendRequests = ({ getUser, user: { user } }) => {
     }, []);
 
     return (
-        <ul>
-            <h1>Friend Requests</h1>
+        <Container maxWidth='xs'>
+        <Typography variant='h4'>Friend Requests</Typography>
+        <Divider/>
+        <List className={classes.root}>
+            {user === null && (
+                <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                        <Avatar>{":("}</Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary={"No Friends to show."}
+                        secondary={
+                            <React.Fragment>
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                className={classes.inline}
+                                color="textPrimary"
+                            >
+                                Add Friends to start Budget Battling!
+                            </Typography>
+                            </React.Fragment>
+                        }
+                    />
+                    </ListItem>
+            )}
             {user !== null && 
-            (<div>
-                <li>Outpending:</li>
-                <li>
-                    <ul>
-                        {user.friends.map(friend => (
-                            friend.status === "Pending" && 
-                            friend.user1 === user.userID &&
-                            (
-                                <div key={friend._id}>
-                                    <li>Friend's ID: {friend.user2}</li>
-                                    <li>Friend's Name: {friend.user2name}</li>
-                                </div>
-                            )
-                        ))}
-                    </ul>
-                </li>
-                <li>Inpending:</li>
-                <li>
-                    <ul>
+                (<div>
                         {user.friends.map(friend => (
                             friend.status === "Pending" && 
                             friend.user2 === user.userID &&
-                            (<div key={friend._id}>
-                                <li>Friend's ID: {friend.user1}</li>
-                                <li>Friend's Name: {friend.user1name}</li>
-                            </div>
+                            (
+                                <div>
+                                <ListItem alignItems="flex-start" key={friend._id}>
+                                    <ListItemAvatar>
+                                        <Avatar>{friend.user1name && friend.user1name.substring(0,1)}</Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={friend.user1name}
+                                        secondary={
+                                            <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                className={classes.inline}
+                                                color="textPrimary"
+                                            >
+                                                Since { moment(new Date(friend.date)).format("MMM DD YYYY") }
+                                            </Typography>
+                                            </React.Fragment>
+                                        }
+                                    />
+                                    <ListItemSecondaryAction>
+                                        <IconButton edge="end" aria-label="delete">
+                                            <CheckIcon />
+                                        </IconButton>
+                                        <IconButton edge="end" aria-label="delete">
+                                            <ClearIcon />
+                                        </IconButton>
+                                    </ListItemSecondaryAction>
+                                </ListItem>
+                                </div>
                             )
                         ))}
-                    </ul>
-                </li>
-            </div>)
-            }
-        </ul>
+                    
+                </div>)
+                }
+                
+            </List>
+        </Container>
+        
     )
 }
 
