@@ -20,7 +20,7 @@ const FriendsPage = () => {
           container
           direction="row"
           justify="center"
-          alignItems="center"
+          alignItems="flex-start"
           spacing={5}
         >
           <Grid item md={6} xs={12}>

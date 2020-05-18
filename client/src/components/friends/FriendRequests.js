@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { getUser } from '../../actions/userActions';
+import { acceptFriend, deleteFriend } from '../../actions/userActions';
 
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,6 +19,10 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+
 const moment = require('moment');
 
 const useStyles = makeStyles((theme) => ({
@@ -29,11 +35,36 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } }) => {
+    const [open, setOpen] = useState(false);
+    const [msg, setMsg] = useState('');
 
-
-const FriendRequests = ({ getUser, user: { user } }) => {
     const classes = useStyles();
-    
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+        return;
+        }
+
+        setOpen(false);
+    };
+
+    const acceptButton = (friendID) => {
+        acceptFriend({ friendID });
+        setMsg("Friend Request Accepted");
+        handleClick();
+    }
+
+    const rejectButton = (friendID) => {
+        deleteFriend({ friendID });
+        setMsg("Friend Request Rejected");
+        handleClick();
+    }
+
     const getRequests = (friendslist) => {
         return friendslist.filter(friend => friend.status === "Pending" && friend.user2 === user.userID)
     }
@@ -46,6 +77,7 @@ const FriendRequests = ({ getUser, user: { user } }) => {
     }, []);
     
     return (
+        <div>
         <Container maxWidth='xs'>
         <Typography variant='h4'>Friend Requests</Typography>
         <Divider/>
@@ -96,33 +128,53 @@ const FriendRequests = ({ getUser, user: { user } }) => {
                             }
                             />
                             <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete">
-                            <CheckIcon />
+                            <IconButton edge="end" aria-label="delete" onClick={acceptButton(friend.user1)}>
+                                <CheckIcon />
                             </IconButton>
-                            <IconButton edge="end" aria-label="delete">
-                            <ClearIcon />
+                            <IconButton edge="end" aria-label="delete" onClick={rejectButton(friend.user1)}>
+                                <ClearIcon />
                             </IconButton>
                             </ListItemSecondaryAction>
                             </ListItem>
                         </div>
                     ))}
-                            
-                            </div>)
-                        }
-                        
-                        </List>
-                        </Container>
-                        
-                        )
-                    }
+                </div>)
+            }
+        </List>
+    </Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={msg}
+        action={
+          <React.Fragment>
+            <Button color="secondary" size="small" onClick={handleClose}>
+              UNDO
+            </Button>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+    </div>
+    )
+}
                     
-                    FriendRequests.propTypes = {
-                        user: PropTypes.object.isRequired,
-                        getUser: PropTypes.func.isRequired
-                    }
-                    
-                    const mapStateToProps = state => ({
-                        user: state.user
-                    });
-                    
-                    export default connect(mapStateToProps, { getUser })(FriendRequests);
+FriendRequests.propTypes = {
+    user: PropTypes.object.isRequired,
+    getUser: PropTypes.func.isRequired,
+    acceptFriend: PropTypes.func.isRequired,
+    deleteFriend: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+    user: state.user
+});
+
+export default connect(mapStateToProps, { getUser, acceptFriend, deleteFriend })(FriendRequests);
