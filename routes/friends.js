@@ -52,6 +52,7 @@ router.post('/send', async (req, res) => {
             user1name: req.session.user.name,
             user2: friendID,
             user2name: friend.name,
+            date: new Date(),
             status: "Pending"
         });
 
@@ -97,7 +98,8 @@ router.put('/', async (req, res) => {
         // update friend
         await Friend.findByIdAndUpdate(friend._id, 
             { $set: {
-                status: "Accepted"
+                status: "Accepted",
+                date: new Date()
                 }
             }
         );

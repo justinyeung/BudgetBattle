@@ -13,6 +13,9 @@ const FriendSchema = mongoose.Schema({
     user2name:{
         type: String
     },
+    date: {
+        type: Date
+    },
     status: {
         type: String,
         required: true,

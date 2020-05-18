@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       backgroundColor: theme.palette.background.paper,
+      margin: 0
     },
     inline: {
       display: 'inline',
@@ -28,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
 const FriendsList = ({ getUser, user: { user } }) => {
     const classes = useStyles();
 
+    const getAccepted = (friendslist) => {
+        return friendslist.filter(friend => friend.status === "Accepted" && (friend.user2 === user.userID || friend.user1 === user.userID))
+    }
+
     useEffect(() => {
         // get state of currently logged in user
         getUser();
@@ -36,11 +41,11 @@ const FriendsList = ({ getUser, user: { user } }) => {
     }, []);
 
     return (
-        <Container maxWidth='xs'>
+        <Container id="friendslist-container" maxWidth='xs'>
             <Typography variant='h4'>Friends</Typography>
             <Divider/>
             <List className={classes.root}>
-                {user === null && (
+                {(user === null || getAccepted(user.friends).length === 0 || getAccepted(user.friends) === undefined) && (
                     <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                         <Avatar>{":("}</Avatar>
@@ -64,9 +69,7 @@ const FriendsList = ({ getUser, user: { user } }) => {
                 )}
                 {user !== null && 
                     (<div>
-                            {user.friends.map(friend => (
-                                friend.status === "Accepted" && 
-                                (
+                            {getAccepted(user.friends).map(friend => (
                                 (friend.user2 === user.userID && (
                                     <div>
                                         <ListItem alignItems="flex-start" key={friend._id}>
@@ -115,7 +118,6 @@ const FriendsList = ({ getUser, user: { user } }) => {
                                         </ListItem>
                                     </div>
                                 ))
-                            )
                             ))}
                     </div>)
                 }
