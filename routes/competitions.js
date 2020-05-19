@@ -1,187 +1,200 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const isLoggedIn = require('./middleware');
+const isLoggedIn = require("./middleware");
 
-const Competition = require('../models/Competition');
-const User = require('../models/User');
-const Purchase = require('../models/Purchase');
+const Competition = require("../models/Competition");
+const User = require("../models/User");
+const Purchase = require("../models/Purchase");
 
 // @route GET /api/competitions/accepted
 // @desc get a user's accepted competitions
 // @access private
-router.get('/accepted', isLoggedIn, async (req, res) => {
-    try {
-        // get all accepted outgoing and incoming competitions
-        let competitions = await Competition.find({ 
-            $or:[
-                {user1: req.session.user.userID, status: "Accepted"},
-                {user2: req.session.user.userID, status: "Accepted"}
-              ]
-        });
+router.get("/accepted", isLoggedIn, async (req, res) => {
+  try {
+    // get all accepted outgoing and incoming competitions
+    let competitions = await Competition.find({
+      $or: [
+        { user1: req.session.user.userID, status: "Accepted" },
+        { user2: req.session.user.userID, status: "Accepted" },
+      ],
+    });
 
-        res.json(competitions);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
+    res.json(competitions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route GET /api/competitions/outpending
 // @desc get a user's outgoing pending requests
 // @access private
-router.get('/outpending', isLoggedIn, async (req, res) => {
-    try {
-        // get all pending competitions
-        let competitions = await Competition.find({ 
-            user1: req.session.user.userID, 
-            status: "Pending"
-        });
+router.get("/outpending", isLoggedIn, async (req, res) => {
+  try {
+    // get all pending competitions
+    let competitions = await Competition.find({
+      user1: req.session.user.userID,
+      status: "Pending",
+    });
 
-        res.json(competitions);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
+    res.json(competitions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route GET /api/competitions/inpending
 // @desc get a user's incoming pending requests
 // @access private
-router.get('/inpending', isLoggedIn, async (req, res) => {
-    try {
-        // get all pending competitions
-        let competitions = await Competition.find({ 
-            user2: req.session.user.userID, 
-            status: "Pending"
-        });
+router.get("/inpending", isLoggedIn, async (req, res) => {
+  try {
+    // get all pending competitions
+    let competitions = await Competition.find({
+      user2: req.session.user.userID,
+      status: "Pending",
+    });
 
-        res.json(competitions);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
+    res.json(competitions);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route POST /api/competitions/send
 // @desc send a pending competition request
 // @access private
-router.post('/send', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const { id, numMonth: month, numYear: year } = req.body;
+router.post("/send", isLoggedIn, async (req, res) => {
+  try {
+    // input params
+    const { id, numMonth: month, numYear: year } = req.body;
 
-        // query for user2 name
-        let user2 = await User.findOne({ userID: id });
+    // query for user2 name
+    let user2 = await User.findOne({ userID: id });
 
-        // create new competition
-        newCompetition = new Competition({
-            user1: req.session.user.userID,
-            user1name: req.session.user.name,
-            user2: id,
-            user2name: user2.name,
-            month: month,
-            year: year,
-            status: "Pending"
-        });
+    // create new competition
+    newCompetition = new Competition({
+      user1: req.session.user.userID,
+      user1name: req.session.user.name,
+      user2: id,
+      user2name: user2.name,
+      month: month,
+      year: year,
+      status: "Pending",
+    });
 
-        const competition = await newCompetition.save();
+    const competition = await newCompetition.save();
 
-        res.json(competition);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
-    }
+    res.json(competition);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route PUT /api/competitions/accept
 // @desc accept a inpending competition request
 // @access private
-router.put('/', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const { compID } = req.body;
+router.put("/", isLoggedIn, async (req, res) => {
+  try {
+    // input params
+    const { compID } = req.body;
 
-        // find competition
-        let competition = await Competition.findById(compID);
+    // find competition
+    let competition = await Competition.findById(compID);
 
-        // check if competition exists
-        if(!competition){
-            return res.status(404).json({ msg: "Competition Not Found" });
-        }
-
-        if(competition.user2 !== req.session.user.userID){
-            return res.status(404).json({ msg: "Cannot Accept Outgoing Competition"});
-        }
-
-        // Get total amount for users' purchases
-        let user1purchases = await Purchase.aggregate([
-            {$match: {
-                    userID: competition.user1,
-                    month: competition.month - 1,
-                    year: competition.year
-                }
-            },
-            {$group: {
-                _id: null,
-                count: { $sum: "$amount" }
-            }
-        }])
-        let user2purchases = await Purchase.aggregate([
-            {$match: {
-                    userID: competition.user2,
-                    month: competition.month - 1,
-                    year: competition.year
-                }
-            },
-            {$group: {
-                _id: null,
-                count: { $sum: "$amount" }
-            }
-        }])
-
-        // find competition and update status to accepted
-        await Competition.findByIdAndUpdate(compID, 
-            { $set: {
-                status: "Accepted",
-                user1total: user1purchases !== [] && !user1purchases ? user1purchases[0].count : 0,
-                user2total: user2purchases !== [] && !user2purchases ? user2purchases[0].count : 0
-                }
-            }
-        );
-
-        // find and return updated competition
-        let returnCompetition = await Competition.findById(compID);
-        res.json(returnCompetition);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
+    // check if competition exists
+    if (!competition) {
+      return res.status(404).json({ msg: "Competition Not Found" });
     }
+
+    if (competition.user2 !== req.session.user.userID) {
+      return res
+        .status(404)
+        .json({ msg: "Cannot Accept Outgoing Competition" });
+    }
+
+    // Get total amount for users' purchases
+    let user1purchases = await Purchase.aggregate([
+      {
+        $match: {
+          userID: competition.user1,
+          month: competition.month - 1,
+          year: competition.year,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          count: { $sum: "$amount" },
+        },
+      },
+    ]);
+    let user2purchases = await Purchase.aggregate([
+      {
+        $match: {
+          userID: competition.user2,
+          month: competition.month - 1,
+          year: competition.year,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          count: { $sum: "$amount" },
+        },
+      },
+    ]);
+
+    // find competition and update status to accepted
+    await Competition.findByIdAndUpdate(compID, {
+      $set: {
+        status: "Accepted",
+        user1total:
+          user1purchases !== [] && !user1purchases
+            ? user1purchases[0].count
+            : 0,
+        user2total:
+          user2purchases !== [] && !user2purchases
+            ? user2purchases[0].count
+            : 0,
+      },
+    });
+
+    // find and return updated competition
+    let returnCompetition = await Competition.findById(compID);
+    res.json(returnCompetition);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route DELETE /api/competitions
 // @desc reject or delete a competition request or competition
 // @access private
-router.delete('/', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const { comp } = req.body;
+router.delete("/", isLoggedIn, async (req, res) => {
+  try {
+    // input params
+    const { comp } = req.body;
 
-        // find competition
-        let competition = await Competition.findById(comp.compID);
+    // find competition
+    let competition = await Competition.findById(comp.compID);
 
-        // check if competition exists
-        if(!competition){
-            return res.status(404).json({ msg: "Competition Not Found" });
-        }
-        
-        await Competition.findByIdAndDelete(comp.compID);
-        
-        res.json({ msg: "Competition Rejected" });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error'); 
+    // check if competition exists
+    if (!competition) {
+      return res.status(404).json({ msg: "Competition Not Found" });
     }
+
+    await Competition.findByIdAndDelete(comp.compID);
+
+    res.json({ msg: "Competition Rejected" });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 // @route GET /api/competitions/:id
@@ -227,7 +240,7 @@ router.delete('/', isLoggedIn, async (req, res) => {
 //         res.json({ user1total: user1purchases[0].count, user2total: user2purchases[0].count });
 //     } catch (err) {
 //         console.error(err.message);
-//         res.status(500).send('Server Error'); 
+//         res.status(500).send('Server Error');
 //     }
 // })
 
