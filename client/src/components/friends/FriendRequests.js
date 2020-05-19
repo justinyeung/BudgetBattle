@@ -19,7 +19,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -42,14 +41,12 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
     const classes = useStyles();
 
     const acceptButton = (friendID) => {
-        console.log("Accept Button");
         acceptFriend({ friendID });
         setMsg("Friend Request Accepted");
         handleClick();
     }
     
     const rejectButton = (friendID) => {
-        console.log("Reject button");
         deleteFriend({ friendID });
         setMsg("Friend Request Rejected");
         handleClick();
@@ -132,12 +129,12 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
                             }
                             />
                             <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete" onClick={() => acceptButton(friend.user1)}>
-                                <CheckIcon />
-                            </IconButton>
-                            <IconButton edge="end" aria-label="delete" onClick={() => rejectButton(friend.user1)}>
-                                <ClearIcon />
-                            </IconButton>
+                                <IconButton edge="end" aria-label="delete" onClick={() => acceptButton(friend.user1)}>
+                                    <CheckIcon />
+                                </IconButton>
+                                <IconButton edge="end" aria-label="delete" onClick={() => rejectButton(friend.user1)}>
+                                    <ClearIcon />
+                                </IconButton>
                             </ListItemSecondaryAction>
                             </ListItem>
                         </div>
@@ -157,9 +154,6 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
         message={msg}
         action={
           <React.Fragment>
-            <Button color="secondary" size="small" onClick={handleClose}>
-              UNDO
-            </Button>
             <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
               <CloseIcon fontSize="small" />
             </IconButton>
