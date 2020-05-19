@@ -24,11 +24,11 @@ const FriendForm = ({ sendFriendRequest, acceptFriend, deleteFriend }) => {
         <div>
             <input type="text" placeholder="Friend's UserID" value={friendID} onChange={e => setFriendID(e.target.value)} />
             <br/>
-            <button onClick={sendFriendRequestBtn}>Send Friend Request</button>
+            <button onClick={() => sendFriendRequestBtn()}>Send Friend Request</button>
             <br/>
-            <button onClick={acceptFriendBtn}>Accept Friend Request</button>
+            <button onClick={() => acceptFriendBtn()}>Accept Friend Request</button>
             <br/>
-            <button onClick={deleteFriendBtn}>Delete Friend/Friend Request</button>
+            <button onClick={() => deleteFriendBtn()}>Delete Friend/Friend Request</button>
         </div>
     )
 }

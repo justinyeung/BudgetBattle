@@ -23,10 +23,10 @@ const SetCompetitorForm = ({ setCompetitor, getCompetitorPurchases, clearCompeti
         <div>
             <input type="text" placeholder="User ID" value={id} onChange={e => setID(e.target.value)} />
             <br/>
-            <button onClick={setCompetitorButton}>Set Competitor</button>
+            <button onClick={() => setCompetitorButton()}>Set Competitor</button>
             <br/>
             <br/>
-            <button onClick={clearCompetitorButton}>Clear Competitor</button>
+            <button onClick={() => clearCompetitorButton()}>Clear Competitor</button>
         </div>
     )
 }

@@ -16,7 +16,7 @@ const DeleteUserBtn = ({ deleteUser, clearPurchases, clearComps }) => {
 
     return(
         <div>
-            <button onClick={deleteUserButton}>Delete Logged In User</button>
+            <button onClick={() => deleteUserButton()}>Delete Logged In User</button>
         </div>
     )
 }

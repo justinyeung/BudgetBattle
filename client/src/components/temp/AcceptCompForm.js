@@ -22,11 +22,11 @@ const AcceptCompForm = ({ acceptComp, rejectOrDeleteComp }) => {
         <div>
             <input type="text" placeholder="Competition ID" value={compID} onChange={e => setCompID(e.target.value)} />
             <br/>
-            <button onClick={acceptCompBtn}>Accept Competition Request</button>
+            <button onClick={() => acceptCompBtn()}>Accept Competition Request</button>
             <br />
-            <button onClick={rejectOrDeleteCompBtn}>Reject Competition Request</button>
+            <button onClick={() => rejectOrDeleteCompBtn()}>Reject Competition Request</button>
             <br />
-            <button onClick={rejectOrDeleteCompBtn}>Delete Competition</button>
+            <button onClick={() => rejectOrDeleteCompBtn()}>Delete Competition</button>
         </div>
     )
 }

@@ -35,7 +35,7 @@ const CompsForm = ({ sendCompRequest }) => {
             </MuiPickersUtilsProvider>
             <input type="text" placeholder="User ID" value={id} onChange={e => setID(e.target.value)} />
             <br/>
-            <button onClick={requestBtn}>Send Competition Request</button>
+            <button onClick={() => requestBtn()}>Send Competition Request</button>
             
         </div>
     )

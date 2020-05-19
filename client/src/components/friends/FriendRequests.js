@@ -41,6 +41,20 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
 
     const classes = useStyles();
 
+    const acceptButton = (friendID) => {
+        console.log("Accept Button");
+        acceptFriend({ friendID });
+        setMsg("Friend Request Accepted");
+        handleClick();
+    }
+    
+    const rejectButton = (friendID) => {
+        console.log("Reject button");
+        deleteFriend({ friendID });
+        setMsg("Friend Request Rejected");
+        handleClick();
+    }
+
     const handleClick = () => {
         setOpen(true);
     };
@@ -53,17 +67,7 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
         setOpen(false);
     };
 
-    const acceptButton = (friendID) => {
-        acceptFriend({ friendID });
-        setMsg("Friend Request Accepted");
-        handleClick();
-    }
-
-    const rejectButton = (friendID) => {
-        deleteFriend({ friendID });
-        setMsg("Friend Request Rejected");
-        handleClick();
-    }
+    
 
     const getRequests = (friendslist) => {
         return friendslist.filter(friend => friend.status === "Pending" && friend.user2 === user.userID)
@@ -128,10 +132,10 @@ const FriendRequests = ({ getUser, acceptFriend, deleteFriend, user: { user } })
                             }
                             />
                             <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete" onClick={acceptButton(friend.user1)}>
+                            <IconButton edge="end" aria-label="delete" onClick={() => acceptButton(friend.user1)}>
                                 <CheckIcon />
                             </IconButton>
-                            <IconButton edge="end" aria-label="delete" onClick={rejectButton(friend.user1)}>
+                            <IconButton edge="end" aria-label="delete" onClick={() => rejectButton(friend.user1)}>
                                 <ClearIcon />
                             </IconButton>
                             </ListItemSecondaryAction>

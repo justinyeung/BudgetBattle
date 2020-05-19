@@ -88,7 +88,7 @@ const PurchaseForm = ({ addPurchase }) => {
                     </Box>
                     <Box id="purchases-form-submit" display="flex" flexDirection="row-reverse">
                         <Toolbar disableGutters={true}>
-                            <Button variant="contained" onClick={addPurchaseBtn}>
+                            <Button variant="contained" onClick={() => addPurchaseBtn()}>
                                 Add Purchase
                             </Button>
                         </Toolbar>

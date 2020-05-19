@@ -15,7 +15,7 @@ const LogoutBtn = ({ logout, clearPurchases, clearComps }) => {
 
     return(
         <div>
-            <button onClick={logoutButton}>Logout</button>
+            <button onClick={() => logoutButton}>Logout</button>
         </div>
     )
 }
