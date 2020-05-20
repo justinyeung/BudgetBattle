@@ -14,7 +14,7 @@ const FriendsPage = () => {
       <div style={{ padding: "1rem" }}>
         <FriendForm />
       </div>
-      <Container maxWidth="md" id="purchases-form">
+      <Container maxWidth="md" className="container-spacing">
         <Box boxShadow={1}>
           <Grid
             container

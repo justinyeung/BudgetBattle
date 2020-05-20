@@ -22,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     fontWeight: "fontWeightBold",
   },
+  primaryHeading: {
+    color: theme.palette.text.secondary,
+  },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
@@ -107,19 +110,21 @@ const CurrentComps = ({
   return (
     <div>
       <Container maxWidth="lg">
-        <Typography variant="h4">Competitions</Typography>
+        <Typography variant="h6" id="header-title">
+          Competitions
+        </Typography>
         <Divider />
         <div className={classes.root}>
           {accepted !== [] &&
             accepted.map((comp) => (
-              <ExpansionPanel key={comp._id}>
+              <ExpansionPanel key={comp._id} id="expansion-panel">
                 <ExpansionPanelSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1c-content"
                   id="panel1c-header"
                 >
                   <div id="competitions-left-column" className={classes.column}>
-                    <Typography id="competitor-header-name" variant="h5">
+                    <Typography className={classes.primaryHeading} variant="h6">
                       {getRight(comp).name}
                     </Typography>
                   </div>

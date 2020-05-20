@@ -64,7 +64,9 @@ const CompRequests = ({
   return (
     <div>
       <Container maxWidth="lg">
-        <Typography variant="h4">Competition Requests</Typography>
+        <Typography variant="h6" id="header-title">
+          Competition Requests
+        </Typography>
         <Divider />
         <List className={classes.root}>
           {(inpending.length === 0 || inpending === null) && (
