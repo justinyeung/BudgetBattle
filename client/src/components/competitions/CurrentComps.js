@@ -13,7 +13,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
-import { Container } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,8 +106,9 @@ const CurrentComps = ({
 
   return (
     <div>
-      <h1>Competitions:</h1>
       <Container maxWidth="lg">
+        <Typography variant="h4">Competitions</Typography>
+        <Divider />
         <div className={classes.root}>
           {accepted !== [] &&
             accepted.map((comp) => (
