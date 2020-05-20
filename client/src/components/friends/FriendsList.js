@@ -115,7 +115,9 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
   return (
     <div>
       <Container id="friendslist-container" maxWidth="xs">
-        <Typography variant="h4">Friends</Typography>
+        <Typography variant="h6" id="header-title">
+          Friends
+        </Typography>
         <Divider />
         <List className={classes.root}>
           {(user === null ||

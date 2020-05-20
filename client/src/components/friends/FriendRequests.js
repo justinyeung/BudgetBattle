@@ -85,7 +85,9 @@ const FriendRequests = ({
   return (
     <div>
       <Container maxWidth="xs">
-        <Typography variant="h4">Friend Requests</Typography>
+        <Typography variant="h6" id="header-title">
+          Friend Requests
+        </Typography>
         <Divider />
         <List className={classes.root}>
           {(user === null ||

@@ -42,7 +42,7 @@
   color: black;
 }
 
-#login-link{
+#login-link {
   text-decoration: none;
 }
 
@@ -56,34 +56,35 @@
   padding-right: 24px;
 }
 
-#purchases-form-toolbar{
+#purchases-form-toolbar {
   padding-left: 24px;
 }
 
-#purchases-form-title{
+#header-title {
+  padding: 12px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: rgba(0, 0, 0, 0.87);
 }
 
-#purchases-form-submit{
+#purchases-form-submit {
   padding-right: 24px;
 }
 
-#purchases-form-grid{
-  padding:34px;
+#purchases-form-grid {
+  padding: 34px;
 }
 
-#competitions-left-column{
+#competitions-left-column {
   padding-left: 1.5rem;
 }
 
-#competitions-center-column{
+#competitions-center-column {
   text-align: center;
 }
 
-#competitions-right-column{
+#competitions-right-column {
   text-align: right;
   text-align: -webkit-right;
   text-align: -ms-right;
@@ -91,6 +92,12 @@
   text-align: -o-right;
 }
 
-#competitor-header-name{
-  font-weight: bold;
+#expansion-panel {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.container-spacing {
+  padding: 24px;
 }

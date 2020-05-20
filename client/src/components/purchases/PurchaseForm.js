@@ -42,7 +42,7 @@ const PurchaseForm = ({ addPurchase }) => {
             justifyContent="flex-left"
           >
             <Toolbar disableGutters={true}>
-              <Typography id="purchases-form-title" variant="h6">
+              <Typography id="header-title" variant="h6">
                 Add Purchase
               </Typography>
             </Toolbar>
