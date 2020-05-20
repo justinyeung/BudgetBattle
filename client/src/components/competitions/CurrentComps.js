@@ -14,6 +14,10 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
   },
   column: {
     flexBasis: "25%",
+  },
+  list: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    margin: 0,
   },
 }));
 
@@ -115,6 +124,30 @@ const CurrentComps = ({
         </Typography>
         <Divider />
         <div className={classes.root}>
+          {accepted.length === 0 && (
+            <List className={classes.list}>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar>{":("}</Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={"No Competitions to show."}
+                  secondary={
+                    <React.Fragment>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.inline}
+                        color="textPrimary"
+                      >
+                        Invite Friends to start Budget Battling!
+                      </Typography>
+                    </React.Fragment>
+                  }
+                />
+              </ListItem>
+            </List>
+          )}
           {accepted !== [] &&
             accepted.map((comp) => (
               <ExpansionPanel key={comp._id} id="expansion-panel">
