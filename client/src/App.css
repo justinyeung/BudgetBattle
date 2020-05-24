@@ -101,3 +101,8 @@
 .container-spacing {
   padding: 24px;
 }
+
+.send-comp-request {
+  padding: 24px;
+  padding-top: 32px;
+}
