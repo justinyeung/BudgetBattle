@@ -11,6 +11,8 @@ import Paper from "@material-ui/core/Paper";
 import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,52 +37,41 @@ const useStyles = makeStyles((theme) => ({
 const FriendForm = ({ sendFriendRequest, searchUsers }) => {
   const classes = useStyles();
 
-  const [friendID, setFriendID] = useState("");
+  const [friendSearch, setFriendSearch] = useState("");
 
   const searchBtn = () => {
-    console.log(friendID);
-    setFriendID("");
-    // sendFriendRequest({ friendID });
+    searchUsers({ friendSearch });
+    console.log(friendSearch);
+    setFriendSearch("");
+    // sendFriendRequest({ friendSearch });
   };
 
   return (
     <Container maxWidth="md" className="container-spacing">
       <Box boxShadow={1} className="container-spacing">
-        {/* <TextField
-          fullWidth
-          label="Search by Name or User ID"
-          variant="outlined"
-          value={friendID}
-          onChange={(e) => setFriendID(e.target.value)}
-        />
-        <Box
-          id="purchases-form-submit"
-          display="flex"
-          flexDirection="row-reverse"
-        >
-          <Toolbar disableGutters={true}>
-            <Button variant="contained" onClick={() => searchBtn()}>
-              Search
-            </Button>
-          </Toolbar>
-        </Box> */}
-        <Paper component="form" className={classes.root}>
-          <InputBase
-            className={classes.input}
-            value={friendID}
-            onChange={(e) => setFriendID(e.target.value)}
-            placeholder="Search Users by Name or ID"
-            inputProps={{ "aria-label": "search google maps" }}
-          />
-          <IconButton
-            type="button"
-            onClick={() => searchBtn()}
-            className={classes.iconButton}
-            aria-label="search"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+        <Typography variant="h6" id="header-title">
+          Add Friend
+        </Typography>
+        <Divider />
+        <div id="purchases-form-grid">
+          <Paper component="form" className={classes.root}>
+            <InputBase
+              className={classes.input}
+              value={friendSearch}
+              onChange={(e) => setFriendSearch(e.target.value)}
+              placeholder="Search Users by Name or ID"
+              inputProps={{ "aria-label": "search google maps" }}
+            />
+            <IconButton
+              type="button"
+              onClick={() => searchBtn()}
+              className={classes.iconButton}
+              aria-label="search"
+            >
+              <SearchIcon />
+            </IconButton>
+          </Paper>
+        </div>
       </Box>
     </Container>
   );
