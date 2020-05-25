@@ -9,7 +9,7 @@ import CompRequests from "../components/competitions/CompRequests";
 
 const CompetitionsPage = () => {
   return (
-    <div style={{ padding: "1rem" }}>
+    <div>
       <CurrentComps />
       <Container maxWidth="lg" className="container-spacing">
         <Grid

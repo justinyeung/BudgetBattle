@@ -87,7 +87,7 @@ const CurrentPurchases = ({
 
   return (
     <div>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className="container-spacing">
         <MaterialTable
           columns={[
             {

@@ -34,8 +34,8 @@ const PurchaseForm = ({ addPurchase }) => {
 
   return (
     <div>
-      <Container maxWidth="lg" id="purchases-form">
-        <Box boxShadow={1}>
+      <Container maxWidth="lg" className="container-spacing">
+        <Box boxShadow={1} className="container-spacing">
           <Box
             id="purchases-form-toolbar"
             display="flex"

@@ -46,18 +46,8 @@
   text-decoration: none;
 }
 
-#purchases-form {
-  width: 100%;
-  display: block;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
 #purchases-form-toolbar {
-  padding-left: 24px;
+  padding-left: 12px;
 }
 
 #header-title {
@@ -73,7 +63,7 @@
 }
 
 #purchases-form-grid {
-  padding: 34px;
+  padding: 24px;
 }
 
 #competitions-left-column {
