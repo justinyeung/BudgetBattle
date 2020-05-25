@@ -31,32 +31,6 @@ export const login = () => async (dispatch) => {
   }
 };
 
-// Get user by user id
-// export const getUserById = (userID) => async dispatch => {
-//     try {
-
-//         const res = await axios.get(`/api/users/byid/${userID}`);
-
-//         dispatch({
-//             type: null,
-//             payload: res.data
-//         })
-
-//     } catch (err) {
-//         dispatch({
-//             type: AUTH_ERROR,
-//             payload: err
-//         });
-//     }
-// }
-
-// export function getUserById(id) {
-//     return axios.get(`/api/users/byid/${id}`)
-//         .then(res => {
-//             return res.data
-//         })
-// }
-
 // Get current logged in user and user's friends
 export const getUser = () => async (dispatch) => {
   try {
