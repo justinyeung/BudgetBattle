@@ -2,7 +2,6 @@ import React from "react";
 
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
 
 import FriendForm from "../components/temp/FriendForm";
 import FriendsList from "../components/friends/FriendsList";

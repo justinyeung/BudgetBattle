@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { getUser } from "../../actions/userActions";
 import { acceptFriend, deleteFriend } from "../../actions/userActions";
 
-import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -77,7 +76,6 @@ const FriendRequests = ({
   };
 
   useEffect(() => {
-    // get state of currently logged in user
     getUser();
 
     // eslint-disable-next-line
