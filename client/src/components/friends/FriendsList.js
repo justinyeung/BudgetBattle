@@ -106,7 +106,6 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
   };
 
   useEffect(() => {
-    // get state of currently logged in user
     getUser();
 
     // eslint-disable-next-line

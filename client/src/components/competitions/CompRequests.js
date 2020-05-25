@@ -7,7 +7,6 @@ import {
 } from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
@@ -19,6 +18,7 @@ import CheckIcon from "@material-ui/icons/Check";
 import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +63,7 @@ const CompRequests = ({
 
   return (
     <div>
-      <Container maxWidth="lg">
+      <Box boxShadow={1} className="container-spacing">
         <Typography variant="h6" id="header-title">
           Competition Requests
         </Typography>
@@ -133,7 +133,7 @@ const CompRequests = ({
               </ListItem>
             ))}
         </List>
-      </Container>
+      </Box>
     </div>
   );
 };

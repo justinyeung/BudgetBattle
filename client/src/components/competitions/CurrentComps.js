@@ -18,6 +18,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -117,8 +118,8 @@ const CurrentComps = ({
   };
 
   return (
-    <div>
-      <Container maxWidth="lg">
+    <Container maxWidth="lg" className="container-spacing">
+      <Box boxShadow={1} className="container-spacing">
         <Typography variant="h6" id="header-title">
           Competitions
         </Typography>
@@ -257,8 +258,8 @@ const CurrentComps = ({
               </ExpansionPanel>
             ))}
         </div>
-      </Container>
-    </div>
+      </Box>
+    </Container>
   );
 };
 
