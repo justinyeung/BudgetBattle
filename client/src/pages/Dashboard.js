@@ -1,7 +1,6 @@
 import React from "react";
 
 import CurrentUser from "../components/user/CurrentUser";
-import FriendForm from "../components/temp/FriendForm";
 import PurchaseForm from "../components/purchases/PurchaseForm";
 import CompRequests from "../components/competitions/CompRequests";
 import FriendRequests from "../components/friends/FriendRequests";
@@ -12,9 +11,6 @@ const Dashboard = () => {
     <div>
       <div style={{ padding: "1rem" }}>
         <PurchaseForm />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <FriendForm />
       </div>
       <div style={{ padding: "1rem" }}>
         <CurrentUser />
