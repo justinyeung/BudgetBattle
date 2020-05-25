@@ -15,22 +15,20 @@ const FriendsPage = () => {
         <FriendForm />
       </div>
       <Container maxWidth="md" className="container-spacing">
-        <Box boxShadow={1}>
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="flex-start"
-            spacing={5}
-          >
-            <Grid item md={6} xs={12}>
-              <FriendRequests />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <FriendsList />
-            </Grid>
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={5}
+        >
+          <Grid item md={6} xs={12}>
+            <FriendRequests />
           </Grid>
-        </Box>
+          <Grid item md={6} xs={12}>
+            <FriendsList />
+          </Grid>
+        </Grid>
       </Container>
     </div>
   );
