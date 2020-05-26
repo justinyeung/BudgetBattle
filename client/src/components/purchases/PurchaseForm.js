@@ -76,6 +76,9 @@ const PurchaseForm = ({ addPurchase }) => {
                       KeyboardButtonProps={{
                         "aria-label": "change date",
                       }}
+                      onKeyPress={(e) => {
+                        e.key === "Enter" && addPurchaseBtn();
+                      }}
                     />
                   </MuiPickersUtilsProvider>
                 </FormControl>
@@ -89,6 +92,9 @@ const PurchaseForm = ({ addPurchase }) => {
                     variant="outlined"
                     value={amount}
                     onChange={(amount) => setAmount(amount.target.value)}
+                    onKeyPress={(e) => {
+                      e.key === "Enter" && addPurchaseBtn();
+                    }}
                   />
                 </FormControl>
               </Grid>
@@ -101,6 +107,9 @@ const PurchaseForm = ({ addPurchase }) => {
                     variant="outlined"
                     value={location}
                     onChange={(location) => setLocation(location.target.value)}
+                    onKeyPress={(e) => {
+                      e.key === "Enter" && addPurchaseBtn();
+                    }}
                   />
                 </FormControl>
               </Grid>
@@ -113,6 +122,9 @@ const PurchaseForm = ({ addPurchase }) => {
                     variant="outlined"
                     value={category}
                     onChange={(category) => setCategory(category.target.value)}
+                    onKeyPress={(e) => {
+                      e.key === "Enter" && addPurchaseBtn();
+                    }}
                   />
                 </FormControl>
               </Grid>

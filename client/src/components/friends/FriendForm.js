@@ -54,13 +54,16 @@ const FriendForm = ({ sendFriendRequest, searchUsers }) => {
         </Typography>
         <Divider />
         <div id="purchases-form-grid">
-          <Paper component="form" className={classes.root}>
+          <Paper component="div" className={classes.root}>
             <InputBase
               className={classes.input}
               value={friendSearch}
               onChange={(e) => setFriendSearch(e.target.value)}
+              onKeyPress={(e) => {
+                e.key === "Enter" && searchBtn();
+              }}
               placeholder="Search Users by Name or ID"
-              inputProps={{ "aria-label": "search google maps" }}
+              inputProps={{ "aria-label": "search users" }}
             />
             <IconButton
               type="button"

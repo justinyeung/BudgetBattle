@@ -83,6 +83,9 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
               onChange={(date) =>
                 date !== null ? setDate(new Date(date)) : setDate(new Date())
               }
+              onKeyPress={(e) => {
+                e.key === "Enter" && requestBtn();
+              }}
             />
           </MuiPickersUtilsProvider>
         </Grid>
@@ -96,6 +99,9 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
               id="demo-simple-select-outlined"
               value={id}
               onChange={(e) => setID(e.target.value)}
+              onKeyPress={(e) => {
+                e.key === "Enter" && requestBtn();
+              }}
               label="Select Friend"
             >
               <MenuItem value="">
