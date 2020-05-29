@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { sendFriendRequest } from "../../actions/userActions";
+import { getUser, sendFriendRequest } from "../../actions/userActions";
 import { searchUsers } from "../../actions/searchActions";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -49,12 +49,19 @@ const useStyles = makeStyles((theme) => ({
 const FriendForm = ({
   sendFriendRequest,
   searchUsers,
+  getUser,
   user: { user },
   search: { users },
 }) => {
   const classes = useStyles();
 
   const [friendSearch, setFriendSearch] = useState("");
+
+  useEffect(() => {
+    getUser();
+
+    // eslint-disable-next-line
+  }, []);
 
   const searchBtn = () => {
     searchUsers({ friendSearch });
@@ -64,6 +71,17 @@ const FriendForm = ({
 
   const addFriendBtn = (friendID) => {
     sendFriendRequest({ friendID });
+  };
+
+  const filterSearches = () => {
+    // use state user.user.userID, user.user.friends and searches.users
+    // loop through searches
+    // if search is in friends, filter out
+    // if search is yourself, filter out
+  };
+
+  const checkAdded = () => {
+    // check if user is already requested
   };
 
   return (
@@ -103,7 +121,8 @@ const FriendForm = ({
           spacing={5}
           className="send-comp-request"
         >
-          {users.length > 0 &&
+          {user &&
+            users.length > 0 &&
             users.map(
               (searchUser) =>
                 user.userID !== searchUser.userID && (
@@ -144,6 +163,7 @@ FriendForm.propTypes = {
   search: PropTypes.object.isRequired,
   sendFriendRequest: PropTypes.func.isRequired,
   searchUsers: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -151,6 +171,8 @@ const mapStateToProps = (state) => ({
   search: state.search,
 });
 
-export default connect(mapStateToProps, { sendFriendRequest, searchUsers })(
-  FriendForm
-);
+export default connect(mapStateToProps, {
+  sendFriendRequest,
+  searchUsers,
+  getUser,
+})(FriendForm);
