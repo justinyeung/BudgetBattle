@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { addPurchase } from "../../actions/purchaseActions";
 
-import { Container, Typography } from "@material-ui/core";
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -11,6 +10,9 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
@@ -20,14 +22,14 @@ import Button from "@material-ui/core/Button";
 
 const PurchaseForm = ({ addPurchase }) => {
   const [date, setDate] = useState(new Date());
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
 
   const addPurchaseBtn = () => {
     addPurchase({ date, amount, location, category });
     setDate(new Date());
-    setAmount("");
+    setAmount(0);
     setLocation("");
     setCategory("");
   };
@@ -36,28 +38,21 @@ const PurchaseForm = ({ addPurchase }) => {
     <div>
       <Container maxWidth="lg" className="container-spacing">
         <Box boxShadow={1} className="container-spacing">
-          <Box
-            id="purchases-form-toolbar"
-            display="flex"
-            justifyContent="flex-left"
-          >
-            <Toolbar disableGutters={true}>
-              <Typography id="header-title" variant="h6">
-                Add Purchase
-              </Typography>
-            </Toolbar>
-          </Box>
-          <Box display="flex" justifyContent="center">
-            <Grid
-              id="purchases-form-grid"
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              spacing={5}
-            >
-              <Grid item md={3} sm={5} xs={8}>
-                <FormControl fullWidth>
+          <FormControl fullWidth>
+            <Typography variant="h6" id="header-title">
+              Add Purchase
+            </Typography>
+            <Divider />
+            <Box display="flex" justifyContent="center">
+              <Grid
+                id="purchases-form-grid"
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={5}
+              >
+                <Grid item md={3} sm={5} xs={8}>
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
                       disableToolbar
@@ -67,6 +62,7 @@ const PurchaseForm = ({ addPurchase }) => {
                       label="Date"
                       inputVariant="outlined"
                       autoOk="true"
+                      fullWidth
                       value={date}
                       onChange={(date) =>
                         date !== null
@@ -81,66 +77,67 @@ const PurchaseForm = ({ addPurchase }) => {
                       }}
                     />
                   </MuiPickersUtilsProvider>
-                </FormControl>
-              </Grid>
-              <Grid item md={3} sm={5} xs={8}>
-                <FormControl fullWidth>
+                </Grid>
+                <Grid item md={3} sm={5} xs={8}>
                   <TextField
                     id="outlined-basic"
                     autoComplete="off"
                     label="Amount"
                     variant="outlined"
+                    fullWidth
                     value={amount}
                     onChange={(amount) => setAmount(amount.target.value)}
                     onKeyPress={(e) => {
                       e.key === "Enter" && addPurchaseBtn();
                     }}
                   />
-                </FormControl>
-              </Grid>
-              <Grid item md={3} sm={5} xs={8}>
-                <FormControl fullWidth>
+                </Grid>
+                <Grid item md={3} sm={5} xs={8}>
                   <TextField
                     id="outlined-basic"
                     autoComplete="off"
                     label="Location"
                     variant="outlined"
+                    fullWidth
                     value={location}
                     onChange={(location) => setLocation(location.target.value)}
                     onKeyPress={(e) => {
                       e.key === "Enter" && addPurchaseBtn();
                     }}
                   />
-                </FormControl>
-              </Grid>
-              <Grid item md={3} sm={5} xs={8}>
-                <FormControl fullWidth>
+                </Grid>
+                <Grid item md={3} sm={5} xs={8}>
                   <TextField
                     id="outlined-basic"
                     autoComplete="off"
                     label="Category"
                     variant="outlined"
+                    fullWidth
                     value={category}
                     onChange={(category) => setCategory(category.target.value)}
                     onKeyPress={(e) => {
                       e.key === "Enter" && addPurchaseBtn();
                     }}
                   />
-                </FormControl>
+                </Grid>
               </Grid>
-            </Grid>
-          </Box>
-          <Box
-            id="purchases-form-submit"
-            display="flex"
-            flexDirection="row-reverse"
-          >
-            <Toolbar disableGutters={true}>
-              <Button variant="contained" onClick={() => addPurchaseBtn()}>
-                Add Purchase
-              </Button>
-            </Toolbar>
-          </Box>
+            </Box>
+            <Box
+              id="purchases-form-submit"
+              display="flex"
+              flexDirection="row-reverse"
+            >
+              <Toolbar disableGutters={true}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  onClick={() => addPurchaseBtn()}
+                >
+                  Add Purchase
+                </Button>
+              </Toolbar>
+            </Box>
+          </FormControl>
         </Box>
       </Container>
     </div>

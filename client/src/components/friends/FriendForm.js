@@ -13,7 +13,6 @@ import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Grid from "@material-ui/core/Grid";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -118,7 +117,7 @@ const FriendForm = ({
                       <ListItemText
                         primary={searchUser.name}
                         secondary={
-                          searchUser.friends.length == 1
+                          searchUser.friends.length === 1
                             ? searchUser.friends.length + " Friend"
                             : searchUser.friends.length + " Friends"
                         }
