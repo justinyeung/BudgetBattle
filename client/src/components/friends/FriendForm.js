@@ -19,7 +19,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,15 +73,57 @@ const FriendForm = ({
     sendFriendRequest({ friendID });
   };
 
-  const filterSearches = () => {
-    // use state user.user.userID, user.user.friends and searches.users
-    // loop through searches
-    // if search is in friends, filter out
-    // if search is yourself, filter out
+  const isFriend = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Accepted"
+    );
+
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user1 === userID || myFriends[i].user2 === userID) {
+        return true;
+      }
+    }
+    return false;
   };
 
-  const checkAdded = () => {
-    // check if user is already requested
+  const isOutpending = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Pending"
+    );
+
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user1 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const isInpending = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Pending"
+    );
+
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user2 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const detectRelationship = (userID) => {
+    if (userID === user.userID) {
+      return <Button>You</Button>;
+    } else if (isOutpending(userID)) {
+      return <Button>Requested</Button>;
+    } else if (isInpending(userID)) {
+      return <Button>Accept Request</Button>;
+    } else if (isFriend(userID)) {
+      return <Button>Remove</Button>;
+    } else {
+      return <Button>Add Friend</Button>;
+    }
   };
 
   return (
@@ -122,7 +164,6 @@ const FriendForm = ({
           className="send-comp-request"
         >
           {user &&
-            users.length > 0 &&
             users.map(
               (searchUser) =>
                 user.userID !== searchUser.userID && (
@@ -142,12 +183,7 @@ const FriendForm = ({
                         }
                       />
                       <ListItemSecondaryAction>
-                        <IconButton
-                          edge="end"
-                          onClick={() => addFriendBtn(searchUser.userID)}
-                        >
-                          <PersonAddIcon />
-                        </IconButton>
+                        {detectRelationship(searchUser.userID)}
                       </ListItemSecondaryAction>
                     </ListItem>
                   </Grid>
