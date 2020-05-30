@@ -93,6 +93,7 @@ app.use("/api/users", require("./routes/users"));
 app.use("/api/competitions", require("./routes/competitions"));
 app.use("/api/purchases", require("./routes/purchases"));
 app.use("/api/friends", require("./routes/friends"));
+app.use("/api/search", require("./routes/search"));
 // app.use('/api/middleware', require('./routes/middleware'));
 
 const PORT = process.env.PORT || 5000;

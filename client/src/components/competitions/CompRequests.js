@@ -52,7 +52,6 @@ const CompRequests = ({
   competition: { outpending, inpending },
 }) => {
   useEffect(() => {
-    // get state of currently logged in user
     getOutPendingComp();
     getInPendingComp();
 

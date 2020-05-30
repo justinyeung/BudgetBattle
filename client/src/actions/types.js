@@ -25,3 +25,5 @@ export const GET_OUTPENDING_COMP = "GET_OUTPENDING_COMP";
 export const GET_INPENDING_COMP = "GET_INPENDING_COMP";
 export const CLEAR_COMPS = "CLEAR_COMPS";
 export const COMP_ERROR = "COMP_ERROR";
+export const SEARCH_USER = "SEARCH_USER";
+export const SEARCH_ERROR = "SEARCH_ERROR";

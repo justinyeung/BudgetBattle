@@ -1,7 +1,9 @@
 import React from "react";
 
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+
 import CurrentUser from "../components/user/CurrentUser";
-import FriendForm from "../components/temp/FriendForm";
 import PurchaseForm from "../components/purchases/PurchaseForm";
 import CompRequests from "../components/competitions/CompRequests";
 import FriendRequests from "../components/friends/FriendRequests";
@@ -10,24 +12,25 @@ import AcceptCompForm from "../components/temp/AcceptCompForm";
 const Dashboard = () => {
   return (
     <div>
-      <div style={{ padding: "1rem" }}>
-        <PurchaseForm />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <FriendForm />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <CurrentUser />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <FriendRequests />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <AcceptCompForm />
-      </div>
-      <div style={{ padding: "1rem" }}>
-        <CompRequests />
-      </div>
+      <CurrentUser />
+      <PurchaseForm />
+      <Container maxWidth="lg" className="container-spacing">
+        <Grid
+          container
+          direction="row"
+          justify="center"
+          alignItems="flex-start"
+          spacing={5}
+        >
+          <Grid item md={6} xs={12}>
+            <FriendRequests />
+          </Grid>
+          <Grid item md={6} xs={12}>
+            <CompRequests />
+          </Grid>
+        </Grid>
+      </Container>
+      <AcceptCompForm />
     </div>
   );
 };
