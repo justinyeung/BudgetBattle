@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUser, sendFriendRequest } from "../../actions/userActions";
+import {
+  getUser,
+  deleteFriend,
+  acceptFriend,
+  sendFriendRequest,
+} from "../../actions/userActions";
 import { searchUsers } from "../../actions/searchActions";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -50,6 +55,8 @@ const FriendForm = ({
   sendFriendRequest,
   searchUsers,
   getUser,
+  deleteFriend,
+  acceptFriend,
   user: { user },
   search: { users },
 }) => {
@@ -66,11 +73,15 @@ const FriendForm = ({
   const searchBtn = () => {
     searchUsers({ friendSearch });
     setFriendSearch("");
-    // sendFriendRequest({ friendSearch });
   };
-
   const addFriendBtn = (friendID) => {
     sendFriendRequest({ friendID });
+  };
+  const removeFriendBtn = (friendID) => {
+    deleteFriend({ friendID });
+  };
+  const acceptRequestBtn = (friendID) => {
+    acceptFriend({ friendID });
   };
 
   const isFriend = (userID) => {
@@ -85,8 +96,19 @@ const FriendForm = ({
     }
     return false;
   };
-
   const isOutpending = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Pending"
+    );
+
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user2 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const isInpending = (userID) => {
     let myFriends = user.friends.filter(
       (friend) => friend.status === "Pending"
     );
@@ -99,30 +121,19 @@ const FriendForm = ({
     return false;
   };
 
-  const isInpending = (userID) => {
-    let myFriends = user.friends.filter(
-      (friend) => friend.status === "Pending"
-    );
-
-    for (let i = 0; i < myFriends.length; i++) {
-      if (myFriends[i].user2 === userID) {
-        return true;
-      }
-    }
-    return false;
-  };
-
   const detectRelationship = (userID) => {
     if (userID === user.userID) {
       return <Button>You</Button>;
     } else if (isOutpending(userID)) {
-      return <Button>Requested</Button>;
+      return <Button onClick={() => removeFriendBtn(userID)}>Requested</Button>;
     } else if (isInpending(userID)) {
-      return <Button>Accept Request</Button>;
+      return (
+        <Button onClick={() => acceptRequestBtn(userID)}>Accept Request</Button>
+      );
     } else if (isFriend(userID)) {
-      return <Button>Remove</Button>;
+      return <Button onClick={() => removeFriendBtn(userID)}>Remove</Button>;
     } else {
-      return <Button>Add Friend</Button>;
+      return <Button onClick={() => addFriendBtn(userID)}>Add Friend</Button>;
     }
   };
 
@@ -200,6 +211,8 @@ FriendForm.propTypes = {
   sendFriendRequest: PropTypes.func.isRequired,
   searchUsers: PropTypes.func.isRequired,
   getUser: PropTypes.func.isRequired,
+  deleteFriend: PropTypes.func.isRequired,
+  acceptFriend: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -211,4 +224,6 @@ export default connect(mapStateToProps, {
   sendFriendRequest,
   searchUsers,
   getUser,
+  deleteFriend,
+  acceptFriend,
 })(FriendForm);
