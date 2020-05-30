@@ -258,7 +258,7 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
           horizontal: "left",
         }}
         open={openSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleCloseSnackbar}
         message={"Friend Removed"}
         action={

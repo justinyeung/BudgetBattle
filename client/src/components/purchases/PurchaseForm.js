@@ -19,19 +19,44 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const PurchaseForm = ({ addPurchase }) => {
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+
+  // snackbar
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const addPurchaseBtn = () => {
     addPurchase({ date, amount, location, category });
+    if (amount === 0) {
+      setSnackbarMsg("Purchase Added");
+    } else if (!amount) {
+      setSnackbarMsg("Purchase Amount Required");
+    } else {
+      setSnackbarMsg("Purchase Added");
+    }
     setDate(new Date());
     setAmount(0);
     setLocation("");
     setCategory("");
+    handleClick();
   };
 
   return (
@@ -140,6 +165,28 @@ const PurchaseForm = ({ addPurchase }) => {
           </FormControl>
         </Box>
       </Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={snackbarMsg}
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </div>
   );
 };
