@@ -25,6 +25,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +64,8 @@ const FriendForm = ({
 }) => {
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
   const [friendSearch, setFriendSearch] = useState("");
 
   useEffect(() => {
@@ -70,62 +74,51 @@ const FriendForm = ({
     // eslint-disable-next-line
   }, []);
 
+  // snackbar methods
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  // buttons
   const searchBtn = () => {
     searchUsers({ friendSearch });
     setFriendSearch("");
   };
   const addFriendBtn = (friendID) => {
+    setSnackbarMsg("Request Sent");
     sendFriendRequest({ friendID });
+    handleClick();
   };
   const removeFriendBtn = (friendID) => {
+    setSnackbarMsg("Friend Removed");
     deleteFriend({ friendID });
+    handleClick();
+  };
+  const removeRequestBtn = (friendID) => {
+    setSnackbarMsg("Request Removed");
+    deleteFriend({ friendID });
+    handleClick();
   };
   const acceptRequestBtn = (friendID) => {
+    setSnackbarMsg("Request Accepted");
     acceptFriend({ friendID });
+    handleClick();
   };
 
-  const isFriend = (userID) => {
-    let myFriends = user.friends.filter(
-      (friend) => friend.status === "Accepted"
-    );
-
-    for (let i = 0; i < myFriends.length; i++) {
-      if (myFriends[i].user1 === userID || myFriends[i].user2 === userID) {
-        return true;
-      }
-    }
-    return false;
-  };
-  const isOutpending = (userID) => {
-    let myFriends = user.friends.filter(
-      (friend) => friend.status === "Pending"
-    );
-
-    for (let i = 0; i < myFriends.length; i++) {
-      if (myFriends[i].user2 === userID) {
-        return true;
-      }
-    }
-    return false;
-  };
-  const isInpending = (userID) => {
-    let myFriends = user.friends.filter(
-      (friend) => friend.status === "Pending"
-    );
-
-    for (let i = 0; i < myFriends.length; i++) {
-      if (myFriends[i].user1 === userID) {
-        return true;
-      }
-    }
-    return false;
-  };
-
+  // Search result buttons
   const detectRelationship = (userID) => {
     if (userID === user.userID) {
       return <Button>You</Button>;
     } else if (isOutpending(userID)) {
-      return <Button onClick={() => removeFriendBtn(userID)}>Requested</Button>;
+      return (
+        <Button onClick={() => removeRequestBtn(userID)}>Requested</Button>
+      );
     } else if (isInpending(userID)) {
       return (
         <Button onClick={() => acceptRequestBtn(userID)}>Accept Request</Button>
@@ -137,72 +130,130 @@ const FriendForm = ({
     }
   };
 
+  // local methods for search result buttons
+  const isFriend = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Accepted"
+    );
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user1 === userID || myFriends[i].user2 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const isOutpending = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Pending"
+    );
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user2 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
+  const isInpending = (userID) => {
+    let myFriends = user.friends.filter(
+      (friend) => friend.status === "Pending"
+    );
+    for (let i = 0; i < myFriends.length; i++) {
+      if (myFriends[i].user1 === userID) {
+        return true;
+      }
+    }
+    return false;
+  };
   return (
-    <Container maxWidth="md" className="container-spacing">
-      <Box boxShadow={1} className="container-spacing">
-        <Typography variant="h6" id="header-title">
-          Add Friend
-        </Typography>
-        <Divider />
-        <div id="purchases-form-grid">
-          <Paper component="div" className={classes.root}>
-            <InputBase
-              className={classes.input}
-              value={friendSearch}
-              onChange={(e) => setFriendSearch(e.target.value)}
-              onKeyPress={(e) => {
-                e.key === "Enter" && searchBtn();
-              }}
-              placeholder="Search Users by Name or ID"
-              inputProps={{ "aria-label": "search users" }}
-            />
+    <div>
+      <Container maxWidth="md" className="container-spacing">
+        <Box boxShadow={1} className="container-spacing">
+          <Typography variant="h6" id="header-title">
+            Add Friend
+          </Typography>
+          <Divider />
+          <div id="purchases-form-grid">
+            <Paper component="div" className={classes.root}>
+              <InputBase
+                className={classes.input}
+                value={friendSearch}
+                onChange={(e) => setFriendSearch(e.target.value)}
+                onKeyPress={(e) => {
+                  e.key === "Enter" && searchBtn();
+                }}
+                placeholder="Search Users by Name or ID"
+                inputProps={{ "aria-label": "search users" }}
+              />
+              <IconButton
+                type="button"
+                onClick={() => searchBtn()}
+                className={classes.iconButton}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </Paper>
+          </div>
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="flex-start"
+            spacing={5}
+            className="send-comp-request"
+          >
+            {user &&
+              users.map(
+                (searchUser) =>
+                  user.userID !== searchUser.userID && (
+                    <Grid item lg={6} key={searchUser._id}>
+                      <ListItem ContainerComponent="div">
+                        <ListItemAvatar>
+                          <Avatar>
+                            {searchUser.name && searchUser.name.substring(0, 1)}
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={searchUser.name}
+                          secondary={
+                            searchUser.friends.length === 1
+                              ? searchUser.friends.length + " Friend"
+                              : searchUser.friends.length + " Friends"
+                          }
+                        />
+                        <ListItemSecondaryAction>
+                          {detectRelationship(searchUser.userID)}
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                    </Grid>
+                  )
+              )}
+          </Grid>
+        </Box>
+      </Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message={snackbarMsg}
+        action={
+          <React.Fragment>
             <IconButton
-              type="button"
-              onClick={() => searchBtn()}
-              className={classes.iconButton}
-              aria-label="search"
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
             >
-              <SearchIcon />
+              <CloseIcon fontSize="small" />
             </IconButton>
-          </Paper>
-        </div>
-        <Grid
-          container
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-          spacing={5}
-          className="send-comp-request"
-        >
-          {user &&
-            users.map(
-              (searchUser) =>
-                user.userID !== searchUser.userID && (
-                  <Grid item lg={6} key={searchUser._id}>
-                    <ListItem ContainerComponent="div">
-                      <ListItemAvatar>
-                        <Avatar>
-                          {searchUser.name && searchUser.name.substring(0, 1)}
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={searchUser.name}
-                        secondary={
-                          searchUser.friends.length === 1
-                            ? searchUser.friends.length + " Friend"
-                            : searchUser.friends.length + " Friends"
-                        }
-                      />
-                      <ListItemSecondaryAction>
-                        {detectRelationship(searchUser.userID)}
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  </Grid>
-                )
-            )}
-        </Grid>
-      </Box>
-    </Container>
+          </React.Fragment>
+        }
+      />
+    </div>
   );
 };
 
