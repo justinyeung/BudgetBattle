@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  getOutPendingComp,
-  getInPendingComp,
-} from "../../actions/competitionActions";
+import { getInPendingComp } from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -19,7 +16,6 @@ import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 
@@ -49,13 +45,8 @@ const monthNames = [
   "December",
 ];
 
-const CompRequests = ({
-  getOutPendingComp,
-  getInPendingComp,
-  competition: { outpending, inpending },
-}) => {
+const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
   useEffect(() => {
-    getOutPendingComp();
     getInPendingComp();
 
     // eslint-disable-next-line
@@ -187,7 +178,6 @@ const CompRequests = ({
 };
 
 CompRequests.propTypes = {
-  getOutPendingComp: PropTypes.func.isRequired,
   getInPendingComp: PropTypes.func.isRequired,
 };
 
@@ -196,6 +186,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getOutPendingComp,
   getInPendingComp,
 })(CompRequests);
