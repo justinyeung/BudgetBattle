@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import {
-  getOutPendingComp,
-  getInPendingComp,
-} from "../../actions/competitionActions";
+import { getInPendingComp } from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -19,6 +16,8 @@ import ClearIcon from "@material-ui/icons/Clear";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Box from "@material-ui/core/Box";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,19 +45,38 @@ const monthNames = [
   "December",
 ];
 
-const CompRequests = ({
-  getOutPendingComp,
-  getInPendingComp,
-  competition: { outpending, inpending },
-}) => {
+const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
   useEffect(() => {
-    getOutPendingComp();
     getInPendingComp();
 
     // eslint-disable-next-line
   }, []);
 
   const classes = useStyles();
+
+  const [snacbarMsg, setSnackbarMsg] = useState("");
+  const [open, setOpen] = useState(false);
+
+  // snackbar
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  // buttons
+  const acceptBtn = () => {
+    setSnackbarMsg("Competition Request Accepted");
+    handleClick();
+  };
+  const rejectBtn = () => {
+    setSnackbarMsg("Rejected Competition Request");
+    handleClick();
+  };
 
   return (
     <div>
@@ -117,14 +135,14 @@ const CompRequests = ({
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => console.log("Accept")}
+                    onClick={() => acceptBtn()}
                   >
                     <CheckIcon />
                   </IconButton>
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => console.log("Delete")}
+                    onClick={() => rejectBtn()}
                   >
                     <ClearIcon />
                   </IconButton>
@@ -133,12 +151,33 @@ const CompRequests = ({
             ))}
         </List>
       </Box>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={snacbarMsg}
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </div>
   );
 };
 
 CompRequests.propTypes = {
-  getOutPendingComp: PropTypes.func.isRequired,
   getInPendingComp: PropTypes.func.isRequired,
 };
 
@@ -147,6 +186,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getOutPendingComp,
   getInPendingComp,
 })(CompRequests);

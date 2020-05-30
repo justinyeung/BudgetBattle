@@ -237,7 +237,7 @@ const FriendForm = ({
           horizontal: "left",
         }}
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={3000}
         onClose={handleClose}
         message={snackbarMsg}
         action={

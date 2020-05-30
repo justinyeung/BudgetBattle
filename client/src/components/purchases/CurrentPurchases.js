@@ -1,4 +1,4 @@
-import React, { useEffect, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -25,6 +25,10 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 import {
   MuiPickersUtilsProvider,
@@ -78,12 +82,36 @@ const CurrentPurchases = ({
   deletePurchase,
   purchase: { purchases },
 }) => {
+  const [open, setOpen] = useState(false);
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+
   useEffect(() => {
     // get purchases of currently logged in user
     getPurchases();
 
     // eslint-disable-next-line
   }, []);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const editBtn = (purchase) => {
+    editPurchase(purchase);
+    setSnackbarMsg("Purchase Edited");
+    handleClick();
+  };
+  const deleteBtn = (id) => {
+    deletePurchase(id);
+    setSnackbarMsg("Purchase Deleted");
+    handleClick();
+  };
 
   return (
     <div>
@@ -141,8 +169,7 @@ const CurrentPurchases = ({
                       category: newData.category,
                       amount: newData.amount,
                     };
-
-                    editPurchase(oldPurchase);
+                    editBtn(oldPurchase);
                   }
                   resolve();
                 }, 1000);
@@ -150,13 +177,35 @@ const CurrentPurchases = ({
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  deletePurchase(oldData.id);
+                  deleteBtn(oldData.id);
                   resolve();
                 }, 1000);
               }),
           }}
         />
       </Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={snackbarMsg}
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
     </div>
   );
 };
