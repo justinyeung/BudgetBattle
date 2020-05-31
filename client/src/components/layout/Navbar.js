@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -25,15 +26,14 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-
-//drawer
-import clsx from "clsx";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
 
 import { logout, getUser } from "../../actions/userActions";
 import { clearPurchases } from "../../actions/purchaseActions";
@@ -104,13 +104,27 @@ const PrimarySearchAppBar = ({
   }, []);
 
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  // snackbar
+  const handleSnackClick = () => {
+    setOpen(true);
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   // menu
-  const handleClick = (event) => {
+  const handleMenuClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
+  const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
@@ -131,6 +145,15 @@ const PrimarySearchAppBar = ({
     }
     setState({ ...state, [anchor]: open });
   };
+
+  const logoutButton = () => {
+    handleMenuClose();
+    logout();
+    clearPurchases();
+    clearComps();
+    handleSnackClick();
+  };
+
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -213,30 +236,23 @@ const PrimarySearchAppBar = ({
     </div>
   );
 
-  const logoutButton = () => {
-    handleClose();
-    logout();
-    clearPurchases();
-    clearComps();
-  };
-
   const renderMenu = (
     <StyledMenu
       id="customized-menu"
       anchorEl={anchorEl}
       keepMounted
       open={Boolean(anchorEl)}
-      onClose={handleClose}
+      onClose={handleMenuClose}
     >
       {(localStorage.getItem("isLoggedIn") || user !== null) && (
         <div>
-          <StyledMenuItem onClick={handleClose}>
+          <StyledMenuItem onClick={handleMenuClose}>
             <ListItemIcon>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </StyledMenuItem>
-          <StyledMenuItem onClick={handleClose}>
+          <StyledMenuItem onClick={handleMenuClose}>
             <ListItemIcon>
               <SettingsIcon fontSize="small" />
             </ListItemIcon>
@@ -251,6 +267,31 @@ const PrimarySearchAppBar = ({
         </div>
       )}
     </StyledMenu>
+  );
+
+  const snackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleSnackClose}
+      message="Logout Successful"
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleSnackClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
   );
 
   return (
@@ -302,7 +343,11 @@ const PrimarySearchAppBar = ({
             </Grid>
             <Grid item>
               {localStorage.getItem("isLoggedIn") || user !== null ? (
-                <IconButton onClick={handleClick} edge="end" color="inherit">
+                <IconButton
+                  onClick={handleMenuClick}
+                  edge="end"
+                  color="inherit"
+                >
                   <Avatar>
                     {user && user.name && user.name.substring(0, 1)}
                   </Avatar>
@@ -346,6 +391,7 @@ const PrimarySearchAppBar = ({
         </Toolbar>
       </AppBar>
       {renderMenu}
+      {snackbar}
     </div>
   );
 };
