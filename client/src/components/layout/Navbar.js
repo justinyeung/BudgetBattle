@@ -363,7 +363,11 @@ const PrimarySearchAppBar = ({
                 >
                   <Grid item className={classes.title}>
                     <Button href="/getstarted" color="inherit">
-                      <Typography variant="subtitle1" noWrap>
+                      <Typography
+                        variant="subtitle1"
+                        noWrap
+                        className={classes.loginButtonText}
+                      >
                         Get Started
                       </Typography>
                     </Button>
