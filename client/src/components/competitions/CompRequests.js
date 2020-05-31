@@ -79,13 +79,11 @@ const CompRequests = ({
 
   // buttons
   const acceptBtn = (compID) => {
-    console.log(compID);
     acceptComp({ compID });
     setSnackbarMsg("Competition Request Accepted");
     handleClick();
   };
   const rejectBtn = (compID) => {
-    console.log(compID);
     rejectOrDeleteComp({ compID });
     setSnackbarMsg("Rejected Competition Request");
     handleClick();
