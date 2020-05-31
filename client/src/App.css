@@ -100,3 +100,11 @@
 .friend-request-textfield {
   width: "100%";
 }
+
+.navbar-link {
+  text-decoration: none;
+}
+
+.navbar-link-text {
+  color: white;
+}

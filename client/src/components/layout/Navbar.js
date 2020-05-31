@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -11,14 +12,19 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MoreIcon from "@material-ui/icons/MoreVert";
 import HomeIcon from "@material-ui/icons/Home";
 import AppsIcon from "@material-ui/icons/Apps";
 import PersonIcon from "@material-ui/icons/Person";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import CheckIcon from "@material-ui/icons/Check";
 import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
+import GroupIcon from "@material-ui/icons/Group";
+import Grid from "@material-ui/core/Grid";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import SettingsIcon from "@material-ui/icons/Settings";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
 
 //drawer
 import clsx from "clsx";
@@ -46,38 +52,44 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  loginButton: {
+    padding: "3px",
+  },
+  loginButtonText: {
+    textTransform: "capitalize",
+  },
   title: {
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
     },
   },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  sectionMobile: {
-    display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
 }));
+
+// menu
+const StyledMenu = withStyles({
+  paper: {
+    border: "1px solid #d3d4d5",
+  },
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "center",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "center",
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {},
+}))(MenuItem);
 
 const PrimarySearchAppBar = ({
   user: { user },
@@ -93,17 +105,22 @@ const PrimarySearchAppBar = ({
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  // menu
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   // drawer
-
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -114,7 +131,6 @@ const PrimarySearchAppBar = ({
     }
     setState({ ...state, [anchor]: open });
   };
-
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -149,7 +165,7 @@ const PrimarySearchAppBar = ({
             <Link to="/friends" id="drawer-link">
               <ListItem button key={"Friends"}>
                 <ListItemIcon>
-                  <PersonIcon />
+                  <GroupIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Friends"} />
               </ListItem>
@@ -186,7 +202,7 @@ const PrimarySearchAppBar = ({
             <Link to="/login" id="drawer-link">
               <ListItem button key={"Login"}>
                 <ListItemIcon>
-                  <AppsIcon />
+                  <PersonIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Login"} />
               </ListItem>
@@ -197,144 +213,138 @@ const PrimarySearchAppBar = ({
     </div>
   );
 
-  ////////////////
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
   const logoutButton = () => {
-    handleMenuClose();
+    handleClose();
     logout();
     clearPurchases();
     clearComps();
   };
 
-  const menuId = "primary-search-account-menu";
   const renderMenu = (
-    <Menu
+    <StyledMenu
+      id="customized-menu"
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
       keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
+      open={Boolean(anchorEl)}
+      onClose={handleClose}
     >
-      <div>
-        {localStorage.getItem("isLoggedIn") || user !== null ? (
-          <div>
-            <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
-            <MenuItem onClick={logoutButton}>Log Out</MenuItem>
-          </div>
-        ) : (
-          <Link to="/login" id="drawer-link">
-            <MenuItem onClick={handleMenuClose}>Login</MenuItem>
-          </Link>
-        )}
-      </div>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
+      {(localStorage.getItem("isLoggedIn") || user !== null) && (
+        <div>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </StyledMenuItem>
+          <StyledMenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <SettingsIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </StyledMenuItem>
+          <StyledMenuItem onClick={() => logoutButton()}>
+            <ListItemIcon>
+              <LockOpenIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </StyledMenuItem>
+        </div>
+      )}
+    </StyledMenu>
   );
 
   return (
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer("left", true)}
+          <Grid
+            container
+            direction="row"
+            justify="space-between"
+            alignItems="center"
           >
-            <MenuIcon />
-          </IconButton>
-          {/* drawer */}
-          <div>
-            <React.Fragment key={"left"}>
-              <SwipeableDrawer
-                anchor={"left"}
-                open={state["left"]}
-                onClose={toggleDrawer("left", false)}
-                onOpen={toggleDrawer("left", true)}
+            <Grid item>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="center"
               >
-                {list("left")}
-              </SwipeableDrawer>
-            </React.Fragment>
-          </div>
-          {/* drawer */}
-
-          <Typography className={classes.title} variant="h6" noWrap>
-            Budget Battle
-          </Typography>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
+                <Grid item>
+                  <IconButton
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={toggleDrawer("left", true)}
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <div>
+                    <React.Fragment key={"left"}>
+                      <SwipeableDrawer
+                        anchor={"left"}
+                        open={state["left"]}
+                        onClose={toggleDrawer("left", false)}
+                        onOpen={toggleDrawer("left", true)}
+                      >
+                        {list("left")}
+                      </SwipeableDrawer>
+                    </React.Fragment>
+                  </div>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h6" noWrap>
+                    Budget Battle
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid item>
+              {localStorage.getItem("isLoggedIn") || user !== null ? (
+                <IconButton onClick={handleClick} edge="end" color="inherit">
+                  <Avatar>
+                    {user && user.name && user.name.substring(0, 1)}
+                  </Avatar>
+                  <ArrowDropDownIcon />
+                </IconButton>
+              ) : (
+                <Grid
+                  container
+                  direction="row"
+                  justify="flex-end"
+                  alignItems="center"
+                  spacing={2}
+                >
+                  <Grid item className={classes.title}>
+                    <Button href="/getstarted" color="inherit">
+                      <Typography variant="subtitle1" noWrap>
+                        Get Started
+                      </Typography>
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      href="/login"
+                      color="inherit"
+                      variant="outlined"
+                      className={classes.loginButton}
+                    >
+                      <Typography
+                        variant="subtitle1"
+                        noWrap
+                        className={classes.loginButtonText}
+                      >
+                        Login
+                      </Typography>
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
     </div>
   );
