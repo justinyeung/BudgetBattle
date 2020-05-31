@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getAcceptedComp } from "../../actions/competitionActions";
+import {
+  getAcceptedComp,
+  rejectOrDeleteComp,
+} from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -18,6 +21,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,9 +83,13 @@ const monthNames = [
 
 const CurrentComps = ({
   getAcceptedComp,
+  rejectOrDeleteComp,
   user: { user },
   competition: { accepted },
 }) => {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
   useEffect(() => {
     // get state of currently logged in user
     getAcceptedComp();
@@ -87,7 +97,16 @@ const CurrentComps = ({
     // eslint-disable-next-line
   }, []);
 
-  const classes = useStyles();
+  // snackbar
+  const handleClick = () => {
+    setOpen(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   const getRight = (comp) => {
     if (user.userID === comp.user1) {
@@ -117,154 +136,213 @@ const CurrentComps = ({
     }
   };
 
+  const deleteBtn = (compID) => {
+    rejectOrDeleteComp({ compID });
+    handleClick();
+  };
+
   return (
-    <Container maxWidth="lg" className="container-spacing">
-      <Box boxShadow={1} className="container-spacing">
-        <Typography variant="h6" id="header-title">
-          Competitions
-        </Typography>
-        <Divider />
-        <div className={classes.root}>
-          {accepted.length === 0 && (
-            <List className={classes.list}>
-              <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                  <Avatar>{":("}</Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={"No Competitions to show."}
-                  secondary={
-                    <React.Fragment>
-                      <Typography
-                        component="span"
-                        variant="body2"
-                        className={classes.inline}
-                        color="textPrimary"
-                      >
-                        Invite Friends to start Budget Battling!
-                      </Typography>
-                    </React.Fragment>
-                  }
-                />
-              </ListItem>
-            </List>
-          )}
-          {accepted !== [] &&
-            accepted.map((comp) => (
-              <ExpansionPanel key={comp._id} id="expansion-panel">
-                <ExpansionPanelSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1c-content"
-                  id="panel1c-header"
-                >
-                  <div id="competitions-left-column" className={classes.column}>
-                    <Typography className={classes.primaryHeading} variant="h6">
-                      {getRight(comp).name}
-                    </Typography>
-                  </div>
-                  <div
-                    id="competitions-center-column"
-                    className={classes.column}
+    <div>
+      <Container maxWidth="lg" className="container-spacing">
+        <Box boxShadow={1} className="container-spacing">
+          <Typography variant="h6" id="header-title">
+            Competitions
+          </Typography>
+          <Divider />
+          <div className={classes.root}>
+            {accepted.length === 0 && (
+              <List className={classes.list}>
+                <ListItem alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar>{":("}</Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={"No Competitions to show."}
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          Invite Friends to start Budget Battling!
+                        </Typography>
+                      </React.Fragment>
+                    }
                   />
-                  <div
-                    id="competitions-right-column"
-                    className={classes.column}
+                </ListItem>
+              </List>
+            )}
+            {accepted !== [] &&
+              accepted.map((comp) => (
+                <ExpansionPanel key={comp._id} id="expansion-panel">
+                  <ExpansionPanelSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1c-content"
+                    id="panel1c-header"
                   >
-                    <Typography
-                      variant="h5"
-                      className={classes.secondaryHeading}
+                    <div
+                      id="competitions-left-column"
+                      className={classes.column}
                     >
-                      {monthNames[comp.month - 1]} {comp.year}
-                    </Typography>
-                  </div>
-                </ExpansionPanelSummary>
-                <Divider />
-                <ExpansionPanelDetails className={classes.detailsAvatar}>
-                  <div id="competitions-left-column" className={classes.column}>
-                    <Avatar>{getLeft(comp).name.substring(0, 1)}</Avatar>
-                  </div>
-                  <div
-                    id="competitions-center-column"
-                    className={classes.column}
-                  />
-                  <div
-                    id="competitions-right-column"
-                    className={classes.column}
-                  >
-                    <Avatar>{getRight(comp).name.substring(0, 1)}</Avatar>
-                  </div>
-                </ExpansionPanelDetails>
-                <ExpansionPanelDetails className={classes.details}>
-                  <div id="competitions-left-column" className={classes.column}>
-                    <Typography variant="h5">{getLeft(comp).name}</Typography>
-                  </div>
-                  <div
-                    id="competitions-center-column"
-                    className={classes.column}
-                  />
-                  <div
-                    id="competitions-right-column"
-                    className={classes.column}
-                  >
-                    <Typography variant="h5">{getRight(comp).name}</Typography>
-                  </div>
-                </ExpansionPanelDetails>
-                <ExpansionPanelDetails className={classes.details}>
-                  <div id="competitions-left-column" className={classes.column}>
-                    <Typography variant="h5">${getLeft(comp).total}</Typography>
-                  </div>
-                  <div
-                    id="competitions-center-column"
-                    className={classes.column}
-                  >
-                    <h5>Total Spent</h5>
-                  </div>
-                  <div
-                    id="competitions-right-column"
-                    className={classes.column}
-                  >
-                    <Typography variant="h5">
-                      ${getRight(comp).total}
-                    </Typography>
-                  </div>
-                </ExpansionPanelDetails>
-                <ExpansionPanelDetails className={classes.details}>
-                  <div id="competitions-left-column" className={classes.column}>
-                    <Typography variant="h5">
-                      {getLeft(comp).total - getRight(comp).total}
-                    </Typography>
-                  </div>
-                  <div
-                    id="competitions-center-column"
-                    className={classes.column}
-                  >
-                    <h5>Difference</h5>
-                  </div>
-                  <div
-                    id="competitions-right-column"
-                    className={classes.column}
-                  >
-                    <Typography variant="h5">
-                      {getRight(comp).total - getLeft(comp).total}
-                    </Typography>
-                  </div>
-                </ExpansionPanelDetails>
-                <Divider />
-                <ExpansionPanelActions>
-                  <Button size="small" color="primary">
-                    View More
-                  </Button>
-                </ExpansionPanelActions>
-              </ExpansionPanel>
-            ))}
-        </div>
-      </Box>
-    </Container>
+                      <Typography
+                        className={classes.primaryHeading}
+                        variant="h6"
+                      >
+                        {getRight(comp).name}
+                      </Typography>
+                    </div>
+                    <div
+                      id="competitions-center-column"
+                      className={classes.column}
+                    />
+                    <div
+                      id="competitions-right-column"
+                      className={classes.column}
+                    >
+                      <Typography
+                        variant="h5"
+                        className={classes.secondaryHeading}
+                      >
+                        {monthNames[comp.month - 1]} {comp.year}
+                      </Typography>
+                    </div>
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails className={classes.detailsAvatar}>
+                    <div
+                      id="competitions-left-column"
+                      className={classes.column}
+                    >
+                      <Avatar>{getLeft(comp).name.substring(0, 1)}</Avatar>
+                    </div>
+                    <div
+                      id="competitions-center-column"
+                      className={classes.column}
+                    />
+                    <div
+                      id="competitions-right-column"
+                      className={classes.column}
+                    >
+                      <Avatar>{getRight(comp).name.substring(0, 1)}</Avatar>
+                    </div>
+                  </ExpansionPanelDetails>
+                  <ExpansionPanelDetails className={classes.details}>
+                    <div
+                      id="competitions-left-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">{getLeft(comp).name}</Typography>
+                    </div>
+                    <div
+                      id="competitions-center-column"
+                      className={classes.column}
+                    />
+                    <div
+                      id="competitions-right-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">
+                        {getRight(comp).name}
+                      </Typography>
+                    </div>
+                  </ExpansionPanelDetails>
+                  <ExpansionPanelDetails className={classes.details}>
+                    <div
+                      id="competitions-left-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">
+                        ${getLeft(comp).total}
+                      </Typography>
+                    </div>
+                    <div
+                      id="competitions-center-column"
+                      className={classes.column}
+                    >
+                      <h5>Total Spent</h5>
+                    </div>
+                    <div
+                      id="competitions-right-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">
+                        ${getRight(comp).total}
+                      </Typography>
+                    </div>
+                  </ExpansionPanelDetails>
+                  <ExpansionPanelDetails className={classes.details}>
+                    <div
+                      id="competitions-left-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">
+                        {getLeft(comp).total - getRight(comp).total}
+                      </Typography>
+                    </div>
+                    <div
+                      id="competitions-center-column"
+                      className={classes.column}
+                    >
+                      <h5>Difference</h5>
+                    </div>
+                    <div
+                      id="competitions-right-column"
+                      className={classes.column}
+                    >
+                      <Typography variant="h5">
+                        {getRight(comp).total - getLeft(comp).total}
+                      </Typography>
+                    </div>
+                  </ExpansionPanelDetails>
+                  <ExpansionPanelActions>
+                    <Button
+                      variant="outlined"
+                      size="large"
+                      color="secondary"
+                      onClick={() => deleteBtn(comp._id)}
+                    >
+                      Remove
+                    </Button>
+                    <Button variant="outlined" size="large" color="primary">
+                      View More
+                    </Button>
+                  </ExpansionPanelActions>
+                  <Divider />
+                </ExpansionPanel>
+              ))}
+          </div>
+        </Box>
+      </Container>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message="Competition Removed"
+        action={
+          <React.Fragment>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
+    </div>
   );
 };
 
 CurrentComps.propTypes = {
   getAcceptedComp: PropTypes.func.isRequired,
+  rejectOrDeleteComp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -272,4 +350,7 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getAcceptedComp })(CurrentComps);
+export default connect(mapStateToProps, {
+  getAcceptedComp,
+  rejectOrDeleteComp,
+})(CurrentComps);

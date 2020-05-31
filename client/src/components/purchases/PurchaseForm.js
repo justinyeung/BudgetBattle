@@ -25,7 +25,7 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const PurchaseForm = ({ addPurchase }) => {
   const [date, setDate] = useState(new Date());
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
   const [location, setLocation] = useState("");
   const [category, setCategory] = useState("");
   const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ const PurchaseForm = ({ addPurchase }) => {
       setSnackbarMsg("Purchase Added");
     }
     setDate(new Date());
-    setAmount(0);
+    setAmount("");
     setLocation("");
     setCategory("");
     handleClick();
