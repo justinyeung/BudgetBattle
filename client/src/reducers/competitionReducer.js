@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
     case REJECT_DELETE_COMP:
       return {
         ...state,
-        accepted: state.outpending.filter(
+        accepted: state.accepted.filter(
           (comp) => comp._id !== action.payload.compID
         ),
         outpending: state.outpending.filter(

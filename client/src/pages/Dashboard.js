@@ -7,7 +7,6 @@ import CurrentUser from "../components/user/CurrentUser";
 import PurchaseForm from "../components/purchases/PurchaseForm";
 import CompRequests from "../components/competitions/CompRequests";
 import FriendRequests from "../components/friends/FriendRequests";
-import AcceptCompForm from "../components/temp/AcceptCompForm";
 
 const Dashboard = () => {
   return (
@@ -30,7 +29,6 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Container>
-      <AcceptCompForm />
     </div>
   );
 };

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getInPendingComp } from "../../actions/competitionActions";
+import {
+  acceptComp,
+  rejectOrDeleteComp,
+  getInPendingComp,
+} from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -45,7 +49,12 @@ const monthNames = [
   "December",
 ];
 
-const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
+const CompRequests = ({
+  acceptComp,
+  rejectOrDeleteComp,
+  getInPendingComp,
+  competition: { inpending },
+}) => {
   useEffect(() => {
     getInPendingComp();
 
@@ -69,11 +78,15 @@ const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
   };
 
   // buttons
-  const acceptBtn = () => {
+  const acceptBtn = (compID) => {
+    console.log(compID);
+    acceptComp({ compID });
     setSnackbarMsg("Competition Request Accepted");
     handleClick();
   };
-  const rejectBtn = () => {
+  const rejectBtn = (compID) => {
+    console.log(compID);
+    rejectOrDeleteComp({ compID });
     setSnackbarMsg("Rejected Competition Request");
     handleClick();
   };
@@ -135,14 +148,14 @@ const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => acceptBtn()}
+                    onClick={() => acceptBtn(comp._id)}
                   >
                     <CheckIcon />
                   </IconButton>
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => rejectBtn()}
+                    onClick={() => rejectBtn(comp._id)}
                   >
                     <ClearIcon />
                   </IconButton>
@@ -179,6 +192,8 @@ const CompRequests = ({ getInPendingComp, competition: { inpending } }) => {
 
 CompRequests.propTypes = {
   getInPendingComp: PropTypes.func.isRequired,
+  acceptComp: PropTypes.func.isRequired,
+  rejectOrDeleteComp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -187,4 +202,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getInPendingComp,
+  acceptComp,
+  rejectOrDeleteComp,
 })(CompRequests);
