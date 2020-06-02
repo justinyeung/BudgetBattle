@@ -87,7 +87,6 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
 
   //   button that removes a friend
   const removeButton = (friendID, friendName) => {
-    // deleteFriend({ friendID });
     setCurrentID(friendID);
     setCurrentName(friendName);
     handleClickOpenDialog();
@@ -95,7 +94,6 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
 
   //   button to confirm delete in dialog
   const confirmDelete = () => {
-    // console.log(currentID);
     deleteFriend({ friendID: currentID });
     handleCloseDialog();
     handleClickSnackbar();

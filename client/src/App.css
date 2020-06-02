@@ -37,6 +37,16 @@
   }
 }
 
+/* sm */
+@media (max-width: 576px) {
+  .search-request-container {
+    padding: 32px 0 0 0;
+  }
+  .search-item {
+    padding: 0 !important;
+  }
+}
+
 #drawer-link {
   text-decoration: none;
   color: black;
@@ -93,6 +103,11 @@
 }
 
 .send-comp-request {
+  padding: 24px;
+  padding-top: 32px;
+}
+
+.search-request-container {
   padding: 24px;
   padding-top: 32px;
 }
