@@ -63,16 +63,15 @@ const tableIcons = {
 };
 
 const setData = (purchasesArray) => {
-  const currentPurchases = purchasesArray.map((purchase) => ({
+  return purchasesArray.map((purchase) => ({
     id: purchase._id,
     userID: purchase.userID,
-    // date: purchase.date,
-    date: moment(purchase.date).format("MMM DD YYYY"),
+    date: moment(purchase.date).format("YYYY-MM-DD"),
+    // date: purchase.date.toString(),
     location: purchase.location,
     category: purchase.category,
     amount: purchase.amount,
   }));
-  return currentPurchases;
 };
 
 const CurrentPurchases = ({
