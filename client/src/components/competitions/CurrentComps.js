@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -25,6 +25,14 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import Box from "@material-ui/core/Box";
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Paper from "@material-ui/core/Paper";
+import Draggable from "react-draggable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,6 +89,17 @@ const monthNames = [
   "December",
 ];
 
+function PaperComponent(props) {
+  return (
+    <Draggable
+      handle="#draggable-dialog-title"
+      cancel={'[class*="MuiDialogContent-root"]'}
+    >
+      <Paper {...props} />
+    </Draggable>
+  );
+}
+
 const CurrentComps = ({
   getAcceptedComp,
   rejectOrDeleteComp,
@@ -88,7 +107,10 @@ const CurrentComps = ({
   competition: { accepted },
 }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+
+  const [openDialog, setOpenDialog] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [compID, setCompID] = useState("");
 
   useEffect(() => {
     // get state of currently logged in user
@@ -98,10 +120,10 @@ const CurrentComps = ({
   }, []);
 
   // snackbar
-  const handleClick = () => {
+  const handleClickSnackbar = () => {
     setOpen(true);
   };
-  const handleClose = (event, reason) => {
+  const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
@@ -136,10 +158,74 @@ const CurrentComps = ({
     }
   };
 
-  const deleteBtn = (compID) => {
-    rejectOrDeleteComp({ compID });
-    handleClick();
+  //   dialog open and close
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
   };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  //   button that removes a competition
+  const deleteBtn = (id) => {
+    setCompID(id);
+    handleClickOpenDialog();
+  };
+  const confirmDeleteBtn = () => {
+    rejectOrDeleteComp({ compID });
+    handleCloseDialog();
+    handleClickSnackbar();
+  };
+
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleCloseSnackbar}
+      message="Competition Removed"
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
+
+  const renderDialog = (
+    <Dialog
+      open={openDialog}
+      onClose={handleCloseDialog}
+      PaperComponent={PaperComponent}
+      aria-labelledby="draggable-dialog-title"
+    >
+      <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+        Remove Competition
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Are you sure you want to remove this competition?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCloseDialog} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={confirmDeleteBtn} color="primary">
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 
   return (
     <div>
@@ -314,28 +400,8 @@ const CurrentComps = ({
           </div>
         </Box>
       </Container>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message="Competition Removed"
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderDialog}
+      {renderSnackbar}
     </div>
   );
 };

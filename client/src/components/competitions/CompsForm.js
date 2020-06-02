@@ -79,6 +79,31 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
     }
   };
 
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      message={snackbarMsg}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
+
   return (
     <div>
       <Box boxShadow={1} className="container-spacing">
@@ -161,28 +186,7 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
           </Toolbar>
         </Box>
       </Box>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={snackbarMsg}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderSnackbar}
     </div>
   );
 };

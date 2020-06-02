@@ -63,16 +63,15 @@ const tableIcons = {
 };
 
 const setData = (purchasesArray) => {
-  const currentPurchases = purchasesArray.map((purchase) => ({
+  return purchasesArray.map((purchase) => ({
     id: purchase._id,
     userID: purchase.userID,
-    // date: purchase.date,
-    date: moment(purchase.date).format("MMM DD YYYY"),
+    date: moment(purchase.date).format("YYYY-MM-DD"),
+    // date: purchase.date.toString(),
     location: purchase.location,
     category: purchase.category,
     amount: purchase.amount,
   }));
-  return currentPurchases;
 };
 
 const CurrentPurchases = ({
@@ -111,6 +110,31 @@ const CurrentPurchases = ({
     setSnackbarMsg("Purchase Deleted");
     handleClick();
   };
+
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleClose}
+      message={snackbarMsg}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
 
   return (
     <div>
@@ -183,28 +207,7 @@ const CurrentPurchases = ({
           }}
         />
       </Container>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={snackbarMsg}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderSnackbar}
     </div>
   );
 };

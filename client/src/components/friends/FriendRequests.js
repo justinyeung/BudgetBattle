@@ -45,6 +45,12 @@ const FriendRequests = ({
 
   const classes = useStyles();
 
+  useEffect(() => {
+    getUser();
+
+    // eslint-disable-next-line
+  }, []);
+
   const acceptButton = (friendID) => {
     acceptFriend({ friendID });
     setMsg("Friend Request Accepted");
@@ -75,11 +81,30 @@ const FriendRequests = ({
     );
   };
 
-  useEffect(() => {
-    getUser();
-
-    // eslint-disable-next-line
-  }, []);
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleClose}
+      message={msg}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
 
   return (
     <div>
@@ -164,28 +189,7 @@ const FriendRequests = ({
           )}
         </List>
       </Box>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={msg}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderSnackbar}
     </div>
   );
 };

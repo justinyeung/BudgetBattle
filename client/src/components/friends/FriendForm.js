@@ -51,6 +51,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     margin: 0,
   },
+  avatar: {
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
 }));
 
 const FriendForm = ({
@@ -164,6 +170,31 @@ const FriendForm = ({
     }
     return false;
   };
+
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleClose}
+      message={snackbarMsg}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
   return (
     <div>
       <Container maxWidth="md" className="container-spacing">
@@ -200,15 +231,21 @@ const FriendForm = ({
             justify="flex-start"
             alignItems="flex-start"
             spacing={5}
-            className="send-comp-request"
+            className="search-request-container"
           >
             {user &&
               users.map(
                 (searchUser) =>
                   user.userID !== searchUser.userID && (
-                    <Grid item lg={6} key={searchUser._id}>
+                    <Grid
+                      item
+                      xs={12}
+                      md={6}
+                      key={searchUser._id}
+                      className="search-item"
+                    >
                       <ListItem ContainerComponent="div">
-                        <ListItemAvatar>
+                        <ListItemAvatar className={classes.avatar}>
                           <Avatar>
                             {searchUser.name && searchUser.name.substring(0, 1)}
                           </Avatar>
@@ -231,28 +268,7 @@ const FriendForm = ({
           </Grid>
         </Box>
       </Container>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={snackbarMsg}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderSnackbar}
     </div>
   );
 };
