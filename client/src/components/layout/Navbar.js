@@ -269,7 +269,7 @@ const PrimarySearchAppBar = ({
     </StyledMenu>
   );
 
-  const snackbar = (
+  const renderSnackbar = (
     <Snackbar
       anchorOrigin={{
         vertical: "bottom",
@@ -395,7 +395,7 @@ const PrimarySearchAppBar = ({
         </Toolbar>
       </AppBar>
       {renderMenu}
-      {snackbar}
+      {renderSnackbar}
     </div>
   );
 };

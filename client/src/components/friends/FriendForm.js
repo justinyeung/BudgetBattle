@@ -164,6 +164,31 @@ const FriendForm = ({
     }
     return false;
   };
+
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={open}
+      autoHideDuration={3000}
+      onClose={handleClose}
+      message={snackbarMsg}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
   return (
     <div>
       <Container maxWidth="md" className="container-spacing">
@@ -231,28 +256,7 @@ const FriendForm = ({
           </Grid>
         </Box>
       </Container>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={snackbarMsg}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderSnackbar}
     </div>
   );
 };

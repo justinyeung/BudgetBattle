@@ -53,12 +53,18 @@ function PaperComponent(props) {
 }
 
 const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
+  const classes = useStyles();
+
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [currentID, setCurrentID] = useState("");
   const [currentName, setCurrentName] = useState("");
 
-  const classes = useStyles();
+  useEffect(() => {
+    getUser();
+
+    // eslint-disable-next-line
+  }, []);
 
   //   snackbar open and close
   const handleClickSnackbar = () => {
@@ -104,11 +110,56 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
     );
   };
 
-  useEffect(() => {
-    getUser();
+  const renderSnackbar = (
+    <Snackbar
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      open={openSnackbar}
+      autoHideDuration={3000}
+      onClose={handleCloseSnackbar}
+      message={"Friend Removed"}
+      action={
+        <React.Fragment>
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="inherit"
+            onClick={handleCloseSnackbar}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </React.Fragment>
+      }
+    />
+  );
 
-    // eslint-disable-next-line
-  }, []);
+  const renderDialog = (
+    <Dialog
+      open={openDialog}
+      onClose={handleCloseDialog}
+      PaperComponent={PaperComponent}
+      aria-labelledby="draggable-dialog-title"
+    >
+      <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
+        Remove Friend
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Are you sure you want to remove {currentName} as a friend?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button autoFocus onClick={handleCloseDialog} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={confirmDelete} color="primary">
+          Confirm
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 
   return (
     <div>
@@ -228,52 +279,8 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
           )}
         </List>
       </Box>
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        PaperComponent={PaperComponent}
-        aria-labelledby="draggable-dialog-title"
-      >
-        <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-          Remove Friend
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to remove {currentName} as a friend?
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleCloseDialog} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={confirmDelete} color="primary">
-            Confirm
-          </Button>
-        </DialogActions>
-      </Dialog>
-
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={handleCloseSnackbar}
-        message={"Friend Removed"}
-        action={
-          <React.Fragment>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleCloseSnackbar}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-        }
-      />
+      {renderDialog}
+      {renderSnackbar}
     </div>
   );
 };
