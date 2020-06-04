@@ -45,6 +45,9 @@
   .search-item {
     padding: 0 !important;
   }
+  .container-spacing {
+    padding: 4px !important;
+  }
 }
 
 #drawer-link {

@@ -12,7 +12,6 @@ const Dashboard = () => {
   return (
     <div>
       <CurrentUser />
-      <PurchaseForm />
       <Container maxWidth="lg" className="container-spacing">
         <Grid
           container
@@ -21,6 +20,9 @@ const Dashboard = () => {
           alignItems="flex-start"
           spacing={5}
         >
+          <Grid item xs={12}>
+            <PurchaseForm />
+          </Grid>
           <Grid item md={6} xs={12}>
             <FriendRequests />
           </Grid>
