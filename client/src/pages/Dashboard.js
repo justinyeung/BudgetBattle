@@ -18,15 +18,14 @@ const Dashboard = () => {
           direction="row"
           justify="center"
           alignItems="flex-start"
-          spacing={5}
         >
-          <Grid item xs={12}>
+          <Grid item xs={12} className="page-grid-spacing">
             <PurchaseForm />
           </Grid>
-          <Grid item md={6} xs={12}>
+          <Grid item md={6} xs={12} className="page-grid-spacing">
             <FriendRequests />
           </Grid>
-          <Grid item md={6} xs={12}>
+          <Grid item md={6} xs={12} className="page-grid-spacing">
             <CompRequests />
           </Grid>
         </Grid>
