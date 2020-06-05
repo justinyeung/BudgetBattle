@@ -34,6 +34,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
+import Container from "@material-ui/core/Container";
 
 import { logout, getUser } from "../../actions/userActions";
 import { clearPurchases } from "../../actions/purchaseActions";
@@ -163,19 +164,27 @@ const PrimarySearchAppBar = ({
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        <Link to="/" id="drawer-link">
-          <ListItem button key={"Home"}>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Home"} />
-          </ListItem>
-        </Link>
-      </List>
-      <Divider />
       {localStorage.getItem("isLoggedIn") || user !== null ? (
         <div>
+          <List>
+            <Link to="/" id="drawer-link">
+              <ListItem button key={"Home"}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+            </Link>
+            <Link to="/getstarted" id="drawer-link">
+              <ListItem button key={"Get Started"}>
+                <ListItemIcon>
+                  <CheckIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Get Started"} />
+              </ListItem>
+            </Link>
+          </List>
+          <Divider />
           <List>
             <Link to="/dashboard" id="drawer-link">
               <ListItem button key={"Dashboard"}>
@@ -213,6 +222,17 @@ const PrimarySearchAppBar = ({
         </div>
       ) : (
         <div>
+          <List>
+            <Link to="/" id="drawer-link">
+              <ListItem button key={"Home"}>
+                <ListItemIcon>
+                  <HomeIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Home"} />
+              </ListItem>
+            </Link>
+          </List>
+          <Divider />
           <List>
             <Link to="/getstarted" id="drawer-link">
               <ListItem button key={"Get Started"}>
@@ -296,102 +316,104 @@ const PrimarySearchAppBar = ({
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" color="inherit">
         <Toolbar>
-          <Grid
-            container
-            direction="row"
-            justify="space-between"
-            alignItems="center"
-          >
-            <Grid item>
-              <Grid
-                container
-                direction="row"
-                justify="flex-start"
-                alignItems="center"
-              >
-                <Grid item>
-                  <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="open drawer"
-                    onClick={toggleDrawer("left", true)}
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                  <div>
-                    <React.Fragment key={"left"}>
-                      <SwipeableDrawer
-                        anchor={"left"}
-                        open={state["left"]}
-                        onClose={toggleDrawer("left", false)}
-                        onOpen={toggleDrawer("left", true)}
-                      >
-                        {list("left")}
-                      </SwipeableDrawer>
-                    </React.Fragment>
-                  </div>
-                </Grid>
-                <Grid item>
-                  <Typography variant="h6" noWrap>
-                    Budget Battle
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid item>
-              {localStorage.getItem("isLoggedIn") || user !== null ? (
-                <IconButton
-                  onClick={handleMenuClick}
-                  edge="end"
-                  color="inherit"
-                >
-                  <Avatar>
-                    {user && user.name && user.name.substring(0, 1)}
-                  </Avatar>
-                  <ArrowDropDownIcon />
-                </IconButton>
-              ) : (
+          <Container maxWidth="lg">
+            <Grid
+              container
+              direction="row"
+              justify="space-between"
+              alignItems="center"
+            >
+              <Grid item>
                 <Grid
                   container
                   direction="row"
-                  justify="flex-end"
+                  justify="flex-start"
                   alignItems="center"
-                  spacing={2}
                 >
-                  <Grid item className={classes.title}>
-                    <Button href="/getstarted" color="inherit">
-                      <Typography
-                        variant="subtitle1"
-                        noWrap
-                        className={classes.loginButtonText}
-                      >
-                        Get Started
-                      </Typography>
-                    </Button>
+                  <Grid item>
+                    <IconButton
+                      edge="start"
+                      className={classes.menuButton}
+                      color="inherit"
+                      aria-label="open drawer"
+                      onClick={toggleDrawer("left", true)}
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                    <div>
+                      <React.Fragment key={"left"}>
+                        <SwipeableDrawer
+                          anchor={"left"}
+                          open={state["left"]}
+                          onClose={toggleDrawer("left", false)}
+                          onOpen={toggleDrawer("left", true)}
+                        >
+                          {list("left")}
+                        </SwipeableDrawer>
+                      </React.Fragment>
+                    </div>
                   </Grid>
                   <Grid item>
-                    <Button
-                      href="/login"
-                      color="inherit"
-                      variant="outlined"
-                      className={classes.loginButton}
-                    >
-                      <Typography
-                        variant="subtitle1"
-                        noWrap
-                        className={classes.loginButtonText}
-                      >
-                        Login
-                      </Typography>
-                    </Button>
+                    <Typography variant="h6" noWrap>
+                      Budget Battle
+                    </Typography>
                   </Grid>
                 </Grid>
-              )}
+              </Grid>
+              <Grid item>
+                {localStorage.getItem("isLoggedIn") || user !== null ? (
+                  <IconButton
+                    onClick={handleMenuClick}
+                    edge="end"
+                    color="inherit"
+                  >
+                    <Avatar>
+                      {user && user.name && user.name.substring(0, 1)}
+                    </Avatar>
+                    <ArrowDropDownIcon />
+                  </IconButton>
+                ) : (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="center"
+                    spacing={2}
+                  >
+                    <Grid item className={classes.title}>
+                      <Button href="/getstarted" color="inherit">
+                        <Typography
+                          variant="subtitle1"
+                          noWrap
+                          className={classes.loginButtonText}
+                        >
+                          Get Started
+                        </Typography>
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        href="/login"
+                        color="inherit"
+                        variant="outlined"
+                        className={classes.loginButton}
+                      >
+                        <Typography
+                          variant="subtitle1"
+                          noWrap
+                          className={classes.loginButtonText}
+                        >
+                          Login
+                        </Typography>
+                      </Button>
+                    </Grid>
+                  </Grid>
+                )}
+              </Grid>
             </Grid>
-          </Grid>
+          </Container>
         </Toolbar>
       </AppBar>
       {renderMenu}
