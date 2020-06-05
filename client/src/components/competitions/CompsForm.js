@@ -116,10 +116,9 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
           direction="row"
           justify="center"
           alignItems="center"
-          spacing={5}
           className="send-comp-request"
         >
-          <Grid item sm={6} xs={8}>
+          <Grid item sm={6} xs={8} className="grid-spacing">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker
                 className={classes.formControl}
@@ -138,7 +137,7 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item sm={6} xs={8}>
+          <Grid item sm={6} xs={8} className="grid-spacing">
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel id="demo-simple-select-outlined-label">
                 Friend

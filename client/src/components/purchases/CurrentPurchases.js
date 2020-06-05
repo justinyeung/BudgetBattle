@@ -7,7 +7,6 @@ import {
   deletePurchase,
 } from "../../actions/purchaseActions";
 
-import { Container } from "@material-ui/core";
 import MaterialTable from "material-table";
 
 import AddBox from "@material-ui/icons/AddBox";
@@ -138,75 +137,73 @@ const CurrentPurchases = ({
 
   return (
     <div>
-      <Container maxWidth="lg" className="container-spacing">
-        <MaterialTable
-          columns={[
-            {
-              title: "Date",
-              field: "date",
-              defaultSort: "desc",
-              filtering: false,
-              editComponent: (props) => (
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="MM/dd/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Date"
-                    inputVariant="outlined"
-                    autoOk="true"
-                    value={props.value}
-                    onChange={(date) => props.onChange(date)}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-              ),
-            },
-            { title: "Location", field: "location" },
-            { title: "Category", field: "category" },
-            { title: "Amount", field: "amount", filtering: false },
-          ]}
-          data={setData(purchases)}
-          title="Purchases"
-          icons={tableIcons}
-          options={{
-            filtering: true,
-          }}
-          editable={{
-            isEditable: (rowData) => rowData.name !== null, // only name(a) rows would be editable
-            isDeletable: (rowData) => rowData.name !== null, // only name(a) rows would be deletable
-            onRowAdd: null,
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    const oldPurchase = {
-                      purchaseID: oldData.id,
-                      userID: newData.userID,
-                      date: newData.date,
-                      location: newData.location,
-                      category: newData.category,
-                      amount: newData.amount,
-                    };
-                    editBtn(oldPurchase);
-                  }
-                  resolve();
-                }, 1000);
-              }),
-            onRowDelete: (oldData) =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  deleteBtn(oldData.id);
-                  resolve();
-                }, 1000);
-              }),
-          }}
-        />
-      </Container>
+      <MaterialTable
+        columns={[
+          {
+            title: "Date",
+            field: "date",
+            defaultSort: "desc",
+            filtering: false,
+            editComponent: (props) => (
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Date"
+                  inputVariant="outlined"
+                  autoOk="true"
+                  value={props.value}
+                  onChange={(date) => props.onChange(date)}
+                  KeyboardButtonProps={{
+                    "aria-label": "change date",
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            ),
+          },
+          { title: "Location", field: "location" },
+          { title: "Category", field: "category" },
+          { title: "Amount", field: "amount", filtering: false },
+        ]}
+        data={setData(purchases)}
+        title="Purchases"
+        icons={tableIcons}
+        options={{
+          filtering: true,
+        }}
+        editable={{
+          isEditable: (rowData) => rowData.name !== null, // only name(a) rows would be editable
+          isDeletable: (rowData) => rowData.name !== null, // only name(a) rows would be deletable
+          onRowAdd: null,
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                {
+                  const oldPurchase = {
+                    purchaseID: oldData.id,
+                    userID: newData.userID,
+                    date: newData.date,
+                    location: newData.location,
+                    category: newData.category,
+                    amount: newData.amount,
+                  };
+                  editBtn(oldPurchase);
+                }
+                resolve();
+              }, 1000);
+            }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve, reject) => {
+              setTimeout(() => {
+                deleteBtn(oldData.id);
+                resolve();
+              }, 1000);
+            }),
+        }}
+      />
       {renderSnackbar}
     </div>
   );

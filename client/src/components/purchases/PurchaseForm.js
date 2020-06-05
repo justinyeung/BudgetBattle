@@ -10,7 +10,6 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 
-import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
@@ -66,7 +65,8 @@ const PurchaseForm = ({ addPurchase }) => {
         horizontal: "left",
       }}
       open={open}
-      autoHideDuration={3000}
+      autoHideDuratilg={3}
+      on={3000}
       onClose={handleClose}
       message={snackbarMsg}
       action={
@@ -86,110 +86,107 @@ const PurchaseForm = ({ addPurchase }) => {
 
   return (
     <div>
-      <Container maxWidth="lg" className="container-spacing">
-        <Box boxShadow={1} className="container-spacing">
-          <FormControl fullWidth>
-            <Typography variant="h6" id="header-title">
-              Add Purchase
-            </Typography>
-            <Divider />
-            <Box display="flex" justifyContent="center">
-              <Grid
-                id="purchases-form-grid"
-                container
-                direction="row"
-                justify="center"
-                alignItems="center"
-                spacing={5}
-              >
-                <Grid item md={3} sm={5} xs={8}>
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                      disableToolbar
-                      variant="inline"
-                      format="MM/dd/yyyy"
-                      id="date-picker-inline"
-                      label="Date"
-                      inputVariant="outlined"
-                      autoOk="true"
-                      fullWidth
-                      value={date}
-                      onChange={(date) =>
-                        date !== null
-                          ? setDate(new Date(date))
-                          : setDate(new Date())
-                      }
-                      KeyboardButtonProps={{
-                        "aria-label": "change date",
-                      }}
-                      onKeyPress={(e) => {
-                        e.key === "Enter" && addPurchaseBtn();
-                      }}
-                    />
-                  </MuiPickersUtilsProvider>
-                </Grid>
-                <Grid item md={3} sm={5} xs={8}>
-                  <TextField
-                    id="outlined-basic"
-                    autoComplete="off"
-                    label="Amount"
-                    variant="outlined"
-                    fullWidth
-                    value={amount}
-                    onChange={(amount) => setAmount(amount.target.value)}
-                    onKeyPress={(e) => {
-                      e.key === "Enter" && addPurchaseBtn();
-                    }}
-                  />
-                </Grid>
-                <Grid item md={3} sm={5} xs={8}>
-                  <TextField
-                    id="outlined-basic"
-                    autoComplete="off"
-                    label="Location"
-                    variant="outlined"
-                    fullWidth
-                    value={location}
-                    onChange={(location) => setLocation(location.target.value)}
-                    onKeyPress={(e) => {
-                      e.key === "Enter" && addPurchaseBtn();
-                    }}
-                  />
-                </Grid>
-                <Grid item md={3} sm={5} xs={8}>
-                  <TextField
-                    id="outlined-basic"
-                    autoComplete="off"
-                    label="Category"
-                    variant="outlined"
-                    fullWidth
-                    value={category}
-                    onChange={(category) => setCategory(category.target.value)}
-                    onKeyPress={(e) => {
-                      e.key === "Enter" && addPurchaseBtn();
-                    }}
-                  />
-                </Grid>
-              </Grid>
-            </Box>
-            <Box
-              id="purchases-form-submit"
-              display="flex"
-              flexDirection="row-reverse"
+      <Box boxShadow={1} className="container-spacing">
+        <FormControl fullWidth>
+          <Typography variant="h6" id="header-title">
+            Add Purchase
+          </Typography>
+          <Divider />
+          <Box display="flex" justifyContent="center">
+            <Grid
+              id="purchases-form-grid"
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
             >
-              <Toolbar disableGutters={true}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  onClick={() => addPurchaseBtn()}
-                >
-                  Add Purchase
-                </Button>
-              </Toolbar>
-            </Box>
-          </FormControl>
-        </Box>
-      </Container>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    disableToolbar
+                    variant="inline"
+                    format="MM/dd/yyyy"
+                    id="date-picker-inline"
+                    label="Date"
+                    inputVariant="outlined"
+                    autoOk="true"
+                    fullWidth
+                    value={date}
+                    onChange={(date) =>
+                      date !== null
+                        ? setDate(new Date(date))
+                        : setDate(new Date())
+                    }
+                    KeyboardButtonProps={{
+                      "aria-label": "change date",
+                    }}
+                    onKeyPress={(e) => {
+                      e.key === "Enter" && addPurchaseBtn();
+                    }}
+                  />
+                </MuiPickersUtilsProvider>
+              </Grid>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
+                <TextField
+                  id="outlined-basic"
+                  autoComplete="off"
+                  label="Amount"
+                  variant="outlined"
+                  fullWidth
+                  value={amount}
+                  onChange={(amount) => setAmount(amount.target.value)}
+                  onKeyPress={(e) => {
+                    e.key === "Enter" && addPurchaseBtn();
+                  }}
+                />
+              </Grid>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
+                <TextField
+                  id="outlined-basic"
+                  autoComplete="off"
+                  label="Location"
+                  variant="outlined"
+                  fullWidth
+                  value={location}
+                  onChange={(location) => setLocation(location.target.value)}
+                  onKeyPress={(e) => {
+                    e.key === "Enter" && addPurchaseBtn();
+                  }}
+                />
+              </Grid>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
+                <TextField
+                  id="outlined-basic"
+                  autoComplete="off"
+                  label="Category"
+                  variant="outlined"
+                  fullWidth
+                  value={category}
+                  onChange={(category) => setCategory(category.target.value)}
+                  onKeyPress={(e) => {
+                    e.key === "Enter" && addPurchaseBtn();
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+          <Box
+            id="purchases-form-submit"
+            display="flex"
+            flexDirection="row-reverse"
+          >
+            <Toolbar disableGutters={true}>
+              <Button
+                type="submit"
+                variant="contained"
+                onClick={() => addPurchaseBtn()}
+              >
+                Add Purchase
+              </Button>
+            </Toolbar>
+          </Box>
+        </FormControl>
+      </Box>
       {renderSnackbar}
     </div>
   );
