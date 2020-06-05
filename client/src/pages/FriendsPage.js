@@ -18,10 +18,10 @@ const FriendsPage = () => {
           justify="center"
           alignItems="flex-start"
         >
-          <Grid item md={6} xs={12} className="page-grid-spacing">
+          <Grid item md={6} xs={12} className="grid-spacing">
             <FriendRequests />
           </Grid>
-          <Grid item md={6} xs={12} className="page-grid-spacing">
+          <Grid item md={6} xs={12} className="grid-spacing">
             <FriendsList />
           </Grid>
         </Grid>

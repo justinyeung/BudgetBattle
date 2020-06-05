@@ -230,7 +230,6 @@ const FriendForm = ({
             direction="row"
             justify="flex-start"
             alignItems="flex-start"
-            spacing={5}
             className="search-request-container"
           >
             {user &&
@@ -242,7 +241,7 @@ const FriendForm = ({
                       xs={12}
                       md={6}
                       key={searchUser._id}
-                      className="search-item"
+                      className={("search-item", "grid-spacing")}
                     >
                       <ListItem ContainerComponent="div">
                         <ListItemAvatar className={classes.avatar}>

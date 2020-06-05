@@ -16,10 +16,10 @@ const PurchasePage = () => {
           justify="center"
           alignItems="flex-start"
         >
-          <Grid item xs={12} className="page-grid-spacing">
+          <Grid item xs={12} className="grid-spacing">
             <PurchaseForm />
           </Grid>
-          <Grid item xs={12} className="page-grid-spacing">
+          <Grid item xs={12} className="grid-spacing">
             <CurrentPurchases />
           </Grid>
         </Grid>

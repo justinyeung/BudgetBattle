@@ -99,9 +99,8 @@ const PurchaseForm = ({ addPurchase }) => {
               direction="row"
               justify="center"
               alignItems="center"
-              spacing={5}
             >
-              <Grid item lg={3} md={3} sm={8} xs={10}>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     disableToolbar
@@ -127,7 +126,7 @@ const PurchaseForm = ({ addPurchase }) => {
                   />
                 </MuiPickersUtilsProvider>
               </Grid>
-              <Grid item lg={3} md={3} sm={8} xs={10}>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
                 <TextField
                   id="outlined-basic"
                   autoComplete="off"
@@ -141,7 +140,7 @@ const PurchaseForm = ({ addPurchase }) => {
                   }}
                 />
               </Grid>
-              <Grid item lg={3} md={3} sm={8} xs={10}>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
                 <TextField
                   id="outlined-basic"
                   autoComplete="off"
@@ -155,7 +154,7 @@ const PurchaseForm = ({ addPurchase }) => {
                   }}
                 />
               </Grid>
-              <Grid item lg={3} md={3} sm={8} xs={10}>
+              <Grid item lg={3} md={3} sm={8} xs={10} className="grid-spacing">
                 <TextField
                   id="outlined-basic"
                   autoComplete="off"

@@ -48,12 +48,12 @@
   .container-spacing {
     padding: 4px !important;
   }
-  .page-grid-spacing {
+  .grid-spacing {
     padding: 4px !important;
   }
 }
 
-.page-grid-spacing {
+.grid-spacing {
   padding: 20px;
 }
 
