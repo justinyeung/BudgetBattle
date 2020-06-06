@@ -21,7 +21,7 @@ class DesktopContainer extends Component {
             inverted
             textAlign="center"
             style={{
-              minHeight: 700,
+              minHeight: 500,
               padding: "1em 0em",
               background: `linear-gradient(to right, #3c3b3f, #605c3c)`,
             }}
