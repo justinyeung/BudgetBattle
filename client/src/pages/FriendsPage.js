@@ -10,7 +10,6 @@ import FriendRequests from "../components/friends/FriendRequests";
 const FriendsPage = () => {
   return (
     <div>
-      <FriendForm />
       <Container maxWidth="md" className="container-spacing">
         <Grid
           container
@@ -18,6 +17,9 @@ const FriendsPage = () => {
           justify="center"
           alignItems="flex-start"
         >
+          <Grid item xs={12} className="grid-spacing">
+            <FriendForm />
+          </Grid>
           <Grid item md={6} xs={12} className="grid-spacing">
             <FriendRequests />
           </Grid>
