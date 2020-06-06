@@ -11,17 +11,11 @@ const getWidth = () => {
 };
 
 class DesktopContainer extends Component {
-  state = {};
-
   render() {
     const { children } = this.props;
 
     return (
-      <Responsive
-        getWidth={getWidth}
-        minWidth={Responsive.onlyTablet.minWidth}
-        className="homepage-header"
-      >
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility once={false}>
           <Segment
             inverted
