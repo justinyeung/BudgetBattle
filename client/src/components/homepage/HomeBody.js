@@ -90,7 +90,7 @@ const HomeBody = ({ mobile }) => {
             </Grid.Row>
             <Grid.Row style={{ padding: 0 }}>
               <Grid.Column width={mobile ? 16 : 12}>
-                <Button>Get Started!</Button>
+                <Button href="/getstarted">Get Started!</Button>
               </Grid.Column>
             </Grid.Row>
           </Grid>

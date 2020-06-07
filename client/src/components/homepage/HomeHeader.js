@@ -25,7 +25,7 @@ const HomeHeader = ({ mobile }) => (
         marginTop: mobile ? "1em" : "1.5em",
       }}
     />
-    <Button primary size="huge">
+    <Button primary href="/getstarted" size="huge">
       Get Started
       <Icon name="right arrow" />
     </Button>
