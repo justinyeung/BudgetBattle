@@ -32,15 +32,8 @@ function App() {
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/friends" component={FriendsPage} />
             <PrivateRoute path="/purchases" component={PurchasesPage} />
-            <PrivateRoute
-              exact
-              path="/competitions"
-              component={CompetitionsPage}
-            />
-            <PrivateRoute
-              path="/competitions/user"
-              component={CurrentCompPage}
-            />
+            <PrivateRoute exact path="/battles" component={CompetitionsPage} />
+            <PrivateRoute path="/battles/user" component={CurrentCompPage} />
             <Route exact path="/login" component={LoginPage} />
           </Switch>
         </Fragment>

@@ -207,11 +207,11 @@ const CurrentComps = ({
       aria-labelledby="draggable-dialog-title"
     >
       <DialogTitle style={{ cursor: "move" }} id="draggable-dialog-title">
-        Remove Competition
+        Remove Battle
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Are you sure you want to remove this competition?
+          Are you sure you want to remove this battle?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -229,7 +229,7 @@ const CurrentComps = ({
     <div>
       <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
-          Competitions
+          Battles
         </Typography>
         <Divider />
         <div className={classes.root}>
@@ -240,7 +240,7 @@ const CurrentComps = ({
                   <Avatar>{":("}</Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={"No Competitions to show."}
+                  primary={"No Battles to show."}
                   secondary={
                     <React.Fragment>
                       <Typography
@@ -249,7 +249,7 @@ const CurrentComps = ({
                         className={classes.inline}
                         color="textPrimary"
                       >
-                        Invite Friends to start Budget Battling!
+                        Invite Friends to start Battling!
                       </Typography>
                     </React.Fragment>
                   }
