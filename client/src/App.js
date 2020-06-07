@@ -18,6 +18,7 @@ import FriendsPage from "./pages/FriendsPage";
 import PurchasesPage from "./pages/PurchasesPage";
 import CompetitionsPage from "./pages/CompetitionsPage";
 import CurrentCompPage from "./pages/CurrentCompPage";
+import Footer from "./components/layout/Footer";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route exact path="/login" component={LoginPage} />
           </Switch>
         </Fragment>
+        <Footer />
       </Router>
     </Provider>
   );
