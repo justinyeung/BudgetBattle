@@ -6,7 +6,7 @@ const passport = require('passport');
 router.get(
     '/callback',
     passport.authenticate('google', {
-        failureRedirect: 'http://localhost:3000/',
+        failureRedirect: 'http://www.budgetbattle.io/',
     }),
     function (req, res) {
         try {
@@ -14,7 +14,7 @@ router.get(
             req.session.user = req.user;
 
             // redirect to home page
-            res.redirect('http://localhost:3000/');
+            res.redirect('http://www.budgetbattle.io/');
         } catch (error) {
             console.error(err.message);
             res.status(500).send('Server Error');

@@ -60,6 +60,7 @@ router.get('/logout', (req, res) => {
         req.logout();
         req.session.destroy();
 
+        // redirect to home page
         return res.json({ msg: 'User Logged Out' });
     } catch (err) {
         console.error(err.message);
