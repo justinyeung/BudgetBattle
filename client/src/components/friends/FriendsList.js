@@ -33,7 +33,7 @@ const moment = require("moment");
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#f5f5f5",
     margin: 0,
   },
   inline: {
