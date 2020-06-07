@@ -68,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
     margin: 0,
   },
 }));
@@ -228,7 +227,7 @@ const CurrentComps = ({
 
   return (
     <div>
-      <Box boxShadow={1} className="container-spacing">
+      <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
           Competitions
         </Typography>
