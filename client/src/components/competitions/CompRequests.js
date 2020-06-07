@@ -26,7 +26,6 @@ import CloseIcon from "@material-ui/icons/Close";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
     margin: 0,
   },
   inline: {
@@ -116,7 +115,7 @@ const CompRequests = ({
 
   return (
     <div>
-      <Box boxShadow={1} className="container-spacing">
+      <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
           Competition Requests
         </Typography>

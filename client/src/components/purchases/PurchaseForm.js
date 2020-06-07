@@ -86,7 +86,7 @@ const PurchaseForm = ({ addPurchase }) => {
 
   return (
     <div>
-      <Box boxShadow={1} className="container-spacing">
+      <Box boxShadow={1} className="container-spacing component-box">
         <FormControl fullWidth>
           <Typography variant="h6" id="header-title">
             Add Purchase

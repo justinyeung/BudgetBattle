@@ -161,7 +161,7 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
 
   return (
     <div>
-      <Box boxShadow={1} className="container-spacing">
+      <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
           Friends
         </Typography>

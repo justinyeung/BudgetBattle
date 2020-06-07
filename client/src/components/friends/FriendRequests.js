@@ -27,7 +27,6 @@ const moment = require("moment");
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
   },
   inline: {
     display: "inline",
@@ -108,7 +107,7 @@ const FriendRequests = ({
 
   return (
     <div>
-      <Box boxShadow={1} className="container-spacing">
+      <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
           Friend Requests
         </Typography>
