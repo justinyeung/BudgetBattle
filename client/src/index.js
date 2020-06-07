@@ -6,7 +6,7 @@ import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App style={{ position: "relative" }} />
   </React.StrictMode>,
   document.getElementById("root")
 );

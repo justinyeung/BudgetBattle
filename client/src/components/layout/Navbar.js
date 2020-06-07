@@ -316,7 +316,7 @@ const PrimarySearchAppBar = ({
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" color="inherit">
+      <AppBar elevation={1} position="static" color="inherit">
         <Toolbar>
           <Container maxWidth="lg">
             <Grid
