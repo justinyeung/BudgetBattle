@@ -108,7 +108,7 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
     <div>
       <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
-          Send Competition Request
+          Send Battle Request
         </Typography>
         <Divider />
         <Grid

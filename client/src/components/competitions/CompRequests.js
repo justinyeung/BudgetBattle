@@ -117,7 +117,7 @@ const CompRequests = ({
     <div>
       <Box boxShadow={1} className="container-spacing component-box">
         <Typography variant="h6" id="header-title">
-          Competition Requests
+          Battle Requests
         </Typography>
         <Divider />
         <List className={classes.root}>

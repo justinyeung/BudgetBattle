@@ -72,8 +72,8 @@ const Footer = () => {
                 <List.Item as="a" href="/purchases">
                   Purchases
                 </List.Item>
-                <List.Item as="a" href="/competitions">
-                  Competitions
+                <List.Item as="a" href="/battles">
+                  Battles
                 </List.Item>
               </List>
             </Grid.Column>
@@ -86,7 +86,7 @@ const Footer = () => {
                   Semantic UI.
                 </List.Item>
                 <List.Item
-                  as="p"
+                  as="a"
                   href="https://github.com/justinyeung/BudgetBattle"
                 >
                   View the code on Github

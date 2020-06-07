@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     width: "100%",
+    background: "#f5f5f5",
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     width: "100%",
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: "#f5f5f5",
     margin: 0,
   },
   avatar: {
