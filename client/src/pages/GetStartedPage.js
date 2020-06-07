@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -8,8 +8,14 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { getUser } from "../actions/userActions";
+import LoginPage from "./LoginPage";
 
 const GetStartedPage = ({ getUser, user: { user } }) => {
   useEffect(() => {
@@ -18,10 +24,42 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
     // eslint-disable-next-line
   }, []);
 
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const renderLoginDialog = (
+    <div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle id="alert-dialog-title">
+          {user ? "You are already Logged in" : "Log in to Get Started"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {user
+              ? "Thank you for creating an account with us!"
+              : "In order to use our features and services, you must create an account."}
+          </DialogContentText>
+        </DialogContent>
+        {!user && <LoginPage />}
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+
   return (
     <div>
       <Container maxWidth="lg" className="container-spacing">
-        {user ? <p>Logged In</p> : <p>Not Logged In</p>}
         <Grid
           container
           direction="row"
@@ -35,10 +73,8 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
               </Typography>
               <Divider />
               <Container className="container-spacing">
-                <p>
-                  Use your Facebook or Google account to access Budget Battle
-                </p>
-                <Button href="/login" variant="contained">
+                <p>Create an account with us to get started!</p>
+                <Button onClick={handleClickOpen} variant="contained">
                   Go to Sign In
                 </Button>
               </Container>
@@ -60,9 +96,15 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
                   Easily keep track of your purchases and sort by Date,
                   Location, Category and Amount.
                 </p>
-                <Button href="/login" variant="contained">
-                  Go to Purchases
-                </Button>
+                {user ? (
+                  <Button href="/purchases" variant="contained">
+                    Go to Purchases
+                  </Button>
+                ) : (
+                  <Button onClick={handleClickOpen} variant="contained">
+                    Go to Purchases
+                  </Button>
+                )}
               </Container>
             </Box>
           </Grid>
@@ -79,11 +121,17 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
                 </p>
                 <p>
                   Easily search for your friends and send them a friend request.
+                  If they find you first, accept their request!
                 </p>
-                <p>If they find you first, accept their request!</p>
-                <Button href="/login" variant="contained">
-                  Go to Friends
-                </Button>
+                {user ? (
+                  <Button href="/friends" variant="contained">
+                    Go to Friends
+                  </Button>
+                ) : (
+                  <Button onClick={handleClickOpen} variant="contained">
+                    Go to Friends
+                  </Button>
+                )}
               </Container>
             </Box>
           </Grid>
@@ -94,17 +142,26 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
               </Typography>
               <Divider />
               <Container className="container-spacing">
-                <p>Compete with your friends to see who can stay on budget</p>
-                <p>Compare your purchases!</p>
-                <p>See who can meet their goal by the end of the month.</p>
-                <Button href="/login" variant="contained">
-                  Go to Battles
-                </Button>
+                <p>Compete with your friends to see who can stay on budget.</p>
+                <p>
+                  Compare your purchases and see who can meet their goal by the
+                  end of the month.
+                </p>
+                {user ? (
+                  <Button href="/battles" variant="contained">
+                    Go to Battles
+                  </Button>
+                ) : (
+                  <Button onClick={handleClickOpen} variant="contained">
+                    Go to Battles
+                  </Button>
+                )}
               </Container>
             </Box>
           </Grid>
         </Grid>
       </Container>
+      {renderLoginDialog}
     </div>
   );
 };
