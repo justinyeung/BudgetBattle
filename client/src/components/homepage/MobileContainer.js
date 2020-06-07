@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Responsive, Segment } from "semantic-ui-react";
 
-import HomepageHeading from "./HomepageHeading";
+import HomeHeader from "./HomeHeader";
+import HomeBody from "./HomeBody";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -12,8 +13,6 @@ const getWidth = () => {
 
 class MobileContainer extends Component {
   render() {
-    const { children } = this.props;
-
     return (
       <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth}>
         <Segment
@@ -26,10 +25,10 @@ class MobileContainer extends Component {
           }}
           vertical
         >
-          <HomepageHeading mobile />
+          <HomeHeader mobile />
         </Segment>
 
-        {children}
+        <HomeBody mobile />
       </Responsive>
     );
   }
