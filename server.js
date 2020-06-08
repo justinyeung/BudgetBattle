@@ -37,7 +37,7 @@ passport.use(
         {
             clientID: process.env.REACT_APP_FACEBOOK_APP_ID,
             clientSecret: process.env.REACT_APP_FACEBOOK_APP_SECRET,
-            callbackURL: '/api/fbauth/callback',
+            callbackURL: 'https://www.budgetbattle.io/api/fbauth/callback',
         },
         async function (accessToken, refreshToken, profile, cb) {
             // runs when logging in
@@ -64,7 +64,7 @@ passport.use(
         {
             clientID: process.env.REACT_APP_GOOGLE_APP_ID,
             clientSecret: process.env.REACT_APP_GOOGLE_APP_SECRET,
-            callbackURL: '/api/ggauth/callback',
+            callbackURL: 'https://www.budgetbattle.io/api/ggauth/callback',
         },
         async function (accessToken, refreshToken, profile, cb) {
             // runs when logging in
