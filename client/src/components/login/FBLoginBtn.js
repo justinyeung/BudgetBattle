@@ -6,7 +6,8 @@ const FBLoginBtn = ({ setUserLoading }) => {
     return (
         <div>
             <a
-                href="http://localhost:5000/api/fbauth/login/"
+                id="login-link"
+                href="http://www.budgetbattle.io/api/fbauth/login/"
                 onClick={setUserLoading}
             >
                 <FacebookLoginButton />
