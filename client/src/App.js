@@ -19,6 +19,7 @@ import PurchasesPage from "./pages/PurchasesPage";
 import CompetitionsPage from "./pages/CompetitionsPage";
 import CurrentCompPage from "./pages/CurrentCompPage";
 import Footer from "./components/layout/Footer";
+import SuccessRedirect from "./pages/SuccesRedirect";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <PrivateRoute path="/purchases" component={PurchasesPage} />
             <PrivateRoute exact path="/battles" component={CompetitionsPage} />
             <PrivateRoute path="/battles/user" component={CurrentCompPage} />
+            <Route exact path="/success" component={SuccessRedirect} />
             <Route exact path="/login" component={LoginPage} />
           </Switch>
         </Fragment>
