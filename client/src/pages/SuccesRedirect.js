@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+import Spinner from "../components/layout/Spinner";
 import { getUser, setLoading } from "../actions/userActions";
 
 const SuccessRedirect = ({ getUser, setLoading, user: { user, loading } }) => {
@@ -10,6 +11,8 @@ const SuccessRedirect = ({ getUser, setLoading, user: { user, loading } }) => {
     if (loading === false) {
       getUser();
     }
+
+    // eslint-disable-next-line
   }, []);
 
   const getUserFn = () => {
@@ -19,8 +22,8 @@ const SuccessRedirect = ({ getUser, setLoading, user: { user, loading } }) => {
 
   return (
     <div>
-      {user && user.name}
-      {loading ? "Loading" : "Not Loading"}
+      {!loading && user && user.name}
+      {loading && <Spinner />}
       <button onClick={getUserFn}>Click to Get User</button>
     </div>
   );
