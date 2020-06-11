@@ -154,3 +154,15 @@ header.appbar {
   background-color: black;
   color: white;
 }
+
+div.MuiLinearProgress-colorPrimary {
+  background-color: inherit;
+}
+
+div.MuiLinearProgress-barColorPrimary {
+  background-color: rgb(203, 63, 34);
+}
+
+div.MuiLinearProgress-root {
+  height: 5px;
+}

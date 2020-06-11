@@ -9,6 +9,7 @@ import {
   ACCEPT_FRIEND,
   DELETE_FRIEND,
   FRIEND_ERROR,
+  SET_LOADING,
 } from "./types";
 
 import axios from "axios";
@@ -31,17 +32,26 @@ export const login = () => async (dispatch) => {
   }
 };
 
+// set loading
+export const setLoading = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: SET_LOADING,
+      payload: null,
+    });
+  } catch (err) {
+    dispatch({
+      type: USER_ERROR,
+      payload: err,
+    });
+  }
+};
+
 // Get current logged in user and user's friends
 export const getUser = () => async (dispatch) => {
   try {
     // api call to get current user
     const res = await axios.get("/api/users/current");
-
-    if (res.data !== null) {
-      localStorage.setItem("isLoggedIn", true);
-    } else {
-      localStorage.removeItem("isLoggedIn");
-    }
 
     dispatch({
       type: GET_USER,
@@ -61,8 +71,6 @@ export const logout = () => async (dispatch) => {
   try {
     // api call to log out user
     await axios.get("/api/users/logout");
-
-    localStorage.removeItem("isLoggedIn");
 
     dispatch({
       type: LOGOUT,

@@ -34,8 +34,8 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env["FACEBOOK_APP_ID"],
-      clientSecret: process.env["FACEBOOK_APP_SECRET"],
+      clientID: process.env.REACT_APP_FACEBOOK_APP_ID,
+      clientSecret: process.env.REACT_APP_FACEBOOK_APP_SECRET,
       callbackURL: "/api/fbauth/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {
@@ -63,8 +63,8 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env["GOOGLE_APP_ID"],
-      clientSecret: process.env["GOOGLE_APP_SECRET"],
+      clientID: process.env.REACT_APP_GOOGLE_APP_ID,
+      clientSecret: process.env.REACT_APP_GOOGLE_APP_SECRET,
       callbackURL: "/api/ggauth/callback",
     },
     async function (accessToken, refreshToken, profile, cb) {

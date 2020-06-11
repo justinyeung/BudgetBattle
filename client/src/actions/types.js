@@ -27,3 +27,4 @@ export const CLEAR_COMPS = "CLEAR_COMPS";
 export const COMP_ERROR = "COMP_ERROR";
 export const SEARCH_USER = "SEARCH_USER";
 export const SEARCH_ERROR = "SEARCH_ERROR";
+export const SET_LOADING = "SET_LOADING";
