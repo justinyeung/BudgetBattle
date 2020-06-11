@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 
-import Spinner from "../layout/Spinner";
 import { getUser, setLoading } from "../../actions/userActions";
 
 const PrivateRoute = ({
@@ -22,7 +21,6 @@ const PrivateRoute = ({
 
   return (
     <div>
-      {loading && <Spinner />}
       {!loading && user !== null && <Route {...rest} render={Component} />}
       {!loading && user === null && <Redirect to="/login" />}
     </div>

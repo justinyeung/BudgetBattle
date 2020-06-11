@@ -35,8 +35,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import Container from "@material-ui/core/Container";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { logout, getUser } from "../../actions/userActions";
+import { logout, getUser, setLoading } from "../../actions/userActions";
 import { clearPurchases } from "../../actions/purchaseActions";
 import { clearComps } from "../../actions/competitionActions";
 
@@ -98,6 +99,7 @@ const PrimarySearchAppBar = ({
   getUser,
   clearPurchases,
   clearComps,
+  setLoading,
 }) => {
   useEffect(() => {
     getUser();
@@ -106,19 +108,13 @@ const PrimarySearchAppBar = ({
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  // snackbar
-  const handleSnackClick = () => {
-    setOpen(true);
-  };
+  const [logoutClicked, setLogoutClicked] = useState(false);
 
   const handleSnackClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
-    setOpen(false);
+    setLogoutClicked(false);
   };
 
   // menu
@@ -148,11 +144,13 @@ const PrimarySearchAppBar = ({
   };
 
   const logoutButton = () => {
+    setLoading();
     handleMenuClose();
     logout();
     clearPurchases();
     clearComps();
-    handleSnackClick();
+    setLogoutClicked(true);
+    // handleSnackClick();
   };
 
   const list = (anchor) => (
@@ -296,7 +294,7 @@ const PrimarySearchAppBar = ({
         vertical: "bottom",
         horizontal: "left",
       }}
-      open={open}
+      open={!loading && user === null && logoutClicked}
       autoHideDuration={3000}
       onClose={handleSnackClose}
       message="Logout Successful"
@@ -418,6 +416,8 @@ const PrimarySearchAppBar = ({
           </Container>
         </Toolbar>
       </AppBar>
+      {loading && <LinearProgress />}
+      {/* <LinearProgress /> */}
       {renderMenu}
       {renderSnackbar}
     </div>
@@ -429,6 +429,7 @@ PrimarySearchAppBar.propTypes = {
   getUser: PropTypes.func.isRequired,
   clearPurchases: PropTypes.func.isRequired,
   clearComps: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -440,4 +441,5 @@ export default connect(mapStateToProps, {
   getUser,
   clearPurchases,
   clearComps,
+  setLoading,
 })(PrimarySearchAppBar);

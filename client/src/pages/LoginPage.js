@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 import GGLoginBtn from "../components/auth/GGLoginBtn";
 import FBLoginBtn from "../components/auth/FBLoginBtn";
-import Spinner from "../components/layout/Spinner";
 
 import { getUser, setLoading } from "../actions/userActions";
 
@@ -50,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginPage = ({ getUser, user: { user, loading } }) => {
   useEffect(() => {
+    setLoading();
     getUser();
     // eslint-disable-next-line
   }, []);
@@ -80,12 +80,7 @@ const LoginPage = ({ getUser, user: { user, loading } }) => {
           </Container>
         </div>
       )}
-      {loading && <Spinner />}
-      {!loading && user !== null && (
-        <div>
-          <Redirect to="/" />
-        </div>
-      )}
+      {!loading && user !== null && <Redirect to="/" />}
     </div>
   );
 };
