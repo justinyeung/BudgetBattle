@@ -14,7 +14,7 @@ router.get(
       req.session.user = req.user;
 
       // redirect to home page
-      res.redirect("http://localhost:3000/success");
+      res.redirect("http://localhost:3000/");
     } catch (error) {
       console.error(err.message);
       res.status(500).send("Server Error");

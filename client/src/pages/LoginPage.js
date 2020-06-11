@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 
 import GGLoginBtn from "../components/auth/GGLoginBtn";
 import FBLoginBtn from "../components/auth/FBLoginBtn";
+import Spinner from "../components/layout/Spinner";
 
-import { getUser } from "../actions/userActions";
+import { getUser, setLoading } from "../actions/userActions";
 
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginPage = ({ getUser, user: { user } }) => {
+const LoginPage = ({ getUser, user: { user, loading } }) => {
   useEffect(() => {
     getUser();
     // eslint-disable-next-line
@@ -57,7 +58,7 @@ const LoginPage = ({ getUser, user: { user } }) => {
 
   return (
     <div>
-      {!localStorage.getItem("isLoggedIn") || user === null ? (
+      {!loading && user === null && (
         <div className="drawer-container">
           <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -78,7 +79,9 @@ const LoginPage = ({ getUser, user: { user } }) => {
             </Box>
           </Container>
         </div>
-      ) : (
+      )}
+      {loading && <Spinner />}
+      {!loading && user !== null && (
         <div>
           <Redirect to="/" />
         </div>
@@ -89,10 +92,11 @@ const LoginPage = ({ getUser, user: { user } }) => {
 
 LoginPage.propTypes = {
   getUser: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser })(LoginPage);
+export default connect(mapStateToProps, { getUser, setLoading })(LoginPage);

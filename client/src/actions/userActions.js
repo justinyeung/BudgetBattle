@@ -50,18 +50,8 @@ export const setLoading = () => async (dispatch) => {
 // Get current logged in user and user's friends
 export const getUser = () => async (dispatch) => {
   try {
-    console.log("after loading");
-
     // api call to get current user
     const res = await axios.get("/api/users/current");
-
-    console.log("after api");
-
-    if (res.data !== null) {
-      localStorage.setItem("isLoggedIn", true);
-    } else {
-      localStorage.removeItem("isLoggedIn");
-    }
 
     dispatch({
       type: GET_USER,
@@ -81,8 +71,6 @@ export const logout = () => async (dispatch) => {
   try {
     // api call to log out user
     await axios.get("/api/users/logout");
-
-    localStorage.removeItem("isLoggedIn");
 
     dispatch({
       type: LOGOUT,

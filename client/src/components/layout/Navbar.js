@@ -93,7 +93,7 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const PrimarySearchAppBar = ({
-  user: { user },
+  user: { user, loading },
   logout,
   getUser,
   clearPurchases,
@@ -164,7 +164,7 @@ const PrimarySearchAppBar = ({
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {localStorage.getItem("isLoggedIn") || user !== null ? (
+      {!loading && user !== null && (
         <div>
           <List>
             <Link to="/" id="drawer-link">
@@ -220,7 +220,8 @@ const PrimarySearchAppBar = ({
             </Link>
           </List>
         </div>
-      ) : (
+      )}
+      {!loading && user === null && (
         <div>
           <List>
             <Link to="/" id="drawer-link">
@@ -264,7 +265,7 @@ const PrimarySearchAppBar = ({
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      {(localStorage.getItem("isLoggedIn") || user !== null) && (
+      {!loading && user !== null && (
         <div>
           <StyledMenuItem onClick={handleMenuClose}>
             <ListItemIcon>
@@ -363,7 +364,7 @@ const PrimarySearchAppBar = ({
                 </Grid>
               </Grid>
               <Grid item>
-                {localStorage.getItem("isLoggedIn") || user !== null ? (
+                {!loading && user !== null && (
                   <IconButton
                     onClick={handleMenuClick}
                     edge="end"
@@ -374,7 +375,8 @@ const PrimarySearchAppBar = ({
                     </Avatar>
                     <ArrowDropDownIcon />
                   </IconButton>
-                ) : (
+                )}
+                {!loading && user === null && (
                   <Grid
                     container
                     direction="row"

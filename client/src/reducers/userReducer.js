@@ -26,7 +26,6 @@ export default (state = initialState, action) => {
         loading: true,
       };
     case LOGIN:
-      localStorage.setItem("isLoggedIn", true);
       return {
         ...state,
         loading: false,
@@ -39,7 +38,6 @@ export default (state = initialState, action) => {
       };
     case LOGOUT:
     case DELETE_USER:
-      localStorage.removeItem("isLoggedIn");
       return {
         ...state,
         user: null,
