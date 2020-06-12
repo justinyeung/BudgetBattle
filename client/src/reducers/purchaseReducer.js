@@ -8,36 +8,47 @@ import {
   PURCHASE_ERROR,
   CLEAR_PURCHASES,
   CLEAR_COMPETITOR,
+  SET_PURCHASE_LOADING,
 } from "../actions/types";
 
 const initialState = {
   purchases: [],
   competitor: null,
   competitorPurchases: [],
+  purchaseLoading: false,
   error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case SET_PURCHASE_LOADING:
+      return {
+        ...state,
+        purchaseLoading: true,
+      };
     case GET_PURCHASES:
       state.purchases = action.payload;
       return {
         ...state,
+        purchaseLoading: false,
       };
     case SET_COMPETITOR:
       return {
         ...state,
         competitor: action.payload,
+        purchaseLoading: false,
       };
     case GET_COMPETITOR_PURCHASES:
       state.competitorPurchases = action.payload;
       return {
         ...state,
+        purchaseLoading: false,
       };
     case ADD_PURCHASE:
       state.purchases = [...state.purchases, action.payload];
       return {
         ...state,
+        purchaseLoading: false,
       };
     case EDIT_PURCHASE:
       state.purchases = state.purchases.map((purchase) =>
@@ -45,6 +56,7 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
+        purchaseLoading: false,
       };
     case DELETE_PURCHASE:
       state.purchases = state.purchases.filter(
@@ -52,12 +64,14 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
+        purchaseLoading: false,
       };
     case PURCHASE_ERROR:
       console.error(action.payload);
       return {
         ...state,
         error: action.payload,
+        purchaseLoading: false,
       };
     case CLEAR_PURCHASES:
       return {
@@ -65,12 +79,14 @@ export default (state = initialState, action) => {
         purchases: [],
         competitor: null,
         competitorPurchases: [],
+        purchaseLoading: false,
       };
     case CLEAR_COMPETITOR:
       return {
         ...state,
         competitor: null,
         competitorPurchases: [],
+        purchaseLoading: false,
       };
     default:
       return state;

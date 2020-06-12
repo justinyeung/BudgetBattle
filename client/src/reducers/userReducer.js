@@ -9,45 +9,45 @@ import {
   ACCEPT_FRIEND,
   FRIEND_ERROR,
   DELETE_FRIEND,
-  SET_LOADING,
+  SET_USER_LOADING,
 } from "../actions/types";
 
 const initialState = {
   user: null,
-  loading: false,
+  userLoading: false,
   error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_LOADING:
+    case SET_USER_LOADING:
       return {
         ...state,
-        loading: true,
+        userLoading: true,
       };
     case LOGIN:
       return {
         ...state,
-        loading: false,
+        userLoading: false,
       };
     case GET_USER:
       return {
         ...state,
         user: action.payload,
-        loading: false,
+        userLoading: false,
       };
     case LOGOUT:
     case DELETE_USER:
       return {
         ...state,
         user: null,
-        loading: false,
+        userLoading: false,
       };
     case SEND_FRIEND:
       return {
         ...state,
         user: action.payload,
-        loading: false,
+        userLoading: false,
       };
     case ACCEPT_FRIEND:
       state.user.friends = state.user.friends.map((friend) =>
@@ -55,7 +55,7 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
-        loading: false,
+        userLoading: false,
       };
     case DELETE_FRIEND:
       state.user.friends = state.user.friends.filter(
@@ -66,7 +66,7 @@ export default (state = initialState, action) => {
       );
       return {
         ...state,
-        loading: false,
+        userLoading: false,
       };
     case AUTH_ERROR:
     case USER_ERROR:
@@ -75,7 +75,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        userLoading: false,
       };
     default:
       return state;

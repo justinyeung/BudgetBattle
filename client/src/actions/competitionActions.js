@@ -7,6 +7,7 @@ import {
   GET_INPENDING_COMP,
   COMP_ERROR,
   CLEAR_COMPS,
+  SET_COMP_LOADING,
 } from "./types";
 
 import axios from "axios";
@@ -144,6 +145,21 @@ export const clearComps = () => async (dispatch) => {
   try {
     dispatch({
       type: CLEAR_COMPS,
+      payload: null,
+    });
+  } catch (err) {
+    dispatch({
+      type: COMP_ERROR,
+      payload: err,
+    });
+  }
+};
+
+// set loading
+export const setCompLoading = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: SET_COMP_LOADING,
       payload: null,
     });
   } catch (err) {
