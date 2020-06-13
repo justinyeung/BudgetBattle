@@ -423,12 +423,12 @@ const PrimarySearchAppBar = ({
             </Grid>
           </Container>
         </Toolbar>
-        {userLoading || purchaseLoading || compLoading || searchLoading ? (
-          <LinearProgress />
-        ) : (
-          <div style={{ paddingTop: "4px", background: "black" }}></div>
-        )}
-        {/* <LinearProgress /> */}
+        <div style={{ height: "4px" }}>
+          {(userLoading || purchaseLoading || compLoading || searchLoading) && (
+            <LinearProgress />
+          )}
+          {/* <LinearProgress /> */}
+        </div>
       </AppBar>
 
       {renderMenu}
