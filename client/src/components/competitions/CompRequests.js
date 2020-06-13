@@ -5,6 +5,7 @@ import {
   acceptComp,
   rejectOrDeleteComp,
   getInPendingComp,
+  setCompLoading,
 } from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,9 +53,11 @@ const CompRequests = ({
   acceptComp,
   rejectOrDeleteComp,
   getInPendingComp,
+  setCompLoading,
   competition: { inpending },
 }) => {
   useEffect(() => {
+    setCompLoading();
     getInPendingComp();
 
     // eslint-disable-next-line
@@ -78,11 +81,13 @@ const CompRequests = ({
 
   // buttons
   const acceptBtn = (compID) => {
+    setCompLoading();
     acceptComp({ compID });
     setSnackbarMsg("Competition Request Accepted");
     handleClick();
   };
   const rejectBtn = (compID) => {
+    setCompLoading();
     rejectOrDeleteComp({ compID });
     setSnackbarMsg("Rejected Competition Request");
     handleClick();
@@ -195,6 +200,7 @@ CompRequests.propTypes = {
   getInPendingComp: PropTypes.func.isRequired,
   acceptComp: PropTypes.func.isRequired,
   rejectOrDeleteComp: PropTypes.func.isRequired,
+  setCompLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -205,4 +211,5 @@ export default connect(mapStateToProps, {
   getInPendingComp,
   acceptComp,
   rejectOrDeleteComp,
+  setCompLoading,
 })(CompRequests);

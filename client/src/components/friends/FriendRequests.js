@@ -3,7 +3,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { getUser } from "../../actions/userActions";
-import { acceptFriend, deleteFriend } from "../../actions/userActions";
+import {
+  acceptFriend,
+  deleteFriend,
+  setUserLoading,
+} from "../../actions/userActions";
 
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
@@ -37,6 +41,7 @@ const FriendRequests = ({
   getUser,
   acceptFriend,
   deleteFriend,
+  setUserLoading,
   user: { user },
 }) => {
   const [open, setOpen] = useState(false);
@@ -51,12 +56,14 @@ const FriendRequests = ({
   }, []);
 
   const acceptButton = (friendID) => {
+    setUserLoading();
     acceptFriend({ friendID });
     setMsg("Friend Request Accepted");
     handleClick();
   };
 
   const rejectButton = (friendID) => {
+    setUserLoading();
     deleteFriend({ friendID });
     setMsg("Friend Request Rejected");
     handleClick();
@@ -198,6 +205,7 @@ FriendRequests.propTypes = {
   getUser: PropTypes.func.isRequired,
   acceptFriend: PropTypes.func.isRequired,
   deleteFriend: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -208,4 +216,5 @@ export default connect(mapStateToProps, {
   getUser,
   acceptFriend,
   deleteFriend,
+  setUserLoading,
 })(FriendRequests);

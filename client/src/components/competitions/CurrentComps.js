@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import {
   getAcceptedComp,
   rejectOrDeleteComp,
+  setCompLoading,
 } from "../../actions/competitionActions";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -101,6 +102,7 @@ function PaperComponent(props) {
 const CurrentComps = ({
   getAcceptedComp,
   rejectOrDeleteComp,
+  setCompLoading,
   user: { user },
   competition: { accepted },
 }) => {
@@ -111,7 +113,7 @@ const CurrentComps = ({
   const [compID, setCompID] = useState("");
 
   useEffect(() => {
-    // get state of currently logged in user
+    setCompLoading();
     getAcceptedComp();
 
     // eslint-disable-next-line
@@ -169,6 +171,7 @@ const CurrentComps = ({
     handleClickOpenDialog();
   };
   const confirmDeleteBtn = () => {
+    setCompLoading();
     rejectOrDeleteComp({ compID });
     handleCloseDialog();
     handleClickSnackbar();
@@ -383,6 +386,7 @@ const CurrentComps = ({
 CurrentComps.propTypes = {
   getAcceptedComp: PropTypes.func.isRequired,
   rejectOrDeleteComp: PropTypes.func.isRequired,
+  setCompLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -393,4 +397,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAcceptedComp,
   rejectOrDeleteComp,
+  setCompLoading,
 })(CurrentComps);

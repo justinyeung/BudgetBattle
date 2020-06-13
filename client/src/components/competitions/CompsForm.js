@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { sendCompRequest } from "../../actions/competitionActions";
+
+import {
+  sendCompRequest,
+  setCompLoading,
+} from "../../actions/competitionActions";
+import { getUser } from "../../actions/userActions";
+
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { getUser } from "../../actions/userActions";
-
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -30,7 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
+const CompsForm = ({
+  sendCompRequest,
+  setCompLoading,
+  getUser,
+  user: { user },
+}) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -71,6 +80,7 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
       setSnackbarMsg("No Friend Selected");
       handleClick();
     } else {
+      setCompLoading();
       sendCompRequest({ id, numMonth, numYear });
       setID("");
       setDate(new Date());
@@ -192,12 +202,16 @@ const CompsForm = ({ sendCompRequest, getUser, user: { user } }) => {
 
 CompsForm.propTypes = {
   sendCompRequest: PropTypes.func.isRequired,
+  setCompLoading: PropTypes.func.isRequired,
+  getUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { sendCompRequest, getUser })(
-  CompsForm
-);
+export default connect(mapStateToProps, {
+  sendCompRequest,
+  setCompLoading,
+  getUser,
+})(CompsForm);

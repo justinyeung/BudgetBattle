@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addPurchase } from "../../actions/purchaseActions";
+import { addPurchase, setPurchaseLoading } from "../../actions/purchaseActions";
 
 import {
   MuiPickersUtilsProvider,
@@ -22,7 +22,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-const PurchaseForm = ({ addPurchase }) => {
+const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState("");
   const [location, setLocation] = useState("");
@@ -43,6 +43,7 @@ const PurchaseForm = ({ addPurchase }) => {
   };
 
   const addPurchaseBtn = () => {
+    setPurchaseLoading();
     addPurchase({ date, amount, location, category });
     if (amount === 0) {
       setSnackbarMsg("Purchase Added");
@@ -194,6 +195,7 @@ const PurchaseForm = ({ addPurchase }) => {
 
 PurchaseForm.propTypes = {
   addPurchase: PropTypes.func.isRequired,
+  setPurchaseLoading: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addPurchase })(PurchaseForm);
+export default connect(null, { addPurchase, setPurchaseLoading })(PurchaseForm);

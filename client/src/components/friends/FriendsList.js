@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { getUser, deleteFriend } from "../../actions/userActions";
+import {
+  getUser,
+  deleteFriend,
+  setUserLoading,
+} from "../../actions/userActions";
 
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
@@ -52,7 +56,12 @@ function PaperComponent(props) {
   );
 }
 
-const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
+const FriendsList = ({
+  getUser,
+  deleteFriend,
+  setUserLoading,
+  user: { user },
+}) => {
   const classes = useStyles();
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -94,6 +103,7 @@ const FriendsList = ({ getUser, deleteFriend, user: { user } }) => {
 
   //   button to confirm delete in dialog
   const confirmDelete = () => {
+    setUserLoading();
     deleteFriend({ friendID: currentID });
     handleCloseDialog();
     handleClickSnackbar();
@@ -287,10 +297,15 @@ FriendsList.propTypes = {
   user: PropTypes.object.isRequired,
   getUser: PropTypes.func.isRequired,
   deleteFriend: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser, deleteFriend })(FriendsList);
+export default connect(mapStateToProps, {
+  getUser,
+  deleteFriend,
+  setUserLoading,
+})(FriendsList);

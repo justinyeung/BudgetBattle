@@ -8,6 +8,7 @@ import { getUser, setUserLoading } from "../../actions/userActions";
 
 const PrivateRoute = ({
   getUser,
+  setUserLoading,
   user: { user, userLoading },
   component: Component,
   ...rest
@@ -21,7 +22,7 @@ const PrivateRoute = ({
 
   return (
     <div>
-      {!userLoading && user !== null && <Route {...rest} render={Component} />}
+      {user !== null && <Route {...rest} render={Component} />}
       {!userLoading && user === null && <Redirect to="/login" />}
     </div>
   );
