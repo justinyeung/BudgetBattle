@@ -37,9 +37,12 @@ import CloseIcon from "@material-ui/icons/Close";
 import Container from "@material-ui/core/Container";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
-import { logout, getUser, setLoading } from "../../actions/userActions";
-import { clearPurchases } from "../../actions/purchaseActions";
-import { clearComps } from "../../actions/competitionActions";
+import { logout, getUser, setUserLoading } from "../../actions/userActions";
+import {
+  clearPurchases,
+  setPurchaseLoading,
+} from "../../actions/purchaseActions";
+import { clearComps, setCompLoading } from "../../actions/competitionActions";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -94,12 +97,15 @@ const StyledMenuItem = withStyles((theme) => ({
 }))(MenuItem);
 
 const PrimarySearchAppBar = ({
-  user: { user, loading },
+  user: { user, userLoading },
+  purchase: { purchaseLoading },
+  competition: { compLoading },
+  search: { searchLoading },
   logout,
   getUser,
   clearPurchases,
   clearComps,
-  setLoading,
+  setUserLoading,
 }) => {
   useEffect(() => {
     getUser();
@@ -144,7 +150,9 @@ const PrimarySearchAppBar = ({
   };
 
   const logoutButton = () => {
-    setLoading();
+    setUserLoading();
+    setCompLoading();
+    setPurchaseLoading();
     handleMenuClose();
     logout();
     clearPurchases();
@@ -162,7 +170,7 @@ const PrimarySearchAppBar = ({
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {!loading && user !== null && (
+      {!userLoading && user !== null && (
         <div>
           <List>
             <Link to="/" id="drawer-link">
@@ -219,7 +227,7 @@ const PrimarySearchAppBar = ({
           </List>
         </div>
       )}
-      {!loading && user === null && (
+      {!userLoading && user === null && (
         <div>
           <List>
             <Link to="/" id="drawer-link">
@@ -263,7 +271,7 @@ const PrimarySearchAppBar = ({
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      {!loading && user !== null && (
+      {!userLoading && user !== null && (
         <div>
           <StyledMenuItem onClick={handleMenuClose}>
             <ListItemIcon>
@@ -294,7 +302,7 @@ const PrimarySearchAppBar = ({
         vertical: "bottom",
         horizontal: "left",
       }}
-      open={!loading && user === null && logoutClicked}
+      open={!userLoading && user === null && logoutClicked}
       autoHideDuration={3000}
       onClose={handleSnackClose}
       message="Logout Successful"
@@ -362,7 +370,7 @@ const PrimarySearchAppBar = ({
                 </Grid>
               </Grid>
               <Grid item>
-                {!loading && user !== null && (
+                {!userLoading && user !== null && (
                   <IconButton
                     onClick={handleMenuClick}
                     edge="end"
@@ -374,7 +382,7 @@ const PrimarySearchAppBar = ({
                     <ArrowDropDownIcon />
                   </IconButton>
                 )}
-                {!loading && user === null && (
+                {!userLoading && user === null && (
                   <Grid
                     container
                     direction="row"
@@ -416,7 +424,9 @@ const PrimarySearchAppBar = ({
           </Container>
         </Toolbar>
       </AppBar>
-      {loading && <LinearProgress />}
+      {(userLoading || purchaseLoading || compLoading || searchLoading) && (
+        <LinearProgress />
+      )}
       {/* <LinearProgress /> */}
       {renderMenu}
       {renderSnackbar}
@@ -429,11 +439,14 @@ PrimarySearchAppBar.propTypes = {
   getUser: PropTypes.func.isRequired,
   clearPurchases: PropTypes.func.isRequired,
   clearComps: PropTypes.func.isRequired,
-  setLoading: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  purchase: state.purchase,
+  competition: state.competition,
+  search: state.search,
 });
 
 export default connect(mapStateToProps, {
@@ -441,5 +454,5 @@ export default connect(mapStateToProps, {
   getUser,
   clearPurchases,
   clearComps,
-  setLoading,
+  setUserLoading,
 })(PrimarySearchAppBar);

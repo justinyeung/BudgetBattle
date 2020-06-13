@@ -8,6 +8,7 @@ import {
   PURCHASE_ERROR,
   CLEAR_PURCHASES,
   CLEAR_COMPETITOR,
+  SET_PURCHASE_LOADING,
 } from "./types";
 
 import axios from "axios";
@@ -166,6 +167,21 @@ export const clearCompetitor = () => async (dispatch) => {
   try {
     dispatch({
       type: CLEAR_COMPETITOR,
+      payload: null,
+    });
+  } catch (err) {
+    dispatch({
+      type: PURCHASE_ERROR,
+      payload: err,
+    });
+  }
+};
+
+// set loading
+export const setPurchaseLoading = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: SET_PURCHASE_LOADING,
       payload: null,
     });
   } catch (err) {

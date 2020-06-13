@@ -6,8 +6,9 @@ import {
   deleteFriend,
   acceptFriend,
   sendFriendRequest,
+  setUserLoading,
 } from "../../actions/userActions";
-import { searchUsers } from "../../actions/searchActions";
+import { searchUsers, setSearchLoading } from "../../actions/searchActions";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Box from "@material-ui/core/Box";
@@ -65,6 +66,8 @@ const FriendForm = ({
   getUser,
   deleteFriend,
   acceptFriend,
+  setUserLoading,
+  setSearchLoading,
   user: { user },
   search: { users },
 }) => {
@@ -93,27 +96,32 @@ const FriendForm = ({
 
   // buttons
   const searchBtn = () => {
+    setSearchLoading();
     searchUsers({ friendSearch });
     setFriendSearch("");
   };
   const addFriendBtn = (friendID) => {
-    setSnackbarMsg("Request Sent");
+    setUserLoading();
     sendFriendRequest({ friendID });
+    setSnackbarMsg("Request Sent");
     handleClick();
   };
   const removeFriendBtn = (friendID) => {
-    setSnackbarMsg("Friend Removed");
+    setUserLoading();
     deleteFriend({ friendID });
+    setSnackbarMsg("Friend Removed");
     handleClick();
   };
   const removeRequestBtn = (friendID) => {
-    setSnackbarMsg("Request Removed");
+    setUserLoading();
     deleteFriend({ friendID });
+    setSnackbarMsg("Request Removed");
     handleClick();
   };
   const acceptRequestBtn = (friendID) => {
-    setSnackbarMsg("Request Accepted");
+    setUserLoading();
     acceptFriend({ friendID });
+    setSnackbarMsg("Request Accepted");
     handleClick();
   };
 
@@ -277,6 +285,8 @@ FriendForm.propTypes = {
   getUser: PropTypes.func.isRequired,
   deleteFriend: PropTypes.func.isRequired,
   acceptFriend: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
+  setSearchLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -290,4 +300,6 @@ export default connect(mapStateToProps, {
   getUser,
   deleteFriend,
   acceptFriend,
+  setUserLoading,
+  setSearchLoading,
 })(FriendForm);

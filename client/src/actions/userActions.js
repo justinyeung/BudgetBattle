@@ -9,7 +9,7 @@ import {
   ACCEPT_FRIEND,
   DELETE_FRIEND,
   FRIEND_ERROR,
-  SET_LOADING,
+  SET_USER_LOADING,
 } from "./types";
 
 import axios from "axios";
@@ -33,10 +33,10 @@ export const login = () => async (dispatch) => {
 };
 
 // set loading
-export const setLoading = () => async (dispatch) => {
+export const setUserLoading = () => async (dispatch) => {
   try {
     dispatch({
-      type: SET_LOADING,
+      type: SET_USER_LOADING,
       payload: null,
     });
   } catch (err) {

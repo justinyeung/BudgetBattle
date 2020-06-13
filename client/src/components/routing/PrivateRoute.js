@@ -4,16 +4,17 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Route } from "react-router-dom";
 
-import { getUser, setLoading } from "../../actions/userActions";
+import { getUser, setUserLoading } from "../../actions/userActions";
 
 const PrivateRoute = ({
   getUser,
-  user: { user, loading },
+  setUserLoading,
+  user: { user, userLoading },
   component: Component,
   ...rest
 }) => {
   useEffect(() => {
-    setLoading();
+    setUserLoading();
     getUser();
 
     // eslint-disable-next-line
@@ -21,19 +22,21 @@ const PrivateRoute = ({
 
   return (
     <div>
-      {!loading && user !== null && <Route {...rest} render={Component} />}
-      {!loading && user === null && <Redirect to="/login" />}
+      {user !== null && <Route {...rest} render={Component} />}
+      {!userLoading && user === null && <Redirect to="/login" />}
     </div>
   );
 };
 
 PrivateRoute.propTypes = {
   getUser: PropTypes.func.isRequired,
-  setLoading: PropTypes.func.isRequired,
+  setUserLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser, setLoading })(PrivateRoute);
+export default connect(mapStateToProps, { getUser, setUserLoading })(
+  PrivateRoute
+);
