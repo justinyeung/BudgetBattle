@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
@@ -368,9 +369,11 @@ const CurrentComps = ({
                   >
                     Remove
                   </Button>
-                  <Button variant="outlined" size="large" color="primary">
-                    View More
-                  </Button>
+                  <Link to="/battles/idasdfasfd">
+                    <Button variant="outlined" size="large" color="primary">
+                      View More
+                    </Button>
+                  </Link>
                 </ExpansionPanelActions>
                 <Divider />
               </ExpansionPanel>

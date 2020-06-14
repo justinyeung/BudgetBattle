@@ -1,12 +1,10 @@
 import React from "react";
 
-import CurrentPurchases from "../components/purchases/CurrentPurchases";
-
 const CurrentCompetition = () => {
   return (
     <div>
       <div style={{ padding: "1rem" }}>
-        <CurrentPurchases />
+        <p>Current Competition Page</p>
       </div>
     </div>
   );

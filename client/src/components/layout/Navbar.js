@@ -391,31 +391,34 @@ const PrimarySearchAppBar = ({
                     spacing={2}
                   >
                     <Grid item className={classes.title}>
-                      <Button href="/getstarted" color="inherit">
-                        <Typography
-                          variant="subtitle1"
-                          noWrap
-                          className={classes.loginButtonText}
-                        >
-                          Get Started
-                        </Typography>
-                      </Button>
+                      <Link to="/getstarted" class="navbar-link">
+                        <Button color="inherit">
+                          <Typography
+                            variant="subtitle1"
+                            noWrap
+                            className={classes.loginButtonText}
+                          >
+                            Get Started
+                          </Typography>
+                        </Button>
+                      </Link>
                     </Grid>
                     <Grid item>
-                      <Button
-                        href="/login"
-                        color="inherit"
-                        variant="outlined"
-                        className={classes.loginButton}
-                      >
-                        <Typography
-                          variant="subtitle1"
-                          noWrap
-                          className={classes.loginButtonText}
+                      <Link to="/login" class="navbar-link">
+                        <Button
+                          color="inherit"
+                          variant="outlined"
+                          className={classes.loginButton}
                         >
-                          Login
-                        </Typography>
-                      </Button>
+                          <Typography
+                            variant="subtitle1"
+                            noWrap
+                            className={classes.loginButtonText}
+                          >
+                            Login
+                          </Typography>
+                        </Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 )}

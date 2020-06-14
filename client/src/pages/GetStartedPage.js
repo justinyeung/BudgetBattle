@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
@@ -97,9 +98,9 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
                   Location, Category and Amount.
                 </p>
                 {user ? (
-                  <Button href="/purchases" variant="contained">
-                    Go to Purchases
-                  </Button>
+                  <Link to="/purchases">
+                    <Button variant="contained">Go to Purchases</Button>
+                  </Link>
                 ) : (
                   <Button onClick={handleClickOpen} variant="contained">
                     Go to Purchases
@@ -124,9 +125,9 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
                   If they find you first, accept their request!
                 </p>
                 {user ? (
-                  <Button href="/friends" variant="contained">
-                    Go to Friends
-                  </Button>
+                  <Link to="/friends">
+                    <Button variant="contained">Go to Friends</Button>
+                  </Link>
                 ) : (
                   <Button onClick={handleClickOpen} variant="contained">
                     Go to Friends
@@ -148,9 +149,9 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
                   end of the month.
                 </p>
                 {user ? (
-                  <Button href="/battles" variant="contained">
-                    Go to Battles
-                  </Button>
+                  <Link to="/battles">
+                    <Button variant="contained">Go to Battles</Button>
+                  </Link>
                 ) : (
                   <Button onClick={handleClickOpen} variant="contained">
                     Go to Battles

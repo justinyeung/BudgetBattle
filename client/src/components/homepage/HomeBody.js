@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import {
   Button,
   Divider,
@@ -90,7 +91,9 @@ const HomeBody = ({ mobile }) => {
             </Grid.Row>
             <Grid.Row style={{ padding: 0 }}>
               <Grid.Column width={mobile ? 16 : 12}>
-                <Button href="/getstarted">Get Started!</Button>
+                <Link to="/getstarted">
+                  <Button>Get Started!</Button>
+                </Link>
               </Grid.Column>
             </Grid.Row>
           </Grid>
