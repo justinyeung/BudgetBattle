@@ -43,13 +43,11 @@ export const getUser = () => async (dispatch) => {
     const res = await axios.get("/api/users/current");
 
     if (!isLoggedIn(res.data)) {
-      console.log("not logged in");
       dispatch({
-        type: GET_USER,
+        type: SET_USER_LOADING_FALSE,
         payload: null,
       });
     } else {
-      console.log("logged in");
       dispatch({
         type: GET_USER,
         payload: res.data,
@@ -111,16 +109,19 @@ export const sendFriendRequest = (friendID) => async (dispatch) => {
 
     // api call to add friend, friendID as param
     // returns updated current user object
-    let updatedCurrent = await axios.post(
-      "/api/friends/send",
-      friendID,
-      config
-    );
+    const res = await axios.post("/api/friends/send", friendID, config);
 
-    dispatch({
-      type: SEND_FRIEND,
-      payload: updatedCurrent.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_USER_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: SEND_FRIEND,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: FRIEND_ERROR,
@@ -140,12 +141,19 @@ export const acceptFriend = (friendID) => async (dispatch) => {
     };
 
     // returns updated friend object
-    let friend = await axios.put("/api/friends", friendID, config);
+    const res = await axios.put("/api/friends", friendID, config);
 
-    dispatch({
-      type: ACCEPT_FRIEND,
-      payload: friend.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_USER_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: ACCEPT_FRIEND,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: FRIEND_ERROR,

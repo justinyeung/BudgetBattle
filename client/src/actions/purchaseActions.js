@@ -9,19 +9,34 @@ import {
   CLEAR_PURCHASES,
   CLEAR_COMPETITOR,
   SET_PURCHASE_LOADING,
+  SET_PURCHASE_LOADING_FALSE,
 } from "./types";
 
 import axios from "axios";
 
+const isLoggedIn = (data) => {
+  if (data.msg === "no user") {
+    return false;
+  }
+  return true;
+};
+
 // Get all purchases for current user
 export const getPurchases = () => async (dispatch) => {
   try {
-    let purchases = await axios.get("/api/purchases");
+    let res = await axios.get("/api/purchases");
 
-    dispatch({
-      type: GET_PURCHASES,
-      payload: purchases.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_PURCHASE_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: GET_PURCHASES,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: PURCHASE_ERROR,
@@ -42,13 +57,17 @@ export const addPurchase = (purchase) => async (dispatch) => {
     // api call to add purchase to db
     let res = await axios.post("/api/purchases", purchase, config);
 
-    // api call to get purchase to retrieve userid and purchaseid
-    // let purchases = await axios.get('/api/purchases');
-
-    dispatch({
-      type: ADD_PURCHASE,
-      payload: res.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_PURCHASE_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: ADD_PURCHASE,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: PURCHASE_ERROR,
@@ -68,10 +87,17 @@ export const editPurchase = (purchase) => async (dispatch) => {
 
     const res = await axios.put("/api/purchases/", purchase, config);
 
-    dispatch({
-      type: EDIT_PURCHASE,
-      payload: res.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_PURCHASE_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: EDIT_PURCHASE,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: PURCHASE_ERROR,
@@ -130,12 +156,19 @@ export const setCompetitor = (id) => async (dispatch) => {
     };
 
     // get competitor's friend object
-    let friend = await axios.post("/api/friends", id, config);
+    const res = await axios.post("/api/friends", id, config);
 
-    dispatch({
-      type: SET_COMPETITOR,
-      payload: friend.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_PURCHASE_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: SET_COMPETITOR,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: PURCHASE_ERROR,

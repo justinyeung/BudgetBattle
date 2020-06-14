@@ -370,7 +370,7 @@ const PrimarySearchAppBar = ({
                 </Grid>
               </Grid>
               <Grid item>
-                {!userLoading && user !== null && (
+                {user !== null && (
                   <IconButton
                     onClick={handleMenuClick}
                     edge="end"
@@ -382,7 +382,7 @@ const PrimarySearchAppBar = ({
                     <ArrowDropDownIcon />
                   </IconButton>
                 )}
-                {!userLoading && user === null && (
+                {user === null && (
                   <Grid
                     container
                     direction="row"
