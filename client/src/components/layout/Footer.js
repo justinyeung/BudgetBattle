@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { Container, Grid, Header, List, Segment } from "semantic-ui-react";
 import Typography from "@material-ui/core/Typography";
 
@@ -54,26 +56,26 @@ const Footer = () => {
             <Grid.Column width={4}>
               <Header as="h4" content="Navigation" />
               <List link>
-                <List.Item as="a" href="/login">
-                  Login/Signup
+                <List.Item as="a">
+                  <Link to="/login">Login/Signup</Link>
                 </List.Item>
-                <List.Item as="a" href="/">
-                  Home
+                <List.Item as="a">
+                  <Link to="/">Home</Link>
                 </List.Item>
-                <List.Item as="a" href="/getstarted">
-                  Getting Started
+                <List.Item as="a">
+                  <Link to="/getstarted">Getting Started</Link>
                 </List.Item>
-                <List.Item as="a" href="/dashboard">
-                  Dashboard
+                <List.Item as="a">
+                  <Link to="/dashboard">Dashboard</Link>
                 </List.Item>
-                <List.Item as="a" href="/friends">
-                  Friends
+                <List.Item as="a">
+                  <Link to="/friends">Friends</Link>
                 </List.Item>
-                <List.Item as="a" href="/purchases">
-                  Purchases
+                <List.Item as="a">
+                  <Link to="/purchases">Purchases</Link>
                 </List.Item>
-                <List.Item as="a" href="/battles">
-                  Battles
+                <List.Item as="a">
+                  <Link to="/battles">Battles</Link>
                 </List.Item>
               </List>
             </Grid.Column>

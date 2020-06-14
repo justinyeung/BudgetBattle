@@ -4,8 +4,5 @@ module.exports = function (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  // console.log("Not Logged In");
-  // return res.send("Not Logged In");
-  // next();
-  return null;
+  return res.json({ msg: "no user" });
 };

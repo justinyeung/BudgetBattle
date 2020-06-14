@@ -1,5 +1,4 @@
 import {
-  LOGIN,
   GET_USER,
   LOGOUT,
   DELETE_USER,
@@ -10,6 +9,7 @@ import {
   FRIEND_ERROR,
   DELETE_FRIEND,
   SET_USER_LOADING,
+  SET_USER_LOADING_FALSE,
 } from "../actions/types";
 
 const initialState = {
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         userLoading: true,
       };
-    case LOGIN:
+    case SET_USER_LOADING_FALSE:
       return {
         ...state,
         userLoading: false,

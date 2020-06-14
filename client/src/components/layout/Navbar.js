@@ -217,11 +217,11 @@ const PrimarySearchAppBar = ({
               </ListItem>
             </Link>
             <Link to="/battles" id="drawer-link">
-              <ListItem button key={"Competitions"}>
+              <ListItem button key={"Battles"}>
                 <ListItemIcon>
                   <EmojiEventsIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Competitions"} />
+                <ListItemText primary={"Battles"} />
               </ListItem>
             </Link>
           </List>
@@ -370,7 +370,7 @@ const PrimarySearchAppBar = ({
                 </Grid>
               </Grid>
               <Grid item>
-                {!userLoading && user !== null && (
+                {user !== null && (
                   <IconButton
                     onClick={handleMenuClick}
                     edge="end"
@@ -382,7 +382,7 @@ const PrimarySearchAppBar = ({
                     <ArrowDropDownIcon />
                   </IconButton>
                 )}
-                {!userLoading && user === null && (
+                {user === null && (
                   <Grid
                     container
                     direction="row"

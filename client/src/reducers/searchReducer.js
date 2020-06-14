@@ -2,6 +2,7 @@ import {
   SEARCH_USER,
   SEARCH_ERROR,
   SET_SEARCH_LOADING,
+  SET_SEARCH_LOADING_FALSE,
 } from "../actions/types";
 
 const initialState = {
@@ -13,10 +14,14 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_SEARCH_LOADING:
-      console.log("Setting search loading");
       return {
         ...state,
         searchLoading: true,
+      };
+    case SET_SEARCH_LOADING_FALSE:
+      return {
+        ...state,
+        searchLoading: false,
       };
     case SEARCH_USER:
       return {

@@ -8,9 +8,17 @@ import {
   COMP_ERROR,
   CLEAR_COMPS,
   SET_COMP_LOADING,
+  SET_COMP_LOADING_FALSE,
 } from "./types";
 
 import axios from "axios";
+
+const isLoggedIn = (data) => {
+  if (data.msg === "no user") {
+    return false;
+  }
+  return true;
+};
 
 // Send competition request
 export const sendCompRequest = ({ id, numMonth, numYear }) => async (
@@ -30,10 +38,17 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
       config
     );
 
-    dispatch({
-      type: SEND_COMP,
-      payload: res.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: SEND_COMP,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: COMP_ERROR,
@@ -45,12 +60,19 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
 // Get accepted competitions
 export const getAcceptedComp = () => async (dispatch) => {
   try {
-    let competitions = await axios.get("/api/competitions/accepted");
+    const res = await axios.get("/api/competitions/accepted");
 
-    dispatch({
-      type: GET_ACCEPTED_COMP,
-      payload: competitions.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: GET_ACCEPTED_COMP,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: COMP_ERROR,
@@ -62,11 +84,19 @@ export const getAcceptedComp = () => async (dispatch) => {
 // Get out pending competitions
 export const getOutPendingComp = () => async (dispatch) => {
   try {
-    let competitions = await axios.get("/api/competitions/outpending");
-    dispatch({
-      type: GET_OUTPENDING_COMP,
-      payload: competitions.data,
-    });
+    const res = await axios.get("/api/competitions/outpending");
+
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: GET_OUTPENDING_COMP,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: COMP_ERROR,
@@ -78,11 +108,19 @@ export const getOutPendingComp = () => async (dispatch) => {
 // Get in pending competitions
 export const getInPendingComp = () => async (dispatch) => {
   try {
-    let competitions = await axios.get("/api/competitions/inpending");
-    dispatch({
-      type: GET_INPENDING_COMP,
-      payload: competitions.data,
-    });
+    let res = await axios.get("/api/competitions/inpending");
+
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: GET_INPENDING_COMP,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: COMP_ERROR,
@@ -100,12 +138,19 @@ export const acceptComp = (compID) => async (dispatch) => {
       },
     };
 
-    let competition = await axios.put("/api/competitions", compID, config);
+    const res = await axios.put("/api/competitions", compID, config);
 
-    dispatch({
-      type: ACCEPT_COMP,
-      payload: competition.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: ACCEPT_COMP,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: COMP_ERROR,

@@ -29,12 +29,12 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/getstarted" component={GetStartedPage} />
+            <Route path="/login" component={LoginPage} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/friends" component={FriendsPage} />
             <PrivateRoute path="/purchases" component={PurchasesPage} />
             <PrivateRoute exact path="/battles" component={CompetitionsPage} />
-            <PrivateRoute path="/battles/user" component={CurrentCompPage} />
-            <Route exact path="/login" component={LoginPage} />
+            <PrivateRoute path="/battles/:id" component={CurrentCompPage} />
           </Switch>
         </Fragment>
         <Footer />

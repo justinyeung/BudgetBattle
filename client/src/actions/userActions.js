@@ -1,5 +1,4 @@
 import {
-  LOGIN,
   GET_USER,
   LOGOUT,
   DELETE_USER,
@@ -10,26 +9,16 @@ import {
   DELETE_FRIEND,
   FRIEND_ERROR,
   SET_USER_LOADING,
+  SET_USER_LOADING_FALSE,
 } from "./types";
 
 import axios from "axios";
 
-// Login user
-export const login = () => async (dispatch) => {
-  try {
-    // api call to get current user
-    // const res = await axios.get('/api/users/current');
-
-    dispatch({
-      type: LOGIN,
-      payload: null,
-    });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: err,
-    });
+const isLoggedIn = (data) => {
+  if (data.msg === "no user") {
+    return false;
   }
+  return true;
 };
 
 // set loading
@@ -53,10 +42,17 @@ export const getUser = () => async (dispatch) => {
     // api call to get current user
     const res = await axios.get("/api/users/current");
 
-    dispatch({
-      type: GET_USER,
-      payload: res.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_USER_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: GET_USER,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     console.log("Login failed");
     dispatch({
@@ -113,16 +109,19 @@ export const sendFriendRequest = (friendID) => async (dispatch) => {
 
     // api call to add friend, friendID as param
     // returns updated current user object
-    let updatedCurrent = await axios.post(
-      "/api/friends/send",
-      friendID,
-      config
-    );
+    const res = await axios.post("/api/friends/send", friendID, config);
 
-    dispatch({
-      type: SEND_FRIEND,
-      payload: updatedCurrent.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_USER_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: SEND_FRIEND,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: FRIEND_ERROR,
@@ -142,12 +141,19 @@ export const acceptFriend = (friendID) => async (dispatch) => {
     };
 
     // returns updated friend object
-    let friend = await axios.put("/api/friends", friendID, config);
+    const res = await axios.put("/api/friends", friendID, config);
 
-    dispatch({
-      type: ACCEPT_FRIEND,
-      payload: friend.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      dispatch({
+        type: SET_USER_LOADING_FALSE,
+        payload: null,
+      });
+    } else {
+      dispatch({
+        type: ACCEPT_FRIEND,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     dispatch({
       type: FRIEND_ERROR,

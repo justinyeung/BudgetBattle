@@ -7,6 +7,7 @@ import {
   GET_INPENDING_COMP,
   CLEAR_COMPS,
   SET_COMP_LOADING,
+  SET_COMP_LOADING_FALSE,
 } from "../actions/types";
 
 const initialState = {
@@ -23,6 +24,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         compLoading: true,
+      };
+    case SET_COMP_LOADING_FALSE:
+      return {
+        ...state,
+        compLoading: false,
       };
     case SEND_COMP:
       state.outpending = [...state.outpending, action.payload];
