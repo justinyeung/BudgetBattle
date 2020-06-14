@@ -41,10 +41,13 @@ function App() {
                             path="/battles"
                             component={CompetitionsPage}
                         />
-                        <PrivateRoute
+                        {/* <PrivateRoute
                             path="/battles/:id"
                             component={CurrentCompPage}
-                        />
+                        /> */}
+                        <Route path="/battles/:id">
+                            <CurrentCompPage />
+                        </Route>
                     </Switch>
                 </Fragment>
                 <Footer />

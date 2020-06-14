@@ -16,13 +16,14 @@ const PrivateRoute = ({
     useEffect(() => {
         setUserLoading();
         getUser();
-
         // eslint-disable-next-line
     }, []);
 
     return (
         <div>
-            {user !== null && <Route {...rest} render={Component} />}
+            {user !== null && (
+                <Route {...rest} render={(props) => <Component {...props} />} />
+            )}
             {!userLoading && user === null && <Redirect to="/login" />}
         </div>
     );
