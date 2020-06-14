@@ -323,7 +323,7 @@ const PrimarySearchAppBar = ({
 
   return (
     <div className={classes.grow}>
-      <AppBar elevation={1} position="static" className="appbar">
+      <AppBar elevation={1} position="fixed" className="appbar">
         <Toolbar>
           <Container maxWidth="lg">
             <Grid
@@ -423,11 +423,14 @@ const PrimarySearchAppBar = ({
             </Grid>
           </Container>
         </Toolbar>
+        <div style={{ height: "4px" }}>
+          {(userLoading || purchaseLoading || compLoading || searchLoading) && (
+            <LinearProgress />
+          )}
+          {/* <LinearProgress /> */}
+        </div>
       </AppBar>
-      {(userLoading || purchaseLoading || compLoading || searchLoading) && (
-        <LinearProgress />
-      )}
-      {/* <LinearProgress /> */}
+
       {renderMenu}
       {renderSnackbar}
     </div>
