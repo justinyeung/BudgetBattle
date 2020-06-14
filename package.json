@@ -1,31 +1,32 @@
 {
-  "name": "budgetbattle",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "dependencies": {
-    "concurrently": "^5.1.0",
-    "config": "^3.3.1",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.1",
-    "mongoose": "^5.9.9",
-    "nodemon": "^2.0.3",
-    "passport": "^0.4.1",
-    "passport-facebook": "^3.0.0",
-    "passport-google-oauth20": "^2.0.0",
-    "path": "^0.12.7",
-    "prettier": "^2.0.5"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "client install": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "budgetbattle",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "dependencies": {
+        "concurrently": "^5.1.0",
+        "config": "^3.3.1",
+        "cors": "^2.8.5",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-session": "^1.17.1",
+        "mongoose": "^5.9.9",
+        "nodemon": "^2.0.3",
+        "passport": "^0.4.1",
+        "passport-facebook": "^3.0.0",
+        "passport-google-oauth20": "^2.0.0",
+        "path": "^0.12.7",
+        "prettier": "^2.0.5"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "start": "node server.js",
+        "server": "nodemon server.js",
+        "client": "npm start --prefix client",
+        "client install": "npm install --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "pretty": "prettier --write \"**/*.js\""
+    },
+    "author": "",
+    "license": "ISC"
 }
