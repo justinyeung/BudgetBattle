@@ -1,5 +1,4 @@
 import {
-  LOGIN,
   GET_USER,
   LOGOUT,
   DELETE_USER,
@@ -10,26 +9,16 @@ import {
   DELETE_FRIEND,
   FRIEND_ERROR,
   SET_USER_LOADING,
+  SET_USER_LOADING_FALSE,
 } from "./types";
 
 import axios from "axios";
 
-// Login user
-export const login = () => async (dispatch) => {
-  try {
-    // api call to get current user
-    // const res = await axios.get('/api/users/current');
-
-    dispatch({
-      type: LOGIN,
-      payload: null,
-    });
-  } catch (err) {
-    dispatch({
-      type: AUTH_ERROR,
-      payload: err,
-    });
+const isLoggedIn = (data) => {
+  if (data.msg === "no user") {
+    return false;
   }
+  return true;
 };
 
 // set loading
@@ -53,10 +42,19 @@ export const getUser = () => async (dispatch) => {
     // api call to get current user
     const res = await axios.get("/api/users/current");
 
-    dispatch({
-      type: GET_USER,
-      payload: res.data,
-    });
+    if (!isLoggedIn(res.data)) {
+      console.log("not logged in");
+      dispatch({
+        type: GET_USER,
+        payload: null,
+      });
+    } else {
+      console.log("logged in");
+      dispatch({
+        type: GET_USER,
+        payload: res.data,
+      });
+    }
   } catch (err) {
     console.log("Login failed");
     dispatch({

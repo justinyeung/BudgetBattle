@@ -9,7 +9,7 @@ const Friend = require("../models/Friend");
 // @route POST /api/friends
 // @desc get a friend's name
 // @access private
-router.post("/", async (req, res) => {
+router.post("/", isLoggedIn, async (req, res) => {
   try {
     // input params
     const { id } = req.body;
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 // @route POST /api/friends/send
 // @desc send a friend request
 // @access private
-router.post("/send", async (req, res) => {
+router.post("/send", isLoggedIn, async (req, res) => {
   try {
     // get current user's friends and friend requests
     let currentFriends = await Friend.find({
@@ -77,7 +77,7 @@ router.post("/send", async (req, res) => {
 // @route PUT /api/friends/accept
 // @desc accept an inpending friend request
 // @access private
-router.put("/", async (req, res) => {
+router.put("/", isLoggedIn, async (req, res) => {
   try {
     // input params
     const { friendID } = req.body;

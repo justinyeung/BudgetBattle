@@ -8,6 +8,7 @@ import {
   COMP_ERROR,
   CLEAR_COMPS,
   SET_COMP_LOADING,
+  SET_COMP_LOADING_FALSE,
 } from "./types";
 
 import axios from "axios";
@@ -30,6 +31,14 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
       config
     );
 
+    // backend middleware
+    if (res.data.msg === "no user") {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    }
+
     dispatch({
       type: SEND_COMP,
       payload: res.data,
@@ -45,11 +54,18 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
 // Get accepted competitions
 export const getAcceptedComp = () => async (dispatch) => {
   try {
-    let competitions = await axios.get("/api/competitions/accepted");
+    let res = await axios.get("/api/competitions/accepted");
+
+    if (res.data.msg === "no user") {
+      dispatch({
+        type: SET_COMP_LOADING_FALSE,
+        payload: null,
+      });
+    }
 
     dispatch({
       type: GET_ACCEPTED_COMP,
-      payload: competitions.data,
+      payload: res.data,
     });
   } catch (err) {
     dispatch({

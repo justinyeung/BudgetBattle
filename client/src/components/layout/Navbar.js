@@ -217,11 +217,11 @@ const PrimarySearchAppBar = ({
               </ListItem>
             </Link>
             <Link to="/battles" id="drawer-link">
-              <ListItem button key={"Competitions"}>
+              <ListItem button key={"Battles"}>
                 <ListItemIcon>
                   <EmojiEventsIcon />
                 </ListItemIcon>
-                <ListItemText primary={"Competitions"} />
+                <ListItemText primary={"Battles"} />
               </ListItem>
             </Link>
           </List>

@@ -15,7 +15,9 @@ const PrivateRoute = ({
 }) => {
   useEffect(() => {
     setUserLoading();
+    console.log("Private Route Before Getting User");
     getUser();
+    console.log("Private Route After Getting User");
 
     // eslint-disable-next-line
   }, []);
