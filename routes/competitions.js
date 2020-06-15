@@ -197,4 +197,60 @@ router.delete('/', isLoggedIn, async (req, res) => {
     }
 });
 
+// @route GET /api/competitions/comp/:id
+// @desc get a competition
+// @access private
+router.get('/comp/:id', isLoggedIn, async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        let comp = await Competition.findById(id);
+
+        res.json(comp);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route GET /api/competitions/competitor/:id
+// @desc get a friend
+// @access private
+router.get('/competitor/:id', isLoggedIn, async (req, res) => {
+    try {
+        // input params
+        const id = req.params.id;
+
+        // find friend's user object
+        let friend = await User.findOne({
+            userID: id,
+        });
+
+        res.json(friend);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route GET /api/competitions/purchases/:id
+// @desc get competitor's purchases
+// @access private
+router.get('/purchases/:id', isLoggedIn, async (req, res) => {
+    try {
+        // input params
+        const userID = req.params.id;
+
+        console.log(userID);
+
+        // query for purchase in db
+        let purchases = await Purchase.find({ userID: userID });
+
+        res.json(purchases);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

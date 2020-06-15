@@ -4,20 +4,20 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-    setCompetitor,
+    getCompetitor,
     getCompetitorPurchases,
     clearCompetitor,
 } from '../../actions/purchaseActions';
 
-const SetCompetitorForm = ({
-    setCompetitor,
+const getCompetitorForm = ({
+    getCompetitor,
     getCompetitorPurchases,
     clearCompetitor,
 }) => {
     const [id, setID] = useState('');
 
-    const setCompetitorButton = () => {
-        setCompetitor({ id });
+    const getCompetitorButton = () => {
+        getCompetitor({ id });
 
         getCompetitorPurchases({ id });
         setID('');
@@ -36,7 +36,7 @@ const SetCompetitorForm = ({
                 onChange={(e) => setID(e.target.value)}
             />
             <br />
-            <button onClick={() => setCompetitorButton()}>
+            <button onClick={() => getCompetitorButton()}>
                 Set Competitor
             </button>
             <br />
@@ -48,14 +48,14 @@ const SetCompetitorForm = ({
     );
 };
 
-SetCompetitorForm.propTypes = {
-    setCompetitor: PropTypes.func.isRequired,
+getCompetitorForm.propTypes = {
+    getCompetitor: PropTypes.func.isRequired,
     getCompetitorPurchases: PropTypes.func.isRequired,
     clearCompetitor: PropTypes.func.isRequired,
 };
 
 export default connect(null, {
-    setCompetitor,
+    getCompetitor,
     getCompetitorPurchases,
     clearCompetitor,
-})(SetCompetitorForm);
+})(getCompetitorForm);

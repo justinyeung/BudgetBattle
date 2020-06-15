@@ -412,7 +412,7 @@ const CurrentComps = ({
                                     >
                                         Remove
                                     </Button>
-                                    <Link to="/battles/idasdfasfd">
+                                    <Link to={`/battles/${comp._id}`}>
                                         <Button
                                             variant="outlined"
                                             size="large"
