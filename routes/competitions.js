@@ -116,56 +116,7 @@ router.put('/', isLoggedIn, async (req, res) => {
                 .json({ msg: 'Cannot Accept Outgoing Competition' });
         }
 
-        // Get total amount for users' purchases
-        let user1purchases = await Purchase.aggregate([
-            {
-                $match: {
-                    userID: competition.user1,
-                    month: competition.month - 1,
-                    year: competition.year,
-                },
-            },
-            {
-                $group: {
-                    _id: null,
-                    count: { $sum: '$amount' },
-                },
-            },
-        ]);
-        let user2purchases = await Purchase.aggregate([
-            {
-                $match: {
-                    userID: competition.user2,
-                    month: competition.month - 1,
-                    year: competition.year,
-                },
-            },
-            {
-                $group: {
-                    _id: null,
-                    count: { $sum: '$amount' },
-                },
-            },
-        ]);
-
-        // find competition and update status to accepted
-        await Competition.findByIdAndUpdate(compID, {
-            $set: {
-                status: 'Accepted',
-                user1total:
-                    user1purchases !== [] && !user1purchases
-                        ? user1purchases[0].count
-                        : 0,
-                user2total:
-                    user2purchases !== [] && !user2purchases
-                        ? user2purchases[0].count
-                        : 0,
-            },
-        });
-
-        // find and return updated competition
-        let returnCompetition = await Competition.findById(compID);
-        res.json(returnCompetition);
+        res.json(competition);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -198,15 +149,60 @@ router.delete('/', isLoggedIn, async (req, res) => {
 });
 
 // @route GET /api/competitions/comp/:id
-// @desc get a competition
+// @desc update sums and get a competition
 // @access private
 router.get('/comp/:id', isLoggedIn, async (req, res) => {
     try {
         const id = req.params.id;
 
-        let comp = await Competition.findById(id);
+        let competition = await Competition.findById(id);
 
-        res.json(comp);
+        // Update competition info
+        let user1purchases = await Purchase.aggregate([
+            {
+                $match: {
+                    userID: competition.user1,
+                    month: competition.month,
+                    year: competition.year,
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    count: { $sum: '$amount' },
+                },
+            },
+        ]);
+        let user2purchases = await Purchase.aggregate([
+            {
+                $match: {
+                    userID: competition.user2,
+                    month: competition.month,
+                    year: competition.year,
+                },
+            },
+            {
+                $group: {
+                    _id: null,
+                    count: { $sum: '$amount' },
+                },
+            },
+        ]);
+        await Competition.findByIdAndUpdate(id, {
+            $set: {
+                user1total:
+                    user1purchases !== [] && user1purchases.length > 0
+                        ? user1purchases[0].count
+                        : 0,
+                user2total:
+                    user2purchases !== [] && user2purchases.length > 0
+                        ? user2purchases[0].count
+                        : 0,
+            },
+        });
+
+        let returnCompetition = await Competition.findById(id);
+        res.json(returnCompetition);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -236,15 +232,19 @@ router.get('/competitor/:id', isLoggedIn, async (req, res) => {
 // @route GET /api/competitions/purchases/:id
 // @desc get competitor's purchases
 // @access private
-router.get('/purchases/:id', isLoggedIn, async (req, res) => {
+router.get('/purchases/:id/:month/:year', isLoggedIn, async (req, res) => {
     try {
         // input params
         const userID = req.params.id;
-
-        console.log(userID);
+        const month = req.params.month;
+        const year = req.params.year;
 
         // query for purchase in db
-        let purchases = await Purchase.find({ userID: userID });
+        let purchases = await Purchase.find({
+            userID: userID,
+            month: month,
+            year: year,
+        });
 
         res.json(purchases);
     } catch (err) {

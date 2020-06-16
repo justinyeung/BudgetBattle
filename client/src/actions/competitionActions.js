@@ -13,6 +13,7 @@ import {
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
     SET_COMPETITION,
+    UPDATE_COMP,
 } from './types';
 
 import axios from 'axios';
@@ -208,8 +209,6 @@ export const getCompetition = ({ id }) => async (dispatch) => {
     try {
         const res = await axios.get(`/api/competitions/comp/${id}`);
 
-        console.log(res.data);
-
         if (!isLoggedIn(res.data)) {
             dispatch({
                 type: SET_COMP_LOADING_FALSE,
@@ -256,10 +255,14 @@ export const getCompetitor = ({ id }) => async (dispatch) => {
 };
 
 // Get all purchases for competitor
-export const getCompetitorPurchases = ({ id }) => async (dispatch) => {
+export const getCompetitorPurchases = ({ id, month, year }) => async (
+    dispatch
+) => {
     try {
         // api call to get competitor's purchases
-        const res = await axios.get(`/api/competitions/purchases/${id}`);
+        const res = await axios.get(
+            `/api/competitions/purchases/${id}/${month}/${year}`
+        );
 
         if (!isLoggedIn(res.data)) {
             dispatch({
@@ -269,6 +272,29 @@ export const getCompetitorPurchases = ({ id }) => async (dispatch) => {
         } else {
             dispatch({
                 type: GET_COMPETITOR_PURCHASES,
+                payload: res.data,
+            });
+        }
+    } catch (err) {
+        dispatch({
+            type: COMP_ERROR,
+            payload: err,
+        });
+    }
+};
+
+export const updateComp = ({ id }) => async (dispatch) => {
+    try {
+        const res = await axios.get(`/api/competitions/comp/${id}`);
+
+        if (!isLoggedIn(res.data)) {
+            dispatch({
+                type: SET_COMP_LOADING_FALSE,
+                payload: null,
+            });
+        } else {
+            dispatch({
+                type: UPDATE_COMP,
                 payload: res.data,
             });
         }

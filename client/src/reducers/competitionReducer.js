@@ -12,6 +12,7 @@ import {
     CLEAR_COMPETITOR,
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
+    UPDATE_COMP,
 } from '../actions/types';
 
 const initialState = {
@@ -33,6 +34,14 @@ export default (state = initialState, action) => {
                 compLoading: true,
             };
         case SET_COMP_LOADING_FALSE:
+            return {
+                ...state,
+                compLoading: false,
+            };
+        case UPDATE_COMP:
+            state.accepted = state.accepted.map((comp) =>
+                comp._id === action.payload._id ? action.payload : comp
+            );
             return {
                 ...state,
                 compLoading: false,

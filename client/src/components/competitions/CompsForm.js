@@ -74,8 +74,8 @@ const CompsForm = ({
     };
 
     const requestBtn = () => {
-        const numMonth = moment(date).format('MM');
-        const numYear = moment(date).format('YYYY');
+        const numMonth = new Date(date).getMonth();
+        const numYear = new Date(date).getFullYear();
         if (id === '') {
             setSnackbarMsg('No Friend Selected');
             handleClick();
