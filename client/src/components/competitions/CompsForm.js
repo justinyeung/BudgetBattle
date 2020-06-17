@@ -26,8 +26,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const moment = require('moment');
-
 const useStyles = makeStyles((theme) => ({
     formControl: {
         width: '100%',

@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Copyright = () => {
     return (
-        <Typography variant="body2" color="textSecondary" align="start">
+        <Typography variant="body2" color="textSecondary" align="left">
             {'Copyright © '}
             Budget Battle
             {new Date().getFullYear()}
@@ -64,28 +64,28 @@ const Footer = () => {
                         </Grid.Column>
                         <Grid.Column width={4}>
                             <Header as="h4" content="Navigation" />
-                            <List link>
-                                <List.Item as="a">
+                            <List link className="footer-links">
+                                <List.Item as="p">
                                     <Link to="/login">Login/Signup</Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/">Home</Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/getstarted">
                                         Getting Started
                                     </Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/dashboard">Dashboard</Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/friends">Friends</Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/purchases">Purchases</Link>
                                 </List.Item>
-                                <List.Item as="a">
+                                <List.Item as="p">
                                     <Link to="/battles">Battles</Link>
                                 </List.Item>
                             </List>

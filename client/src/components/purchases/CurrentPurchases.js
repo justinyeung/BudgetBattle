@@ -35,8 +35,6 @@ import {
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-const moment = require('moment');
-
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
