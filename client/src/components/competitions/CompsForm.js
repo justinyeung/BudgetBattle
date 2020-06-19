@@ -172,12 +172,18 @@ const CompsForm = ({
                                     getAccepted(user.friends).map(
                                         (friend) =>
                                             (friend.user2 === user.userID && (
-                                                <MenuItem value={friend.user1}>
+                                                <MenuItem
+                                                    value={friend.user1}
+                                                    key={friend.user1}
+                                                >
                                                     {friend.user1name}
                                                 </MenuItem>
                                             )) ||
                                             (friend.user1 === user.userID && (
-                                                <MenuItem value={friend.user2}>
+                                                <MenuItem
+                                                    value={friend.user2}
+                                                    key={friend.user2}
+                                                >
                                                     {friend.user2name}
                                                 </MenuItem>
                                             ))

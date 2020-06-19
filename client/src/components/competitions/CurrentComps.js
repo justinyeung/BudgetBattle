@@ -276,7 +276,7 @@ const CurrentComps = ({
                     )}
                     {accepted !== [] &&
                         accepted.map((comp) => (
-                            <div>
+                            <div key={comp._id}>
                                 {load && updateCompetitions()}
                                 <ExpansionPanel
                                     key={comp._id}
