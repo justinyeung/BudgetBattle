@@ -6,26 +6,6 @@ const isLoggedIn = require('./middleware');
 const User = require('../models/User');
 const Friend = require('../models/Friend');
 
-// @route POST /api/friends
-// @desc get a friend's name
-// @access private
-router.post('/', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const { id } = req.body;
-
-        // find friend's user object
-        let friend = await User.findOne({
-            userID: id,
-        });
-
-        res.json(friend);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
 // @route POST /api/friends/send
 // @desc send a friend request
 // @access private

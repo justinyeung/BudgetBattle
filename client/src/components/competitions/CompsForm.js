@@ -26,8 +26,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const moment = require('moment');
-
 const useStyles = makeStyles((theme) => ({
     formControl: {
         width: '100%',
@@ -74,8 +72,8 @@ const CompsForm = ({
     };
 
     const requestBtn = () => {
-        const numMonth = moment(date).format('MM');
-        const numYear = moment(date).format('YYYY');
+        const numMonth = new Date(date).getMonth();
+        const numYear = new Date(date).getFullYear();
         if (id === '') {
             setSnackbarMsg('No Friend Selected');
             handleClick();
@@ -174,12 +172,18 @@ const CompsForm = ({
                                     getAccepted(user.friends).map(
                                         (friend) =>
                                             (friend.user2 === user.userID && (
-                                                <MenuItem value={friend.user1}>
+                                                <MenuItem
+                                                    value={friend.user1}
+                                                    key={friend.user1}
+                                                >
                                                     {friend.user1name}
                                                 </MenuItem>
                                             )) ||
                                             (friend.user1 === user.userID && (
-                                                <MenuItem value={friend.user2}>
+                                                <MenuItem
+                                                    value={friend.user2}
+                                                    key={friend.user2}
+                                                >
                                                     {friend.user2name}
                                                 </MenuItem>
                                             ))

@@ -6,14 +6,22 @@ import {
     GET_OUTPENDING_COMP,
     GET_INPENDING_COMP,
     CLEAR_COMPS,
+    SET_COMPETITION,
+    SET_COMPETITOR,
+    GET_COMPETITOR_PURCHASES,
+    CLEAR_COMPETITOR,
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
+    UPDATE_COMP,
 } from '../actions/types';
 
 const initialState = {
     accepted: [],
     outpending: [],
     inpending: [],
+    competition: null,
+    competitor: null,
+    competitorPurchases: [],
     compLoading: false,
     error: null,
 };
@@ -28,6 +36,39 @@ export default (state = initialState, action) => {
         case SET_COMP_LOADING_FALSE:
             return {
                 ...state,
+                compLoading: false,
+            };
+        case UPDATE_COMP:
+            state.accepted = state.accepted.map((comp) =>
+                comp._id === action.payload._id ? action.payload : comp
+            );
+            return {
+                ...state,
+                compLoading: false,
+            };
+        case SET_COMPETITION:
+            return {
+                ...state,
+                competition: action.payload,
+                compLoading: false,
+            };
+        case SET_COMPETITOR:
+            return {
+                ...state,
+                competitor: action.payload,
+                compLoading: false,
+            };
+        case GET_COMPETITOR_PURCHASES:
+            state.competitorPurchases = action.payload;
+            return {
+                ...state,
+                compLoading: false,
+            };
+        case CLEAR_COMPETITOR:
+            return {
+                ...state,
+                competitor: null,
+                competitorPurchases: [],
                 compLoading: false,
             };
         case SEND_COMP:

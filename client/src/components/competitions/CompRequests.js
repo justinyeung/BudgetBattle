@@ -168,7 +168,7 @@ const CompRequests = ({
                                                 className={classes.inline}
                                                 color="textPrimary"
                                             >
-                                                {monthNames[comp.month - 1]}{' '}
+                                                {monthNames[comp.month]}{' '}
                                                 {comp.year}
                                             </Typography>
                                         </React.Fragment>

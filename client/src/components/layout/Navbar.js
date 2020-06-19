@@ -401,7 +401,7 @@ const PrimarySearchAppBar = ({
                                         <Grid item className={classes.title}>
                                             <Link
                                                 to="/getstarted"
-                                                class="navbar-link"
+                                                className="navbar-link"
                                             >
                                                 <Button color="inherit">
                                                     <Typography
@@ -419,7 +419,7 @@ const PrimarySearchAppBar = ({
                                         <Grid item>
                                             <Link
                                                 to="/login"
-                                                class="navbar-link"
+                                                className="navbar-link"
                                             >
                                                 <Button
                                                     color="inherit"

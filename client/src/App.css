@@ -1,177 +1,181 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* sm */
 @media (max-width: 576px) {
-  .search-request-container {
-    padding: 32px 0 0 0;
-  }
-  .search-item {
-    padding: 0 !important;
-  }
-  .container-spacing {
-    padding: 4px !important;
-  }
-  .grid-spacing {
-    padding: 4px !important;
-  }
+    .search-request-container {
+        padding: 32px 0 0 0;
+    }
+    .search-item {
+        padding: 0 !important;
+    }
+    .container-spacing {
+        padding: 4px !important;
+    }
+    .grid-spacing {
+        padding: 4px !important;
+    }
 }
 
 .grid-spacing {
-  padding: 20px;
+    padding: 20px;
 }
 
 #drawer-link {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 #login-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 #purchases-form-toolbar {
-  padding-left: 12px;
+    padding-left: 12px;
 }
 
 #header-title {
-  padding: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: rgba(0, 0, 0, 0.87);
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.87);
 }
 
 #purchases-form-submit {
-  padding-right: 24px;
+    padding-right: 24px;
 }
 
 #purchases-form-grid {
-  padding: 24px;
+    padding: 24px;
 }
 
 #competitions-left-column {
-  padding-left: 1.5rem;
+    padding-left: 1.5rem;
 }
 
 #competitions-center-column {
-  text-align: center;
+    text-align: center;
 }
 
 #competitions-right-column {
-  text-align: right;
-  text-align: -webkit-right;
-  text-align: -ms-right;
-  text-align: -moz-right;
-  text-align: -o-right;
+    text-align: right;
+    text-align: -webkit-right;
+    text-align: -ms-right;
+    text-align: -moz-right;
+    text-align: -o-right;
 }
 
 #expansion-panel {
-  background-color: #f5f5f5;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+    background-color: #f5f5f5;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .container-spacing {
-  padding: 24px;
+    padding: 24px;
 }
 
 .send-comp-request {
-  padding: 24px;
-  padding-top: 32px;
+    padding: 24px;
+    padding-top: 32px;
 }
 
 .search-request-container {
-  padding: 24px;
-  padding-top: 32px;
+    padding: 24px;
+    padding-top: 32px;
 }
 
 .friend-request-textfield {
-  width: "100%";
+    width: '100%';
 }
 
 .navbar-link {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .navbar-link-text {
-  color: white;
+    color: white;
 }
 
 .footer {
-  position: absolute !important;
-  bottom: 0;
-  width: 100%;
-  height: 220px;
+    position: absolute !important;
+    bottom: 0;
+    width: 100%;
+    height: 220px;
 }
 
 .component-box {
-  background-color: #f5f5f5 !important;
+    background-color: #f5f5f5 !important;
 }
 
 th.MuiTableCell-root.MuiTableCell-head {
-  background-color: #f5f5f5 !important;
+    background-color: #f5f5f5 !important;
 }
 
 header.appbar {
-  background-color: black;
-  color: white;
+    background-color: black;
+    color: white;
 }
 
 div.MuiLinearProgress-colorPrimary {
-  background-color: inherit;
+    background-color: inherit;
 }
 
 div.MuiLinearProgress-barColorPrimary {
-  background-color: rgb(203, 63, 34);
+    background-color: rgb(203, 63, 34);
 }
 
 div.MuiToolbar-regular {
-  height: 60px;
-  min-height: 60px;
+    height: 60px;
+    min-height: 60px;
 }
 
 a.navbar-link {
-  color: white;
+    color: white;
 }
 
 a.navbar-link:hover {
-  color: #afafaf;
+    color: #afafaf;
+}
+
+.footer-links p {
+    margin-bottom: 0;
 }

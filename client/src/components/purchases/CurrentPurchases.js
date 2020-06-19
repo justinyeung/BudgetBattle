@@ -35,8 +35,6 @@ import {
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-const moment = require('moment');
-
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -69,8 +67,8 @@ const setData = (purchasesArray) => {
     return purchasesArray.map((purchase) => ({
         id: purchase._id,
         userID: purchase.userID,
-        date: moment(purchase.date).format('YYYY-MM-DD'),
-        // date: purchase.date.toString(),
+        // date: moment(purchase.date).format('YYYY-MM-DD'),
+        date: purchase.date.toString(),
         location: purchase.location,
         category: purchase.category,
         amount: purchase.amount,
