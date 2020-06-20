@@ -258,41 +258,24 @@ router.get('/comp/:id', isLoggedIn, async (req, res) => {
     }
 });
 
-// @route GET /api/competitions/competitor/:id
-// @desc get a friend
-// @access private
-router.get('/competitor/:id', isLoggedIn, async (req, res) => {
-    try {
-        // input params
-        const id = req.params.id;
-
-        // find friend's user object
-        let friend = await User.findOne({
-            userID: id,
-        });
-
-        res.json(friend);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
 // @route GET /api/competitions/purchases/:id
-// @desc get competitor's purchases
+// @desc get user's purchases
 // @access private
-router.get('/purchases/:id/:month/:year', isLoggedIn, async (req, res) => {
+router.get('/purchases/:id/:competition', isLoggedIn, async (req, res) => {
     try {
         // input params
         const userID = req.params.id;
-        const month = req.params.month;
-        const year = req.params.year;
+        const competitionID = req.params.competition;
+        // const month = req.params.month;
+        // const year = req.params.year;
+
+        let competition = await Competition.findById(competitionID);
 
         // query for purchase in db
         let purchases = await Purchase.find({
             userID: userID,
-            month: month,
-            year: year,
+            month: competition.month,
+            year: competition.year,
         });
 
         res.json(purchases);

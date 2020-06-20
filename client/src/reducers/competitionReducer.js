@@ -7,12 +7,10 @@ import {
     GET_INPENDING_COMP,
     CLEAR_COMPS,
     SET_COMPETITION,
-    SET_COMPETITOR,
-    GET_COMPETITOR_PURCHASES,
-    CLEAR_COMPETITOR,
+    GET_USER1_PURCHASES,
+    GET_USER2_PURCHASES,
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
-    UPDATE_COMP,
 } from '../actions/types';
 
 const initialState = {
@@ -20,8 +18,8 @@ const initialState = {
     outpending: [],
     inpending: [],
     competition: null,
-    competitor: null,
-    competitorPurchases: [],
+    user1Purchases: [],
+    user2Purchases: [],
     compLoading: false,
     error: null,
 };
@@ -38,7 +36,7 @@ export default (state = initialState, action) => {
                 ...state,
                 compLoading: false,
             };
-        case UPDATE_COMP:
+        case GET_ACCEPTED_COMP:
             return {
                 ...state,
                 accepted: action.payload,
@@ -50,33 +48,20 @@ export default (state = initialState, action) => {
                 competition: action.payload,
                 compLoading: false,
             };
-        case SET_COMPETITOR:
-            return {
-                ...state,
-                competitor: action.payload,
-                compLoading: false,
-            };
-        case GET_COMPETITOR_PURCHASES:
-            state.competitorPurchases = action.payload;
+        case GET_USER1_PURCHASES:
+            state.user1Purchases = action.payload;
             return {
                 ...state,
                 compLoading: false,
             };
-        case CLEAR_COMPETITOR:
+        case GET_USER2_PURCHASES:
+            state.user2Purchases = action.payload;
             return {
                 ...state,
-                competitor: null,
-                competitorPurchases: [],
                 compLoading: false,
             };
         case SEND_COMP:
             state.outpending = [...state.outpending, action.payload];
-            return {
-                ...state,
-                compLoading: false,
-            };
-        case GET_ACCEPTED_COMP:
-            state.accepted = action.payload;
             return {
                 ...state,
                 compLoading: false,

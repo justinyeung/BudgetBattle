@@ -38,11 +38,8 @@ import Container from '@material-ui/core/Container';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { logout, getUser, setUserLoading } from '../../actions/userActions';
-import {
-    clearPurchases,
-    setPurchaseLoading,
-} from '../../actions/purchaseActions';
-import { clearComps, setCompLoading } from '../../actions/competitionActions';
+import { clearPurchases } from '../../actions/purchaseActions';
+import { clearComps } from '../../actions/competitionActions';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -151,8 +148,6 @@ const PrimarySearchAppBar = ({
 
     const logoutButton = () => {
         setUserLoading();
-        setCompLoading();
-        setPurchaseLoading();
         handleMenuClose();
         logout();
         clearPurchases();
