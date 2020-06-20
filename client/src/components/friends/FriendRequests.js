@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getUser } from '../../actions/userActions';
 import {
     acceptFriend,
     deleteFriend,
@@ -38,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FriendRequests = ({
-    getUser,
     acceptFriend,
     deleteFriend,
     setUserLoading,
@@ -48,12 +46,6 @@ const FriendRequests = ({
     const [msg, setMsg] = useState('');
 
     const classes = useStyles();
-
-    useEffect(() => {
-        getUser();
-
-        // eslint-disable-next-line
-    }, []);
 
     const acceptButton = (friendID) => {
         setUserLoading();
@@ -219,7 +211,6 @@ const FriendRequests = ({
 
 FriendRequests.propTypes = {
     user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired,
     acceptFriend: PropTypes.func.isRequired,
     deleteFriend: PropTypes.func.isRequired,
     setUserLoading: PropTypes.func.isRequired,
@@ -230,7 +221,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    getUser,
     acceptFriend,
     deleteFriend,
     setUserLoading,

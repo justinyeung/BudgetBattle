@@ -97,6 +97,45 @@ export const getAcceptedComps = () => async (dispatch) => {
         });
     }
 };
+// local functions for getAcceptedComp()
+const loadCompData = (id) => {
+    return async function (dispatch) {
+        // current competition object
+        const comp = await axios.get(`/api/competitions/comp/${id}`);
+        dispatch(dispatchCompetition(comp));
+        let competition = comp.data;
+
+        // user's competitions
+        const user1Purchases = await axios.get(
+            `/api/competitions/purchases/${competition.user1}/${competition._id}`
+        );
+        dispatch(dispatchUser1(user1Purchases));
+
+        // competitor's competitions
+        const user2Purchases = await axios.get(
+            `/api/competitions/purchases/${competition.user2}/${competition._id}`
+        );
+        dispatch(dispatchUser2(user2Purchases));
+    };
+};
+const dispatchUser1 = (param) => {
+    return {
+        type: GET_USER1_PURCHASES,
+        payload: param.data,
+    };
+};
+const dispatchUser2 = (param) => {
+    return {
+        type: GET_USER2_PURCHASES,
+        payload: param.data,
+    };
+};
+const dispatchCompetition = (param) => {
+    return {
+        type: SET_COMPETITION,
+        payload: param.data,
+    };
+};
 
 // Get out pending competitions
 export const getOutPendingComp = () => async (dispatch) => {
@@ -200,46 +239,6 @@ export const rejectOrDeleteComp = (comp) => async (dispatch) => {
             payload: err,
         });
     }
-};
-
-// local functions
-const loadCompData = (id) => {
-    return async function (dispatch) {
-        // current competition object
-        const comp = await axios.get(`/api/competitions/comp/${id}`);
-        dispatch(dispatchCompetition(comp));
-        let competition = comp.data;
-
-        // user's competitions
-        const user1Purchases = await axios.get(
-            `/api/competitions/purchases/${competition.user1}/${competition._id}`
-        );
-        dispatch(dispatchUser1(user1Purchases));
-
-        // competitor's competitions
-        const user2Purchases = await axios.get(
-            `/api/competitions/purchases/${competition.user2}/${competition._id}`
-        );
-        dispatch(dispatchUser2(user2Purchases));
-    };
-};
-const dispatchUser1 = (param) => {
-    return {
-        type: GET_USER1_PURCHASES,
-        payload: param.data,
-    };
-};
-const dispatchUser2 = (param) => {
-    return {
-        type: GET_USER2_PURCHASES,
-        payload: param.data,
-    };
-};
-const dispatchCompetition = (param) => {
-    return {
-        type: SET_COMPETITION,
-        payload: param.data,
-    };
 };
 
 export const getCompetition = ({ id }) => async (dispatch) => {

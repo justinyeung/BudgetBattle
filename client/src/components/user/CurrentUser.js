@@ -1,16 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getUser } from '../../actions/userActions';
 
-const CurrentUser = ({ getUser, user: { user } }) => {
-    useEffect(() => {
-        // get state of currently logged in user
-        getUser();
-
-        // eslint-disable-next-line
-    }, []);
-
+const CurrentUser = ({ user: { user } }) => {
     return (
         <ul>
             {user !== null && (
@@ -90,11 +82,10 @@ const CurrentUser = ({ getUser, user: { user } }) => {
 
 CurrentUser.propTypes = {
     user: PropTypes.object.isRequired,
-    getUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser })(CurrentUser);
+export default connect(mapStateToProps)(CurrentUser);

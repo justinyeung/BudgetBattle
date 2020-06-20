@@ -446,6 +446,8 @@ const CurrentComps = ({
 };
 
 CurrentComps.propTypes = {
+    user: PropTypes.object.isRequired,
+    competition: PropTypes.object.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
     getAcceptedComps: PropTypes.func.isRequired,

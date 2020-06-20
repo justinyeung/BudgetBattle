@@ -200,6 +200,7 @@ const CompRequests = ({
 };
 
 CompRequests.propTypes = {
+    competition: PropTypes.object.isRequired,
     getInPendingComp: PropTypes.func.isRequired,
     acceptComp: PropTypes.func.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,

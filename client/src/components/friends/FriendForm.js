@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-    getUser,
     deleteFriend,
     acceptFriend,
     sendFriendRequest,
@@ -63,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
 const FriendForm = ({
     sendFriendRequest,
     searchUsers,
-    getUser,
     deleteFriend,
     acceptFriend,
     setUserLoading,
@@ -76,12 +74,6 @@ const FriendForm = ({
     const [open, setOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [friendSearch, setFriendSearch] = useState('');
-
-    useEffect(() => {
-        getUser();
-
-        // eslint-disable-next-line
-    }, []);
 
     // snackbar methods
     const handleClick = () => {
@@ -305,10 +297,10 @@ const FriendForm = ({
 };
 
 FriendForm.propTypes = {
+    user: PropTypes.object.isRequired,
     search: PropTypes.object.isRequired,
     sendFriendRequest: PropTypes.func.isRequired,
     searchUsers: PropTypes.func.isRequired,
-    getUser: PropTypes.func.isRequired,
     deleteFriend: PropTypes.func.isRequired,
     acceptFriend: PropTypes.func.isRequired,
     setUserLoading: PropTypes.func.isRequired,
@@ -323,7 +315,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     sendFriendRequest,
     searchUsers,
-    getUser,
     deleteFriend,
     acceptFriend,
     setUserLoading,
