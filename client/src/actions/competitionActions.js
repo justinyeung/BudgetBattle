@@ -230,8 +230,6 @@ export const getCompetition = ({ id }) => async (dispatch) => {
 
 export const getCompetitor = ({ id }) => async (dispatch) => {
     try {
-        console.log(id);
-
         // get competitor's friend object
         const res = await axios.get(`/api/competitions/competitor/${id}`);
 
@@ -283,19 +281,34 @@ export const getCompetitorPurchases = ({ id, month, year }) => async (
     }
 };
 
-export const updateComp = ({ id }) => async (dispatch) => {
+export const updateComp = () => async (dispatch) => {
     try {
-        const res = await axios.get(`/api/competitions/comp/${id}`);
+        // get accepted competitions
+        const accepted = await axios.get('/api/competitions/accepted');
 
-        if (!isLoggedIn(res.data)) {
+        if (!isLoggedIn(accepted.data)) {
             dispatch({
                 type: SET_COMP_LOADING_FALSE,
                 payload: null,
             });
         } else {
-            dispatch({
-                type: UPDATE_COMP,
-                payload: res.data,
+            let comps = [];
+            let promises = [];
+
+            // for each accepted competition, update
+            for (let i = 0; i < accepted.data.length; i++) {
+                let id = accepted.data[i]._id;
+                promises.push(
+                    axios.get(`/api/competitions/comp/${id}`).then((res) => {
+                        comps.push(res.data);
+                    })
+                );
+            }
+            Promise.all(promises).then(() => {
+                dispatch({
+                    type: UPDATE_COMP,
+                    payload: comps,
+                });
             });
         }
     } catch (err) {

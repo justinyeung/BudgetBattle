@@ -5,6 +5,7 @@ import {
     getPurchases,
     editPurchase,
     deletePurchase,
+    setPurchaseLoading,
 } from '../../actions/purchaseActions';
 
 import MaterialTable from 'material-table';
@@ -79,13 +80,14 @@ const CurrentPurchases = ({
     getPurchases,
     editPurchase,
     deletePurchase,
+    setPurchaseLoading,
     purchase: { purchases },
 }) => {
     const [open, setOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
 
     useEffect(() => {
-        // get purchases of currently logged in user
+        setPurchaseLoading();
         getPurchases();
 
         // eslint-disable-next-line
@@ -217,6 +219,7 @@ CurrentPurchases.propTypes = {
     getPurchases: PropTypes.func.isRequired,
     editPurchase: PropTypes.func.isRequired,
     deletePurchase: PropTypes.func.isRequired,
+    setPurchaseLoading: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -227,4 +230,5 @@ export default connect(mapStateToProps, {
     getPurchases,
     editPurchase,
     deletePurchase,
+    setPurchaseLoading,
 })(CurrentPurchases);

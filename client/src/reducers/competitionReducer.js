@@ -39,11 +39,9 @@ export default (state = initialState, action) => {
                 compLoading: false,
             };
         case UPDATE_COMP:
-            state.accepted = state.accepted.map((comp) =>
-                comp._id === action.payload._id ? action.payload : comp
-            );
             return {
                 ...state,
+                accepted: action.payload,
                 compLoading: false,
             };
         case SET_COMPETITION:
