@@ -6,7 +6,6 @@ import {
     GET_OUTPENDING_COMP,
     GET_INPENDING_COMP,
     COMP_ERROR,
-    CLEAR_COMPS,
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
     SET_COMPETITION,
@@ -203,20 +202,6 @@ export const rejectOrDeleteComp = (comp) => async (dispatch) => {
     }
 };
 
-// Clear competitions from state
-export const clearComps = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: CLEAR_COMPS,
-            payload: null,
-        });
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
 // local functions
 const loadCompData = (id) => {
     return async function (dispatch) {

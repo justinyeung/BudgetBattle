@@ -67,8 +67,6 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 purchases: [],
-                competitor: null,
-                competitorPurchases: [],
                 purchaseLoading: false,
             };
         default:

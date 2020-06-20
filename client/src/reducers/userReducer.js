@@ -1,6 +1,6 @@
 import {
     GET_USER,
-    LOGOUT,
+    CLEAR_USER,
     DELETE_USER,
     AUTH_ERROR,
     USER_ERROR,
@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
                 user: action.payload,
                 userLoading: false,
             };
-        case LOGOUT:
+        case CLEAR_USER:
         case DELETE_USER:
             return {
                 ...state,
