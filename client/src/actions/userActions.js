@@ -1,6 +1,8 @@
 import {
     GET_USER,
-    LOGOUT,
+    CLEAR_USER,
+    CLEAR_COMPS,
+    CLEAR_PURCHASES,
     DELETE_USER,
     AUTH_ERROR,
     USER_ERROR,
@@ -68,16 +70,38 @@ export const logout = () => async (dispatch) => {
         // api call to log out user
         await axios.get('/api/users/logout');
 
-        dispatch({
-            type: LOGOUT,
-            payload: null,
-        });
+        dispatch(clearData());
     } catch (err) {
         dispatch({
             type: AUTH_ERROR,
             payload: err,
         });
     }
+};
+const clearData = () => {
+    return async function (dispatch) {
+        dispatch(dispatchClearUser());
+        dispatch(dispatchClearPurchases());
+        dispatch(dispatchClearComps());
+    };
+};
+const dispatchClearUser = () => {
+    return {
+        type: CLEAR_USER,
+        payload: null,
+    };
+};
+const dispatchClearPurchases = () => {
+    return {
+        type: CLEAR_PURCHASES,
+        payload: null,
+    };
+};
+const dispatchClearComps = () => {
+    return {
+        type: CLEAR_COMPS,
+        payload: null,
+    };
 };
 
 // delete user

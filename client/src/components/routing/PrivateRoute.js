@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import { getUser, setUserLoading } from '../../actions/userActions';
-
 const PrivateRoute = ({
-    getUser,
-    setUserLoading,
     user: { user, userLoading },
     component: Component,
     ...rest
 }) => {
-    useEffect(() => {
-        setUserLoading();
-        getUser();
-        // eslint-disable-next-line
-    }, []);
-
     return (
         <div>
             {user !== null && (
@@ -30,14 +20,11 @@ const PrivateRoute = ({
 };
 
 PrivateRoute.propTypes = {
-    getUser: PropTypes.func.isRequired,
-    setUserLoading: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser, setUserLoading })(
-    PrivateRoute
-);
+export default connect(mapStateToProps)(PrivateRoute);

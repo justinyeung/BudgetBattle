@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
     rejectOrDeleteComp,
     setCompLoading,
-    updateComp,
+    getAcceptedComps,
 } from '../../actions/competitionActions';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -103,7 +103,7 @@ function PaperComponent(props) {
 const CurrentComps = ({
     rejectOrDeleteComp,
     setCompLoading,
-    updateComp,
+    getAcceptedComps,
     user: { user },
     competition: { accepted },
 }) => {
@@ -115,7 +115,7 @@ const CurrentComps = ({
 
     useEffect(() => {
         setCompLoading();
-        updateComp();
+        getAcceptedComps();
 
         // eslint-disable-next-line
     }, []);
@@ -446,9 +446,11 @@ const CurrentComps = ({
 };
 
 CurrentComps.propTypes = {
+    user: PropTypes.object.isRequired,
+    competition: PropTypes.object.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
-    updateComp: PropTypes.func.isRequired,
+    getAcceptedComps: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -459,5 +461,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     rejectOrDeleteComp,
     setCompLoading,
-    updateComp,
+    getAcceptedComps,
 })(CurrentComps);

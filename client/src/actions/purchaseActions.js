@@ -4,7 +4,6 @@ import {
     GET_PURCHASES,
     DELETE_PURCHASE,
     PURCHASE_ERROR,
-    CLEAR_PURCHASES,
     SET_PURCHASE_LOADING,
     SET_PURCHASE_LOADING_FALSE,
 } from './types';
@@ -120,21 +119,6 @@ export const deletePurchase = (purchaseID) => async (dispatch) => {
         dispatch({
             type: DELETE_PURCHASE,
             payload: purchaseID,
-        });
-    } catch (err) {
-        dispatch({
-            type: PURCHASE_ERROR,
-            payload: err,
-        });
-    }
-};
-
-// Clear purchases from state
-export const clearPurchases = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: CLEAR_PURCHASES,
-            payload: null,
         });
     } catch (err) {
         dispatch({

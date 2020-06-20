@@ -6,14 +6,11 @@ import {
     GET_OUTPENDING_COMP,
     GET_INPENDING_COMP,
     COMP_ERROR,
-    CLEAR_COMPS,
-    SET_COMPETITOR,
-    GET_COMPETITOR_PURCHASES,
-    CLEAR_COMPETITOR,
     SET_COMP_LOADING,
     SET_COMP_LOADING_FALSE,
     SET_COMPETITION,
-    UPDATE_COMP,
+    GET_USER1_PURCHASES,
+    GET_USER2_PURCHASES,
 } from './types';
 
 import axios from 'axios';
@@ -62,20 +59,35 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
     }
 };
 
-// Get accepted competitions
-export const getAcceptedComp = () => async (dispatch) => {
+// get accepted competitions
+export const getAcceptedComps = () => async (dispatch) => {
     try {
-        const res = await axios.get('/api/competitions/accepted');
+        // get accepted competitions
+        const accepted = await axios.get('/api/competitions/accepted');
 
-        if (!isLoggedIn(res.data)) {
+        if (!isLoggedIn(accepted.data)) {
             dispatch({
                 type: SET_COMP_LOADING_FALSE,
                 payload: null,
             });
         } else {
-            dispatch({
-                type: GET_ACCEPTED_COMP,
-                payload: res.data,
+            let comps = [];
+            let promises = [];
+
+            // for each accepted competition, update
+            for (let i = 0; i < accepted.data.length; i++) {
+                let id = accepted.data[i]._id;
+                promises.push(
+                    axios.get(`/api/competitions/comp/${id}`).then((res) => {
+                        comps.push(res.data);
+                    })
+                );
+            }
+            Promise.all(promises).then(() => {
+                dispatch({
+                    type: GET_ACCEPTED_COMP,
+                    payload: comps,
+                });
             });
         }
     } catch (err) {
@@ -84,6 +96,45 @@ export const getAcceptedComp = () => async (dispatch) => {
             payload: err,
         });
     }
+};
+// local functions for getAcceptedComp()
+const loadCompData = (id) => {
+    return async function (dispatch) {
+        // current competition object
+        const comp = await axios.get(`/api/competitions/comp/${id}`);
+        dispatch(dispatchCompetition(comp));
+        let competition = comp.data;
+
+        // user's competitions
+        const user1Purchases = await axios.get(
+            `/api/competitions/purchases/${competition.user1}/${competition._id}`
+        );
+        dispatch(dispatchUser1(user1Purchases));
+
+        // competitor's competitions
+        const user2Purchases = await axios.get(
+            `/api/competitions/purchases/${competition.user2}/${competition._id}`
+        );
+        dispatch(dispatchUser2(user2Purchases));
+    };
+};
+const dispatchUser1 = (param) => {
+    return {
+        type: GET_USER1_PURCHASES,
+        payload: param.data,
+    };
+};
+const dispatchUser2 = (param) => {
+    return {
+        type: GET_USER2_PURCHASES,
+        payload: param.data,
+    };
+};
+const dispatchCompetition = (param) => {
+    return {
+        type: SET_COMPETITION,
+        payload: param.data,
+    };
 };
 
 // Get out pending competitions
@@ -190,142 +241,9 @@ export const rejectOrDeleteComp = (comp) => async (dispatch) => {
     }
 };
 
-// Clear competitions from state
-export const clearComps = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: CLEAR_COMPS,
-            payload: null,
-        });
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
-
 export const getCompetition = ({ id }) => async (dispatch) => {
     try {
-        const res = await axios.get(`/api/competitions/comp/${id}`);
-
-        if (!isLoggedIn(res.data)) {
-            dispatch({
-                type: SET_COMP_LOADING_FALSE,
-                payload: null,
-            });
-        } else {
-            dispatch({
-                type: SET_COMPETITION,
-                payload: res.data,
-            });
-        }
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
-
-export const getCompetitor = ({ id }) => async (dispatch) => {
-    try {
-        // get competitor's friend object
-        const res = await axios.get(`/api/competitions/competitor/${id}`);
-
-        if (!isLoggedIn(res.data)) {
-            dispatch({
-                type: SET_COMP_LOADING_FALSE,
-                payload: null,
-            });
-        } else {
-            dispatch({
-                type: SET_COMPETITOR,
-                payload: res.data,
-            });
-        }
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
-
-// Get all purchases for competitor
-export const getCompetitorPurchases = ({ id, month, year }) => async (
-    dispatch
-) => {
-    try {
-        // api call to get competitor's purchases
-        const res = await axios.get(
-            `/api/competitions/purchases/${id}/${month}/${year}`
-        );
-
-        if (!isLoggedIn(res.data)) {
-            dispatch({
-                type: SET_COMP_LOADING_FALSE,
-                payload: null,
-            });
-        } else {
-            dispatch({
-                type: GET_COMPETITOR_PURCHASES,
-                payload: res.data,
-            });
-        }
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
-
-export const updateComp = () => async (dispatch) => {
-    try {
-        // get accepted competitions
-        const accepted = await axios.get('/api/competitions/accepted');
-
-        if (!isLoggedIn(accepted.data)) {
-            dispatch({
-                type: SET_COMP_LOADING_FALSE,
-                payload: null,
-            });
-        } else {
-            let comps = [];
-            let promises = [];
-
-            // for each accepted competition, update
-            for (let i = 0; i < accepted.data.length; i++) {
-                let id = accepted.data[i]._id;
-                promises.push(
-                    axios.get(`/api/competitions/comp/${id}`).then((res) => {
-                        comps.push(res.data);
-                    })
-                );
-            }
-            Promise.all(promises).then(() => {
-                dispatch({
-                    type: UPDATE_COMP,
-                    payload: comps,
-                });
-            });
-        }
-    } catch (err) {
-        dispatch({
-            type: COMP_ERROR,
-            payload: err,
-        });
-    }
-};
-
-// Clear purchases from state
-export const clearCompetitor = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: CLEAR_COMPETITOR,
-            payload: null,
-        });
+        dispatch(loadCompData(id));
     } catch (err) {
         dispatch({
             type: COMP_ERROR,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -37,12 +37,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Container from '@material-ui/core/Container';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-import { logout, getUser, setUserLoading } from '../../actions/userActions';
-import {
-    clearPurchases,
-    setPurchaseLoading,
-} from '../../actions/purchaseActions';
-import { clearComps, setCompLoading } from '../../actions/competitionActions';
+import { logout, setUserLoading } from '../../actions/userActions';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -102,16 +97,8 @@ const PrimarySearchAppBar = ({
     competition: { compLoading },
     search: { searchLoading },
     logout,
-    getUser,
-    clearPurchases,
-    clearComps,
     setUserLoading,
 }) => {
-    useEffect(() => {
-        getUser();
-        // eslint-disable-next-line
-    }, []);
-
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState(null);
     const [logoutClicked, setLogoutClicked] = useState(false);
@@ -151,14 +138,9 @@ const PrimarySearchAppBar = ({
 
     const logoutButton = () => {
         setUserLoading();
-        setCompLoading();
-        setPurchaseLoading();
         handleMenuClose();
         logout();
-        clearPurchases();
-        clearComps();
         setLogoutClicked(true);
-        // handleSnackClick();
     };
 
     const list = (anchor) => (
@@ -463,9 +445,6 @@ const PrimarySearchAppBar = ({
 
 PrimarySearchAppBar.propTypes = {
     logout: PropTypes.func.isRequired,
-    getUser: PropTypes.func.isRequired,
-    clearPurchases: PropTypes.func.isRequired,
-    clearComps: PropTypes.func.isRequired,
     setUserLoading: PropTypes.func.isRequired,
 };
 
@@ -478,8 +457,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
     logout,
-    getUser,
-    clearPurchases,
-    clearComps,
     setUserLoading,
 })(PrimarySearchAppBar);

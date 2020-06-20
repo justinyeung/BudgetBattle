@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -15,16 +15,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { getUser } from '../actions/userActions';
 import LoginPage from './LoginPage';
 
-const GetStartedPage = ({ getUser, user: { user } }) => {
-    useEffect(() => {
-        getUser();
-
-        // eslint-disable-next-line
-    }, []);
-
+const GetStartedPage = ({ user: { user } }) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -204,11 +197,11 @@ const GetStartedPage = ({ getUser, user: { user } }) => {
 };
 
 GetStartedPage.propTypes = {
-    getUser: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
     user: state.user,
 });
 
-export default connect(mapStateToProps, { getUser })(GetStartedPage);
+export default connect(mapStateToProps)(GetStartedPage);

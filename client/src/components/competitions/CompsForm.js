@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -6,7 +6,6 @@ import {
     sendCompRequest,
     setCompLoading,
 } from '../../actions/competitionActions';
-import { getUser } from '../../actions/userActions';
 
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { DatePicker } from '@material-ui/pickers';
@@ -32,24 +31,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const CompsForm = ({
-    sendCompRequest,
-    setCompLoading,
-    getUser,
-    user: { user },
-}) => {
+const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [id, setID] = useState('');
     const [date, setDate] = useState(new Date());
-
-    useEffect(() => {
-        getUser();
-
-        // eslint-disable-next-line
-    }, []);
 
     // snackbar
     const handleClick = () => {
@@ -213,9 +201,9 @@ const CompsForm = ({
 };
 
 CompsForm.propTypes = {
+    user: PropTypes.object.isRequired,
     sendCompRequest: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
-    getUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -225,5 +213,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
     sendCompRequest,
     setCompLoading,
-    getUser,
 })(CompsForm);
