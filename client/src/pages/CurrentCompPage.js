@@ -13,6 +13,7 @@ import {
 const CurrentCompetition = ({
     setCompLoading,
     getCompetition,
+    getCompetitor,
     user: { user },
     competition: { competition },
 }) => {

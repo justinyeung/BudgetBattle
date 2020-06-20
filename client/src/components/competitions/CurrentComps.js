@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
-    getAcceptedComp,
     rejectOrDeleteComp,
     setCompLoading,
     updateComp,
@@ -102,7 +101,6 @@ function PaperComponent(props) {
 }
 
 const CurrentComps = ({
-    getAcceptedComp,
     rejectOrDeleteComp,
     setCompLoading,
     updateComp,
@@ -114,23 +112,13 @@ const CurrentComps = ({
     const [openDialog, setOpenDialog] = useState(false);
     const [open, setOpen] = useState(false);
     const [compID, setCompID] = useState('');
-    const [load, setLoad] = useState(false);
 
     useEffect(() => {
         setCompLoading();
-        getAcceptedComp();
-        setLoad(true);
+        updateComp();
 
         // eslint-disable-next-line
     }, []);
-
-    const updateCompetitions = () => {
-        for (let i = 0; i < accepted.length; i++) {
-            const id = accepted[i]._id;
-            updateComp({ id });
-        }
-        setLoad(false);
-    };
 
     // snackbar
     const handleClickSnackbar = () => {
@@ -277,7 +265,6 @@ const CurrentComps = ({
                     {accepted !== [] &&
                         accepted.map((comp) => (
                             <div key={comp._id}>
-                                {load && updateCompetitions()}
                                 <ExpansionPanel
                                     key={comp._id}
                                     id="expansion-panel"
@@ -459,7 +446,6 @@ const CurrentComps = ({
 };
 
 CurrentComps.propTypes = {
-    getAcceptedComp: PropTypes.func.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
     updateComp: PropTypes.func.isRequired,
@@ -471,7 +457,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-    getAcceptedComp,
     rejectOrDeleteComp,
     setCompLoading,
     updateComp,
