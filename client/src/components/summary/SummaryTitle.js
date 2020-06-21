@@ -11,14 +11,13 @@ import Avatar from '@material-ui/core/Avatar';
 
 const SummaryTitle = ({
     userType,
-    user: { user },
-    competition: { competition, user1purchases, user2purchases },
+    competition: { competition, user1Purchases, user2Purchases },
 }) => {
     return (
         <Box boxShadow={1} className="container-spacing component-box">
             <Typography variant="h4" className="summary-title">
                 <Avatar>
-                    {user && competition && userType === UserType.USER
+                    {userType === UserType.USER
                         ? competition &&
                           competition.user1name &&
                           competition.user1name.substring(0, 1)
@@ -27,7 +26,7 @@ const SummaryTitle = ({
                           competition.user2name.substring(0, 1)}
                 </Avatar>
                 <div class="summary-title-text">
-                    {user && competition && userType === UserType.USER
+                    {userType === UserType.USER
                         ? competition && competition.user1name
                         : competition && competition.user2name}
                 </div>
@@ -42,10 +41,26 @@ const SummaryTitle = ({
                 >
                     <Grid item xs={12} className="grid-spacing">
                         <Typography variant="h5">
-                            {'Total Sum: $'}
-                            {user && competition && userType === UserType.USER
+                            {'Total Amount Spent: $'}
+                            {userType === UserType.USER
                                 ? competition && competition.user1total
                                 : competition && competition.user2total}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} className="grid-spacing">
+                        <Typography variant="h5">
+                            {'Total # of Purchases Made: '}
+                            {userType === UserType.USER
+                                ? user1Purchases && user1Purchases.length
+                                : user2Purchases && user2Purchases.length}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} className="grid-spacing">
+                        <Typography variant="h5">
+                            {'Total # of Purchases Made: '}
+                            {userType === UserType.USER
+                                ? user1Purchases && user1Purchases.length
+                                : user2Purchases && user2Purchases.length}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -55,12 +70,11 @@ const SummaryTitle = ({
 };
 
 SummaryTitle.propTypes = {
-    user: PropTypes.object.isRequired,
+    userType: PropTypes.object.isRequired,
     competition: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-    user: state.user,
     competition: state.competition,
 });
 
