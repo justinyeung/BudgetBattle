@@ -183,3 +183,17 @@ a.navbar-link:hover {
 td.MuiTableCell-root.MuiTableCell-body {
     text-align: left;
 }
+
+.summary-title {
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+}
+
+.summary-title-text {
+    padding-top: 4px;
+    padding-left: 12px;
+}
