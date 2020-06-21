@@ -179,3 +179,7 @@ a.navbar-link:hover {
 .footer-links p {
     margin-bottom: 0;
 }
+
+td.MuiTableCell-root.MuiTableCell-body {
+    text-align: left;
+}

@@ -68,8 +68,7 @@ const setData = (purchasesArray) => {
     return purchasesArray.map((purchase) => ({
         id: purchase._id,
         userID: purchase.userID,
-        // date: moment(purchase.date).format('YYYY-MM-DD'),
-        date: purchase.date.toString(),
+        date: purchase.date,
         location: purchase.location,
         category: purchase.category,
         amount: purchase.amount,
@@ -148,6 +147,7 @@ const CurrentPurchases = ({
                     {
                         title: 'Date',
                         field: 'date',
+                        type: 'date',
                         defaultSort: 'desc',
                         filtering: false,
                         editComponent: (props) => (
@@ -155,7 +155,7 @@ const CurrentPurchases = ({
                                 <KeyboardDatePicker
                                     disableToolbar
                                     variant="inline"
-                                    format="MM/dd/yyyy"
+                                    format="yyyy/MM/dd"
                                     margin="normal"
                                     id="date-picker-inline"
                                     label="Date"
@@ -170,9 +170,14 @@ const CurrentPurchases = ({
                             </MuiPickersUtilsProvider>
                         ),
                     },
-                    { title: 'Location', field: 'location' },
-                    { title: 'Category', field: 'category' },
-                    { title: 'Amount', field: 'amount', filtering: false },
+                    { title: 'Location', field: 'location', type: 'string' },
+                    { title: 'Category', field: 'category', type: 'string' },
+                    {
+                        title: 'Amount',
+                        field: 'amount',
+                        type: 'currency',
+                        filtering: false,
+                    },
                 ]}
                 data={setData(purchases)}
                 title="Purchases"

@@ -47,7 +47,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LoginPage = ({ getUser, user: { user, userLoading } }) => {
+const LoginPage = ({
+    getUser,
+    setUserLoading,
+    user: { user, userLoading },
+}) => {
     useEffect(() => {
         setUserLoading();
         getUser();
