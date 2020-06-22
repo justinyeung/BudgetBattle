@@ -17,7 +17,7 @@ import Dashboard from './pages/Dashboard';
 import FriendsPage from './pages/FriendsPage';
 import PurchasesPage from './pages/PurchasesPage';
 import CompetitionsPage from './pages/CompetitionsPage';
-import CurrentCompPage from './pages/CurrentCompPage';
+import SummaryPage from './pages/SummaryPage';
 import Footer from './components/layout/Footer';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
                         />
                         <PrivateRoute
                             path="/battles/:id"
-                            component={CurrentCompPage}
+                            component={SummaryPage}
                         />
                     </Switch>
                 </Fragment>

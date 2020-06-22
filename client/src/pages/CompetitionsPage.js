@@ -9,26 +9,24 @@ import CompRequests from '../components/competitions/CompRequests';
 
 const CompetitionsPage = () => {
     return (
-        <div>
-            <Container maxWidth="lg" className="container-spacing">
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="flex-start"
-                >
-                    <Grid item xs={12} className="grid-spacing">
-                        <CurrentComps />
-                    </Grid>
-                    <Grid item md={6} xs={12} className="grid-spacing">
-                        <CompsForm />
-                    </Grid>
-                    <Grid item md={6} xs={12} className="grid-spacing">
-                        <CompRequests />
-                    </Grid>
+        <Container maxWidth="lg" className="container-spacing">
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="flex-start"
+            >
+                <Grid item xs={12} className="grid-spacing">
+                    <CurrentComps />
                 </Grid>
-            </Container>
-        </div>
+                <Grid item md={6} xs={12} className="grid-spacing">
+                    <CompsForm />
+                </Grid>
+                <Grid item md={6} xs={12} className="grid-spacing">
+                    <CompRequests />
+                </Grid>
+            </Grid>
+        </Container>
     );
 };
 

@@ -179,3 +179,36 @@ a.navbar-link:hover {
 .footer-links p {
     margin-bottom: 0;
 }
+
+td.MuiTableCell-root.MuiTableCell-body {
+    text-align: left;
+}
+
+.summary-header-title {
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    justify-content: center;
+}
+
+.summary-header-title-text {
+    font-weight: 500;
+    padding: 0 12px;
+}
+
+.summary-title-title {
+    font-weight: 425 !important;
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+}
+
+h6.summary-title-item {
+    font-weight: 400;
+}

@@ -306,6 +306,7 @@ const CurrentComps = ({
                                             </Typography>
                                         </div>
                                     </ExpansionPanelSummary>
+                                    <Divider />
                                     <ExpansionPanelDetails
                                         className={classes.detailsAvatar}
                                     >
@@ -383,34 +384,6 @@ const CurrentComps = ({
                                         >
                                             <Typography variant="h5">
                                                 ${getRight(comp).total}
-                                            </Typography>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                    <ExpansionPanelDetails
-                                        className={classes.details}
-                                    >
-                                        <div
-                                            id="competitions-left-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                {getLeft(comp).total -
-                                                    getRight(comp).total}
-                                            </Typography>
-                                        </div>
-                                        <div
-                                            id="competitions-center-column"
-                                            className={classes.column}
-                                        >
-                                            <h5>Difference</h5>
-                                        </div>
-                                        <div
-                                            id="competitions-right-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                {getRight(comp).total -
-                                                    getLeft(comp).total}
                                             </Typography>
                                         </div>
                                     </ExpansionPanelDetails>

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { getUser } from '../actions/userActions';
+import { getUser, setUserLoading } from '../actions/userActions';
 import DesktopContainer from '../components/homepage/DesktopContainer';
 import MobileContainer from '../components/homepage/MobileContainer';
 
-const HomePage = ({ getUser }) => {
+const HomePage = ({ getUser, setUserLoading }) => {
     useEffect(() => {
+        setUserLoading();
         getUser();
 
         // eslint-disable-next-line
@@ -20,4 +22,9 @@ const HomePage = ({ getUser }) => {
     );
 };
 
-export default connect(null, { getUser })(HomePage);
+HomePage.propTypes = {
+    getUser: PropTypes.func.isRequired,
+    setUserLoading: PropTypes.func.isRequired,
+};
+
+export default connect(null, { getUser, setUserLoading })(HomePage);
