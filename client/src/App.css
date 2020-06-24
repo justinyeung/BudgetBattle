@@ -53,6 +53,16 @@
     }
 }
 
+@media (max-width: 958px) {
+    .summary-header-left {
+        justify-content: flex-start !important;
+    }
+
+    .summary-header-right {
+        justify-content: flex-end !important;
+    }
+}
+
 .grid-spacing {
     padding: 20px;
 }
@@ -196,7 +206,7 @@ td.MuiTableCell-root.MuiTableCell-body {
 
 .summary-header-title-text {
     font-weight: 500;
-    padding: 0 12px;
+    padding: 0 30px;
 }
 
 .summary-title-title {
@@ -211,4 +221,26 @@ td.MuiTableCell-root.MuiTableCell-body {
 
 h6.summary-title-item {
     font-weight: 400;
+}
+
+.summary-header-icon {
+    text-align: center;
+}
+
+.summary-header-left {
+    justify-content: flex-end;
+}
+
+.summary-header-right {
+    justify-content: flex-start;
+}
+
+.summary-header-left-score {
+    color: green;
+    text-align: end;
+}
+
+.summary-header-right-score {
+    color: red;
+    text-align: start;
 }
