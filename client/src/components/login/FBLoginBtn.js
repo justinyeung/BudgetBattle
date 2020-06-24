@@ -7,7 +7,7 @@ const FBLoginBtn = ({ setUserLoading }) => {
         <div>
             <a
                 id="login-link"
-                href="http://www.budgetbattle.io/api/fbauth/login/"
+                href="https://www.budgetbattle.io/api/fbauth/login/"
                 onClick={setUserLoading}
             >
                 <FacebookLoginButton />

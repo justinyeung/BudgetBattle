@@ -6,14 +6,14 @@ const passport = require('passport');
 router.get(
     '/callback',
     passport.authenticate('facebook', {
-        failureRedirect: 'http://www.budgetbattle.io/',
+        failureRedirect: 'https://www.budgetbattle.io/',
     }),
     function (req, res) {
         try {
             // save user to express session
             req.session.user = req.user;
             // redirect to home page
-            res.redirect('http://www.budgetbattle.io/');
+            res.redirect('https://www.budgetbattle.io/');
         } catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
