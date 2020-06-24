@@ -13,50 +13,80 @@ import SyncAltIcon from '@material-ui/icons/SyncAlt';
 const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
     return (
         <Box boxShadow={1} className="container-spacing component-box">
-            <Typography variant="h4" className="summary-header-title">
-                <Avatar>
-                    {user && competition && user.userID === competition.user1
-                        ? competition &&
-                          competition.user1name &&
-                          competition.user1name.substring(0, 1)
-                        : competition &&
-                          competition.user2name &&
-                          competition.user2name.substring(0, 1)}
-                </Avatar>
-                <div className="summary-header-title-text">
-                    {user && competition && user.userID === competition.user1
-                        ? competition && (
-                              <div>
-                                  {competition.user1name +
-                                      ' v.s. ' +
-                                      competition.user2name}
-                              </div>
-                          )
-                        : competition && (
-                              <div>
-                                  {competition.user2name +
-                                      ' v.s. ' +
-                                      competition.user1name}
-                              </div>
-                          )}
-                </div>
-                <Avatar>
-                    {user && competition && user.userID === competition.user1
-                        ? competition &&
-                          competition.user2name &&
-                          competition.user2name.substring(0, 1)
-                        : competition &&
-                          competition.user1name &&
-                          competition.user1name.substring(0, 1)}
-                </Avatar>
-            </Typography>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+            >
+                <Grid item xs={12} md={5}>
+                    <Typography
+                        variant="h4"
+                        className="summary-header-title summary-header-left"
+                    >
+                        <Avatar>
+                            {user &&
+                            competition &&
+                            user.userID === competition.user1
+                                ? competition &&
+                                  competition.user1name &&
+                                  competition.user1name.substring(0, 1)
+                                : competition &&
+                                  competition.user2name &&
+                                  competition.user2name.substring(0, 1)}
+                        </Avatar>
+                        <div className="summary-header-title-text">
+                            {user &&
+                            competition &&
+                            user.userID === competition.user1
+                                ? competition && competition.user1name
+                                : competition && competition.user2name}
+                        </div>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={2}>
+                    <Typography variant="h4" className="summary-header-title">
+                        v.s.
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={5}>
+                    <Typography
+                        variant="h4"
+                        className="summary-header-title summary-header-right"
+                    >
+                        <div className="summary-header-title-text">
+                            {user &&
+                            competition &&
+                            user.userID === competition.user1
+                                ? competition && competition.user2name
+                                : competition && competition.user1name}
+                        </div>
+                        <Avatar>
+                            {user &&
+                            competition &&
+                            user.userID === competition.user1
+                                ? competition &&
+                                  competition.user2name &&
+                                  competition.user2name.substring(0, 1)
+                                : competition &&
+                                  competition.user1name &&
+                                  competition.user1name.substring(0, 1)}
+                        </Avatar>
+                    </Typography>
+                </Grid>
+            </Grid>
+
             <Grid
                 container
                 direction="row"
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid item xs={4} className="grid-spacing">
+                <Grid
+                    item
+                    xs={5}
+                    className="summary-header-left-score grid-spacing"
+                >
                     <Typography variant="h4">
                         {user &&
                             competition &&
@@ -70,11 +100,6 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             )}
                         {user &&
                             competition &&
-                            user.userID === competition.user1 &&
-                            competition.user2total < competition.user1total &&
-                            competition.user2name}
-                        {user &&
-                            competition &&
                             user.userID !== competition.user1 &&
                             competition.user2total < competition.user1total && (
                                 <div>
@@ -84,50 +109,44 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                                             competition.user2total}
                                 </div>
                             )}
-                        {user &&
-                            competition &&
-                            user.userID !== competition.user1 &&
-                            competition.user1total < competition.user2total &&
-                            competition.user1name}
                     </Typography>
                 </Grid>
-                <Grid item xs={4} className="grid-spacing">
+                <Grid item xs={2} className="summary-header-icon grid-spacing">
                     {user &&
                         competition &&
                         user.userID === competition.user1 &&
                         competition.user1total < competition.user2total && (
-                            <ArrowBackIcon />
+                            <ArrowBackIcon fontSize="large" />
                         )}
                     {user &&
                         competition &&
                         user.userID === competition.user1 &&
                         competition.user1total > competition.user2total && (
-                            <ArrowForwardIcon />
+                            <ArrowForwardIcon fontSize="large" />
                         )}
                     {user &&
                         competition &&
                         user.userID !== competition.user1 &&
                         competition.user2total < competition.user1total && (
-                            <ArrowBackIcon />
+                            <ArrowBackIcon fontSize="large" />
                         )}
                     {user &&
                         competition &&
                         user.userID !== competition.user1 &&
                         competition.user2total > competition.user1total && (
-                            <ArrowForwardIcon />
+                            <ArrowForwardIcon fontSize="large" />
                         )}
                     {competition &&
                         competition.user1total === competition.user2total && (
-                            <SyncAltIcon />
+                            <SyncAltIcon fontSize="large" />
                         )}
                 </Grid>
-                <Grid item xs={4} className="grid-spacing">
+                <Grid
+                    item
+                    xs={5}
+                    className="summary-header-right-score grid-spacing"
+                >
                     <Typography variant="h4">
-                        {user &&
-                            competition &&
-                            user.userID === competition.user1 &&
-                            competition.user1total < competition.user2total &&
-                            competition.user1name}
                         {user &&
                             competition &&
                             user.userID === competition.user1 &&
@@ -139,11 +158,6 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                                             competition.user2total}
                                 </div>
                             )}
-                        {user &&
-                            competition &&
-                            user.userID !== competition.user1 &&
-                            competition.user2total < competition.user1total &&
-                            competition.user2name}
                         {user &&
                             competition &&
                             user.userID !== competition.user1 &&

@@ -22,12 +22,24 @@ const SummaryTitle = ({
                     user.userID === competition.user1 &&
                     competition &&
                     competition.user1name}
+                {userType === UserType.USER &&
+                    user &&
+                    competition &&
+                    user.userID !== competition.user1 &&
+                    competition &&
+                    competition.user2name}
                 {userType === UserType.COMPETITOR &&
                     user &&
                     competition &&
                     user.userID === competition.user1 &&
                     competition &&
                     competition.user2name}
+                {userType === UserType.COMPETITOR &&
+                    user &&
+                    competition &&
+                    user.userID !== competition.user1 &&
+                    competition &&
+                    competition.user1name}
             </Typography>
             <Divider />
             <Box display="flex" justifyContent="center">
@@ -46,12 +58,24 @@ const SummaryTitle = ({
                                 user.userID === competition.user1 &&
                                 competition &&
                                 competition.user1total}
+                            {userType === UserType.USER &&
+                                user &&
+                                competition &&
+                                user.userID !== competition.user1 &&
+                                competition &&
+                                competition.user2total}
                             {userType === UserType.COMPETITOR &&
                                 user &&
                                 competition &&
                                 user.userID === competition.user1 &&
                                 competition &&
                                 competition.user2total}
+                            {userType === UserType.COMPETITOR &&
+                                user &&
+                                competition &&
+                                user.userID !== competition.user1 &&
+                                competition &&
+                                competition.user1total}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} className="grid-spacing">
@@ -63,12 +87,24 @@ const SummaryTitle = ({
                                 user.userID === competition.user1 &&
                                 user1Purchases &&
                                 user1Purchases.length}
+                            {userType === UserType.USER &&
+                                user &&
+                                competition &&
+                                user.userID !== competition.user1 &&
+                                user2Purchases &&
+                                user2Purchases.length}
                             {userType === UserType.COMPETITOR &&
                                 user &&
                                 competition &&
                                 user.userID === competition.user1 &&
-                                user1Purchases &&
+                                user2Purchases &&
                                 user2Purchases.length}
+                            {userType === UserType.COMPETITOR &&
+                                user &&
+                                competition &&
+                                user.userID !== competition.user1 &&
+                                user1Purchases &&
+                                user1Purchases.length}
                         </Typography>
                     </Grid>
                 </Grid>
