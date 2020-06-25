@@ -351,9 +351,15 @@ const PrimarySearchAppBar = ({
                                         </div>
                                     </Grid>
                                     <Grid item>
-                                        <Typography variant="h6" noWrap>
-                                            Budget Battle
-                                        </Typography>
+                                        <Link to="/">
+                                            <Typography
+                                                variant="h6"
+                                                noWrap
+                                                style={{ color: 'white' }}
+                                            >
+                                                Budget Battle
+                                            </Typography>
+                                        </Link>
                                     </Grid>
                                 </Grid>
                             </Grid>

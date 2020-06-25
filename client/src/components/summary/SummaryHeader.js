@@ -165,8 +165,8 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                                 <div>
                                     {'-'}
                                     {competition &&
-                                        competition.user1total -
-                                            competition.user2total}
+                                        competition.user2total -
+                                            competition.user1total}
                                 </div>
                             )}
                     </Typography>

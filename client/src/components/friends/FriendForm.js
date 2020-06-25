@@ -88,8 +88,10 @@ const FriendForm = ({
 
     // buttons
     const searchBtn = () => {
-        setSearchLoading();
-        searchUsers({ friendSearch });
+        if (friendSearch) {
+            setSearchLoading();
+            searchUsers({ friendSearch });
+        }
         setFriendSearch('');
     };
     const addFriendBtn = (friendID) => {
@@ -249,7 +251,7 @@ const FriendForm = ({
                                     <Grid
                                         item
                                         xs={12}
-                                        md={6}
+                                        lg={4}
                                         key={searchUser._id}
                                         className={
                                             ('search-item', 'grid-spacing')

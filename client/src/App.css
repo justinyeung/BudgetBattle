@@ -48,6 +48,9 @@
     .container-spacing {
         padding: 4px !important;
     }
+    div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+        padding: 4px !important;
+    }
     .grid-spacing {
         padding: 4px !important;
     }
@@ -121,6 +124,11 @@
 
 .container-spacing {
     padding: 24px;
+}
+
+.back-button-spacing {
+    padding-left: 44px !important;
+    padding-top: 44px;
 }
 
 .send-comp-request {
@@ -243,4 +251,9 @@ h6.summary-title-item {
 .summary-header-right-score {
     color: red;
     text-align: start;
+}
+
+/* override material-table style to add padding */
+div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+    padding: 24px;
 }
