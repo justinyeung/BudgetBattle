@@ -48,6 +48,10 @@
     .container-spacing {
         padding: 4px !important;
     }
+    .back-button-spacing {
+        padding-left: 8px !important;
+        padding-top: 16px !important;
+    }
     div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
         padding: 4px !important;
     }
@@ -126,8 +130,8 @@
     padding: 24px;
 }
 
-.back-button-spacing {
-    padding-left: 44px !important;
+div.back-button-spacing {
+    padding-left: 44px;
     padding-top: 44px;
 }
 
