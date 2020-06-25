@@ -249,7 +249,7 @@ const FriendForm = ({
                                     <Grid
                                         item
                                         xs={12}
-                                        md={6}
+                                        lg={4}
                                         key={searchUser._id}
                                         className={
                                             ('search-item', 'grid-spacing')

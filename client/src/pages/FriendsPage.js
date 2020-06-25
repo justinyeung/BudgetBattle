@@ -10,7 +10,7 @@ import FriendRequests from '../components/friends/FriendRequests';
 const FriendsPage = () => {
     return (
         <div>
-            <Container maxWidth="md" className="container-spacing">
+            <Container maxWidth="lg" className="container-spacing">
                 <Grid
                     container
                     direction="row"
