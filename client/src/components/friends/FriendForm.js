@@ -88,8 +88,10 @@ const FriendForm = ({
 
     // buttons
     const searchBtn = () => {
-        setSearchLoading();
-        searchUsers({ friendSearch });
+        if (friendSearch) {
+            setSearchLoading();
+            searchUsers({ friendSearch });
+        }
         setFriendSearch('');
     };
     const addFriendBtn = (friendID) => {
