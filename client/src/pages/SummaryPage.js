@@ -11,8 +11,6 @@ import SummaryTitle from '../components/summary/SummaryTitle';
 import SummaryHeader from '../components/summary/SummaryHeader';
 import { getCompetition, setCompLoading } from '../actions/competitionActions';
 
-import BackButton from '../components/layout/BackButton';
-
 const SummaryPage = ({ setCompLoading, getCompetition }) => {
     useEffect(() => {
         setCompLoading();
