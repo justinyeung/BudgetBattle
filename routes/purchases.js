@@ -23,6 +23,26 @@ router.get('/', isLoggedIn, async (req, res) => {
     }
 });
 
+// @route GET /api/purchases/:id
+// @desc get user's purchases
+// @access private
+router.get('/:id', async (req, res) => {
+    try {
+        // input params
+        const userID = req.params.id;
+
+        // query for purchase in db
+        let purchases = await Purchase.find({
+            userID: userID,
+        });
+
+        res.json(purchases);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 // @route POST /api/purchases
 // @desc add a purchase
 // @access private
