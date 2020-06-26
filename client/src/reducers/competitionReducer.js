@@ -1,6 +1,7 @@
 import {
     SEND_COMP,
     ACCEPT_COMP,
+    COMP_ERROR,
     REJECT_DELETE_COMP,
     GET_ACCEPTED_COMP,
     GET_OUTPENDING_COMP,
@@ -99,6 +100,13 @@ export default (state = initialState, action) => {
                 inpending: state.inpending.filter(
                     (comp) => comp._id !== action.payload.compID
                 ),
+                compLoading: false,
+            };
+        case COMP_ERROR:
+            console.error(action.payload);
+            return {
+                ...state,
+                error: action.payload,
                 compLoading: false,
             };
         case CLEAR_COMPS:

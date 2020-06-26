@@ -96,6 +96,7 @@ const PrimarySearchAppBar = ({
     purchase: { purchaseLoading },
     competition: { compLoading },
     search: { searchLoading },
+    profile: { profileLoading },
     logout,
     setUserLoading,
 }) => {
@@ -255,12 +256,17 @@ const PrimarySearchAppBar = ({
         >
             {!userLoading && user !== null && (
                 <div>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                        <ListItemIcon>
-                            <PersonIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary="Profile" />
-                    </StyledMenuItem>
+                    <Link
+                        to={`/profile/${user && user.userID}`}
+                        id="drawer-link"
+                    >
+                        <StyledMenuItem onClick={handleMenuClose}>
+                            <ListItemIcon>
+                                <PersonIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Profile" />
+                        </StyledMenuItem>
+                    </Link>
                     <StyledMenuItem onClick={handleMenuClose}>
                         <ListItemIcon>
                             <SettingsIcon fontSize="small" />
@@ -438,6 +444,7 @@ const PrimarySearchAppBar = ({
                     {(userLoading ||
                         purchaseLoading ||
                         compLoading ||
+                        profileLoading ||
                         searchLoading) && <LinearProgress />}
                     {/* <LinearProgress /> */}
                 </div>
@@ -450,6 +457,11 @@ const PrimarySearchAppBar = ({
 };
 
 PrimarySearchAppBar.propTypes = {
+    user: PropTypes.object.isRequired,
+    purchase: PropTypes.object.isRequired,
+    competition: PropTypes.object.isRequired,
+    search: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     setUserLoading: PropTypes.func.isRequired,
 };
@@ -459,6 +471,7 @@ const mapStateToProps = (state) => ({
     purchase: state.purchase,
     competition: state.competition,
     search: state.search,
+    profile: state.profile,
 });
 
 export default connect(mapStateToProps, {

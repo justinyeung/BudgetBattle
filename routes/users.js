@@ -12,7 +12,7 @@ const Friend = require('../models/Friend');
 router.get('/current', isLoggedIn, async (req, res) => {
     try {
         // get current user's friends and friend requests
-        let currentFriends = await Friend.find({
+        const currentFriends = await Friend.find({
             $or: [
                 { user1: req.session.user.userID },
                 { user2: req.session.user.userID },
@@ -29,6 +29,22 @@ router.get('/current', isLoggedIn, async (req, res) => {
         );
 
         res.json(updatedUser);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
+// @route GET /api/users/byid/:id
+// @desc get user by id
+// @access private
+router.get('/byid/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        user = await User.findOne({ userID: id });
+
+        res.json(user);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

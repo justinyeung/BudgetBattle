@@ -56,7 +56,6 @@ export const getUser = () => async (dispatch) => {
             });
         }
     } catch (err) {
-        console.log('Login failed');
         dispatch({
             type: USER_ERROR,
             payload: err,

@@ -19,6 +19,7 @@ import PurchasesPage from './pages/PurchasesPage';
 import CompetitionsPage from './pages/CompetitionsPage';
 import SummaryPage from './pages/SummaryPage';
 import Footer from './components/layout/Footer';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                         <Route exact path="/" component={HomePage} />
                         <Route path="/getstarted" component={GetStartedPage} />
                         <Route path="/login" component={LoginPage} />
+                        <Route path="/profile/:id" component={ProfilePage} />
                         <PrivateRoute path="/dashboard" component={Dashboard} />
                         <PrivateRoute path="/friends" component={FriendsPage} />
                         <PrivateRoute
