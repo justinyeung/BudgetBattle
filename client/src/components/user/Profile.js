@@ -23,39 +23,34 @@ const Profile = ({
                     direction="row"
                     justify="center"
                     alignItems="center"
+                    className="container-spacing"
                 >
                     <Grid item xs={12} sm={6} className="grid-spacing">
-                        <Typography variant="h6">Name:</Typography>
+                        Name:
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
                         {user && user.name}
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
-                        <Typography variant="h6">User ID:</Typography>
+                        User ID:
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
                         {user && user.userID}
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
-                        <Typography variant="h6">
-                            Total # of friends:
-                        </Typography>
+                        Total # of friends:
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
                         {numFriends}
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
-                        <Typography variant="h6">
-                            Total # of purchases:
-                        </Typography>
+                        Total # of purchases:
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
                         {numPurchases}
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
-                        <Typography variant="h6">
-                            Total # of battles:
-                        </Typography>
+                        Total # of battles:
                     </Grid>
                     <Grid item xs={12} sm={6} className="grid-spacing">
                         {numCompetitions}
