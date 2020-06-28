@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
     deleteFriend,
@@ -121,29 +122,41 @@ const FriendForm = ({
 
     // Search result buttons
     const detectRelationship = (userID) => {
-        if (userID === user.userID) {
-            return <Button>You</Button>;
-        } else if (isOutpending(userID)) {
-            return (
-                <Button onClick={() => removeRequestBtn(userID)}>
-                    Requested
-                </Button>
-            );
-        } else if (isInpending(userID)) {
-            return (
-                <Button onClick={() => acceptRequestBtn(userID)}>
-                    Accept Request
-                </Button>
-            );
-        } else if (isFriend(userID)) {
-            return (
-                <Button onClick={() => removeFriendBtn(userID)}>Remove</Button>
-            );
-        } else {
-            return (
-                <Button onClick={() => addFriendBtn(userID)}>Add Friend</Button>
-            );
-        }
+        return (
+            <div>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-start"
+                    alignItems="flex-start"
+                ></Grid>
+                <Grid item xs={12}>
+                    {userID === user.userID && <Button>You</Button>}
+                    {isOutpending(userID) && (
+                        <Button onClick={() => removeRequestBtn(userID)}>
+                            Requested
+                        </Button>
+                    )}
+                    {isInpending(userID) && (
+                        <Button onClick={() => acceptRequestBtn(userID)}>
+                            Accept Request
+                        </Button>
+                    )}
+                    {isFriend(userID) && (
+                        <Button onClick={() => removeFriendBtn(userID)}>
+                            Remove
+                        </Button>
+                    )}
+                    {!isOutpending(userID) &&
+                        !isInpending(userID) &&
+                        !isFriend(userID) && (
+                            <Button onClick={() => addFriendBtn(userID)}>
+                                Add Friend
+                            </Button>
+                        )}
+                </Grid>
+            </div>
+        );
     };
 
     // local methods for search result buttons
@@ -258,30 +271,39 @@ const FriendForm = ({
                                         }
                                     >
                                         <ListItem ContainerComponent="div">
-                                            <ListItemAvatar
-                                                className={classes.avatar}
+                                            <Link
+                                                to={`/profile/${searchUser.userID}`}
                                             >
-                                                <Avatar>
-                                                    {searchUser.name &&
-                                                        searchUser.name.substring(
-                                                            0,
-                                                            1
-                                                        )}
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText
-                                                primary={searchUser.name}
-                                                secondary={
-                                                    searchUser.friends
-                                                        .length === 1
-                                                        ? searchUser.friends
-                                                              .length +
-                                                          ' Friend'
-                                                        : searchUser.friends
-                                                              .length +
-                                                          ' Friends'
-                                                }
-                                            />
+                                                <ListItemAvatar
+                                                    className={classes.avatar}
+                                                >
+                                                    <Avatar>
+                                                        {searchUser.name &&
+                                                            searchUser.name.substring(
+                                                                0,
+                                                                1
+                                                            )}
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                            </Link>
+                                            <Link
+                                                to={`/profile/${searchUser.userID}`}
+                                                id="drawer-link"
+                                            >
+                                                <ListItemText
+                                                    primary={searchUser.name}
+                                                    secondary={
+                                                        searchUser.friends
+                                                            .length === 1
+                                                            ? searchUser.friends
+                                                                  .length +
+                                                              ' Friend'
+                                                            : searchUser.friends
+                                                                  .length +
+                                                              ' Friends'
+                                                    }
+                                                />
+                                            </Link>
                                             <ListItemSecondaryAction>
                                                 {detectRelationship(
                                                     searchUser.userID
