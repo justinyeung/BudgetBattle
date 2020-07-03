@@ -267,12 +267,6 @@ const PrimarySearchAppBar = ({
                             <ListItemText primary="Profile" />
                         </StyledMenuItem>
                     </Link>
-                    <StyledMenuItem onClick={handleMenuClose}>
-                        <ListItemIcon>
-                            <SettingsIcon fontSize="small" />
-                        </ListItemIcon>
-                        <ListItemText primary="Settings" />
-                    </StyledMenuItem>
                     <StyledMenuItem onClick={() => logoutButton()}>
                         <ListItemIcon>
                             <LockOpenIcon fontSize="small" />
