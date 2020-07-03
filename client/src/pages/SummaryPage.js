@@ -9,7 +9,6 @@ import Container from '@material-ui/core/Container';
 
 import SummaryTitle from '../components/summary/SummaryTitle';
 import SummaryHeader from '../components/summary/SummaryHeader';
-import SummaryPurchases from '../components/summary/SummaryPurchases';
 import { getCompetition, setCompLoading } from '../actions/competitionActions';
 
 const SummaryPage = ({ setCompLoading, getCompetition }) => {
@@ -38,9 +37,6 @@ const SummaryPage = ({ setCompLoading, getCompetition }) => {
                 </Grid>
                 <Grid item md={6} xs={12} className="grid-spacing">
                     <SummaryTitle userType={UserType.COMPETITOR} />
-                </Grid>
-                <Grid item xs={12} className="grid-spacing">
-                    <SummaryPurchases />
                 </Grid>
             </Grid>
         </Container>
