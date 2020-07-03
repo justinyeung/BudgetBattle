@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserType } from '../../models/enums';
+import SummaryPurchases from './SummaryPurchases';
 
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -106,6 +107,36 @@ const SummaryTitle = ({
                                 user1Purchases &&
                                 user1Purchases.length}
                         </Typography>
+                    </Grid>
+                    <Grid item xs={12} className="grid-spacing">
+                        {userType === UserType.USER &&
+                            user &&
+                            competition &&
+                            user.userID === competition.user1 &&
+                            user1Purchases && (
+                                <SummaryPurchases purchases={user1Purchases} />
+                            )}
+                        {userType === UserType.USER &&
+                            user &&
+                            competition &&
+                            user.userID !== competition.user1 &&
+                            user2Purchases && (
+                                <SummaryPurchases purchases={user2Purchases} />
+                            )}
+                        {userType === UserType.COMPETITOR &&
+                            user &&
+                            competition &&
+                            user.userID === competition.user1 &&
+                            user2Purchases && (
+                                <SummaryPurchases purchases={user2Purchases} />
+                            )}
+                        {userType === UserType.COMPETITOR &&
+                            user &&
+                            competition &&
+                            user.userID !== competition.user1 &&
+                            user1Purchases && (
+                                <SummaryPurchases purchases={user1Purchases} />
+                            )}
                     </Grid>
                 </Grid>
             </Box>

@@ -257,6 +257,10 @@ h6.summary-title-item {
     text-align: start;
 }
 
+.summary-purchases-title {
+    justify-content: center;
+}
+
 /* override material-table style to add padding */
 div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
     padding: 24px;
