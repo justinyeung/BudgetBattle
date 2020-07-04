@@ -22,7 +22,6 @@ import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import GroupIcon from '@material-ui/icons/Group';
 import Grid from '@material-ui/core/Grid';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
