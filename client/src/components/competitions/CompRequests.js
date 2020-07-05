@@ -7,6 +7,7 @@ import {
     getInPendingComp,
     setCompLoading,
 } from '../../actions/competitionActions';
+import { monthNames } from '../../models/lists';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -33,21 +34,6 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline',
     },
 }));
-
-const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
 
 const CompRequests = ({
     acceptComp,
