@@ -27,8 +27,8 @@ const SummaryPurchases = ({ purchases }) => {
                 <TableHead>
                     <TableRow>
                         <TableCell>Date</TableCell>
-                        <TableCell>Category</TableCell>
                         <TableCell>Location</TableCell>
+                        <TableCell>Category</TableCell>
                         <TableCell>Amount</TableCell>
                     </TableRow>
                 </TableHead>
@@ -36,8 +36,8 @@ const SummaryPurchases = ({ purchases }) => {
                     purchases.map((purchase) => (
                         <TableRow key={purchase._id}>
                             <TableCell>{formatDate(purchase.date)}</TableCell>
-                            <TableCell>{purchase.category}</TableCell>
                             <TableCell>{purchase.location}</TableCell>
+                            <TableCell>{purchase.category}</TableCell>
                             <TableCell>${purchase.amount}</TableCell>
                         </TableRow>
                     ))}
