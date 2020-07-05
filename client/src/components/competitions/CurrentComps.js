@@ -7,6 +7,7 @@ import {
     setCompLoading,
     getAcceptedComps,
 } from '../../actions/competitionActions';
+import { monthNames } from '../../models/lists';
 
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -73,21 +74,6 @@ const useStyles = makeStyles((theme) => ({
         margin: 0,
     },
 }));
-
-const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-];
 
 function PaperComponent(props) {
     return (
