@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
 
-import BackButton from '../layout/BackButton';
+import NavButtons from '../layout/NavButtons';
 
 const PrivateRoute = ({
     user: { user, userLoading },
@@ -13,7 +13,7 @@ const PrivateRoute = ({
 }) => {
     return (
         <div>
-            <BackButton />
+            <NavButtons />
             {user !== null && (
                 <Route {...rest} render={(props) => <Component {...props} />} />
             )}
