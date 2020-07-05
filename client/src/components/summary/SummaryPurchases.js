@@ -12,11 +12,12 @@ const SummaryPurchases = ({ purchases }) => {
         const newDate = new Date(date);
         return (
             <p>
-                {newDate.getFullYear() +
+                {newDate.getMonth() +
+                    1 +
                     '/' +
-                    newDate.getMonth() +
+                    newDate.getDate() +
                     '/' +
-                    newDate.getDate()}
+                    newDate.getFullYear()}
             </p>
         );
     };
@@ -37,7 +38,7 @@ const SummaryPurchases = ({ purchases }) => {
                             <TableCell>{formatDate(purchase.date)}</TableCell>
                             <TableCell>{purchase.category}</TableCell>
                             <TableCell>{purchase.location}</TableCell>
-                            <TableCell>{purchase.amount}</TableCell>
+                            <TableCell>${purchase.amount}</TableCell>
                         </TableRow>
                     ))}
             </Table>
