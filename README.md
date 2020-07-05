@@ -18,3 +18,10 @@ A Budgeting web application that lets you compete with friends in monthly budget
 - Styled with Material UI and Semantic UI
 - State Management with Redux
 - Deployed using Heroku
+
+## Images
+![summary page](https://i.imgur.com/e2uaGT4.png)
+
+
+
+![purchases page](https://i.imgur.com/Imjcn4B.png)
