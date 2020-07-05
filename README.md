@@ -1,4 +1,4 @@
-# BudgetBattle
+# Budget Battle
 https://www.budgetbattle.io/
 
 ## What is it?
@@ -10,6 +10,7 @@ A Budgeting web application that lets you compete with friends in monthly budget
 - Easily get, add, update and delete your purchases
 - Add friends to compete to see who can budget the best
 - Compete in battles to compare purchases with one another
+- Easily send, accept and reject friend and battle requests
 
 ## Development
 - Developed with Node.js, Express.js, MongoDB and React
