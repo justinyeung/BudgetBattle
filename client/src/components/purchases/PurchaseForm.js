@@ -146,29 +146,6 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                                 <TextField
                                     id="outlined-basic"
                                     autoComplete="off"
-                                    label="Amount"
-                                    variant="outlined"
-                                    fullWidth
-                                    value={amount}
-                                    onChange={(amount) =>
-                                        setAmount(amount.target.value)
-                                    }
-                                    onKeyPress={(e) => {
-                                        e.key === 'Enter' && addPurchaseBtn();
-                                    }}
-                                />
-                            </Grid>
-                            <Grid
-                                item
-                                lg={3}
-                                md={3}
-                                sm={8}
-                                xs={10}
-                                className="grid-spacing"
-                            >
-                                <TextField
-                                    id="outlined-basic"
-                                    autoComplete="off"
                                     label="Location"
                                     variant="outlined"
                                     fullWidth
@@ -198,6 +175,29 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                                     value={category}
                                     onChange={(category) =>
                                         setCategory(category.target.value)
+                                    }
+                                    onKeyPress={(e) => {
+                                        e.key === 'Enter' && addPurchaseBtn();
+                                    }}
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                lg={3}
+                                md={3}
+                                sm={8}
+                                xs={10}
+                                className="grid-spacing"
+                            >
+                                <TextField
+                                    id="outlined-basic"
+                                    autoComplete="off"
+                                    label="Amount"
+                                    variant="outlined"
+                                    fullWidth
+                                    value={amount}
+                                    onChange={(amount) =>
+                                        setAmount(amount.target.value)
                                     }
                                     onKeyPress={(e) => {
                                         e.key === 'Enter' && addPurchaseBtn();
