@@ -42,7 +42,6 @@ passport.use(
             // runs when logging in
             let user = await User.findOne({ userID: profile.id });
             if (!user) {
-                console.log('new user');
                 user = new User({
                     userID: profile.id,
                     name: profile.displayName,
@@ -51,7 +50,6 @@ passport.use(
                 await user.save();
                 return cb(null, user);
             } else {
-                console.log('existing user');
                 return cb(null, user);
             }
         }
@@ -71,7 +69,6 @@ passport.use(
             // runs when logging in
             let user = await User.findOne({ userID: profile.id });
             if (!user) {
-                console.log('new user');
                 user = new User({
                     userID: profile.id,
                     name:
@@ -80,7 +77,6 @@ passport.use(
                 await user.save();
                 return cb(null, user);
             } else {
-                console.log('existing user');
                 return cb(null, user);
             }
         }

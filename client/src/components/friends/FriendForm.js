@@ -131,29 +131,46 @@ const FriendForm = ({
                     alignItems="flex-start"
                 ></Grid>
                 <Grid item xs={12}>
-                    {userID === user.userID && <Button>You</Button>}
+                    {userID === user.userID && (
+                        <Button className="friend-form-btn">You</Button>
+                    )}
                     {isOutpending(userID) && (
-                        <Button onClick={() => removeRequestBtn(userID)}>
+                        <Button
+                            className="friend-form-btn"
+                            onClick={() => removeRequestBtn(userID)}
+                        >
                             Requested
                         </Button>
                     )}
                     {isInpending(userID) && (
-                        <Button onClick={() => acceptRequestBtn(userID)}>
+                        <Button
+                            className="friend-form-btn"
+                            onClick={() => acceptRequestBtn(userID)}
+                        >
                             Accept Request
                         </Button>
                     )}
                     {isFriend(userID) && (
-                        <Button onClick={() => removeFriendBtn(userID)}>
+                        <Button
+                            className="friend-form-btn"
+                            onClick={() => removeFriendBtn(userID)}
+                        >
                             Remove
                         </Button>
                     )}
                     {!isOutpending(userID) &&
                         !isInpending(userID) &&
                         !isFriend(userID) && (
-                            <Button onClick={() => addFriendBtn(userID)}>
+                            <Button
+                                className="friend-form-btn"
+                                onClick={() => addFriendBtn(userID)}
+                            >
                                 Add Friend
                             </Button>
                         )}
+                    <Link to={`/profile/${userID}`} id="drawer-link">
+                        <Button className="friend-form-btn">Profile</Button>
+                    </Link>
                 </Grid>
             </div>
         );
