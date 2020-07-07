@@ -150,7 +150,6 @@ export const sendFriendRequest = (friendID) => async (dispatch) => {
             type: FRIEND_ERROR,
             payload: err,
         });
-        console.log(err);
     }
 };
 
@@ -197,8 +196,6 @@ export const deleteFriend = (friendID) => async (dispatch) => {
             },
         };
 
-        console.log(friendID);
-
         // api call to add friend, friendID as param
         await axios.delete('/api/friends', config);
 
@@ -211,6 +208,5 @@ export const deleteFriend = (friendID) => async (dispatch) => {
             type: FRIEND_ERROR,
             payload: err,
         });
-        console.log(err);
     }
 };

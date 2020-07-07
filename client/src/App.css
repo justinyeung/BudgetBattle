@@ -58,6 +58,13 @@
     .grid-spacing {
         padding: 4px !important;
     }
+    .friend-form-btn {
+        padding: 0 !important;
+        display: block !important;
+    }
+    .profile-spacing:nth-child(2n) {
+        padding-top: 0 !important;
+    }
 }
 
 @media (max-width: 958px) {
@@ -272,4 +279,8 @@ div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
 
 button.nav-buttons {
     margin-right: 24px;
+}
+
+.profile-spacing {
+    padding: 20px;
 }
