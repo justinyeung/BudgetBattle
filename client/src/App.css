@@ -180,6 +180,7 @@ th.MuiTableCell-root.MuiTableCell-head {
 }
 
 header.appbar {
+    padding-right: 0 !important;
     background-color: black;
     color: white;
 }
