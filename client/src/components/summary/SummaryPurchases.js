@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { TableBody } from '@material-ui/core';
 
 const SummaryPurchases = ({ purchases }) => {
     const formatDate = (date) => {
@@ -32,22 +33,28 @@ const SummaryPurchases = ({ purchases }) => {
                         <TableCell>Amount</TableCell>
                     </TableRow>
                 </TableHead>
-                {purchases &&
-                    purchases.map((purchase) => (
-                        <TableRow key={purchase._id}>
-                            <TableCell>{formatDate(purchase.date)}</TableCell>
-                            <TableCell>{purchase.location}</TableCell>
-                            <TableCell>{purchase.category}</TableCell>
-                            <TableCell>${purchase.amount}</TableCell>
-                        </TableRow>
-                    ))}
+                <TableBody>
+                    {purchases &&
+                        purchases.map((purchase) => (
+                            <TableRow key={purchase._id}>
+                                <TableCell>
+                                    {formatDate(purchase.date)}
+                                </TableCell>
+                                <TableCell>{purchase.location}</TableCell>
+                                <TableCell>{purchase.category}</TableCell>
+                                <TableCell>
+                                    ${purchase.amount.toFixed(2)}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                </TableBody>
             </Table>
         </TableContainer>
     );
 };
 
 SummaryPurchases.propTypes = {
-    purchases: PropTypes.object.isRequired,
+    purchases: PropTypes.array.isRequired,
 };
 
 export default SummaryPurchases;
