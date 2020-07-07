@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import Profile from '../components/user/Profile';
 
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
+
 import {
     getNumCompsById,
     getProfileUserById,
@@ -19,6 +23,7 @@ const ProfilePage = ({
     getNumCompsById,
     getNumPurchasesById,
     getProfileUserById,
+    history,
 }) => {
     useEffect(() => {
         setProfileLoading();
@@ -33,6 +38,19 @@ const ProfilePage = ({
 
     return (
         <div>
+            <Container maxWidth="lg" className="back-button-spacing">
+                <Button
+                    className="component-box nav-buttons"
+                    variant="contained"
+                    onClick={() => history.goBack()}
+                >
+                    <KeyboardBackspaceRoundedIcon
+                        className="nav-buttons-icons"
+                        fontSize="large"
+                    />{' '}
+                    Go Back
+                </Button>
+            </Container>
             <Container maxWidth="lg" className="container-spacing">
                 <Grid
                     container
@@ -50,15 +68,18 @@ const ProfilePage = ({
 };
 
 ProfilePage.propTypes = {
+    history: PropTypes.object.isRequired,
     getNumCompsById: PropTypes.func.isRequired,
     getProfileUserById: PropTypes.func.isRequired,
     getNumPurchasesById: PropTypes.func.isRequired,
     setProfileLoading: PropTypes.func.isRequired,
 };
 
-export default connect(null, {
-    getNumCompsById,
-    getProfileUserById,
-    getNumPurchasesById,
-    setProfileLoading,
-})(ProfilePage);
+export default withRouter(
+    connect(null, {
+        getNumCompsById,
+        getProfileUserById,
+        getNumPurchasesById,
+        setProfileLoading,
+    })(ProfilePage)
+);
