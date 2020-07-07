@@ -93,9 +93,11 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID === competition.user1 &&
                             competition.user1total < competition.user2total && (
                                 <div>
-                                    {'-'}
-                                    {competition.user2total -
-                                        competition.user1total}
+                                    {'-$'}
+                                    {(
+                                        competition.user2total -
+                                        competition.user1total
+                                    ).toFixed(2)}
                                 </div>
                             )}
                         {user &&
@@ -103,10 +105,11 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID !== competition.user1 &&
                             competition.user2total < competition.user1total && (
                                 <div>
-                                    {'-'}
-                                    {competition &&
+                                    {'-$'}
+                                    {(
                                         competition.user1total -
-                                            competition.user2total}
+                                        competition.user2total
+                                    ).toFixed(2)}
                                 </div>
                             )}
                     </Typography>
@@ -152,10 +155,11 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID === competition.user1 &&
                             competition.user2total < competition.user1total && (
                                 <div>
-                                    {'-'}
-                                    {competition &&
+                                    {'-$'}
+                                    {(
                                         competition.user1total -
-                                            competition.user2total}
+                                        competition.user2total
+                                    ).toFixed(2)}
                                 </div>
                             )}
                         {user &&
@@ -163,10 +167,11 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID !== competition.user1 &&
                             competition.user1total < competition.user2total && (
                                 <div>
-                                    {'-'}
-                                    {competition &&
+                                    {'-$'}
+                                    {(
                                         competition.user2total -
-                                            competition.user1total}
+                                        competition.user1total
+                                    ).toFixed(2)}
                                 </div>
                             )}
                     </Typography>
