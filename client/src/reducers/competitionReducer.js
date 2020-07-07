@@ -39,7 +39,6 @@ export default (state = initialState, action) => {
             };
         case GET_ACCEPTED_COMP:
             function compare(a, b) {
-                console.log('sorting');
                 if (a.year < b.year) {
                     return 1;
                 } else if (a.year > b.year) {
