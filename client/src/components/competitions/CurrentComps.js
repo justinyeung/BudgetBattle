@@ -121,12 +121,12 @@ const CurrentComps = ({
         if (user.userID === comp.user1) {
             return {
                 name: comp.user2name,
-                total: comp.user2total,
+                total: comp.user2total.toFixed(2),
             };
         } else {
             return {
                 name: comp.user1name,
-                total: comp.user1total,
+                total: comp.user1total.toFixed(2),
             };
         }
     };
@@ -135,12 +135,12 @@ const CurrentComps = ({
         if (user.userID !== comp.user1) {
             return {
                 name: comp.user2name,
-                total: comp.user2total,
+                total: comp.user2total.toFixed(2),
             };
         } else {
             return {
                 name: comp.user1name,
-                total: comp.user1total,
+                total: comp.user1total.toFixed(2),
             };
         }
     };
