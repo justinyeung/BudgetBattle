@@ -58,25 +58,25 @@ const SummaryTitle = ({
                                 competition &&
                                 user.userID === competition.user1 &&
                                 competition &&
-                                competition.user1total}
+                                competition.user1total.toFixed(2)}
                             {userType === UserType.USER &&
                                 user &&
                                 competition &&
                                 user.userID !== competition.user1 &&
                                 competition &&
-                                competition.user2total}
+                                competition.user2total.toFixed(2)}
                             {userType === UserType.COMPETITOR &&
                                 user &&
                                 competition &&
                                 user.userID === competition.user1 &&
                                 competition &&
-                                competition.user2total}
+                                competition.user2total.toFixed(2)}
                             {userType === UserType.COMPETITOR &&
                                 user &&
                                 competition &&
                                 user.userID !== competition.user1 &&
                                 competition &&
-                                competition.user1total}
+                                competition.user1total.toFixed(2)}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} className="grid-spacing">
