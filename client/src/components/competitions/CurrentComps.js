@@ -91,7 +91,7 @@ const CurrentComps = ({
     setCompLoading,
     getAcceptedComps,
     user: { user },
-    competition: { accepted },
+    competition: { accepted, compLoading },
 }) => {
     const classes = useStyles();
 
@@ -222,181 +222,183 @@ const CurrentComps = ({
                     Battles
                 </Typography>
                 <Divider />
-                <div className={classes.root}>
-                    {accepted.length === 0 && (
-                        <List className={classes.list}>
-                            <ListItem alignItems="flex-start">
-                                <ListItemAvatar>
-                                    <Avatar>{':('}</Avatar>
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={'No Battles to show.'}
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                component="span"
-                                                variant="body2"
-                                                className={classes.inline}
-                                                color="textPrimary"
+                {!compLoading && (
+                    <div className={classes.root}>
+                        {accepted.length === 0 && (
+                            <List className={classes.list}>
+                                <ListItem alignItems="flex-start">
+                                    <ListItemAvatar>
+                                        <Avatar>{':('}</Avatar>
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={'No Battles to show.'}
+                                        secondary={
+                                            <React.Fragment>
+                                                <Typography
+                                                    component="span"
+                                                    variant="body2"
+                                                    className={classes.inline}
+                                                    color="textPrimary"
+                                                >
+                                                    Invite Friends to start
+                                                    Battling!
+                                                </Typography>
+                                            </React.Fragment>
+                                        }
+                                    />
+                                </ListItem>
+                            </List>
+                        )}
+                        {accepted !== [] &&
+                            accepted.map((comp) => (
+                                <div key={comp._id}>
+                                    <ExpansionPanel
+                                        key={comp._id}
+                                        id="expansion-panel"
+                                    >
+                                        <ExpansionPanelSummary
+                                            expandIcon={<ExpandMoreIcon />}
+                                            aria-controls="panel1c-content"
+                                            id="panel1c-header"
+                                        >
+                                            <div
+                                                id="competitions-left-column"
+                                                className={classes.column}
                                             >
-                                                Invite Friends to start
-                                                Battling!
-                                            </Typography>
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </List>
-                    )}
-                    {accepted !== [] &&
-                        accepted.map((comp) => (
-                            <div key={comp._id}>
-                                <ExpansionPanel
-                                    key={comp._id}
-                                    id="expansion-panel"
-                                >
-                                    <ExpansionPanelSummary
-                                        expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1c-content"
-                                        id="panel1c-header"
-                                    >
-                                        <div
-                                            id="competitions-left-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography
-                                                className={
-                                                    classes.primaryHeading
-                                                }
-                                                variant="h6"
+                                                <Typography
+                                                    className={
+                                                        classes.primaryHeading
+                                                    }
+                                                    variant="h6"
+                                                >
+                                                    {getRight(comp).name}
+                                                </Typography>
+                                            </div>
+                                            <div
+                                                id="competitions-center-column"
+                                                className={classes.column}
+                                            />
+                                            <div
+                                                id="competitions-right-column"
+                                                className={classes.column}
                                             >
-                                                {getRight(comp).name}
-                                            </Typography>
-                                        </div>
-                                        <div
-                                            id="competitions-center-column"
-                                            className={classes.column}
-                                        />
-                                        <div
-                                            id="competitions-right-column"
-                                            className={classes.column}
+                                                <Typography
+                                                    variant="h5"
+                                                    className={
+                                                        classes.secondaryHeading
+                                                    }
+                                                >
+                                                    {monthNames[comp.month]}{' '}
+                                                    {comp.year}
+                                                </Typography>
+                                            </div>
+                                        </ExpansionPanelSummary>
+                                        <Divider />
+                                        <ExpansionPanelDetails
+                                            className={classes.detailsAvatar}
                                         >
-                                            <Typography
-                                                variant="h5"
-                                                className={
-                                                    classes.secondaryHeading
-                                                }
+                                            <div
+                                                id="competitions-left-column"
+                                                className={classes.column}
                                             >
-                                                {monthNames[comp.month]}{' '}
-                                                {comp.year}
-                                            </Typography>
-                                        </div>
-                                    </ExpansionPanelSummary>
-                                    <Divider />
-                                    <ExpansionPanelDetails
-                                        className={classes.detailsAvatar}
-                                    >
-                                        <div
-                                            id="competitions-left-column"
-                                            className={classes.column}
+                                                <Avatar>
+                                                    {getLeft(
+                                                        comp
+                                                    ).name.substring(0, 1)}
+                                                </Avatar>
+                                            </div>
+                                            <div
+                                                id="competitions-center-column"
+                                                className={classes.column}
+                                            />
+                                            <div
+                                                id="competitions-right-column"
+                                                className={classes.column}
+                                            >
+                                                <Avatar>
+                                                    {getRight(
+                                                        comp
+                                                    ).name.substring(0, 1)}
+                                                </Avatar>
+                                            </div>
+                                        </ExpansionPanelDetails>
+                                        <ExpansionPanelDetails
+                                            className={classes.details}
                                         >
-                                            <Avatar>
-                                                {getLeft(comp).name.substring(
-                                                    0,
-                                                    1
-                                                )}
-                                            </Avatar>
-                                        </div>
-                                        <div
-                                            id="competitions-center-column"
-                                            className={classes.column}
-                                        />
-                                        <div
-                                            id="competitions-right-column"
-                                            className={classes.column}
+                                            <div
+                                                id="competitions-left-column"
+                                                className={classes.column}
+                                            >
+                                                <Typography variant="h5">
+                                                    {getLeft(comp).name}
+                                                </Typography>
+                                            </div>
+                                            <div
+                                                id="competitions-center-column"
+                                                className={classes.column}
+                                            />
+                                            <div
+                                                id="competitions-right-column"
+                                                className={classes.column}
+                                            >
+                                                <Typography variant="h5">
+                                                    {getRight(comp).name}
+                                                </Typography>
+                                            </div>
+                                        </ExpansionPanelDetails>
+                                        <ExpansionPanelDetails
+                                            className={classes.details}
                                         >
-                                            <Avatar>
-                                                {getRight(comp).name.substring(
-                                                    0,
-                                                    1
-                                                )}
-                                            </Avatar>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                    <ExpansionPanelDetails
-                                        className={classes.details}
-                                    >
-                                        <div
-                                            id="competitions-left-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                {getLeft(comp).name}
-                                            </Typography>
-                                        </div>
-                                        <div
-                                            id="competitions-center-column"
-                                            className={classes.column}
-                                        />
-                                        <div
-                                            id="competitions-right-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                {getRight(comp).name}
-                                            </Typography>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                    <ExpansionPanelDetails
-                                        className={classes.details}
-                                    >
-                                        <div
-                                            id="competitions-left-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                ${getLeft(comp).total}
-                                            </Typography>
-                                        </div>
-                                        <div
-                                            id="competitions-center-column"
-                                            className={classes.column}
-                                        >
-                                            <h5>Total Spent</h5>
-                                        </div>
-                                        <div
-                                            id="competitions-right-column"
-                                            className={classes.column}
-                                        >
-                                            <Typography variant="h5">
-                                                ${getRight(comp).total}
-                                            </Typography>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                    <ExpansionPanelActions>
-                                        <Button
-                                            variant="outlined"
-                                            size="large"
-                                            color="secondary"
-                                            onClick={() => deleteBtn(comp._id)}
-                                        >
-                                            Remove
-                                        </Button>
-                                        <Link to={`/battles/${comp._id}`}>
+                                            <div
+                                                id="competitions-left-column"
+                                                className={classes.column}
+                                            >
+                                                <Typography variant="h5">
+                                                    ${getLeft(comp).total}
+                                                </Typography>
+                                            </div>
+                                            <div
+                                                id="competitions-center-column"
+                                                className={classes.column}
+                                            >
+                                                <h5>Total Spent</h5>
+                                            </div>
+                                            <div
+                                                id="competitions-right-column"
+                                                className={classes.column}
+                                            >
+                                                <Typography variant="h5">
+                                                    ${getRight(comp).total}
+                                                </Typography>
+                                            </div>
+                                        </ExpansionPanelDetails>
+                                        <ExpansionPanelActions>
                                             <Button
                                                 variant="outlined"
                                                 size="large"
-                                                color="primary"
+                                                color="secondary"
+                                                onClick={() =>
+                                                    deleteBtn(comp._id)
+                                                }
                                             >
-                                                View More
+                                                Remove
                                             </Button>
-                                        </Link>
-                                    </ExpansionPanelActions>
-                                    <Divider />
-                                </ExpansionPanel>
-                            </div>
-                        ))}
-                </div>
+                                            <Link to={`/battles/${comp._id}`}>
+                                                <Button
+                                                    variant="outlined"
+                                                    size="large"
+                                                    color="primary"
+                                                >
+                                                    View More
+                                                </Button>
+                                            </Link>
+                                        </ExpansionPanelActions>
+                                        <Divider />
+                                    </ExpansionPanel>
+                                </div>
+                            ))}
+                    </div>
+                )}
             </Box>
             {renderDialog}
             {renderSnackbar}

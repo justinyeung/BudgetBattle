@@ -38,9 +38,24 @@ export default (state = initialState, action) => {
                 compLoading: false,
             };
         case GET_ACCEPTED_COMP:
+            function compare(a, b) {
+                if (a.year < b.year) {
+                    return 1;
+                } else if (a.year > b.year) {
+                    return -1;
+                } else {
+                    if (a.month < b.month) {
+                        return 1;
+                    } else if (a.month > b.month) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
+                }
+            }
             return {
                 ...state,
-                accepted: action.payload,
+                accepted: action.payload.sort(compare),
                 compLoading: false,
             };
         case SET_COMPETITION:
