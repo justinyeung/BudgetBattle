@@ -21,7 +21,3 @@ A Budgeting web application that lets you compete with friends in monthly budget
 
 ## Images
 ![summary page](https://i.imgur.com/e2uaGT4.png)
-
-
-
-![purchases page](https://i.imgur.com/Imjcn4B.png)
