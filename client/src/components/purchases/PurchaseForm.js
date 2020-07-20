@@ -38,7 +38,6 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
 
@@ -66,8 +65,7 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                 horizontal: 'left',
             }}
             open={open}
-            autoHideDuratilg={3}
-            on={3000}
+            autoHideDuration={3000}
             onClose={handleClose}
             message={snackbarMsg}
             action={
