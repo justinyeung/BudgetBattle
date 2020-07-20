@@ -1,0 +1,11 @@
+.profile {
+    @media (max-width: 576px) {
+        &-spacing:nth-child(2n) {
+            padding-top: 0;
+        }
+    }
+
+    &-spacing {
+        padding: 20px;
+    }
+}

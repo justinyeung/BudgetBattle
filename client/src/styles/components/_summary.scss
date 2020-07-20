@@ -1,0 +1,85 @@
+@import '../utilities';
+
+.summary {
+    @include container-spacing;
+
+    @include component-box;
+
+    @media (max-width: 958px) {
+        &-header-left {
+            justify-content: flex-start !important;
+        }
+
+        &-header-right {
+            justify-content: flex-end !important;
+        }
+    }
+
+    .MuiTypography-h6 {
+        font-weight: 400;
+    }
+
+    .MuiTableContainer-root {
+        @include grid-spacing;
+    }
+
+    &-header-title {
+        padding: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: rgba(0, 0, 0, 0.87);
+        display: flex;
+        justify-content: center;
+    }
+
+    &-header-title-text {
+        font-weight: 500;
+        padding: 0 30px;
+    }
+
+    &-title-title {
+        font-weight: 425 !important;
+        padding: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: rgba(0, 0, 0, 0.87);
+        display: flex;
+    }
+
+    &-title-item {
+        @include grid-spacing;
+    }
+
+    &-header-icon {
+        @include grid-spacing;
+        text-align: center;
+    }
+
+    &-header-left {
+        @extend .summary-header-title;
+        justify-content: flex-end;
+    }
+
+    &-header-right {
+        @extend .summary-header-title;
+        justify-content: flex-start;
+    }
+
+    &-header-left-score {
+        @include grid-spacing;
+        color: green;
+        text-align: end;
+    }
+
+    &-header-right-score {
+        @include grid-spacing;
+        color: red;
+        text-align: start;
+    }
+
+    &-purchases-title {
+        justify-content: center;
+    }
+}

@@ -23,7 +23,7 @@ const SummaryPurchases = ({ purchases }) => {
         );
     };
     return (
-        <TableContainer>
+        <TableContainer className="summary">
             <Table size="small">
                 <TableHead>
                     <TableRow>

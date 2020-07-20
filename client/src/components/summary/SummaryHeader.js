@@ -12,7 +12,7 @@ import SyncAltIcon from '@material-ui/icons/SyncAlt';
 
 const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
     return (
-        <Box boxShadow={1} className="container-spacing component-box">
+        <Box boxShadow={1} className="summary">
             <Grid
                 container
                 direction="row"
@@ -20,10 +20,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                 alignItems="center"
             >
                 <Grid item xs={12} md={5}>
-                    <Typography
-                        variant="h4"
-                        className="summary-header-title summary-header-left"
-                    >
+                    <Typography variant="h4" className="summary-header-left">
                         <Avatar>
                             {user &&
                             competition &&
@@ -50,10 +47,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={5}>
-                    <Typography
-                        variant="h4"
-                        className="summary-header-title summary-header-right"
-                    >
+                    <Typography variant="h4" className="summary-header-right">
                         <div className="summary-header-title-text">
                             {user &&
                             competition &&
@@ -82,11 +76,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid
-                    item
-                    xs={5}
-                    className="summary-header-left-score grid-spacing"
-                >
+                <Grid item xs={5} className="summary-header-left-score">
                     <Typography variant="h4">
                         {user &&
                             competition &&
@@ -114,7 +104,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             )}
                     </Typography>
                 </Grid>
-                <Grid item xs={2} className="summary-header-icon grid-spacing">
+                <Grid item xs={2} className="summary-header-icon">
                     {user &&
                         competition &&
                         user.userID === competition.user1 &&
@@ -144,11 +134,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             <SyncAltIcon fontSize="large" />
                         )}
                 </Grid>
-                <Grid
-                    item
-                    xs={5}
-                    className="summary-header-right-score grid-spacing"
-                >
+                <Grid item xs={5} className="summary-header-right-score">
                     <Typography variant="h4">
                         {user &&
                             competition &&

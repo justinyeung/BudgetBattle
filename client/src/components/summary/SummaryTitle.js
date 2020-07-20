@@ -15,7 +15,7 @@ const SummaryTitle = ({
     competition: { competition, user1Purchases, user2Purchases },
 }) => {
     return (
-        <Box boxShadow={1} className="container-spacing component-box">
+        <Box boxShadow={1} className="summary">
             <Typography variant="h5" className="summary-title-title">
                 {userType === UserType.USER &&
                     user &&
@@ -50,8 +50,8 @@ const SummaryTitle = ({
                     justify="center"
                     alignItems="center"
                 >
-                    <Grid item xs={12} className="grid-spacing">
-                        <Typography variant="h6" className="summary-title-item">
+                    <Grid item xs={12} className="summary-title-item">
+                        <Typography variant="h6">
                             {'Total Amount Spent: $'}
                             {userType === UserType.USER &&
                                 user &&
@@ -79,8 +79,8 @@ const SummaryTitle = ({
                                 competition.user1total.toFixed(2)}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
-                        <Typography variant="h6" className="summary-title-item">
+                    <Grid item xs={12} className="summary-title-item">
+                        <Typography variant="h6">
                             {'Total # of Purchases Made: '}
                             {userType === UserType.USER &&
                                 user &&
@@ -108,7 +108,7 @@ const SummaryTitle = ({
                                 user1Purchases.length}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
+                    <Grid item xs={12}>
                         {userType === UserType.USER &&
                             user &&
                             competition &&

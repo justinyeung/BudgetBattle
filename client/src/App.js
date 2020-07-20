@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import './App.css';
+import './styles/index.scss';
 
 import 'typeface-roboto';
 // import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';

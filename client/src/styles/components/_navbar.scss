@@ -1,0 +1,15 @@
+.navbar {
+    // TODO: migrate styles object form component to here
+
+    &-link {
+        color: white;
+    }
+    &-link:hover {
+        color: #afafaf;
+    }
+    .MuiAppBar-colorPrimary {
+        padding-right: 0 !important;
+        background-color: black;
+        color: white;
+    }
+}

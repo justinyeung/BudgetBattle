@@ -62,21 +62,12 @@
         padding: 0 !important;
         display: block !important;
     }
-    .profile-spacing:nth-child(2n) {
+    /* .profile-spacing:nth-child(2n) {
         padding-top: 0 !important;
-    }
+    } */
 }
 
-@media (max-width: 958px) {
-    .summary-header-left {
-        justify-content: flex-start !important;
-    }
-
-    .summary-header-right {
-        justify-content: flex-end !important;
-    }
-}
-
+/* mixin */
 .grid-spacing {
     padding: 20px;
 }
@@ -133,6 +124,7 @@
     box-shadow: none;
 }
 
+/* mixin */
 .container-spacing {
     padding: 24px;
 }
@@ -171,18 +163,13 @@ div.back-button-spacing {
     height: 220px;
 }
 
+/* mixin */
 .component-box {
     background-color: #f5f5f5 !important;
 }
 
 th.MuiTableCell-root.MuiTableCell-head {
     background-color: #f5f5f5 !important;
-}
-
-header.appbar {
-    padding-right: 0 !important;
-    background-color: black;
-    color: white;
 }
 
 div.MuiLinearProgress-colorPrimary {
@@ -198,6 +185,38 @@ div.MuiToolbar-regular {
     min-height: 60px;
 }
 
+.footer-links p {
+    margin-bottom: 0;
+}
+
+td.MuiTableCell-root.MuiTableCell-body {
+    text-align: left;
+}
+
+/* override material-table style to add padding */
+div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+    padding: 24px;
+}
+
+.nav-buttons-icons {
+    padding-right: 4px;
+}
+
+button.nav-buttons {
+    margin-right: 24px;
+}
+
+/*  */
+/*  */
+/*  */
+/* done */
+/* header.appbar {
+    padding-right: 0 !important;
+    background-color: black;
+    color: white;
+} */
+
+/*
 a.navbar-link {
     color: white;
 }
@@ -206,12 +225,17 @@ a.navbar-link:hover {
     color: #afafaf;
 }
 
-.footer-links p {
-    margin-bottom: 0;
+.profile-spacing {
+    padding: 20px;
 }
+@media (max-width: 958px) {
+    .summary-header-left {
+        justify-content: flex-start !important;
+    }
 
-td.MuiTableCell-root.MuiTableCell-body {
-    text-align: left;
+    .summary-header-right {
+        justify-content: flex-end !important;
+    }
 }
 
 .summary-header-title {
@@ -267,21 +291,4 @@ h6.summary-title-item {
 
 .summary-purchases-title {
     justify-content: center;
-}
-
-/* override material-table style to add padding */
-div.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
-    padding: 24px;
-}
-
-.nav-buttons-icons {
-    padding-right: 4px;
-}
-
-button.nav-buttons {
-    margin-right: 24px;
-}
-
-.profile-spacing {
-    padding: 20px;
-}
+} */

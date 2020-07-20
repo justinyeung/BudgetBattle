@@ -303,8 +303,8 @@ const PrimarySearchAppBar = ({
     );
 
     return (
-        <div className={classes.grow}>
-            <AppBar elevation={1} position="fixed" className="appbar">
+        <div className={(classes.grow, 'navbar')}>
+            <AppBar elevation={1} position="fixed">
                 <Toolbar>
                     <Container maxWidth="lg">
                         <Grid
