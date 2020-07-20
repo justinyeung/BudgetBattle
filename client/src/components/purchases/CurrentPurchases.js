@@ -82,7 +82,7 @@ const CurrentPurchases = ({
     setPurchaseLoading,
     purchase: { purchases },
 }) => {
-    const [open, setOpen] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
 
     useEffect(() => {
@@ -93,13 +93,13 @@ const CurrentPurchases = ({
     }, []);
 
     const handleClick = () => {
-        setOpen(true);
+        setOpenSnackbar(true);
     };
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
-        setOpen(false);
+        setOpenSnackbar(false);
     };
 
     const editBtn = (purchase) => {
@@ -119,15 +119,14 @@ const CurrentPurchases = ({
                 vertical: 'bottom',
                 horizontal: 'left',
             }}
-            open={open}
-            autoHideDuration={3000}
+            open={openSnackbar}
+            autoHideDuration={1000}
             onClose={handleClose}
             message={snackbarMsg}
             action={
                 <React.Fragment>
                     <IconButton
                         size="small"
-                        aria-label="close"
                         color="inherit"
                         onClick={handleClose}
                     >
@@ -163,9 +162,6 @@ const CurrentPurchases = ({
                                     autoOk="true"
                                     value={props.value}
                                     onChange={(date) => props.onChange(date)}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date',
-                                    }}
                                 />
                             </MuiPickersUtilsProvider>
                         ),
@@ -215,7 +211,7 @@ const CurrentPurchases = ({
                         }),
                 }}
             />
-            {renderSnackbar}
+            {/* {renderSnackbar} */}
         </div>
     );
 };
