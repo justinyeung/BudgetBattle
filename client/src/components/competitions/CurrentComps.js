@@ -9,7 +9,6 @@ import {
 } from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
-import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -36,46 +35,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 
-const useStyles = makeStyles((theme) => ({
-    // root: {
-    //     width: '100%',
-    // },
-    // heading: {
-    //     fontWeight: 'fontWeightBold',
-    // },
-    // primaryHeading: {
-    //     color: theme.palette.text.secondary,
-    // },
-    // secondaryHeading: {
-    //     fontSize: theme.typography.pxToRem(15),
-    //     color: theme.palette.text.secondary,
-    // },
-    // winningColour: {
-    //     color: 'green',
-    // },
-    // icon: {
-    //     verticalAlign: 'bottom',
-    //     height: 20,
-    //     width: 20,
-    // },
-    details: {
-        alignItems: 'center',
-        paddingTop: '16px',
-    },
-    detailsAvatar: {
-        alignItems: 'center',
-        paddingTop: '32px',
-    },
-    // column: {
-    //     flexBasis: '25%',
-    // },
-    // list: {
-    //     width: '100%',
-    //     margin: 0,
-    // },
-}));
-
-function PaperComponent(props) {
+const PaperComponent = (props) => {
     return (
         <Draggable
             handle="#draggable-dialog-title"
@@ -84,7 +44,7 @@ function PaperComponent(props) {
             <Paper {...props} />
         </Draggable>
     );
-}
+};
 
 const CurrentComps = ({
     rejectOrDeleteComp,
@@ -93,8 +53,6 @@ const CurrentComps = ({
     user: { user },
     competition: { accepted, compLoading },
 }) => {
-    const classes = useStyles();
-
     const [openDialog, setOpenDialog] = useState(false);
     const [open, setOpen] = useState(false);
     const [compID, setCompID] = useState('');
