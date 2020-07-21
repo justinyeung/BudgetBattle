@@ -15,3 +15,11 @@
     }
     padding: 20px;
 }
+
+@mixin header-title {
+    padding: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgba(0, 0, 0, 0.87);
+}

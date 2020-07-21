@@ -85,6 +85,7 @@
     padding-left: 12px;
 }
 
+/* mixin */
 #header-title {
     padding: 12px;
     white-space: nowrap;
@@ -101,29 +102,6 @@
     padding: 24px;
 }
 
-#competitions-left-column {
-    padding-left: 1.5rem;
-}
-
-#competitions-center-column {
-    text-align: center;
-}
-
-#competitions-right-column {
-    text-align: right;
-    text-align: -webkit-right;
-    text-align: -ms-right;
-    text-align: -moz-right;
-    text-align: -o-right;
-}
-
-#expansion-panel {
-    background-color: #f5f5f5;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-}
-
 /* mixin */
 .container-spacing {
     padding: 24px;
@@ -132,11 +110,6 @@
 div.back-button-spacing {
     padding-left: 44px;
     padding-top: 44px;
-}
-
-.send-comp-request {
-    padding: 24px;
-    padding-top: 32px;
 }
 
 .search-request-container {
@@ -192,6 +165,31 @@ button.nav-buttons {
 /*  */
 /* done */
 /* 
+#competitions-left-column {
+    padding-left: 1.5rem;
+}
+
+#competitions-center-column {
+    text-align: center;
+}
+
+#competitions-right-column {
+    text-align: right;
+    text-align: -webkit-right;
+    text-align: -ms-right;
+    text-align: -moz-right;
+    text-align: -o-right;
+}
+#expansion-panel {
+    background-color: #f5f5f5;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.send-comp-request {
+    padding: 24px;
+    padding-top: 32px;
+}
 .footer {
     position: absolute !important;
     bottom: 0;

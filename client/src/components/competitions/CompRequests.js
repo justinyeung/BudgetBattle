@@ -9,7 +9,6 @@ import {
 } from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
@@ -25,16 +24,6 @@ import Box from '@material-ui/core/Box';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        margin: 0,
-    },
-    inline: {
-        display: 'inline',
-    },
-}));
-
 const CompRequests = ({
     acceptComp,
     rejectOrDeleteComp,
@@ -48,8 +37,6 @@ const CompRequests = ({
 
         // eslint-disable-next-line
     }, []);
-
-    const classes = useStyles();
 
     const [snacbarMsg, setSnackbarMsg] = useState('');
     const [open, setOpen] = useState(false);
@@ -106,12 +93,12 @@ const CompRequests = ({
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
+            <Box boxShadow={1} className="competitions">
+                <Typography variant="h6" className="competitions-title">
                     Battle Requests
                 </Typography>
                 <Divider />
-                <List className={classes.root}>
+                <List className="competitions-full-width">
                     {(inpending.length === 0 || inpending === null) && (
                         <ListItem alignItems="flex-start">
                             <ListItemAvatar>
@@ -124,7 +111,7 @@ const CompRequests = ({
                                         <Typography
                                             component="span"
                                             variant="body2"
-                                            className={classes.inline}
+                                            className="competitions-description"
                                             color="textPrimary"
                                         >
                                             Invite Friends to start Budget
@@ -151,7 +138,7 @@ const CompRequests = ({
                                             <Typography
                                                 component="span"
                                                 variant="body2"
-                                                className={classes.inline}
+                                                className="competitions-description"
                                                 color="textPrimary"
                                             >
                                                 {monthNames[comp.month]}{' '}
