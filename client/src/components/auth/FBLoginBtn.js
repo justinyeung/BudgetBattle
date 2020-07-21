@@ -8,7 +8,6 @@ const FBLoginBtn = ({ setUserLoading }) => {
     return (
         <div>
             <a
-                id="login-link"
                 href="http://localhost:5000/api/fbauth/login/"
                 onClick={setUserLoading}
             >

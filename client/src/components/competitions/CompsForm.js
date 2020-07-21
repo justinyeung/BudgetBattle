@@ -10,7 +10,6 @@ import {
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,15 +24,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        width: '100%',
-    },
-}));
-
 const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
-    const classes = useStyles();
-
     const [open, setOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [id, setID] = useState('');
@@ -102,8 +93,8 @@ const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
+            <Box boxShadow={1} className="competitions">
+                <Typography variant="h6" className="competitions-title">
                     Send Battle Request
                 </Typography>
                 <Divider />
@@ -112,12 +103,14 @@ const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
                     direction="row"
                     justify="center"
                     alignItems="center"
-                    className="send-comp-request"
                 >
-                    <Grid item sm={6} xs={8} className="grid-spacing">
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid item sm={6} xs={8}>
+                        <MuiPickersUtilsProvider
+                            utils={DateFnsUtils}
+                            className="competitions-calendar"
+                        >
                             <DatePicker
-                                className={classes.formControl}
+                                className="competitions-full-width"
                                 variant="inline"
                                 inputVariant="outlined"
                                 views={['month', 'year']}
@@ -135,17 +128,13 @@ const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
                             />
                         </MuiPickersUtilsProvider>
                     </Grid>
-                    <Grid item sm={6} xs={8} className="grid-spacing">
+                    <Grid item sm={6} xs={8}>
                         <FormControl
                             variant="outlined"
-                            className={classes.formControl}
+                            className="competitions-full-width"
                         >
-                            <InputLabel id="demo-simple-select-outlined-label">
-                                Friend
-                            </InputLabel>
+                            <InputLabel>Friend</InputLabel>
                             <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
                                 value={id}
                                 onChange={(e) => setID(e.target.value)}
                                 onKeyPress={(e) => {

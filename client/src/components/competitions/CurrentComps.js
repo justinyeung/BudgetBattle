@@ -9,7 +9,6 @@ import {
 } from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
-import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -36,46 +35,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Paper from '@material-ui/core/Paper';
 import Draggable from 'react-draggable';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    heading: {
-        fontWeight: 'fontWeightBold',
-    },
-    primaryHeading: {
-        color: theme.palette.text.secondary,
-    },
-    secondaryHeading: {
-        fontSize: theme.typography.pxToRem(15),
-        color: theme.palette.text.secondary,
-    },
-    winningColour: {
-        color: 'green',
-    },
-    icon: {
-        verticalAlign: 'bottom',
-        height: 20,
-        width: 20,
-    },
-    details: {
-        alignItems: 'center',
-        paddingTop: '16px',
-    },
-    detailsAvatar: {
-        alignItems: 'center',
-        paddingTop: '32px',
-    },
-    column: {
-        flexBasis: '25%',
-    },
-    list: {
-        width: '100%',
-        margin: 0,
-    },
-}));
-
-function PaperComponent(props) {
+const PaperComponent = (props) => {
     return (
         <Draggable
             handle="#draggable-dialog-title"
@@ -84,7 +44,7 @@ function PaperComponent(props) {
             <Paper {...props} />
         </Draggable>
     );
-}
+};
 
 const CurrentComps = ({
     rejectOrDeleteComp,
@@ -93,8 +53,6 @@ const CurrentComps = ({
     user: { user },
     competition: { accepted, compLoading },
 }) => {
-    const classes = useStyles();
-
     const [openDialog, setOpenDialog] = useState(false);
     const [open, setOpen] = useState(false);
     const [compID, setCompID] = useState('');
@@ -196,9 +154,7 @@ const CurrentComps = ({
             PaperComponent={PaperComponent}
             aria-labelledby="draggable-dialog-title"
         >
-            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                Remove Battle
-            </DialogTitle>
+            <DialogTitle style={{ cursor: 'move' }}>Remove Battle</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Are you sure you want to remove this battle?
@@ -217,15 +173,15 @@ const CurrentComps = ({
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
+            <Box boxShadow={1} className="competitions">
+                <Typography variant="h6" className="competitions-title">
                     Battles
                 </Typography>
                 <Divider />
                 {!compLoading && (
-                    <div className={classes.root}>
+                    <div className="competitions-full-width">
                         {accepted.length === 0 && (
-                            <List className={classes.list}>
+                            <List className="competitions-list">
                                 <ListItem alignItems="flex-start">
                                     <ListItemAvatar>
                                         <Avatar>{':('}</Avatar>
@@ -237,7 +193,7 @@ const CurrentComps = ({
                                                 <Typography
                                                     component="span"
                                                     variant="body2"
-                                                    className={classes.inline}
+                                                    className="competitions-description"
                                                     color="textPrimary"
                                                 >
                                                     Invite Friends to start
@@ -254,39 +210,25 @@ const CurrentComps = ({
                                 <div key={comp._id}>
                                     <ExpansionPanel
                                         key={comp._id}
-                                        id="expansion-panel"
+                                        className="competitions-expanded-panel"
                                     >
                                         <ExpansionPanelSummary
                                             expandIcon={<ExpandMoreIcon />}
                                             aria-controls="panel1c-content"
-                                            id="panel1c-header"
                                         >
-                                            <div
-                                                id="competitions-left-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-left-column">
                                                 <Typography
-                                                    className={
-                                                        classes.primaryHeading
-                                                    }
                                                     variant="h6"
+                                                    className="competitions-competitor-name"
                                                 >
                                                     {getRight(comp).name}
                                                 </Typography>
                                             </div>
-                                            <div
-                                                id="competitions-center-column"
-                                                className={classes.column}
-                                            />
-                                            <div
-                                                id="competitions-right-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-center-column" />
+                                            <div className="competitions-right-column">
                                                 <Typography
                                                     variant="h5"
-                                                    className={
-                                                        classes.secondaryHeading
-                                                    }
+                                                    className="competitions-date"
                                                 >
                                                     {monthNames[comp.month]}{' '}
                                                     {comp.year}
@@ -294,27 +236,16 @@ const CurrentComps = ({
                                             </div>
                                         </ExpansionPanelSummary>
                                         <Divider />
-                                        <ExpansionPanelDetails
-                                            className={classes.detailsAvatar}
-                                        >
-                                            <div
-                                                id="competitions-left-column"
-                                                className={classes.column}
-                                            >
+                                        <ExpansionPanelDetails className="competitions-expanded-panel-avatar">
+                                            <div className="competitions-left-column">
                                                 <Avatar>
                                                     {getLeft(
                                                         comp
                                                     ).name.substring(0, 1)}
                                                 </Avatar>
                                             </div>
-                                            <div
-                                                id="competitions-center-column"
-                                                className={classes.column}
-                                            />
-                                            <div
-                                                id="competitions-right-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-center-column" />
+                                            <div className="competitions-right-column">
                                                 <Avatar>
                                                     {getRight(
                                                         comp
@@ -322,51 +253,29 @@ const CurrentComps = ({
                                                 </Avatar>
                                             </div>
                                         </ExpansionPanelDetails>
-                                        <ExpansionPanelDetails
-                                            className={classes.details}
-                                        >
-                                            <div
-                                                id="competitions-left-column"
-                                                className={classes.column}
-                                            >
+                                        <ExpansionPanelDetails className="competitions-expanded-panel-text">
+                                            <div className="competitions-left-column">
                                                 <Typography variant="h5">
                                                     {getLeft(comp).name}
                                                 </Typography>
                                             </div>
-                                            <div
-                                                id="competitions-center-column"
-                                                className={classes.column}
-                                            />
-                                            <div
-                                                id="competitions-right-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-center-column" />
+                                            <div className="competitions-right-column">
                                                 <Typography variant="h5">
                                                     {getRight(comp).name}
                                                 </Typography>
                                             </div>
                                         </ExpansionPanelDetails>
-                                        <ExpansionPanelDetails
-                                            className={classes.details}
-                                        >
-                                            <div
-                                                id="competitions-left-column"
-                                                className={classes.column}
-                                            >
+                                        <ExpansionPanelDetails className="competitions-expanded-panel-text">
+                                            <div className="competitions-left-column">
                                                 <Typography variant="h5">
                                                     ${getLeft(comp).total}
                                                 </Typography>
                                             </div>
-                                            <div
-                                                id="competitions-center-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-center-column">
                                                 <h5>Total Spent</h5>
                                             </div>
-                                            <div
-                                                id="competitions-right-column"
-                                                className={classes.column}
-                                            >
+                                            <div className="competitions-right-column">
                                                 <Typography variant="h5">
                                                     ${getRight(comp).total}
                                                 </Typography>

@@ -1,0 +1,18 @@
+.profile {
+    @include container-spacing;
+    @include component-box;
+
+    @media (max-width: 576px) {
+        &-spacing:nth-child(2n) {
+            padding-top: 0;
+        }
+    }
+
+    .MuiTypography-h6 {
+        @include header-title;
+    }
+
+    &-spacing {
+        padding: 20px;
+    }
+}

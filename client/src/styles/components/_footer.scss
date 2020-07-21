@@ -1,0 +1,15 @@
+.footer {
+    bottom: 0;
+    width: 100%;
+    height: 220px;
+
+    &.ui.segment {
+        position: absolute;
+    }
+
+    &-links {
+        p {
+            margin-bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+.navbar {
+    // TODO: migrate styles object form component to here
+
+    &-appbar {
+        flex-grow: 1;
+
+        .MuiAppBar-colorPrimary {
+            padding-right: 0 !important;
+            background-color: black;
+            color: white;
+        }
+    }
+
+    &-login-button {
+        padding: 3px;
+
+        .MuiTypography-root {
+            text-transform: capitalize;
+        }
+    }
+
+    &-get-started {
+        display: block;
+        @media only screen and (max-width: 600px) {
+            display: none;
+        }
+
+        .MuiTypography-root {
+            text-transform: capitalize;
+        }
+    }
+
+    &-link {
+        color: white;
+    }
+    &-link:hover {
+        color: #afafaf;
+    }
+}
