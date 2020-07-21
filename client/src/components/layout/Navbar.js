@@ -45,24 +45,6 @@ const useStyles = makeStyles((theme) => ({
     fullList: {
         width: 'auto',
     },
-    grow: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    loginButton: {
-        padding: '3px',
-    },
-    loginButtonText: {
-        textTransform: 'capitalize',
-    },
-    title: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
-    },
 }));
 
 // menu
@@ -155,7 +137,7 @@ const PrimarySearchAppBar = ({
             {!userLoading && user !== null && (
                 <div>
                     <List>
-                        <Link to="/" id="drawer-link">
+                        <Link to="/" className="menu-drawer-link">
                             <ListItem button key={'Home'}>
                                 <ListItemIcon>
                                     <HomeIcon />
@@ -163,7 +145,7 @@ const PrimarySearchAppBar = ({
                                 <ListItemText primary={'Home'} />
                             </ListItem>
                         </Link>
-                        <Link to="/getstarted" id="drawer-link">
+                        <Link to="/getstarted" className="menu-drawer-link">
                             <ListItem button key={'Get Started'}>
                                 <ListItemIcon>
                                     <CheckIcon />
@@ -174,7 +156,7 @@ const PrimarySearchAppBar = ({
                     </List>
                     <Divider />
                     <List>
-                        <Link to="/dashboard" id="drawer-link">
+                        <Link to="/dashboard" className="menu-drawer-link">
                             <ListItem button key={'Dashboard'}>
                                 <ListItemIcon>
                                     <AppsIcon />
@@ -182,7 +164,7 @@ const PrimarySearchAppBar = ({
                                 <ListItemText primary={'Dashboard'} />
                             </ListItem>
                         </Link>
-                        <Link to="/friends" id="drawer-link">
+                        <Link to="/friends" className="menu-drawer-link">
                             <ListItem button key={'Friends'}>
                                 <ListItemIcon>
                                     <GroupIcon />
@@ -190,7 +172,7 @@ const PrimarySearchAppBar = ({
                                 <ListItemText primary={'Friends'} />
                             </ListItem>
                         </Link>
-                        <Link to="/purchases" id="drawer-link">
+                        <Link to="/purchases" className="menu-drawer-link">
                             <ListItem button key={'Purchases'}>
                                 <ListItemIcon>
                                     <LocalAtmIcon />
@@ -198,7 +180,7 @@ const PrimarySearchAppBar = ({
                                 <ListItemText primary={'Purchases'} />
                             </ListItem>
                         </Link>
-                        <Link to="/battles" id="drawer-link">
+                        <Link to="/battles" className="menu-drawer-link">
                             <ListItem button key={'Battles'}>
                                 <ListItemIcon>
                                     <EmojiEventsIcon />
@@ -212,7 +194,7 @@ const PrimarySearchAppBar = ({
             {!userLoading && user === null && (
                 <div>
                     <List>
-                        <Link to="/" id="drawer-link">
+                        <Link to="/" className="menu-drawer-link">
                             <ListItem button key={'Home'}>
                                 <ListItemIcon>
                                     <HomeIcon />
@@ -223,7 +205,7 @@ const PrimarySearchAppBar = ({
                     </List>
                     <Divider />
                     <List>
-                        <Link to="/getstarted" id="drawer-link">
+                        <Link to="/getstarted" className="menu-drawer-link">
                             <ListItem button key={'Get Started'}>
                                 <ListItemIcon>
                                     <CheckIcon />
@@ -231,7 +213,7 @@ const PrimarySearchAppBar = ({
                                 <ListItemText primary={'Get Started'} />
                             </ListItem>
                         </Link>
-                        <Link to="/login" id="drawer-link">
+                        <Link to="/login" className="menu-drawer-link">
                             <ListItem button key={'Login'}>
                                 <ListItemIcon>
                                     <PersonIcon />
@@ -247,7 +229,6 @@ const PrimarySearchAppBar = ({
 
     const renderMenu = (
         <StyledMenu
-            id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
@@ -257,7 +238,7 @@ const PrimarySearchAppBar = ({
                 <div>
                     <Link
                         to={`/profile/${user && user.userID}`}
-                        id="drawer-link"
+                        className="menu-drawer-link"
                     >
                         <StyledMenuItem onClick={handleMenuClose}>
                             <ListItemIcon>
@@ -303,7 +284,7 @@ const PrimarySearchAppBar = ({
     );
 
     return (
-        <div className={(classes.grow, 'navbar')}>
+        <div className="navbar-appbar">
             <AppBar elevation={1} position="fixed">
                 <Toolbar>
                     <Container maxWidth="lg">
@@ -323,7 +304,6 @@ const PrimarySearchAppBar = ({
                                     <Grid item>
                                         <IconButton
                                             edge="start"
-                                            className={classes.menuButton}
                                             color="inherit"
                                             aria-label="open drawer"
                                             onClick={toggleDrawer('left', true)}
@@ -385,7 +365,10 @@ const PrimarySearchAppBar = ({
                                         alignItems="center"
                                         spacing={2}
                                     >
-                                        <Grid item className={classes.title}>
+                                        <Grid
+                                            item
+                                            className="navbar-get-started"
+                                        >
                                             <Link
                                                 to="/getstarted"
                                                 className="navbar-link"
@@ -394,9 +377,6 @@ const PrimarySearchAppBar = ({
                                                     <Typography
                                                         variant="subtitle1"
                                                         noWrap
-                                                        className={
-                                                            classes.loginButtonText
-                                                        }
                                                     >
                                                         Get Started
                                                     </Typography>
@@ -411,16 +391,11 @@ const PrimarySearchAppBar = ({
                                                 <Button
                                                     color="inherit"
                                                     variant="outlined"
-                                                    className={
-                                                        classes.loginButton
-                                                    }
+                                                    className="navbar-login-button"
                                                 >
                                                     <Typography
                                                         variant="subtitle1"
                                                         noWrap
-                                                        className={
-                                                            classes.loginButtonText
-                                                        }
                                                     >
                                                         Login
                                                     </Typography>
