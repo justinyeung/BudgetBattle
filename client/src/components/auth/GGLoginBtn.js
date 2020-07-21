@@ -8,7 +8,6 @@ const GGLoginBtn = ({ setUserLoading }) => {
     return (
         <div>
             <a
-                id="login-link"
                 href="http://localhost:5000/api/ggauth/login/"
                 onClick={setUserLoading}
             >
