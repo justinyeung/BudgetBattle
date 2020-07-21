@@ -1,8 +1,19 @@
 .profile {
+    @include container-spacing;
+    @include component-box;
+
     @media (max-width: 576px) {
         &-spacing:nth-child(2n) {
             padding-top: 0;
         }
+    }
+
+    .MuiTypography-root {
+        padding: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: rgba(0, 0, 0, 0.87);
     }
 
     &-spacing {

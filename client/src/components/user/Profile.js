@@ -18,10 +18,8 @@ const Profile = ({
 }) => {
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
-                    Profile
-                </Typography>
+            <Box boxShadow={1} className="profile">
+                <Typography variant="h6">Profile</Typography>
                 <Divider />
 
                 {!profileLoading && (
