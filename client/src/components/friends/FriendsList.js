@@ -30,18 +30,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const moment = require('moment');
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-        backgroundColor: '#f5f5f5',
-        margin: 0,
-    },
-    inline: {
-        display: 'inline',
-    },
-}));
-
-function PaperComponent(props) {
+const PaperComponent = (props) => {
     return (
         <Draggable
             handle="#draggable-dialog-title"
@@ -50,11 +39,9 @@ function PaperComponent(props) {
             <Paper {...props} />
         </Draggable>
     );
-}
+};
 
 const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
-    const classes = useStyles();
-
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [currentID, setCurrentID] = useState('');
@@ -135,9 +122,7 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
             PaperComponent={PaperComponent}
             aria-labelledby="draggable-dialog-title"
         >
-            <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                Remove Friend
-            </DialogTitle>
+            <DialogTitle style={{ cursor: 'move' }}>Remove Friend</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     Are you sure you want to remove {currentName} as a friend?
@@ -156,12 +141,10 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
-                    Friends
-                </Typography>
+            <Box boxShadow={1} className="friends">
+                <Typography variant="h6">Friends</Typography>
                 <Divider />
-                <List className={classes.root}>
+                <List className="friends-list">
                     {(user === null ||
                         getAccepted(user.friends).length === 0 ||
                         getAccepted(user.friends) === undefined) && (
@@ -176,7 +159,6 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
                                         <Typography
                                             component="span"
                                             variant="body2"
-                                            className={classes.inline}
                                             color="textPrimary"
                                         >
                                             Add Friends to start Budget
@@ -213,9 +195,6 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
                                                             <Typography
                                                                 component="span"
                                                                 variant="body2"
-                                                                className={
-                                                                    classes.inline
-                                                                }
                                                                 color="textPrimary"
                                                             >
                                                                 Since{' '}
@@ -267,9 +246,6 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
                                                         <Typography
                                                             component="span"
                                                             variant="body2"
-                                                            className={
-                                                                classes.inline
-                                                            }
                                                             color="textPrimary"
                                                         >
                                                             Since{' '}

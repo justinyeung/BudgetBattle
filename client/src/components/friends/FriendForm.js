@@ -9,7 +9,6 @@ import {
     setUserLoading,
 } from '../../actions/userActions';
 import { searchUsers, setSearchLoading } from '../../actions/searchActions';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -28,38 +27,6 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        padding: '2px 4px',
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-        background: '#f5f5f5',
-    },
-    input: {
-        marginLeft: theme.spacing(1),
-        flex: 1,
-    },
-    iconButton: {
-        padding: 10,
-    },
-    divider: {
-        height: 28,
-        margin: 4,
-    },
-    list: {
-        width: '100%',
-        backgroundColor: '#f5f5f5',
-        margin: 0,
-    },
-    avatar: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
-    },
-}));
-
 const FriendForm = ({
     sendFriendRequest,
     searchUsers,
@@ -70,8 +37,6 @@ const FriendForm = ({
     user: { user },
     search: { users },
 }) => {
-    const classes = useStyles();
-
     const [open, setOpen] = useState(false);
     const [snackbarMsg, setSnackbarMsg] = useState('');
     const [friendSearch, setFriendSearch] = useState('');
@@ -124,54 +89,41 @@ const FriendForm = ({
     const detectRelationship = (userID) => {
         return (
             <div>
-                <Grid
-                    container
-                    direction="row"
-                    justify="flex-start"
-                    alignItems="flex-start"
-                ></Grid>
-                <Grid item xs={12}>
-                    {userID === user.userID && (
-                        <Button className="friend-form-btn">You</Button>
-                    )}
-                    {isOutpending(userID) && (
+                {userID === user.userID && <Button>You</Button>}
+                {isOutpending(userID) && (
+                    <Button
+                        variant="outlined"
+                        onClick={() => removeRequestBtn(userID)}
+                    >
+                        Requested
+                    </Button>
+                )}
+                {isInpending(userID) && (
+                    <Button
+                        variant="outlined"
+                        onClick={() => acceptRequestBtn(userID)}
+                    >
+                        Accept Request
+                    </Button>
+                )}
+                {isFriend(userID) && (
+                    <Button
+                        variant="outlined"
+                        onClick={() => removeFriendBtn(userID)}
+                    >
+                        Remove
+                    </Button>
+                )}
+                {!isOutpending(userID) &&
+                    !isInpending(userID) &&
+                    !isFriend(userID) && (
                         <Button
-                            className="friend-form-btn"
-                            onClick={() => removeRequestBtn(userID)}
+                            variant="outlined"
+                            onClick={() => addFriendBtn(userID)}
                         >
-                            Requested
+                            Add Friend
                         </Button>
                     )}
-                    {isInpending(userID) && (
-                        <Button
-                            className="friend-form-btn"
-                            onClick={() => acceptRequestBtn(userID)}
-                        >
-                            Accept Request
-                        </Button>
-                    )}
-                    {isFriend(userID) && (
-                        <Button
-                            className="friend-form-btn"
-                            onClick={() => removeFriendBtn(userID)}
-                        >
-                            Remove
-                        </Button>
-                    )}
-                    {!isOutpending(userID) &&
-                        !isInpending(userID) &&
-                        !isFriend(userID) && (
-                            <Button
-                                className="friend-form-btn"
-                                onClick={() => addFriendBtn(userID)}
-                            >
-                                Add Friend
-                            </Button>
-                        )}
-                    <Link to={`/profile/${userID}`} id="drawer-link">
-                        <Button className="friend-form-btn">Profile</Button>
-                    </Link>
-                </Grid>
             </div>
         );
     };
@@ -240,39 +192,35 @@ const FriendForm = ({
     );
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
-                    Add Friend
-                </Typography>
+            <Box boxShadow={1} className="friends">
+                <Typography variant="h6">Add Friend</Typography>
                 <Divider />
-                <div id="purchases-form-grid">
-                    <Paper component="div" className={classes.root}>
-                        <InputBase
-                            className={classes.input}
-                            value={friendSearch}
-                            onChange={(e) => setFriendSearch(e.target.value)}
-                            onKeyPress={(e) => {
-                                e.key === 'Enter' && searchBtn();
-                            }}
-                            placeholder="Search Users by Name or ID"
-                            inputProps={{ 'aria-label': 'search users' }}
-                        />
-                        <IconButton
-                            type="button"
-                            onClick={() => searchBtn()}
-                            className={classes.iconButton}
-                            aria-label="search"
-                        >
-                            <SearchIcon />
-                        </IconButton>
-                    </Paper>
-                </div>
+                <Paper component="div" className="friends-search-bar">
+                    <InputBase
+                        className="friends-search-input"
+                        value={friendSearch}
+                        onChange={(e) => setFriendSearch(e.target.value)}
+                        onKeyPress={(e) => {
+                            e.key === 'Enter' && searchBtn();
+                        }}
+                        placeholder="Search Users by Name or ID"
+                        inputProps={{ 'aria-label': 'search users' }}
+                    />
+                    <IconButton
+                        type="button"
+                        onClick={() => searchBtn()}
+                        className="friends-icon-button"
+                        aria-label="search"
+                    >
+                        <SearchIcon />
+                    </IconButton>
+                </Paper>
                 <Grid
                     container
                     direction="row"
                     justify="flex-start"
                     alignItems="flex-start"
-                    className="search-request-container"
+                    className="friends-search-results"
                 >
                     {user &&
                         users.map(
@@ -283,43 +231,40 @@ const FriendForm = ({
                                         xs={12}
                                         lg={4}
                                         key={searchUser._id}
-                                        className={
-                                            ('search-item', 'grid-spacing')
-                                        }
+                                        className="friends-search-item"
                                     >
                                         <ListItem ContainerComponent="div">
                                             <Link
                                                 to={`/profile/${searchUser.userID}`}
                                             >
-                                                <ListItemAvatar
-                                                    className={classes.avatar}
-                                                >
-                                                    <Avatar>
-                                                        {searchUser.name &&
-                                                            searchUser.name.substring(
-                                                                0,
-                                                                1
-                                                            )}
-                                                    </Avatar>
-                                                </ListItemAvatar>
-                                            </Link>
-                                            <Link
-                                                to={`/profile/${searchUser.userID}`}
-                                                id="drawer-link"
-                                            >
-                                                <ListItemText
-                                                    primary={searchUser.name}
-                                                    secondary={
-                                                        searchUser.friends
-                                                            .length === 1
-                                                            ? searchUser.friends
-                                                                  .length +
-                                                              ' Friend'
-                                                            : searchUser.friends
-                                                                  .length +
-                                                              ' Friends'
-                                                    }
-                                                />
+                                                <Button className="friends-profile-btn">
+                                                    <ListItemAvatar>
+                                                        <Avatar>
+                                                            {searchUser.name &&
+                                                                searchUser.name.substring(
+                                                                    0,
+                                                                    1
+                                                                )}
+                                                        </Avatar>
+                                                    </ListItemAvatar>
+                                                    <ListItemText
+                                                        primary={
+                                                            searchUser.name
+                                                        }
+                                                        secondary={
+                                                            searchUser.friends
+                                                                .length === 1
+                                                                ? searchUser
+                                                                      .friends
+                                                                      .length +
+                                                                  ' Friend'
+                                                                : searchUser
+                                                                      .friends
+                                                                      .length +
+                                                                  ' Friends'
+                                                        }
+                                                    />
+                                                </Button>
                                             </Link>
                                             <ListItemSecondaryAction>
                                                 {detectRelationship(

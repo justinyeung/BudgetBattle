@@ -107,12 +107,10 @@ const FriendRequests = ({
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
-                <Typography variant="h6" id="header-title">
-                    Friend Requests
-                </Typography>
+            <Box boxShadow={1} className="friends">
+                <Typography variant="h6">Friend Requests</Typography>
                 <Divider />
-                <List className={classes.root}>
+                <List className="friends-list">
                     {(user === null ||
                         getRequests(user.friends).length === 0 ||
                         getRequests(user.friends) === undefined) && (
@@ -127,7 +125,6 @@ const FriendRequests = ({
                                         <Typography
                                             component="span"
                                             variant="body2"
-                                            className={classes.inline}
                                             color="textPrimary"
                                         >
                                             Add Friends to start Budget
@@ -162,9 +159,6 @@ const FriendRequests = ({
                                                     <Typography
                                                         component="span"
                                                         variant="body2"
-                                                        className={
-                                                            classes.inline
-                                                        }
                                                         color="textPrimary"
                                                     >
                                                         Since{' '}
