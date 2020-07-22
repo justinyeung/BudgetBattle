@@ -9,7 +9,6 @@ import {
 } from '../../actions/userActions';
 
 import Box from '@material-ui/core/Box';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
@@ -27,15 +26,6 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const moment = require('moment');
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '100%',
-    },
-    inline: {
-        display: 'inline',
-    },
-}));
-
 const FriendRequests = ({
     acceptFriend,
     deleteFriend,
@@ -44,8 +34,6 @@ const FriendRequests = ({
 }) => {
     const [open, setOpen] = useState(false);
     const [msg, setMsg] = useState('');
-
-    const classes = useStyles();
 
     const acceptButton = (friendID) => {
         setUserLoading();
