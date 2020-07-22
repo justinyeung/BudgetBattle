@@ -22,5 +22,15 @@
 
     &-form {
         @include grid-spacing;
+        .MuiGrid-item {
+            @include grid-spacing;
+        }
+    }
+
+    &-submit-btn {
+        padding-right: 40px;
+        @media (max-width: 576px) {
+            padding-right: 8px;
+        }
     }
 }

@@ -97,13 +97,7 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                             alignItems="center"
                             className="purchases-form"
                         >
-                            <Grid
-                                item
-                                md={3}
-                                sm={6}
-                                xs={12}
-                                className="grid-spacing"
-                            >
+                            <Grid item md={3} sm={6} xs={12}>
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                     <KeyboardDatePicker
                                         disableToolbar
@@ -130,15 +124,8 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                                     />
                                 </MuiPickersUtilsProvider>
                             </Grid>
-                            <Grid
-                                item
-                                md={3}
-                                sm={6}
-                                xs={12}
-                                className="grid-spacing"
-                            >
+                            <Grid item md={3} sm={6} xs={12}>
                                 <TextField
-                                    id="outlined-basic"
                                     autoComplete="off"
                                     label="Location"
                                     variant="outlined"
@@ -152,15 +139,8 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                                     }}
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                md={3}
-                                sm={6}
-                                xs={12}
-                                className="grid-spacing"
-                            >
+                            <Grid item md={3} sm={6} xs={12}>
                                 <TextField
-                                    id="outlined-basic"
                                     autoComplete="off"
                                     label="Category"
                                     variant="outlined"
@@ -174,15 +154,8 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                                     }}
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                md={3}
-                                sm={6}
-                                xs={12}
-                                className="grid-spacing"
-                            >
+                            <Grid item md={3} sm={6} xs={12}>
                                 <TextField
-                                    id="outlined-basic"
                                     autoComplete="off"
                                     label="Amount"
                                     variant="outlined"
@@ -199,9 +172,9 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                         </Grid>
                     </Box>
                     <Box
-                        id="purchases-form-submit"
                         display="flex"
                         flexDirection="row-reverse"
+                        className="purchases-submit-btn"
                     >
                         <Toolbar disableGutters={true}>
                             <Button
