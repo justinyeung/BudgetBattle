@@ -1,0 +1,19 @@
+.nav-btns {
+    &.MuiContainer-root {
+        @media (max-width: 576px) {
+            padding-left: 8px;
+            padding-top: 16px;
+        }
+        padding-left: 44px;
+        padding-top: 44px;
+    }
+
+    button {
+        @include component-box;
+        margin-right: 24px;
+
+        .MuiSvgIcon-root {
+            padding-right: 4px;
+        }
+    }
+}

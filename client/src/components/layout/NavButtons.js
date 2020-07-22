@@ -40,25 +40,12 @@ const BackButton = ({
     };
 
     return (
-        <Container maxWidth="lg" className="back-button-spacing">
-            <Button
-                className="component-box nav-buttons"
-                variant="contained"
-                onClick={() => history.goBack()}
-            >
-                <KeyboardBackspaceRoundedIcon
-                    className="nav-buttons-icons"
-                    fontSize="large"
-                />{' '}
-                Go Back
+        <Container maxWidth="lg" className="nav-btns">
+            <Button variant="contained" onClick={() => history.goBack()}>
+                <KeyboardBackspaceRoundedIcon fontSize="large" /> Go Back
             </Button>
-            <Button
-                className="component-box nav-buttons"
-                variant="contained"
-                onClick={() => refresh()}
-            >
-                <RefreshIcon className="nav-buttons-icons" fontSize="large" />{' '}
-                Refresh
+            <Button variant="contained" onClick={() => refresh()}>
+                <RefreshIcon fontSize="large" /> Refresh
             </Button>
         </Container>
     );
