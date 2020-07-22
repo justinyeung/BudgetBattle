@@ -1,2 +1,64 @@
 .friends {
+    @include container-spacing;
+    @include component-box;
+
+    .MuiTypography-h6 {
+        @include header-title;
+    }
+
+    @media (max-width: 576px) {
+        &-search-item {
+            padding: 0;
+        }
+    }
+
+    &-search-results {
+        @include container-spacing;
+    }
+
+    &-search-item {
+        padding: 20px 10px;
+        .MuiButton-outlined {
+            min-width: 110px;
+        }
+        .MuiListItem-secondaryAction {
+            padding: 8px;
+        }
+    }
+
+    &-profile-btn {
+        .MuiTypography-root {
+            text-align: start;
+            text-transform: capitalize;
+        }
+
+        .MuiListItemAvatar-root {
+            display: block;
+            @media (max-width: 576px) {
+                display: none;
+            }
+        }
+    }
+
+    &-search-bar.MuiPaper-root {
+        @include container-spacing;
+        padding: 2px 4px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: #f5f5f5;
+    }
+
+    &-search-input {
+        margin-left: 8px;
+        flex: 1;
+    }
+
+    &-icon-button {
+        padding: 10px;
+    }
+
+    &-list {
+        width: 100%;
+    }
 }
