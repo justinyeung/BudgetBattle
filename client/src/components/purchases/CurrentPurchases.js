@@ -138,10 +138,8 @@ const CurrentPurchases = ({
     );
 
     return (
-        <div>
+        <div className="purchases">
             <MaterialTable
-                className="component-box"
-                style={{ background: '#f5f5f5' }}
                 columns={[
                     {
                         title: 'Date',

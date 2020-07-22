@@ -85,26 +85,23 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
 
     return (
         <div>
-            <Box boxShadow={1} className="container-spacing component-box">
+            <Box boxShadow={1} className="purchases">
                 <FormControl fullWidth>
-                    <Typography variant="h6" id="header-title">
-                        Add Purchase
-                    </Typography>
+                    <Typography variant="h6">Add Purchase</Typography>
                     <Divider />
                     <Box display="flex" justifyContent="center">
                         <Grid
-                            id="purchases-form-grid"
                             container
                             direction="row"
                             justify="center"
                             alignItems="center"
+                            className="purchases-form"
                         >
                             <Grid
                                 item
-                                lg={3}
                                 md={3}
-                                sm={8}
-                                xs={10}
+                                sm={6}
+                                xs={12}
                                 className="grid-spacing"
                             >
                                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -135,10 +132,9 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                             </Grid>
                             <Grid
                                 item
-                                lg={3}
                                 md={3}
-                                sm={8}
-                                xs={10}
+                                sm={6}
+                                xs={12}
                                 className="grid-spacing"
                             >
                                 <TextField
@@ -158,10 +154,9 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                             </Grid>
                             <Grid
                                 item
-                                lg={3}
                                 md={3}
-                                sm={8}
-                                xs={10}
+                                sm={6}
+                                xs={12}
                                 className="grid-spacing"
                             >
                                 <TextField
@@ -181,10 +176,9 @@ const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
                             </Grid>
                             <Grid
                                 item
-                                lg={3}
                                 md={3}
-                                sm={8}
-                                xs={10}
+                                sm={6}
+                                xs={12}
                                 className="grid-spacing"
                             >
                                 <TextField

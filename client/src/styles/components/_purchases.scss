@@ -1,0 +1,26 @@
+.purchases {
+    @include container-spacing;
+    @include component-box;
+
+    .MuiTypography-h6 {
+        @include header-title;
+    }
+
+    // material-table styling
+    .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+        @include component-box;
+        @include container-spacing;
+
+        td.MuiTableCell-root.MuiTableCell-body {
+            text-align: left;
+        }
+
+        th.MuiTableCell-root.MuiTableCell-head {
+            @include component-box;
+        }
+    }
+
+    &-form {
+        @include grid-spacing;
+    }
+}
