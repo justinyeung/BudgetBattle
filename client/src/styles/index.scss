@@ -1,6 +1,10 @@
+@import './utilities';
+
 @import './components/body';
 
 @import './components/navbar';
+
+@import './components/nav-btns';
 
 @import './components/menu';
 
@@ -15,7 +19,5 @@
 @import './components/friends';
 
 @import './components/purchases';
-
-@import './components/nav-btns';
 
 @import './components/home-page';
