@@ -17,13 +17,13 @@ const FriendsPage = () => {
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <FriendForm />
                     </Grid>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={6} xs={12} className="pages-sections">
                         <FriendRequests />
                     </Grid>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={6} xs={12} className="pages-sections">
                         <FriendsList />
                     </Grid>
                 </Grid>

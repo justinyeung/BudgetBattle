@@ -17,13 +17,13 @@ const Dashboard = () => {
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <PurchaseForm />
                     </Grid>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={6} xs={12} className="pages-sections">
                         <FriendRequests />
                     </Grid>
-                    <Grid item md={6} xs={12}>
+                    <Grid item md={6} xs={12} className="pages-sections">
                         <CompRequests />
                     </Grid>
                 </Grid>

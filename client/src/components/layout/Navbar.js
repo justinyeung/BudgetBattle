@@ -284,7 +284,7 @@ const PrimarySearchAppBar = ({
     );
 
     return (
-        <div className="navbar-appbar">
+        <div className="navbar">
             <AppBar elevation={1} position="fixed">
                 <Toolbar>
                     <Container maxWidth="lg">
@@ -404,13 +404,12 @@ const PrimarySearchAppBar = ({
                         </Grid>
                     </Container>
                 </Toolbar>
-                <div style={{ height: '4px' }}>
+                <div className="navbar-loading">
                     {(userLoading ||
                         purchaseLoading ||
                         compLoading ||
                         profileLoading ||
                         searchLoading) && <LinearProgress />}
-                    {/* <LinearProgress /> */}
                 </div>
             </AppBar>
 

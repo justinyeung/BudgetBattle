@@ -50,7 +50,7 @@ const ProfilePage = ({
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <Profile />
                     </Grid>
                 </Grid>

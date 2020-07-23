@@ -64,7 +64,7 @@ const GetStartedPage = ({ user: { user } }) => {
                     alignItems="flex-start"
                     className="pages-get-started"
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <Box boxShadow={1}>
                             <Typography variant="h6">
                                 Sign in using Facebook or Google
@@ -81,7 +81,7 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <Box boxShadow={1}>
                             <Typography variant="h6">
                                 Log and keep track of your purchases
@@ -114,7 +114,7 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <Box boxShadow={1}>
                             <Typography variant="h6">
                                 Connect with your Friends
@@ -147,7 +147,7 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <Box boxShadow={1}>
                             <Typography variant="h6">
                                 Compete with your friends in Monthly Battles

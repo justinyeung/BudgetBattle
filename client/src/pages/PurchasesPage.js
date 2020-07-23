@@ -16,10 +16,10 @@ const PurchasePage = () => {
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <PurchaseForm />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={12} className="pages-sections">
                         <CurrentPurchases />
                     </Grid>
                 </Grid>

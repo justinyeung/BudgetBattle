@@ -29,13 +29,13 @@ const SummaryPage = ({ setCompLoading, getCompetition }) => {
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid item xs={12}>
+                <Grid item xs={12} className="pages-sections">
                     <SummaryHeader />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} xs={12} className="pages-sections">
                     <SummaryTitle userType={UserType.USER} />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} xs={12} className="pages-sections">
                     <SummaryTitle userType={UserType.COMPETITOR} />
                 </Grid>
             </Grid>
