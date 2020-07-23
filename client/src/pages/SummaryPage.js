@@ -22,20 +22,20 @@ const SummaryPage = ({ setCompLoading, getCompetition }) => {
     let { id } = useParams();
 
     return (
-        <Container maxWidth="lg" className="container-spacing">
+        <Container maxWidth="lg" className="pages">
             <Grid
                 container
                 direction="row"
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid item xs={12} className="grid-spacing">
+                <Grid item xs={12}>
                     <SummaryHeader />
                 </Grid>
-                <Grid item md={6} xs={12} className="grid-spacing">
+                <Grid item md={6} xs={12}>
                     <SummaryTitle userType={UserType.USER} />
                 </Grid>
-                <Grid item md={6} xs={12} className="grid-spacing">
+                <Grid item md={6} xs={12}>
                     <SummaryTitle userType={UserType.COMPETITOR} />
                 </Grid>
             </Grid>

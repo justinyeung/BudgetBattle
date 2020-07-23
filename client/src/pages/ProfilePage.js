@@ -38,27 +38,19 @@ const ProfilePage = ({
 
     return (
         <div>
-            <Container maxWidth="lg" className="back-button-spacing">
-                <Button
-                    className="component-box nav-buttons"
-                    variant="contained"
-                    onClick={() => history.goBack()}
-                >
-                    <KeyboardBackspaceRoundedIcon
-                        className="nav-buttons-icons"
-                        fontSize="large"
-                    />{' '}
-                    Go Back
+            <Container maxWidth="lg" className="nav-btns">
+                <Button variant="contained" onClick={() => history.goBack()}>
+                    <KeyboardBackspaceRoundedIcon fontSize="large" /> Go Back
                 </Button>
             </Container>
-            <Container maxWidth="lg" className="container-spacing">
+            <Container maxWidth="lg" className="pages">
                 <Grid
                     container
                     direction="row"
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12} className="grid-spacing">
+                    <Grid item xs={12}>
                         <Profile />
                     </Grid>
                 </Grid>

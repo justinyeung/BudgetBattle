@@ -1,2 +1,38 @@
 .pages {
+    &.MuiContainer-root {
+        @include container-spacing;
+    }
+
+    .MuiGrid-item {
+        @include grid-spacing;
+    }
+
+    &-get-started {
+        .MuiBox-root {
+            @include container-spacing;
+            @include component-box;
+        }
+
+        .MuiContainer-root {
+            @include container-spacing;
+        }
+
+        button {
+            margin-top: 10px;
+        }
+
+        h6 {
+            @include header-title;
+        }
+    }
+
+    &-login {
+        margin-top: 64px;
+
+        &-heading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 }

@@ -9,20 +9,20 @@ import CompRequests from '../components/competitions/CompRequests';
 
 const CompetitionsPage = () => {
     return (
-        <Container maxWidth="lg" className="container-spacing">
+        <Container maxWidth="lg" className="pages">
             <Grid
                 container
                 direction="row"
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid item xs={12} className="grid-spacing">
+                <Grid item xs={12}>
                     <CurrentComps />
                 </Grid>
-                <Grid item md={6} xs={12} className="grid-spacing">
+                <Grid item md={6} xs={12}>
                     <CompsForm />
                 </Grid>
-                <Grid item md={6} xs={12} className="grid-spacing">
+                <Grid item md={6} xs={12}>
                     <CompRequests />
                 </Grid>
             </Grid>

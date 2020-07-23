@@ -21,6 +21,7 @@ const GetStartedPage = ({ user: { user } }) => {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
+        console.log('login dialog');
         setOpen(true);
     };
 
@@ -31,13 +32,13 @@ const GetStartedPage = ({ user: { user } }) => {
     const renderLoginDialog = (
         <div>
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle id="alert-dialog-title">
+                <DialogTitle>
                     {user
                         ? 'You are already Logged in'
                         : 'Log in to Get Started'}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
+                    <DialogContentText>
                         {user
                             ? 'Thank you for creating an account with us!'
                             : 'In order to use our features and services, you must create an account.'}
@@ -55,23 +56,21 @@ const GetStartedPage = ({ user: { user } }) => {
 
     return (
         <div>
-            <Container maxWidth="lg" className="container-spacing">
+            <Container maxWidth="lg" className="pages">
                 <Grid
                     container
                     direction="row"
                     justify="center"
                     alignItems="flex-start"
+                    className="pages-get-started"
                 >
-                    <Grid item xs={12} className="grid-spacing">
-                        <Box
-                            boxShadow={1}
-                            className="container-spacing component-box"
-                        >
-                            <Typography variant="h6" id="header-title">
+                    <Grid item xs={12}>
+                        <Box boxShadow={1}>
+                            <Typography variant="h6">
                                 Sign in using Facebook or Google
                             </Typography>
                             <Divider />
-                            <Container className="container-spacing">
+                            <Container>
                                 <p>Create an account with us to get started!</p>
                                 <Button
                                     onClick={handleClickOpen}
@@ -82,16 +81,13 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
-                        <Box
-                            boxShadow={1}
-                            className="container-spacing component-box"
-                        >
-                            <Typography variant="h6" id="header-title">
+                    <Grid item xs={12}>
+                        <Box boxShadow={1}>
+                            <Typography variant="h6">
                                 Log and keep track of your purchases
                             </Typography>
                             <Divider />
-                            <Container className="container-spacing">
+                            <Container>
                                 <p>
                                     Input all your purchases to keep track of
                                     what you bought, where you bought it, when
@@ -118,16 +114,13 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
-                        <Box
-                            boxShadow={1}
-                            className="container-spacing component-box"
-                        >
-                            <Typography variant="h6" id="header-title">
+                    <Grid item xs={12}>
+                        <Box boxShadow={1}>
+                            <Typography variant="h6">
                                 Connect with your Friends
                             </Typography>
                             <Divider />
-                            <Container className="container-spacing">
+                            <Container>
                                 <p>
                                     Add Friends on Budget Battle to meet your
                                     budgeting goals together!
@@ -154,16 +147,13 @@ const GetStartedPage = ({ user: { user } }) => {
                             </Container>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
-                        <Box
-                            boxShadow={1}
-                            className="container-spacing component-box"
-                        >
-                            <Typography variant="h6" id="header-title">
+                    <Grid item xs={12}>
+                        <Box boxShadow={1}>
+                            <Typography variant="h6">
                                 Compete with your friends in Monthly Battles
                             </Typography>
                             <Divider />
-                            <Container className="container-spacing">
+                            <Container>
                                 <p>
                                     Compete with your friends to see who can
                                     stay on budget.

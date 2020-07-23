@@ -10,20 +10,20 @@ import FriendRequests from '../components/friends/FriendRequests';
 const Dashboard = () => {
     return (
         <div>
-            <Container maxWidth="lg" className="container-spacing">
+            <Container maxWidth="lg" className="pages">
                 <Grid
                     container
                     direction="row"
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12} className="grid-spacing">
+                    <Grid item xs={12}>
                         <PurchaseForm />
                     </Grid>
-                    <Grid item md={6} xs={12} className="grid-spacing">
+                    <Grid item md={6} xs={12}>
                         <FriendRequests />
                     </Grid>
-                    <Grid item md={6} xs={12} className="grid-spacing">
+                    <Grid item md={6} xs={12}>
                         <CompRequests />
                     </Grid>
                 </Grid>
