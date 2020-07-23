@@ -170,9 +170,9 @@ const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
                     </Grid>
                 </Grid>
                 <Box
-                    id="purchases-form-submit"
                     display="flex"
                     flexDirection="row-reverse"
+                    className="competitions-submit"
                 >
                     <Toolbar disableGutters={true}>
                         <Button

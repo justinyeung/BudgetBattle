@@ -72,4 +72,8 @@
         @extend .competitions-full-width;
         margin: 0;
     }
+
+    &-submit {
+        padding-right: 24px;
+    }
 }

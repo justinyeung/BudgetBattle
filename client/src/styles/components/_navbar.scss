@@ -1,15 +1,33 @@
 .navbar {
-    &-appbar {
+    .MuiAppBar-root {
         flex-grow: 1;
 
-        .MuiAppBar-colorPrimary {
-            padding-right: 0 !important;
+        &.MuiAppBar-colorPrimary {
+            padding-right: 0;
             background-color: black;
             color: white;
         }
 
         .MuiTypography-h6 {
             color: white;
+        }
+
+        .MuiToolbar-regular {
+            height: 60px;
+            min-height: 60px;
+        }
+    }
+
+    &-loading {
+        height: 4px;
+
+        .MuiLinearProgress-root {
+            height: 4px;
+            background-color: black;
+        }
+
+        .MuiLinearProgress-barColorPrimary {
+            background-color: rgb(203, 63, 34);
         }
     }
 
