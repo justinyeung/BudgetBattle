@@ -9,7 +9,7 @@
     // material-table styling
     .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
         @include component-box;
-        @include container-spacing;
+        box-shadow: none;
 
         td.MuiTableCell-root.MuiTableCell-body {
             text-align: left;
