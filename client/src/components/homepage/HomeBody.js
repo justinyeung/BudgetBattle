@@ -14,8 +14,8 @@ import Container from '@material-ui/core/Container';
 
 const HomeBody = ({ mobile }) => {
     return (
-        <Container maxWidth="lg">
-            <Segment style={{ padding: '5em 0em' }} vertical>
+        <Container maxWidth="lg" className="home-page-body">
+            <Segment vertical>
                 <SemanticContainer text>
                     <Grid container stackable verticalAlign="middle">
                         <Grid.Row>
@@ -30,7 +30,7 @@ const HomeBody = ({ mobile }) => {
 
                             <Grid.Column width={mobile ? 16 : 12}>
                                 <Header as="h2">Compete with Friends</Header>
-                                <p style={{ fontSize: '1.25em' }}>
+                                <p>
                                     Compete in monthly battles to see who can
                                     budget the best.
                                 </p>
@@ -42,7 +42,7 @@ const HomeBody = ({ mobile }) => {
                                 <Header as="h2">
                                     Take Control of your Spendings
                                 </Header>
-                                <p style={{ fontSize: '1.25em' }}>
+                                <p>
                                     Keep track of everything you buy with our
                                     one stop shop website and app.
                                 </p>
@@ -56,7 +56,7 @@ const HomeBody = ({ mobile }) => {
                                 </Grid.Column>
                             )}
                         </Grid.Row>
-                        <Divider style={{ margin: '3em 0em' }} />
+                        <Divider />
                         <Grid.Row>
                             {!mobile && (
                                 <Grid.Column floated="right" width={4}>
@@ -70,17 +70,17 @@ const HomeBody = ({ mobile }) => {
                                 <Header as="h2">
                                     Visualize and Stay Organized
                                 </Header>
-                                <p style={{ fontSize: '1.25em' }}>
+                                <p>
                                     View automatically generated visualizations
                                     to catch any trends in your spendings.
                                 </p>
                             </Grid.Column>
                         </Grid.Row>
-                        <Divider style={{ margin: '3em 0em' }} />
+                        <Divider />
                         <Grid.Row>
                             <Grid.Column width={mobile ? 16 : 12}>
                                 <Header as="h2">Get Started with Ease</Header>
-                                <p style={{ fontSize: '1.25em' }}>
+                                <p>
                                     Use your existing Facebook or Gmail Login
                                     and start saving today!
                                 </p>
@@ -94,7 +94,7 @@ const HomeBody = ({ mobile }) => {
                                 </Grid.Column>
                             )}
                         </Grid.Row>
-                        <Grid.Row style={{ padding: 0 }}>
+                        <Grid.Row>
                             <Grid.Column width={mobile ? 16 : 12}>
                                 <Link to="/getstarted">
                                     <Button>Get Started!</Button>
