@@ -9,17 +9,17 @@ import CurrentPurchases from '../components/purchases/CurrentPurchases';
 const PurchasePage = () => {
     return (
         <div>
-            <Container maxWidth="lg" className="container-spacing">
+            <Container maxWidth="lg" className="pages">
                 <Grid
                     container
                     direction="row"
                     justify="center"
                     alignItems="flex-start"
                 >
-                    <Grid item xs={12} className="grid-spacing">
+                    <Grid item xs={12}>
                         <PurchaseForm />
                     </Grid>
-                    <Grid item xs={12} className="grid-spacing">
+                    <Grid item xs={12}>
                         <CurrentPurchases />
                     </Grid>
                 </Grid>
