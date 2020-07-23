@@ -4,12 +4,12 @@
 
         &.MuiAppBar-colorPrimary {
             padding-right: 0;
-            background-color: black;
-            color: white;
+            background-color: $primary-colour;
+            color: $secondary-colour;
         }
 
         .MuiTypography-h6 {
-            color: white;
+            color: $secondary-colour;
         }
 
         .MuiToolbar-regular {
@@ -23,11 +23,11 @@
 
         .MuiLinearProgress-root {
             height: 4px;
-            background-color: black;
+            background-color: $primary-colour;
         }
 
         .MuiLinearProgress-barColorPrimary {
-            background-color: rgb(203, 63, 34);
+            background-color: $loading-bar;
         }
     }
 
@@ -51,9 +51,9 @@
     }
 
     &-link {
-        color: white;
+        color: $secondary-colour;
     }
     &-link:hover {
-        color: #afafaf;
+        color: $light-grey;
     }
 }

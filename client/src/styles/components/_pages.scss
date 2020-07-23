@@ -3,7 +3,7 @@
         @include container-spacing;
     }
 
-    .MuiGrid-item {
+    &-sections {
         @include grid-spacing;
     }
 

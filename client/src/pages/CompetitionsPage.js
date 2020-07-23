@@ -16,13 +16,13 @@ const CompetitionsPage = () => {
                 justify="center"
                 alignItems="flex-start"
             >
-                <Grid item xs={12}>
+                <Grid item xs={12} className="pages-sections">
                     <CurrentComps />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} xs={12} className="pages-sections">
                     <CompsForm />
                 </Grid>
-                <Grid item md={6} xs={12}>
+                <Grid item md={6} xs={12} className="pages-sections">
                     <CompRequests />
                 </Grid>
             </Grid>

@@ -1,19 +1,17 @@
 .home-page {
-    $background: linear-gradient(to right, #3c3b3f, #605c3c);
-
     &-jumbotron {
         &-mobile.ui.inverted.segment {
             text-align: center;
             min-height: 350px;
             padding: 1em 0;
-            background: $background;
+            background: $jumbotron-background;
         }
 
         &-desktop.ui.inverted.segment {
             text-align: center;
             min-height: 500px;
             padding: 1em 0;
-            background: $background;
+            background: $jumbotron-background;
         }
     }
 
