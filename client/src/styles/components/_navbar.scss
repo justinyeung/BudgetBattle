@@ -3,7 +3,7 @@
         flex-grow: 1;
 
         &.MuiAppBar-colorPrimary {
-            padding-right: 0;
+            padding-right: 0 !important; //fixes navbar width bug
             background-color: $primary-colour;
             color: $secondary-colour;
         }
