@@ -1,5 +1,4 @@
 import { SEARCH_USER, SEARCH_ERROR, SET_SEARCH_LOADING } from './types';
-
 import axios from 'axios';
 
 export const searchUsers = ({ friendSearch }) => async (dispatch) => {
