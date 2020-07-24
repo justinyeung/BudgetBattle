@@ -7,15 +7,8 @@ import {
     SET_PURCHASE_LOADING,
     SET_PURCHASE_LOADING_FALSE,
 } from './types';
-
+import { isLoggedIn } from './middleware';
 import axios from 'axios';
-
-const isLoggedIn = (data) => {
-    if (data.msg === 'no user') {
-        return false;
-    }
-    return true;
-};
 
 // Get all purchases for current user
 export const getPurchases = () => async (dispatch) => {

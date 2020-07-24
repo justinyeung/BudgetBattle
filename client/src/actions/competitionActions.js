@@ -16,22 +16,8 @@ import {
     GET_USER1_PURCHASES,
     GET_USER2_PURCHASES,
 } from './types';
+import { isLoggedIn } from './middleware';
 import axios from 'axios';
-
-/**
- * Checks if user is logged in 
- * 
- * @private
- * @function isLoggedIn
- * @param {Object} data - Object returned from backend 
- * @returns {boolean} - Whether user is logged in
- */
-const isLoggedIn = (data) => {
-    if (data.msg === 'no user') {
-        return false;
-    }
-    return true;
-};
 
 /**
  * PUT request to send a battle request to another user.

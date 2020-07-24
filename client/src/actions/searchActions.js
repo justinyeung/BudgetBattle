@@ -1,10 +1,22 @@
-import { SEARCH_USER, SEARCH_ERROR, SET_SEARCH_LOADING } from './types';
+/**
+ * @module searchActions
+ */
 
+import { SEARCH_USER, SEARCH_ERROR, SET_SEARCH_LOADING } from './types';
 import axios from 'axios';
 
+/**
+ * Searches users for regex matches.
+ * Dispatch results to search store.
+ * 
+ * @async
+ * @public
+ * @static
+ * @function searchUsers
+ * @param {string} config.friendSearch - name of search query 
+ */
 export const searchUsers = ({ friendSearch }) => async (dispatch) => {
     try {
-        // api call to search user
         let res = await axios.get(`/api/search/${friendSearch}`);
 
         dispatch({
@@ -19,7 +31,14 @@ export const searchUsers = ({ friendSearch }) => async (dispatch) => {
     }
 };
 
-// set loading
+/**
+ * Set and disptach search loading flag.
+ * 
+ * @async
+ * @static
+ * @public
+ * @function setSearchLoading
+ */
 export const setSearchLoading = () => async (dispatch) => {
     try {
         dispatch({

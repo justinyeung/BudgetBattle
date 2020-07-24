@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: middleware.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,36 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: middleware.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module middleware
+ */
 
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+/**
+ * Checks if user is logged in 
+ * 
+ * @public
+ * @static
+ * @function isLoggedIn
+ * @param {Object} data - Object returned from backend 
+ * @returns {boolean} - Whether user is logged in
+ */
+export const isLoggedIn = (data) => {
+    if (data.msg === 'no user') {
+        return false;
+    }
+    return true;
+};</code></pre>
+        </article>
+    </section>
 
 
 

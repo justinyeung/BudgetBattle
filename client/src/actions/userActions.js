@@ -13,15 +13,8 @@ import {
     SET_USER_LOADING,
     SET_USER_LOADING_FALSE,
 } from './types';
-
+import { isLoggedIn } from './middleware';
 import axios from 'axios';
-
-const isLoggedIn = (data) => {
-    if (data.msg === 'no user') {
-        return false;
-    }
-    return true;
-};
 
 // set loading
 export const setUserLoading = () => async (dispatch) => {
