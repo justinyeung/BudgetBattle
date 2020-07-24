@@ -106,12 +106,12 @@ export const getNumPurchasesById = ({ id }) => async (dispatch) => {
 };
 
 /**
- * Set and disptach competition loading flag.
+ * Set and disptach profile loading flag.
  * 
  * @async
  * @static
  * @public
- * @function setCompLoading
+ * @function setProfileLoading
  */
 export const setProfileLoading = () => async (dispatch) => {
     try {

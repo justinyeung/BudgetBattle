@@ -6,6 +6,7 @@
  * Checks if user is logged in 
  * 
  * @public
+ * @static
  * @function isLoggedIn
  * @param {Object} data - Object returned from backend 
  * @returns {boolean} - Whether user is logged in
