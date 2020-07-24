@@ -16,7 +16,6 @@ import {
     GET_USER1_PURCHASES,
     GET_USER2_PURCHASES,
 } from './types';
-
 import axios from 'axios';
 
 /**
