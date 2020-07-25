@@ -22,7 +22,7 @@ import axios from 'axios';
 /**
  * PUT request to send a battle request to another user.
  * Dispatches to the competition store.
- * 
+ *
  * @async
  * @public
  * @static
@@ -71,7 +71,7 @@ export const sendCompRequest = ({ id, numMonth, numYear }) => async (
  * GET request to get all accepted competitions.
  * Update all puchases for the competitions.
  * Dispatches to the competition store.
- * 
+ *
  * @async
  * @public
  * @static
@@ -117,7 +117,7 @@ export const getAcceptedComps = () => async (dispatch) => {
 /**
  * GET request that gets all competitions.
  * Loads all purchases associated with loaded competitions.
- * 
+ *
  * @async
  * @private
  * @function loadCompData
@@ -146,7 +146,7 @@ const loadCompData = (id) => {
 
 /**
  * Dispatches purchases for User 1 to competitions store.
- * 
+ *
  * @private
  * @function dispatchUser1
  * @param {number} param - purchases
@@ -160,7 +160,7 @@ const dispatchUser1 = (param) => {
 
 /**
  * Dispatches purchases for User 2 to competitions store.
- * 
+ *
  * @private
  * @function dispatchUser2
  * @param {number} param - purchases
@@ -174,7 +174,7 @@ const dispatchUser2 = (param) => {
 
 /**
  * Dispatches competitions to store.
- * 
+ *
  * @private
  * @function dispatchCompetition
  * @param {number} param - purchases
@@ -189,7 +189,7 @@ const dispatchCompetition = (param) => {
 /**
  * GET request to get all battle requests that have been sent.
  * Dispatch to the competitions store.
- * 
+ *
  * @async
  * @public
  * @static
@@ -219,9 +219,9 @@ export const getOutPendingComp = () => async (dispatch) => {
 };
 
 /**
- * GET request to get all battle requests that have been received
+ * GET request to get all battle requests that have been received.
  * Dispatch to the competitions store.
- * 
+ *
  * @async
  * @public
  * @static
@@ -251,9 +251,9 @@ export const getInPendingComp = () => async (dispatch) => {
 };
 
 /**
- * PUT request to accept a received battle request
+ * PUT request to accept a received battle request.
  * Dispatches to the competition store.
- * 
+ *
  * @async
  * @public
  * @static
@@ -290,8 +290,9 @@ export const acceptComp = (compID) => async (dispatch) => {
 };
 
 /**
- * DELETE request to delete a battle or reject a battle request
- * 
+ * DELETE request to delete a battle or reject a battle request.
+ * Dispatches to the competition store.
+ *
  * @async
  * @public
  * @static
@@ -324,8 +325,9 @@ export const rejectOrDeleteComp = (comp) => async (dispatch) => {
 };
 
 /**
- * Calls loadCompData function to dispatch competition data.
- * 
+ * GET request to update and get all battles.
+ * Dispatches to the competition store.
+ *
  * @async
  * @public
  * @static
@@ -345,7 +347,8 @@ export const getCompetition = ({ id }) => async (dispatch) => {
 
 /**
  * Set and disptach competition loading flag.
- * 
+ * Dispatches to the competition store.
+ *
  * @async
  * @static
  * @public

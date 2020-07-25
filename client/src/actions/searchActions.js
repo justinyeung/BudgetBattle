@@ -8,12 +8,12 @@ import axios from 'axios';
 /**
  * Searches users for regex matches.
  * Dispatch results to search store.
- * 
+ *
  * @async
  * @public
  * @static
  * @function searchUsers
- * @param {string} config.friendSearch - name of search query 
+ * @param {string} config.friendSearch - name of search query
  */
 export const searchUsers = ({ friendSearch }) => async (dispatch) => {
     try {
@@ -33,7 +33,8 @@ export const searchUsers = ({ friendSearch }) => async (dispatch) => {
 
 /**
  * Set and disptach search loading flag.
- * 
+ * Dispatch results to search store.
+ *
  * @async
  * @static
  * @public
