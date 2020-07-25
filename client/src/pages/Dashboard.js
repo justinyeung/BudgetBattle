@@ -1,11 +1,10 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
 import PurchaseForm from '../components/purchases/PurchaseForm';
 import CompRequests from '../components/competitions/CompRequests';
 import FriendRequests from '../components/friends/FriendRequests';
+
+import { Grid, Container } from '@material-ui/core';
 
 const Dashboard = () => {
     return (

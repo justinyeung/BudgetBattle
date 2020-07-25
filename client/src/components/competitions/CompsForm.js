@@ -7,22 +7,24 @@ import {
     setCompLoading,
 } from '../../actions/competitionActions';
 
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import { DatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
+import {
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select,
+    Button,
+    Grid,
+    Box,
+    Toolbar,
+    Typography,
+    Divider,
+    Snackbar,
+    IconButton,
+} from '@material-ui/core';
 
 const CompsForm = ({ sendCompRequest, setCompLoading, user: { user } }) => {
     const [open, setOpen] = useState(false);

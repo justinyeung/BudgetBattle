@@ -16,8 +16,7 @@ import {
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import RefreshIcon from '@material-ui/icons/Refresh';
-import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
+import { Button, Container } from '@material-ui/core';
 
 const BackButton = ({
     getUser,

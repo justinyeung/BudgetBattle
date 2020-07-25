@@ -3,15 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import AppsIcon from '@material-ui/icons/Apps';
@@ -20,23 +13,32 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import CheckIcon from '@material-ui/icons/Check';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import GroupIcon from '@material-ui/icons/Group';
-import Grid from '@material-ui/core/Grid';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
-import Container from '@material-ui/core/Container';
-import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { logout, setUserLoading } from '../../actions/userActions';
+
+import {
+    AppBar,
+    Toolbar,
+    IconButton,
+    Typography,
+    MenuItem,
+    Menu,
+    Grid,
+    Avatar,
+    Button,
+    SwipeableDrawer,
+    List,
+    Divider,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Snackbar,
+    Container,
+    LinearProgress,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     list: {
@@ -310,24 +312,22 @@ const PrimarySearchAppBar = ({
                                         >
                                             <MenuIcon />
                                         </IconButton>
-                                        <div>
-                                            <React.Fragment key={'left'}>
-                                                <SwipeableDrawer
-                                                    anchor={'left'}
-                                                    open={state['left']}
-                                                    onClose={toggleDrawer(
-                                                        'left',
-                                                        false
-                                                    )}
-                                                    onOpen={toggleDrawer(
-                                                        'left',
-                                                        true
-                                                    )}
-                                                >
-                                                    {list('left')}
-                                                </SwipeableDrawer>
-                                            </React.Fragment>
-                                        </div>
+                                        <React.Fragment key={'left'}>
+                                            <SwipeableDrawer
+                                                anchor={'left'}
+                                                open={state['left']}
+                                                onClose={toggleDrawer(
+                                                    'left',
+                                                    false
+                                                )}
+                                                onOpen={toggleDrawer(
+                                                    'left',
+                                                    true
+                                                )}
+                                            >
+                                                {list('left')}
+                                            </SwipeableDrawer>
+                                        </React.Fragment>
                                     </Grid>
                                     <Grid item>
                                         <Link to="/">

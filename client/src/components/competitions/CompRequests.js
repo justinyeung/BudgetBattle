@@ -9,20 +9,23 @@ import {
 } from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Box from '@material-ui/core/Box';
-import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+
+import {
+    Typography,
+    Divider,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemAvatar,
+    Avatar,
+    IconButton,
+    ListItemSecondaryAction,
+    Box,
+    Snackbar,
+} from '@material-ui/core';
 
 const CompRequests = ({
     acceptComp,

@@ -10,22 +10,25 @@ import {
 } from '../../actions/userActions';
 import { searchUsers, setSearchLoading } from '../../actions/searchActions';
 
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import Grid from '@material-ui/core/Grid';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+
+import {
+    Box,
+    Paper,
+    InputBase,
+    IconButton,
+    Typography,
+    Divider,
+    ListItem,
+    Grid,
+    ListItemAvatar,
+    ListItemText,
+    Avatar,
+    ListItemSecondaryAction,
+    Button,
+    Snackbar,
+} from '@material-ui/core';
 
 const FriendForm = ({
     sendFriendRequest,

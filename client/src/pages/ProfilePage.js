@@ -6,9 +6,6 @@ import { withRouter } from 'react-router-dom';
 
 import Profile from '../components/user/Profile';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 
 import {
@@ -17,6 +14,8 @@ import {
     getNumPurchasesById,
     setProfileLoading,
 } from '../actions/profileActions';
+
+import { Grid, Container, Button } from '@material-ui/core';
 
 const ProfilePage = ({
     setProfileLoading,
