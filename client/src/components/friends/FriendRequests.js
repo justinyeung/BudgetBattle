@@ -8,21 +8,23 @@ import {
     setUserLoading,
 } from '../../actions/userActions';
 
-import Box from '@material-ui/core/Box';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-
-import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
+
+import {
+    Box,
+    List,
+    ListItem,
+    Divider,
+    ListItemText,
+    ListItemAvatar,
+    Avatar,
+    Typography,
+    IconButton,
+    ListItemSecondaryAction,
+    Snackbar,
+} from '@material-ui/core';
 
 const moment = require('moment');
 

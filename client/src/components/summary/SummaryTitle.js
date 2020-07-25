@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import { UserType } from '../../models/enums';
 import SummaryPurchases from './SummaryPurchases';
 
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import { Typography, Divider, Box, Grid } from '@material-ui/core';
 
 const SummaryTitle = ({
     userType,

@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { UserType } from '../models/enums';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
 import SummaryTitle from '../components/summary/SummaryTitle';
 import SummaryHeader from '../components/summary/SummaryHeader';
 import { getCompetition, setCompLoading } from '../actions/competitionActions';
+
+import { Grid, Container } from '@material-ui/core';
 
 const SummaryPage = ({ setCompLoading, getCompetition }) => {
     useEffect(() => {

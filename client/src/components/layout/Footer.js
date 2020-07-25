@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Container, Grid, Header, List, Segment } from 'semantic-ui-react';
-import Typography from '@material-ui/core/Typography';
+import { Typography } from '@material-ui/core';
 
 const Copyright = () => {
     return (

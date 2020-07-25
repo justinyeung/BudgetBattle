@@ -10,7 +10,7 @@ import {
     Segment,
 } from 'semantic-ui-react';
 import { Container as SemanticContainer } from 'semantic-ui-react';
-import Container from '@material-ui/core/Container';
+import { Container } from '@material-ui/core';
 
 const HomeBody = ({ mobile }) => {
     return (

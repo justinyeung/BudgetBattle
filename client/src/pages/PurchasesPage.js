@@ -1,10 +1,9 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
 import PurchaseForm from '../components/purchases/PurchaseForm';
 import CurrentPurchases from '../components/purchases/CurrentPurchases';
+
+import { Grid, Container } from '@material-ui/core';
 
 const PurchasePage = () => {
     return (

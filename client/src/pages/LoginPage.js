@@ -8,12 +8,8 @@ import FBLoginBtn from '../components/auth/FBLoginBtn';
 
 import { getUser, setUserLoading } from '../actions/userActions';
 
-import Avatar from '@material-ui/core/Avatar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Box from '@material-ui/core/Box';
 import LockIcon from '@material-ui/icons/Lock';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import { Avatar, CssBaseline, Box, Typography, Container } from '@material-ui/core';
 
 const Copyright = () => {
     return (

@@ -1,11 +1,10 @@
 import React from 'react';
 
-import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-
 import CurrentComps from '../components/competitions/CurrentComps';
 import CompsForm from '../components/competitions/CompsForm';
 import CompRequests from '../components/competitions/CompRequests';
+
+import { Grid, Container } from '@material-ui/core';
 
 const CompetitionsPage = () => {
     return (

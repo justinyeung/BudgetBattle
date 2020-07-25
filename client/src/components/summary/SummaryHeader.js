@@ -2,13 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Avatar from '@material-ui/core/Avatar';
-import Grid from '@material-ui/core/Grid';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import SyncAltIcon from '@material-ui/icons/SyncAlt';
+
+import { Typography, Box, Avatar, Grid } from '@material-ui/core';
 
 const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
     return (

@@ -10,17 +10,20 @@ import {
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
 
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
+import {
+    Typography,
+    Divider,
+    TextField,
+    FormControl,
+    Grid,
+    Box,
+    Toolbar,
+    Button,
+    Snackbar,
+    IconButton,
+} from '@material-ui/core';
 
 const PurchaseForm = ({ addPurchase, setPurchaseLoading }) => {
     const [date, setDate] = useState(new Date());
