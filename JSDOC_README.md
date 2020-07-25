@@ -1,6 +1,8 @@
-# Budget Battle
+<a href="https://www.budgetbattle.io/">https://www.budgetbattle.io/</a>
 
-https://www.budgetbattle.io/
+## Documentation
+
+These docs will show the Actions used in the Redux State Management Lifecycle.
 
 ## What is it?
 
@@ -25,9 +27,3 @@ A Budgeting web application that lets you compete with friends in monthly budget
 - Documented with JSDoc
 - Version Control using Git and GitHub
 - Deployed using Heroku
-
-## Documentation
-
-## Images
-
-![summary page](https://i.imgur.com/e2uaGT4.png)
