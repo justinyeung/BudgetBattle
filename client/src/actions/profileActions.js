@@ -16,12 +16,12 @@ import axios from 'axios';
 /**
  * GET request to get a user's profile info.
  * Dispatches to the profile store.
- * 
+ *
  * @async
  * @static
  * @public
  * @function getProfileUserById
- * @param {number} config.id - User ID 
+ * @param {number} config.id - User ID
  */
 export const getProfileUserById = ({ id }) => async (dispatch) => {
     try {
@@ -42,12 +42,12 @@ export const getProfileUserById = ({ id }) => async (dispatch) => {
 /**
  * GET request to get a user's number of competitions.
  * Dispatches to the profile store.
- * 
+ *
  * @async
  * @static
  * @public
  * @function getNumCompsById
- * @param {number} config.id - User ID 
+ * @param {number} config.id - User ID
  */
 export const getNumCompsById = ({ id }) => async (dispatch) => {
     try {
@@ -73,14 +73,14 @@ export const getNumCompsById = ({ id }) => async (dispatch) => {
 };
 
 /**
- * GET request to get a user's number of purchases..
+ * GET request to get a user's number of purchases.
  * Dispatches to the profile store.
- * 
+ *
  * @async
  * @static
  * @public
  * @function getNumPurchasesById
- * @param {number} config.id - User ID 
+ * @param {number} config.id - User ID
  */
 export const getNumPurchasesById = ({ id }) => async (dispatch) => {
     try {
@@ -107,7 +107,8 @@ export const getNumPurchasesById = ({ id }) => async (dispatch) => {
 
 /**
  * Set and disptach profile loading flag.
- * 
+ * Dispatches to the profile store.
+ *
  * @async
  * @static
  * @public
