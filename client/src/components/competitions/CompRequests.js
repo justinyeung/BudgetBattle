@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { monthNames } from '../../models/lists';
 
@@ -23,17 +23,9 @@ import {
 const CompRequests = ({
     acceptComp,
     rejectOrDeleteComp,
-    getInPendingComp,
     setCompLoading,
     competition: { inpending },
 }) => {
-    useEffect(() => {
-        setCompLoading();
-        getInPendingComp();
-
-        // eslint-disable-next-line
-    }, []);
-
     const [snacbarMsg, setSnackbarMsg] = useState('');
     const [open, setOpen] = useState(false);
 
@@ -170,7 +162,6 @@ const CompRequests = ({
 
 CompRequests.propTypes = {
     competition: PropTypes.object.isRequired,
-    getInPendingComp: PropTypes.func.isRequired,
     acceptComp: PropTypes.func.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,

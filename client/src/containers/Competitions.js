@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
@@ -6,6 +6,8 @@ import {
     rejectOrDeleteComp,
     getInPendingComp,
     setCompLoading,
+    sendCompRequest,
+    getAcceptedComps,
 } from '../actions/competitionActions';
 
 import CurrentComps from '../components/competitions/CurrentComps';
@@ -19,8 +21,19 @@ const Competitions = ({
     rejectOrDeleteComp,
     getInPendingComp,
     setCompLoading,
+    sendCompRequest,
+    getAcceptedComps,
     competition,
+    user,
 }) => {
+    useEffect(() => {
+        setCompLoading();
+        getAcceptedComps();
+        getInPendingComp();
+
+        // eslint-disable-next-line
+    }, []);
+
     return (
         <Container maxWidth="lg" className="pages">
             <Grid
@@ -30,16 +43,24 @@ const Competitions = ({
                 alignItems="flex-start"
             >
                 <Grid item xs={12} className="pages-sections">
-                    <CurrentComps />
+                    <CurrentComps
+                        rejectOrDeleteComp={rejectOrDeleteComp}
+                        setCompLoading={setCompLoading}
+                        user={user}
+                        competition={competition}
+                    />
                 </Grid>
                 <Grid item md={6} xs={12} className="pages-sections">
-                    <CompsForm />
+                    <CompsForm
+                        sendCompRequest={sendCompRequest}
+                        setCompLoading={setCompLoading}
+                        user={user}
+                    />
                 </Grid>
                 <Grid item md={6} xs={12} className="pages-sections">
                     <CompRequests
                         acceptComp={acceptComp}
                         rejectOrDeleteComp={rejectOrDeleteComp}
-                        getInPendingComp={getInPendingComp}
                         setCompLoading={setCompLoading}
                         competition={competition}
                     />
@@ -51,6 +72,8 @@ const Competitions = ({
 
 Competitions.propTypes = {
     competition: PropTypes.object.isRequired,
+    sendCompRequest: PropTypes.func.isRequired,
+    getAcceptedComps: PropTypes.func.isRequired,
     getInPendingComp: PropTypes.func.isRequired,
     acceptComp: PropTypes.func.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
@@ -59,6 +82,7 @@ Competitions.propTypes = {
 
 const mapStateToProps = (state) => ({
     competition: state.competition,
+    user: state.user,
 });
 
 export default connect(mapStateToProps, {
@@ -66,4 +90,6 @@ export default connect(mapStateToProps, {
     acceptComp,
     rejectOrDeleteComp,
     setCompLoading,
+    sendCompRequest,
+    getAcceptedComps,
 })(Competitions);
