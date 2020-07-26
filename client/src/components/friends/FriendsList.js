@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { deleteFriend, setUserLoading } from '../../actions/userActions';
+// import { deleteFriend, setUserLoading } from '../../actions/userActions';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 import Draggable from 'react-draggable';
@@ -294,11 +294,13 @@ FriendsList.propTypes = {
     setUserLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user,
-});
+// const mapStateToProps = (state) => ({
+//     user: state.user,
+// });
 
-export default connect(mapStateToProps, {
-    deleteFriend,
-    setUserLoading,
-})(FriendsList);
+// export default connect(mapStateToProps, {
+//     deleteFriend,
+//     setUserLoading,
+// })(FriendsList);
+
+export default FriendsList;

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {
-    deleteFriend,
-    acceptFriend,
-    sendFriendRequest,
-    setUserLoading,
-} from '../../actions/userActions';
-import { searchUsers, setSearchLoading } from '../../actions/searchActions';
+// import {
+//     deleteFriend,
+//     acceptFriend,
+//     sendFriendRequest,
+//     setUserLoading,
+// } from '../../actions/userActions';
+// import { searchUsers, setSearchLoading } from '../../actions/searchActions';
 
 import SearchIcon from '@material-ui/icons/Search';
 import CloseIcon from '@material-ui/icons/Close';
@@ -296,16 +296,18 @@ FriendForm.propTypes = {
     setSearchLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user,
-    search: state.search,
-});
+// const mapStateToProps = (state) => ({
+//     user: state.user,
+//     search: state.search,
+// });
 
-export default connect(mapStateToProps, {
-    sendFriendRequest,
-    searchUsers,
-    deleteFriend,
-    acceptFriend,
-    setUserLoading,
-    setSearchLoading,
-})(FriendForm);
+// export default connect(mapStateToProps, {
+//     sendFriendRequest,
+//     searchUsers,
+//     deleteFriend,
+//     acceptFriend,
+//     setUserLoading,
+//     setSearchLoading,
+// })(FriendForm);
+
+export default FriendForm;
