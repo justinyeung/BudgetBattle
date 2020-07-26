@@ -6,6 +6,10 @@ https://www.budgetbattle.io/
 
 A Budgeting web application that lets you compete with friends in monthly budgeting battles.
 
+## Documentation
+
+- JSDoc: https://justinyeung.github.io/BudgetBattle/
+
 ## Features
 
 - User Authentication with Facebook and Google
@@ -25,8 +29,6 @@ A Budgeting web application that lets you compete with friends in monthly budget
 - Documented with JSDoc
 - Version Control using Git and GitHub
 - Deployed using Heroku
-
-## Documentation
 
 ## Images
 
