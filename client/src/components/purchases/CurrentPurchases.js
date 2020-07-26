@@ -1,12 +1,5 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-    getPurchases,
-    editPurchase,
-    deletePurchase,
-    setPurchaseLoading,
-} from '../../actions/purchaseActions';
 
 import MaterialTable from 'material-table';
 
@@ -221,13 +214,4 @@ CurrentPurchases.propTypes = {
     setPurchaseLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    purchase: state.purchase,
-});
-
-export default connect(mapStateToProps, {
-    getPurchases,
-    editPurchase,
-    deletePurchase,
-    setPurchaseLoading,
-})(CurrentPurchases);
+export default CurrentPurchases;
