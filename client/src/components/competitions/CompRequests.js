@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-    acceptComp,
-    rejectOrDeleteComp,
-    getInPendingComp,
-    setCompLoading,
-} from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
 import CheckIcon from '@material-ui/icons/Check';
@@ -30,17 +23,9 @@ import {
 const CompRequests = ({
     acceptComp,
     rejectOrDeleteComp,
-    getInPendingComp,
     setCompLoading,
     competition: { inpending },
 }) => {
-    useEffect(() => {
-        setCompLoading();
-        getInPendingComp();
-
-        // eslint-disable-next-line
-    }, []);
-
     const [snacbarMsg, setSnackbarMsg] = useState('');
     const [open, setOpen] = useState(false);
 
@@ -127,7 +112,7 @@ const CompRequests = ({
                     )}
                     {inpending !== [] &&
                         inpending.map((comp) => (
-                            <ListItem alignItems="flex-start" id={comp._id}>
+                            <ListItem alignItems="flex-start" key={comp._id}>
                                 <ListItemAvatar>
                                     <Avatar>
                                         {comp.user1name &&
@@ -177,19 +162,9 @@ const CompRequests = ({
 
 CompRequests.propTypes = {
     competition: PropTypes.object.isRequired,
-    getInPendingComp: PropTypes.func.isRequired,
     acceptComp: PropTypes.func.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    competition: state.competition,
-});
-
-export default connect(mapStateToProps, {
-    getInPendingComp,
-    acceptComp,
-    rejectOrDeleteComp,
-    setCompLoading,
-})(CompRequests);
+export default CompRequests;

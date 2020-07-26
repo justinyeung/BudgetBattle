@@ -1,12 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-    rejectOrDeleteComp,
-    setCompLoading,
-    getAcceptedComps,
-} from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -51,20 +45,12 @@ const PaperComponent = (props) => {
 const CurrentComps = ({
     rejectOrDeleteComp,
     setCompLoading,
-    getAcceptedComps,
     user: { user },
     competition: { accepted, compLoading },
 }) => {
     const [openDialog, setOpenDialog] = useState(false);
     const [open, setOpen] = useState(false);
     const [compID, setCompID] = useState('');
-
-    useEffect(() => {
-        setCompLoading();
-        getAcceptedComps();
-
-        // eslint-disable-next-line
-    }, []);
 
     // snackbar
     const handleClickSnackbar = () => {
@@ -322,16 +308,6 @@ CurrentComps.propTypes = {
     competition: PropTypes.object.isRequired,
     rejectOrDeleteComp: PropTypes.func.isRequired,
     setCompLoading: PropTypes.func.isRequired,
-    getAcceptedComps: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    competition: state.competition,
-    user: state.user,
-});
-
-export default connect(mapStateToProps, {
-    rejectOrDeleteComp,
-    setCompLoading,
-    getAcceptedComps,
-})(CurrentComps);
+export default CurrentComps;

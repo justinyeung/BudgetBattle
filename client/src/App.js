@@ -10,16 +10,16 @@ import store from './store';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 import Navbar from './components/layout/Navbar';
-import LoginPage from './pages/LoginPage';
-import HomePage from './pages/HomePage';
-import GetStartedPage from './pages/GetStartedPage';
-import Dashboard from './pages/Dashboard';
-import FriendsPage from './pages/FriendsPage';
-import PurchasesPage from './pages/PurchasesPage';
-import CompetitionsPage from './pages/CompetitionsPage';
-import SummaryPage from './pages/SummaryPage';
+import LoginPage from './containers/Login';
+import HomePage from './containers/Home';
+import GetStartedPage from './containers/GetStarted';
+import Dashboard from './containers/Dashboard';
+import FriendsPage from './containers/Friends';
+import PurchasesPage from './containers/Purchases';
+import CompetitionsPage from './containers/Competitions';
+import SummaryPage from './containers/Summary';
 import Footer from './components/layout/Footer';
-import ProfilePage from './pages/ProfilePage';
+import ProfilePage from './containers/Profile';
 
 function App() {
     return (

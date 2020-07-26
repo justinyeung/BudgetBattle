@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import {
-    sendCompRequest,
-    setCompLoading,
-} from '../../actions/competitionActions';
 
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -197,11 +191,4 @@ CompsForm.propTypes = {
     setCompLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user,
-});
-
-export default connect(mapStateToProps, {
-    sendCompRequest,
-    setCompLoading,
-})(CompsForm);
+export default CompsForm;
