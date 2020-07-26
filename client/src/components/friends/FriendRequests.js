@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-// import {
-//     acceptFriend,
-//     deleteFriend,
-//     setUserLoading,
-// } from '../../actions/userActions';
 
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
@@ -199,15 +192,5 @@ FriendRequests.propTypes = {
     deleteFriend: PropTypes.func.isRequired,
     setUserLoading: PropTypes.func.isRequired,
 };
-
-// const mapStateToProps = (state) => ({
-//     user: state.user,
-// });
-
-// export default connect(mapStateToProps, {
-//     acceptFriend,
-//     deleteFriend,
-//     setUserLoading,
-// })(FriendRequests);
 
 export default FriendRequests;
