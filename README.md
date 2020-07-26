@@ -8,7 +8,7 @@ A Budgeting web application that lets you compete with friends in monthly budget
 
 ## Documentation
 
-https://justinyeung.github.io/BudgetBattle/
+- JSDoc: https://justinyeung.github.io/BudgetBattle/
 
 ## Features
 
