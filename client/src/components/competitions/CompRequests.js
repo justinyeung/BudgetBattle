@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {
-    acceptComp,
-    rejectOrDeleteComp,
-    getInPendingComp,
-    setCompLoading,
-} from '../../actions/competitionActions';
 import { monthNames } from '../../models/lists';
 
 import CheckIcon from '@material-ui/icons/Check';
@@ -127,7 +120,7 @@ const CompRequests = ({
                     )}
                     {inpending !== [] &&
                         inpending.map((comp) => (
-                            <ListItem alignItems="flex-start" id={comp._id}>
+                            <ListItem alignItems="flex-start" key={comp._id}>
                                 <ListItemAvatar>
                                     <Avatar>
                                         {comp.user1name &&
@@ -183,13 +176,4 @@ CompRequests.propTypes = {
     setCompLoading: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    competition: state.competition,
-});
-
-export default connect(mapStateToProps, {
-    getInPendingComp,
-    acceptComp,
-    rejectOrDeleteComp,
-    setCompLoading,
-})(CompRequests);
+export default CompRequests;
