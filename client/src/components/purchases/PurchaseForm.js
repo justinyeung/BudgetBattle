@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addPurchase, setPurchaseLoading } from '../../actions/purchaseActions';
 
 import {
     MuiPickersUtilsProvider,
@@ -201,4 +199,4 @@ PurchaseForm.propTypes = {
     setPurchaseLoading: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addPurchase, setPurchaseLoading })(PurchaseForm);
+export default PurchaseForm;
