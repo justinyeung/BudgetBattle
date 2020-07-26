@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { UserType } from '../../models/enums';
 import SummaryPurchases from './SummaryPurchases';
@@ -147,9 +146,4 @@ SummaryTitle.propTypes = {
     competition: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user,
-    competition: state.competition,
-});
-
-export default connect(mapStateToProps)(SummaryTitle);
+export default SummaryTitle;

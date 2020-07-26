@@ -10,15 +10,15 @@ import { getCompetition, setCompLoading } from '../actions/competitionActions';
 
 import { Grid, Container } from '@material-ui/core';
 
-const SummaryPage = ({ setCompLoading, getCompetition }) => {
+const SummaryPage = ({ setCompLoading, getCompetition, user, competition }) => {
+    let { id } = useParams();
+
     useEffect(() => {
         setCompLoading();
         getCompetition({ id });
 
         // eslint-disable-next-line
     }, []);
-
-    let { id } = useParams();
 
     return (
         <Container maxWidth="lg" className="pages">
@@ -29,13 +29,21 @@ const SummaryPage = ({ setCompLoading, getCompetition }) => {
                 alignItems="flex-start"
             >
                 <Grid item xs={12} className="pages-sections">
-                    <SummaryHeader />
+                    <SummaryHeader user={user} competition={competition} />
                 </Grid>
                 <Grid item md={6} xs={12} className="pages-sections">
-                    <SummaryTitle userType={UserType.USER} />
+                    <SummaryTitle
+                        userType={UserType.USER}
+                        user={user}
+                        competition={competition}
+                    />
                 </Grid>
                 <Grid item md={6} xs={12} className="pages-sections">
-                    <SummaryTitle userType={UserType.COMPETITOR} />
+                    <SummaryTitle
+                        userType={UserType.COMPETITOR}
+                        user={user}
+                        competition={competition}
+                    />
                 </Grid>
             </Grid>
         </Container>
@@ -45,9 +53,16 @@ const SummaryPage = ({ setCompLoading, getCompetition }) => {
 SummaryPage.propTypes = {
     setCompLoading: PropTypes.func.isRequired,
     getCompetition: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
+    competition: PropTypes.object.isRequired,
 };
 
-export default connect(null, {
+const mapStateToProps = (state) => ({
+    user: state.user,
+    competition: state.competition,
+});
+
+export default connect(mapStateToProps, {
     setCompLoading,
     getCompetition,
 })(SummaryPage);

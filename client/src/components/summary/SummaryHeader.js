@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -170,9 +169,4 @@ SummaryHeader.propTypes = {
     competition: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    user: state.user,
-    competition: state.competition,
-});
-
-export default connect(mapStateToProps)(SummaryHeader);
+export default SummaryHeader;
