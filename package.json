@@ -24,7 +24,8 @@
     "client install": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "jsdoc": "jsdoc -R JSDOC_README.md -r -d docs client/src",
-    "pretty": "prettier --write \"**/*.js\""
+    "pretty": "prettier --write \"**/*.js\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC"
