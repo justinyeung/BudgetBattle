@@ -24,6 +24,8 @@ const ProfilePage = ({
     getProfileUserById,
     history,
 }) => {
+    let { id } = useParams();
+
     useEffect(() => {
         setProfileLoading();
         getProfileUserById({ id });
@@ -32,8 +34,6 @@ const ProfilePage = ({
 
         // eslint-disable-next-line
     }, []);
-
-    let { id } = useParams();
 
     return (
         <div>
