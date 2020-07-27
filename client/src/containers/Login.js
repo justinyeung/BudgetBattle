@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import GGLoginBtn from '../components/auth/GGLoginBtn';
-import FBLoginBtn from '../components/auth/FBLoginBtn';
-
 import { getUser, setUserLoading } from '../actions/userActions';
 
+import GGLoginBtn from '../components/login/GGLoginBtn';
+import FBLoginBtn from '../components/login/FBLoginBtn';
+
 import LockIcon from '@material-ui/icons/Lock';
-import { Avatar, CssBaseline, Box, Typography, Container } from '@material-ui/core';
+import {
+    Avatar,
+    CssBaseline,
+    Box,
+    Typography,
+    Container,
+} from '@material-ui/core';
 
 const Copyright = () => {
     return (
@@ -51,8 +57,8 @@ const LoginPage = ({
                         </Typography>
                     </div>
                     <Box mt={8}>
-                        <FBLoginBtn />
-                        <GGLoginBtn />
+                        <FBLoginBtn setUserLoading={setUserLoading} />
+                        <GGLoginBtn setUserLoading={setUserLoading} />
                     </Box>
                     <Box mt={8}>
                         <Copyright />
