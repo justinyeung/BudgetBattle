@@ -1,15 +1,12 @@
 import React, { Fragment } from 'react';
 import './styles/index.scss';
-
 import 'typeface-roboto';
-// import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
-
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';
-import PrivateRoute from './components/routing/PrivateRoute';
 
-import Navbar from './components/layout/Navbar';
+import PrivateRoute from './containers/PrivateRoute';
+import Navbar from './containers/Navbar';
 import LoginPage from './containers/Login';
 import HomePage from './containers/Home';
 import GetStartedPage from './containers/GetStarted';

@@ -17,7 +17,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { logout, setUserLoading } from '../../actions/userActions';
+import { logout, setUserLoading } from '../actions/userActions';
 
 import {
     AppBar,
