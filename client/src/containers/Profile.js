@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
-import Profile from '../components/user/Profile';
+import Profile from '../components/layout/Profile';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 
@@ -22,6 +22,7 @@ const ProfilePage = ({
     getNumCompsById,
     getNumPurchasesById,
     getProfileUserById,
+    profile,
     history,
 }) => {
     let { id } = useParams();
@@ -50,7 +51,7 @@ const ProfilePage = ({
                     alignItems="flex-start"
                 >
                     <Grid item xs={12} className="pages-sections">
-                        <Profile />
+                        <Profile profile={profile} />
                     </Grid>
                 </Grid>
             </Container>
@@ -60,14 +61,19 @@ const ProfilePage = ({
 
 ProfilePage.propTypes = {
     history: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired,
     getNumCompsById: PropTypes.func.isRequired,
     getProfileUserById: PropTypes.func.isRequired,
     getNumPurchasesById: PropTypes.func.isRequired,
     setProfileLoading: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+    profile: state.profile,
+});
+
 export default withRouter(
-    connect(null, {
+    connect(mapStateToProps, {
         getNumCompsById,
         getProfileUserById,
         getNumPurchasesById,

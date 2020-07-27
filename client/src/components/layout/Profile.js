@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Grid, Box, Typography, Divider } from '@material-ui/core';
@@ -68,8 +67,4 @@ Profile.propTypes = {
     profile: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-    profile: state.profile,
-});
-
-export default connect(mapStateToProps)(Profile);
+export default Profile;

@@ -1,24 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-
-import { getUser, setUserLoading } from '../../actions/userActions';
-import {
-    getPurchases,
-    setPurchaseLoading,
-} from '../../actions/purchaseActions';
-import {
-    getAcceptedComps,
-    getInPendingComp,
-    setCompLoading,
-} from '../../actions/competitionActions';
 
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { Button, Container } from '@material-ui/core';
 
-const BackButton = ({
+const NavButtons = ({
     getUser,
     getPurchases,
     getAcceptedComps,
@@ -50,7 +38,7 @@ const BackButton = ({
     );
 };
 
-BackButton.propTypes = {
+NavButtons.propTypes = {
     history: PropTypes.object.isRequired,
     getUser: PropTypes.func.isRequired,
     getPurchases: PropTypes.func.isRequired,
@@ -61,14 +49,4 @@ BackButton.propTypes = {
     setCompLoading: PropTypes.func.isRequired,
 };
 
-export default withRouter(
-    connect(null, {
-        getUser,
-        getPurchases,
-        getAcceptedComps,
-        getInPendingComp,
-        setUserLoading,
-        setPurchaseLoading,
-        setCompLoading,
-    })(BackButton)
-);
+export default withRouter(NavButtons);

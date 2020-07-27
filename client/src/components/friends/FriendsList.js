@@ -173,56 +173,54 @@ const FriendsList = ({ deleteFriend, setUserLoading, user: { user } }) => {
                             {getAccepted(user.friends).map(
                                 (friend) =>
                                     (friend.user2 === user.userID && (
-                                        <div>
-                                            <ListItem
-                                                alignItems="flex-start"
-                                                key={friend._id}
-                                            >
-                                                <ListItemAvatar>
-                                                    <Avatar>
-                                                        {friend.user1name &&
-                                                            friend.user1name.substring(
-                                                                0,
-                                                                1
+                                        <ListItem
+                                            alignItems="flex-start"
+                                            key={friend._id}
+                                        >
+                                            <ListItemAvatar>
+                                                <Avatar>
+                                                    {friend.user1name &&
+                                                        friend.user1name.substring(
+                                                            0,
+                                                            1
+                                                        )}
+                                                </Avatar>
+                                            </ListItemAvatar>
+                                            <ListItemText
+                                                primary={friend.user1name}
+                                                secondary={
+                                                    <React.Fragment>
+                                                        <Typography
+                                                            component="span"
+                                                            variant="body2"
+                                                            color="textPrimary"
+                                                        >
+                                                            Since{' '}
+                                                            {moment(
+                                                                new Date(
+                                                                    friend.date
+                                                                )
+                                                            ).format(
+                                                                'MMM DD YYYY'
                                                             )}
-                                                    </Avatar>
-                                                </ListItemAvatar>
-                                                <ListItemText
-                                                    primary={friend.user1name}
-                                                    secondary={
-                                                        <React.Fragment>
-                                                            <Typography
-                                                                component="span"
-                                                                variant="body2"
-                                                                color="textPrimary"
-                                                            >
-                                                                Since{' '}
-                                                                {moment(
-                                                                    new Date(
-                                                                        friend.date
-                                                                    )
-                                                                ).format(
-                                                                    'MMM DD YYYY'
-                                                                )}
-                                                            </Typography>
-                                                        </React.Fragment>
+                                                        </Typography>
+                                                    </React.Fragment>
+                                                }
+                                            />
+                                            <ListItemSecondaryAction>
+                                                <IconButton
+                                                    edge="end"
+                                                    aria-label="delete"
+                                                    onClick={() =>
+                                                        removeButton(
+                                                            friend.user1
+                                                        )
                                                     }
-                                                />
-                                                <ListItemSecondaryAction>
-                                                    <IconButton
-                                                        edge="end"
-                                                        aria-label="delete"
-                                                        onClick={() =>
-                                                            removeButton(
-                                                                friend.user1
-                                                            )
-                                                        }
-                                                    >
-                                                        <DeleteIcon />
-                                                    </IconButton>
-                                                </ListItemSecondaryAction>
-                                            </ListItem>
-                                        </div>
+                                                >
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
                                     )) ||
                                     (friend.user1 === user.userID && (
                                         <ListItem
