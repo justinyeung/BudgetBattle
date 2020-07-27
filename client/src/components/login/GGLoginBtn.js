@@ -6,7 +6,6 @@ const GGLoginBtn = ({ setUserLoading }) => {
     return (
         <div>
             <a
-                id="login-link"
                 href="https://www.budgetbattle.io/api/ggauth/login/"
                 onClick={setUserLoading}
             >

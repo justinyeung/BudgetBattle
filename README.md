@@ -2,6 +2,10 @@
 
 https://www.budgetbattle.io/
 
+## Documentation
+
+These docs will show the Actions used in the Redux State Management Lifecycle for Budget Battle.
+
 ## What is it?
 
 A Budgeting web application that lets you keep track of your purchases and compete with friends in monthly budgeting competitions.
