@@ -68,6 +68,7 @@ Purchases.propTypes = {
     deletePurchase: PropTypes.func.isRequired,
     purchase: PropTypes.object.isRequired,
 };
+
 const mapStateToProps = (state) => ({
     purchase: state.purchase,
 });
