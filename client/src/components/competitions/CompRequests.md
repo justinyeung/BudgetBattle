@@ -1,4 +1,4 @@
-Example:
+Component to show Battle Requests:
 
 ```js
 import '../../styles/index.scss';
