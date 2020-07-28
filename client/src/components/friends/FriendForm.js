@@ -224,7 +224,7 @@ const FriendForm = ({
                                     <Grid
                                         item
                                         xs={12}
-                                        lg={4}
+                                        lg={6}
                                         key={searchUser._id}
                                         className="friends-search-item"
                                     >
