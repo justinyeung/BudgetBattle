@@ -118,67 +118,54 @@ const FriendRequests = ({
                             />
                         </ListItem>
                     )}
-                    {user !== null && (
-                        <div>
-                            {getRequests(user.friends).map((friend) => (
-                                <div>
-                                    <ListItem
-                                        alignItems="flex-start"
-                                        key={friend._id}
+                    {user !== null &&
+                        getRequests(user.friends).map((friend) => (
+                            <ListItem alignItems="flex-start" key={friend._id}>
+                                <ListItemAvatar>
+                                    <Avatar>
+                                        {friend.user1name &&
+                                            friend.user1name.substring(0, 1)}
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={friend.user1name}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                color="textPrimary"
+                                            >
+                                                Since{' '}
+                                                {moment(
+                                                    new Date(friend.date)
+                                                ).format('MMM DD YYYY')}
+                                            </Typography>
+                                        </React.Fragment>
+                                    }
+                                />
+                                <ListItemSecondaryAction>
+                                    <IconButton
+                                        edge="end"
+                                        aria-label="delete"
+                                        onClick={() =>
+                                            acceptButton(friend.user1)
+                                        }
                                     >
-                                        <ListItemAvatar>
-                                            <Avatar>
-                                                {friend.user1name &&
-                                                    friend.user1name.substring(
-                                                        0,
-                                                        1
-                                                    )}
-                                            </Avatar>
-                                        </ListItemAvatar>
-                                        <ListItemText
-                                            primary={friend.user1name}
-                                            secondary={
-                                                <React.Fragment>
-                                                    <Typography
-                                                        component="span"
-                                                        variant="body2"
-                                                        color="textPrimary"
-                                                    >
-                                                        Since{' '}
-                                                        {moment(
-                                                            new Date(
-                                                                friend.date
-                                                            )
-                                                        ).format('MMM DD YYYY')}
-                                                    </Typography>
-                                                </React.Fragment>
-                                            }
-                                        />
-                                        <ListItemSecondaryAction>
-                                            <IconButton
-                                                edge="end"
-                                                aria-label="delete"
-                                                onClick={() =>
-                                                    acceptButton(friend.user1)
-                                                }
-                                            >
-                                                <CheckIcon />
-                                            </IconButton>
-                                            <IconButton
-                                                edge="end"
-                                                aria-label="delete"
-                                                onClick={() =>
-                                                    rejectButton(friend.user1)
-                                                }
-                                            >
-                                                <ClearIcon />
-                                            </IconButton>
-                                        </ListItemSecondaryAction>
-                                    </ListItem>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                        <CheckIcon />
+                                    </IconButton>
+                                    <IconButton
+                                        edge="end"
+                                        aria-label="delete"
+                                        onClick={() =>
+                                            rejectButton(friend.user1)
+                                        }
+                                    >
+                                        <ClearIcon />
+                                    </IconButton>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        ))}
                 </List>
             </Box>
             {renderSnackbar}
