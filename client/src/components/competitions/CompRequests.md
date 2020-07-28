@@ -1,4 +1,4 @@
-React Component Example:
+Example:
 
 ```js
 import '../../styles/index.scss';
