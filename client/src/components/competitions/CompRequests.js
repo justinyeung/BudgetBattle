@@ -20,6 +20,11 @@ import {
     Snackbar,
 } from '@material-ui/core';
 
+/**
+ * Component to show all incoming Battle Requests
+ * 
+ * @param {function} acceptComp - Method to accept competitions 
+ */
 const CompRequests = ({
     acceptComp,
     rejectOrDeleteComp,

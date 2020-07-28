@@ -1,7 +1,8 @@
-React Component Example:
+Component to show Battle Requests:
 
 ```js
 import '../../styles/index.scss';
+import 'typeface-roboto';
 const competition = { inpending: [ 
         { _id: '1', user1name: 'Justin Yeung', month: 10, year: 2020 },
         { _id: '2', user1name: 'Terren Chan', month: 5, year: 2020 },
