@@ -11,6 +11,10 @@
         @include grid-spacing;
     }
 
+    a {
+        text-decoration: none;
+    }
+
     &-title {
         @include header-title;
     }
