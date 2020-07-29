@@ -27,34 +27,50 @@ const Profile = ({
                         className="container-spacing"
                     >
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            Name:
+                            <Typography variant="body1">Name:</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            {user && user.name}
+                            <Typography variant="body1">
+                                {user && user.name}
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            User ID:
+                            <Typography variant="body1">User ID:</Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            {user && user.userID}
+                            <Typography variant="body1">
+                                {user && user.userID}
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            Total # of friends:
+                            <Typography variant="body1">
+                                Total # of friends:
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            {numFriends}
+                            <Typography variant="body1">
+                                {numFriends}
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            Total # of purchases:
+                            <Typography variant="body1">
+                                Total # of purchases:
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            {numPurchases}
+                            <Typography variant="body1">
+                                {numPurchases}
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            Total # of battles:
+                            <Typography variant="body1">
+                                Total # of battles:
+                            </Typography>
                         </Grid>
                         <Grid item xs={12} sm={6} className="profile-spacing">
-                            {numCompetitions}
+                            <Typography variant="body1">
+                                {numCompetitions}
+                            </Typography>
                         </Grid>
                     </Grid>
                 )}
