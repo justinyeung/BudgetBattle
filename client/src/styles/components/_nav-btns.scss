@@ -1,5 +1,5 @@
 .nav-btns {
-    &.MuiContainer-root {
+    .MuiContainer-root {
         @media (max-width: 576px) {
             padding-left: 8px;
             padding-top: 16px;
@@ -10,6 +10,9 @@
 
     button {
         @include component-box;
+        @media (max-width: 576px) {
+            margin-right: 8px;
+        }
         margin-right: 24px;
 
         .MuiSvgIcon-root {
