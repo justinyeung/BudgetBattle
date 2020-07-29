@@ -27,15 +27,17 @@ const PrivateRoute = ({
 }) => {
     return (
         <div>
-            <NavButtons
-                getUser={getUser}
-                getPurchases={getPurchases}
-                getAcceptedComps={getAcceptedComps}
-                getInPendingComp={getInPendingComp}
-                setUserLoading={setUserLoading}
-                setPurchaseLoading={setPurchaseLoading}
-                setCompLoading={setCompLoading}
-            />
+            <div className="nav-btns">
+                <NavButtons
+                    getUser={getUser}
+                    getPurchases={getPurchases}
+                    getAcceptedComps={getAcceptedComps}
+                    getInPendingComp={getInPendingComp}
+                    setUserLoading={setUserLoading}
+                    setPurchaseLoading={setPurchaseLoading}
+                    setCompLoading={setCompLoading}
+                />
+            </div>
             {user !== null && (
                 <Route {...rest} render={(props) => <Component {...props} />} />
             )}
