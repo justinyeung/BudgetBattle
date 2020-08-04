@@ -18,7 +18,7 @@ import SummaryPage from './containers/Summary';
 import Footer from './components/layout/Footer';
 import ProfilePage from './containers/Profile';
 
-function App() {
+const App = () => {
     return (
         <Provider store={store}>
             <Router>
@@ -50,6 +50,6 @@ function App() {
             </Router>
         </Provider>
     );
-}
+};
 
 export default App;
