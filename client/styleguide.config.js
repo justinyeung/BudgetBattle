@@ -6,5 +6,6 @@ module.exports = {
         '**/*.d.ts',
         '**/homepage/**',
         '**/Footer.js',
+        '**/login/**',
     ],
 };
