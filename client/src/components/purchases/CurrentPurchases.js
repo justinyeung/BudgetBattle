@@ -212,6 +212,7 @@ CurrentPurchases.propTypes = {
     editPurchase: PropTypes.func.isRequired,
     deletePurchase: PropTypes.func.isRequired,
     setPurchaseLoading: PropTypes.func.isRequired,
+    purchase: PropTypes.object.isRequired,
 };
 
 export default CurrentPurchases;
