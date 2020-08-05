@@ -1,8 +1,6 @@
 Component to show Current Battles that have been accepted:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 import { MemoryRouter } from 'react-router-dom';
 const user = {
     user: {

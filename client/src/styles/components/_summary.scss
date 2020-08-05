@@ -4,12 +4,12 @@
     @include component-box;
 
     @media (max-width: 958px) {
-        &-header-left {
-            justify-content: flex-start !important;
+        &-header-left.MuiTypography-h4 {
+            justify-content: flex-start;
         }
 
-        &-header-right {
-            justify-content: flex-end !important;
+        &-header-right.MuiTypography-h4 {
+            justify-content: flex-end;
         }
     }
 
@@ -28,14 +28,15 @@
     }
 
     &-header-title-text {
-        font-weight: 500;
         padding: 0 30px;
     }
 
     &-title-title {
-        @include header-title;
-        font-weight: 425 !important;
-        display: flex;
+        &.MuiTypography-h5 {
+            @include header-title;
+            display: flex;
+            font-size: 1.75rem;
+        }
     }
 
     &-title-item {

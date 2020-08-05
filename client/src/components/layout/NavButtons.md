@@ -1,8 +1,6 @@
 Component to for the top Navigation Buttons:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 import { MemoryRouter } from 'react-router-dom';
 const getUser = () => {};
 const getPurchases = () => {};

@@ -1,8 +1,6 @@
 Component for showing competitor names in a battle:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const purchases = [
     {
         amount: 11.87,

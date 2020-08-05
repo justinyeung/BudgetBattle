@@ -1,8 +1,6 @@
 Component to show user's purchases:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const getPurchases = () => {};
 const editPurchase = () => {};
 const deletePurchase = () => {};

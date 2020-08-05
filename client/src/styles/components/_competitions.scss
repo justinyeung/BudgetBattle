@@ -19,13 +19,8 @@
         @include header-title;
     }
 
-    &-competitor-name {
-        color: $shaded-grey;
-    }
-
-    &-date.MuiTypography-h5 {
-        color: $shaded-grey;
-        font-size: 0.9375rem;
+    &-competitor-name.MuiTypography-body1 {
+        font-size: 1.15rem;
     }
 
     &-left-column {
