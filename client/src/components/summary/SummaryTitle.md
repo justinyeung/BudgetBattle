@@ -1,8 +1,6 @@
 Component for showing competitor names in a battle:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 import { UserType } from '../../models/enums';
 
 const user = {
@@ -71,5 +69,5 @@ const competition = {
     ],
 };
 
-<SummaryTitle userType={UserType.USER} user={user} competition={competition} />;
+<SummaryTitle userType={'user'} user={user} competition={competition} />;
 ```

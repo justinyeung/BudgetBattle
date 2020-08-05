@@ -1,8 +1,6 @@
 Component to show user profile:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const profile = {
     user: {
         name: 'Justin Yeung',

@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
     ignore: [
         '**/__tests__/**',
@@ -8,4 +10,5 @@ module.exports = {
         '**/Footer.js',
         '**/login/**',
     ],
+    require: [path.join(__dirname, 'src/styles/index.scss')],
 };

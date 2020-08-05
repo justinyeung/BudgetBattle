@@ -206,7 +206,7 @@ const CurrentComps = ({
                                         >
                                             <div className="competitions-left-column">
                                                 <Typography
-                                                    variant="h6"
+                                                    variant="body1"
                                                     className="competitions-competitor-name"
                                                 >
                                                     {getRight(comp).name}
@@ -214,10 +214,7 @@ const CurrentComps = ({
                                             </div>
                                             <div className="competitions-center-column" />
                                             <div className="competitions-right-column">
-                                                <Typography
-                                                    variant="h5"
-                                                    className="competitions-date"
-                                                >
+                                                <Typography variant="body2">
                                                     {monthNames[comp.month]}{' '}
                                                     {comp.year}
                                                 </Typography>

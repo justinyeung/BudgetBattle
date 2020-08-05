@@ -1,8 +1,6 @@
 Component to send Battle Requests to friends:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',

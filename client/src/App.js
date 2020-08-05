@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import './styles/index.scss';
-import 'typeface-roboto';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import store from './store';

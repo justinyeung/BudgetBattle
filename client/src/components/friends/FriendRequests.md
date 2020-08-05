@@ -1,8 +1,6 @@
 Component to show Battle Requests:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',
@@ -53,8 +51,6 @@ const setUserLoading = () => {};
 Example with no Friend Requests:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',

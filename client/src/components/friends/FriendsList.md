@@ -1,8 +1,6 @@
 Component to search for other users:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',
@@ -51,8 +49,6 @@ const setUserLoading = () => {};
 Example with no Friends:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',

@@ -1,8 +1,6 @@
 Component for showing competitor names in a battle:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',
@@ -29,8 +27,6 @@ const competition = {
 Example with current user in the lead:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',
@@ -57,8 +53,6 @@ const competition = {
 Example with a tie:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 const user = {
     user: {
         _id: '1',

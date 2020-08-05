@@ -1,8 +1,6 @@
 Component to search for other users:
 
 ```js
-import '../../styles/index.scss';
-import 'typeface-roboto';
 import { MemoryRouter } from 'react-router-dom';
 const user = {
     user: {
