@@ -30,7 +30,3 @@ A Budgeting web application that lets you compete with friends in monthly budget
 - Documented with JSDoc
 - Version Control using Git and GitHub
 - Deployed using Heroku
-
-## Images
-
-![summary page](https://i.imgur.com/e2uaGT4.png)
