@@ -4,7 +4,7 @@ https://www.budgetbattle.io/
 
 ## What is it?
 
-A Budgeting web application that lets you compete with friends in monthly budgeting battles.
+A Budgeting web application that lets you keep track of your purchases and compete with friends in monthly budgeting competitions.
 
 ## Documentation
 
@@ -23,14 +23,12 @@ A Budgeting web application that lets you compete with friends in monthly budget
 ## Development
 
 - Frontend developed with React
+- Use of React Hooks API
 - Backend developed with Node.js, Express.js and MongoDB
 - OAuth authentication with passport.js
 - Styled with Material UI, Semantic UI and Sass
 - State Management using Redux
-- Documented with JSDoc
+- Documented with JSDoc and React Styleguidist
+- Documentation deployed using GitHub Pages
 - Version Control using Git and GitHub
-- Deployed using Heroku
-
-## Images
-
-![summary page](https://i.imgur.com/e2uaGT4.png)
+- Deployed using Heroku with custom domain name and SSL certificate
