@@ -364,10 +364,7 @@ const PrimarySearchAppBar = ({
                                         alignItems="center"
                                         spacing={2}
                                     >
-                                        <Grid
-                                            item
-                                            className="navbar-get-started"
-                                        >
+                                        <Grid item className="navbar-top-right">
                                             <Link
                                                 to="/getstarted"
                                                 className="navbar-link"
@@ -382,7 +379,7 @@ const PrimarySearchAppBar = ({
                                                 </Button>
                                             </Link>
                                         </Grid>
-                                        <Grid item>
+                                        <Grid item className="navbar-top-right">
                                             <Link
                                                 to="/login"
                                                 className="navbar-link"
