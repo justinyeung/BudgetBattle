@@ -16,7 +16,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import CloseIcon from '@material-ui/icons/Close';
-
+import logo from '../assets/budgetbattlelogo.png';
 import { logout, setUserLoading } from '../actions/userActions';
 
 import {
@@ -328,6 +328,9 @@ const PrimarySearchAppBar = ({
                                                 {list('left')}
                                             </SwipeableDrawer>
                                         </React.Fragment>
+                                    </Grid>
+                                    <Grid item>
+                                        <img src={logo} />
                                     </Grid>
                                     <Grid item>
                                         <Link to="/">
