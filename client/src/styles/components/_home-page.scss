@@ -32,6 +32,9 @@
                 font-size: 2.5em;
                 margin-top: 1.5em;
                 margin-bottom: 0;
+                img {
+                    display: none;
+                }
             }
             h2.ui.inverted.header {
                 font-weight: normal;
@@ -43,8 +46,14 @@
             h1.ui.inverted.header {
                 font-weight: normal;
                 font-size: 4em;
-                margin-top: 2em;
+                margin-top: 1em;
                 margin-bottom: 0;
+                display: inline-flex;
+                p {
+                    display: inline;
+                    margin: auto;
+                    margin-left: 20px;
+                }
             }
             h2.ui.inverted.header {
                 font-weight: normal;

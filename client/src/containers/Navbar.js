@@ -16,7 +16,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import CloseIcon from '@material-ui/icons/Close';
-
+import logo from '../assets/budgetbattlelogo.png';
 import { logout, setUserLoading } from '../actions/userActions';
 
 import {
@@ -330,6 +330,9 @@ const PrimarySearchAppBar = ({
                                         </React.Fragment>
                                     </Grid>
                                     <Grid item>
+                                        <img src={logo} />
+                                    </Grid>
+                                    <Grid item>
                                         <Link to="/">
                                             <Typography variant="h6" noWrap>
                                                 Budget Battle
@@ -361,10 +364,7 @@ const PrimarySearchAppBar = ({
                                         alignItems="center"
                                         spacing={2}
                                     >
-                                        <Grid
-                                            item
-                                            className="navbar-get-started"
-                                        >
+                                        <Grid item className="navbar-top-right">
                                             <Link
                                                 to="/getstarted"
                                                 className="navbar-link"
@@ -379,7 +379,7 @@ const PrimarySearchAppBar = ({
                                                 </Button>
                                             </Link>
                                         </Grid>
-                                        <Grid item>
+                                        <Grid item className="navbar-top-right">
                                             <Link
                                                 to="/login"
                                                 className="navbar-link"
