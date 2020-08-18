@@ -14,6 +14,7 @@ const SummaryPage = ({ setCompLoading, getCompetition, user, competition }) => {
     let { id } = useParams();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setCompLoading();
         getCompetition({ id });
 

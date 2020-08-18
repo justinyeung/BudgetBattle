@@ -34,6 +34,7 @@ const LoginPage = ({
     user: { user, userLoading },
 }) => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         setUserLoading();
         getUser();
         // eslint-disable-next-line

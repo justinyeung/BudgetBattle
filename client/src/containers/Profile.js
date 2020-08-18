@@ -28,6 +28,7 @@ const ProfilePage = ({
     let { id } = useParams();
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         setProfileLoading();
         getProfileUserById({ id });
         getNumPurchasesById({ id });

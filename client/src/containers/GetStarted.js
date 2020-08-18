@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,10 @@ import {
 
 const GetStartedPage = ({ user: { user } }) => {
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     const handleClickOpen = () => {
         console.log('login dialog');

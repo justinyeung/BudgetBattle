@@ -12,7 +12,7 @@ const HomeHeader = ({ mobile }) => (
             as="h1"
             content={
                 <>
-                    <img src={logo} />
+                    <img src={logo} alt={logo} />
                     <p>Budget Battle</p>
                 </>
             }

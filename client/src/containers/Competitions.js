@@ -27,10 +27,10 @@ const Competitions = ({
     user,
 }) => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         setCompLoading();
         getAcceptedComps();
         getInPendingComp();
-
         // eslint-disable-next-line
     }, []);
 
