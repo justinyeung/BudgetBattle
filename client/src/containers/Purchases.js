@@ -24,9 +24,9 @@ const Purchases = ({
     purchase,
 }) => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         setPurchaseLoading();
         getPurchases();
-
         // eslint-disable-next-line
     }, []);
 

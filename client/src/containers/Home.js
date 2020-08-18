@@ -8,9 +8,9 @@ import MobileContainer from '../components/homepage/MobileContainer';
 
 const HomePage = ({ getUser, setUserLoading }) => {
     useEffect(() => {
+        window.scrollTo(0, 0);
         setUserLoading();
         getUser();
-
         // eslint-disable-next-line
     }, []);
 

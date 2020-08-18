@@ -330,7 +330,7 @@ const PrimarySearchAppBar = ({
                                         </React.Fragment>
                                     </Grid>
                                     <Grid item>
-                                        <img src={logo} />
+                                        <img src={logo} alt={logo} />
                                     </Grid>
                                     <Grid item>
                                         <Link to="/">
