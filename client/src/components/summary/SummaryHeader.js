@@ -80,7 +80,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID === competition.user1 &&
                             competition.user1total < competition.user2total && (
                                 <div>
-                                    {'-$'}
+                                    {'$'}
                                     {(
                                         competition.user2total -
                                         competition.user1total
@@ -92,7 +92,7 @@ const SummaryHeader = ({ user: { user }, competition: { competition } }) => {
                             user.userID !== competition.user1 &&
                             competition.user2total < competition.user1total && (
                                 <div>
-                                    {'-$'}
+                                    {'$'}
                                     {(
                                         competition.user1total -
                                         competition.user2total
